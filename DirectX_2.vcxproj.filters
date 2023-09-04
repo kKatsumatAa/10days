@@ -109,6 +109,18 @@
     <Filter Include="ヘッダー ファイル\Engine\3D\Assimp">
       <UniqueIdentifier>{db463434-2f88-4178-82f5-3b1f811d3713}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Application\Effect">
+      <UniqueIdentifier>{f94d148a-9809-4fc6-a591-68ce3cc52be1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Application\Effect\GameVelocityManager">
+      <UniqueIdentifier>{4c1b8e0f-f60b-44d4-a1b2-b4d682ca38df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Application\Effect">
+      <UniqueIdentifier>{a949b321-d305-4b63-af72-51efd563624a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Application\Effect\GameVelocityManger">
+      <UniqueIdentifier>{d05a26cc-58df-4baa-be3d-070e36bcfc50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -320,6 +332,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Scene\SceneStageSelect.cpp">
       <Filter>ソース ファイル\Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Effect\GameVelocity\GameVelocityManager.cpp">
+      <Filter>ソース ファイル\Application\Effect\GameVelocityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Effect\GameVelocity\GameVelocityState.cpp">
+      <Filter>ソース ファイル\Application\Effect\GameVelocityManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -550,6 +568,12 @@
     </ClInclude>
     <ClInclude Include="Engine\Scene\SceneStageSelect.h">
       <Filter>ヘッダー ファイル\Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Effect\GameVelocity\GameVelocityManager.h">
+      <Filter>ヘッダー ファイル\Application\Effect\GameVelocityManger</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Effect\GameVelocity\GameVelocityState.h">
+      <Filter>ヘッダー ファイル\Application\Effect\GameVelocityManger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -133,7 +133,7 @@ void LevelManager::SetParentNode(Object* obj, const LevelData::ObjectData& objDa
 void LevelManager::LoadObj(LevelData::ObjectData& objData)
 {
 	//親がいたらスキップ(登録済みならworldMatはmove()されて無いので)
-	if (/*objData.fileName == "gun" &&*/ !objData.worldMat)
+	if (!objData.worldMat)
 	{
 		return;
 	}
