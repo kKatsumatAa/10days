@@ -220,7 +220,6 @@ void LevelManager::LoadLight(LevelData::LightData& lightData)
 
 void LevelManager::Update()
 {
-
 }
 
 void LevelManager::Draw(Camera* camera)
@@ -229,5 +228,4 @@ void LevelManager::Draw(Camera* camera)
 
 void LevelManager::DrawImGui()
 {
-
 }
