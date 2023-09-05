@@ -14,7 +14,7 @@ private: // エイリアス
 	// DirectX::を省略
 	using XMVECTOR = DirectX::XMVECTOR;
 public:
-	CircleCollider(const DirectX::XMFLOAT2 center = { 0,0 }, float radius = 1.0f)
+	CircleCollider(const Vec2 center = { 0,0 }, float radius = 1.0f)
 	{
 		Circle::center = center;
 		Circle::radius = radius;

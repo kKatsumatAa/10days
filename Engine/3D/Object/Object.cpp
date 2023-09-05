@@ -222,7 +222,7 @@ void Object::SetCollider(std::unique_ptr<BaseCollider> collider)
 	//行列,コライダーの更新
 	Object::WorldMatColliderUpdate();
 
-	if (collider_->GetIs2D() && sprite_ == nullptr)
+	if (collider_ && collider_->GetIs2D() && sprite_ == nullptr)
 	{
 		sprite_ = std::make_unique<Sprite>();
 		sprite_->Initialize();
@@ -814,9 +814,9 @@ void Object::DrawImGui(std::function<void()>imguiF)
 	//トランスなど
 	if (ImGui::TreeNode("TransScaleRot")) {
 
-		ImGui::InputFloat3("Trans: ", &worldMat_->trans_.x_);
-		ImGui::InputFloat3("Scale: ", &worldMat_->scale_.x_);
-		ImGui::InputFloat3("Rot: ", &worldMat_->rot_.x_);
+		ImGui::DragFloat3("Trans: ", &worldMat_->trans_.x_);
+		ImGui::DragFloat3("Scale: ", &worldMat_->scale_.x_);
+		ImGui::DragFloat3("Rot: ", &worldMat_->rot_.x_);
 
 		ImGui::TreePop();
 	}

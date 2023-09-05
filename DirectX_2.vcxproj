@@ -65,7 +65,7 @@
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Engine\2D;$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Base;$(ProjectDir)Engine\Collision;$(ProjectDir)External;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine\PostEffect;$(ProjectDir)Engine\Scene;$(ProjectDir)Engine\Util;$(ProjectDir)Engine\3D\Light;$(ProjectDir)Engine\3D;$(ProjectDir)Engine\3D\Object;$(ProjectDir)Engine\3D\Camera;$(ProjectDir)Application;$(ProjectDir)Application\Effect;$(ProjectDir)Application\Effect\GameVelocity;$(ProjectDir)Engine\Collision\2D;$(ProjectDir)Engine\Collision\3D</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Engine\2D;$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Base;$(ProjectDir)Engine\Collision;$(ProjectDir)External;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine\PostEffect;$(ProjectDir)Engine\Scene;$(ProjectDir)Engine\Util;$(ProjectDir)Engine\3D\Light;$(ProjectDir)Engine\3D;$(ProjectDir)Engine\3D\Object;$(ProjectDir)Engine\3D\Camera;$(ProjectDir)Application;$(ProjectDir)Application\Effect;$(ProjectDir)Application\Effect\GameVelocity;$(ProjectDir)Engine\Collision\2D;$(ProjectDir)Engine\Collision\3D;$(ProjectDir)Application\Character</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -86,7 +86,7 @@
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Engine\2D;$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Base;$(ProjectDir)Engine\Collision;$(ProjectDir)External;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine\PostEffect;$(ProjectDir)Engine\Scene;$(ProjectDir)Engine\Util;$(ProjectDir)Engine\3D\Light;$(ProjectDir)Engine\3D;$(ProjectDir)Engine\3D\Object;$(ProjectDir)Engine\3D\Camera;$(ProjectDir)Application;$(ProjectDir)Application\Effect;$(ProjectDir)Application\Effect\GameVelocity;$(ProjectDir)Engine\Collision\2D;$(ProjectDir)Engine\Collision\3D</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Engine\2D;$(ProjectDir)Engine\Audio;$(ProjectDir)Engine\Base;$(ProjectDir)Engine\Collision;$(ProjectDir)External;$(ProjectDir)Engine\Input;$(ProjectDir)Engine\Math;$(ProjectDir)Engine\PostEffect;$(ProjectDir)Engine\Scene;$(ProjectDir)Engine\Util;$(ProjectDir)Engine\3D\Light;$(ProjectDir)Engine\3D;$(ProjectDir)Engine\3D\Object;$(ProjectDir)Engine\3D\Camera;$(ProjectDir)Application;$(ProjectDir)Application\Effect;$(ProjectDir)Application\Effect\GameVelocity;$(ProjectDir)Engine\Collision\2D;$(ProjectDir)Engine\Collision\3D;$(ProjectDir)Application\Character</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -100,6 +100,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Application\Character\TestChara.cpp" />
     <ClCompile Include="Application\Effect\GameVelocity\GameVelocityManager.cpp" />
     <ClCompile Include="Application\Effect\GameVelocity\GameVelocityState.cpp" />
     <ClCompile Include="Engine\2D\DebugText.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application\Character\TestChara.h" />
     <ClInclude Include="Application\Effect\GameVelocity\GameVelocityManager.h" />
     <ClInclude Include="Application\Effect\GameVelocity\GameVelocityState.h" />
     <ClInclude Include="Engine\2D\DebugText.h" />

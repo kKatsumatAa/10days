@@ -19,7 +19,7 @@ public:
 	//ƒƒ“ƒoŠÖ”
 	float GetLength() const;
 	void  Normalized();
-	Vec2  GetNormalize();
+	Vec2  GetNormalize() const;
 	float Dot(const Vec2& v) const;
 	float Cross(const Vec2& v) const;
 

@@ -12,6 +12,7 @@
 #include "LevelManager.h"
 #include "MouseInput.h"
 #include "PostEffectManager.h"
+#include "TestChara.h"
 
 
 
@@ -41,9 +42,6 @@ private:
 	float specularColor_[3] = { 1,1,1 };
 
 	std::unique_ptr<Camera> camera_;
-
-	//テスト
-	Object* sprite_ = nullptr;
 
 	//ゲームが終了したか
 	bool isEscapingGame_ = false;

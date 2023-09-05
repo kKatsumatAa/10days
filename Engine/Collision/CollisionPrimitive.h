@@ -4,6 +4,8 @@
 /// </summary>
 
 #include<DirectXMath.h>
+#include"Vec2.h"
+#include"Vec3.h"
 
 /// <summary>
 /// 球
@@ -83,7 +85,7 @@ public:
 
 public:
 	//中心座標
-	DirectX::XMFLOAT2 center = { 0,0 };
+	Vec2 center = { 0,0 };
 	//半径
 	float radius = 1.0f;
 };
@@ -91,16 +93,17 @@ public:
 /// <summary>
 /// 矩形
 /// </summary>
-struct Rectangle
+struct MyRectangle
 {
 public:
-	virtual ~Rectangle() { ; }
+	virtual ~MyRectangle() { ; }
 
 public:
-	//中心座標
-	DirectX::XMFLOAT2 center = { 0,0 };
-	//縦横の幅
-	DirectX::XMFLOAT2 length = { 1.0f,1.0f };
+	//各頂点
+	Vec2 leftUp = { -1.0f,-1.0f };
+	Vec2 leftDown = { -1.0f,1.0f };
+	Vec2 rightUp = { 1.0f,-1.0f };
+	Vec2 rightDown = { 1.0f,1.0f };
 };
 
 

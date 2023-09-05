@@ -72,14 +72,19 @@ void SceneManager::Initialize()
 	//シーン遷移マネージャ
 	SceneTransitionManager::GetInstance().Initialize();
 
-	//
-	ObjectManager::GetInstance().AddObject("test", std::make_unique<Object>());
-	sprite_ = ObjectManager::GetInstance().GetObjs("test")[0];
-	sprite_->SetCollider(std::make_unique<CircleCollider>());
-	sprite_->SetScale({ WindowsApp::WINDOW_WIDTH_,WindowsApp::WINDOW_HEIGHT_,1.0f });
+	//仮
+	ObjectManager::GetInstance().AddObject("test", std::make_unique<TestChara>());
+	ObjectManager::GetInstance().AddObject("test", std::make_unique<TestChara>());
+	int32_t count = 0;
+	for (auto& testChara : ObjectManager::GetInstance().GetObjs("test"))
+	{
+		testChara->Initialize();
+		testChara->SetObjName(std::to_string(count));
+		count++;
+	}
 
-		//画像アップロード
-		DirectXWrapper::GetInstance().UpLoadTexture();
+	//画像アップロード
+	DirectXWrapper::GetInstance().UpLoadTexture();
 }
 
 void SceneManager::Update()
@@ -99,6 +104,9 @@ void SceneManager::Update()
 
 		//カメラマネージャー
 		CameraManager::GetInstance().Update();
+
+		//仮
+		CollisionManager::GetInstance()->CheckAllCollisions();
 	}
 
 	lightManager_->SetAmbientColor({ ambientColor_[0],ambientColor_[1], ambientColor_[2] });

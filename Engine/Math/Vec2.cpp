@@ -16,7 +16,7 @@ void Vec2::Normalized()
 	}
 }
 
-Vec2 Vec2::GetNormalize()
+Vec2 Vec2::GetNormalize() const
 {
 	float len = GetLength();
 	if (len > 0) { return *this / len; }

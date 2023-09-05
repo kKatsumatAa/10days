@@ -133,6 +133,12 @@
     <Filter Include="ヘッダー ファイル\Engine\Collision\3D">
       <UniqueIdentifier>{41139e75-f617-49dc-b004-dd6082b59310}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Application\Character">
+      <UniqueIdentifier>{845d1116-886a-496e-85fe-a40d3ddefa12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Application\Character">
+      <UniqueIdentifier>{68946a7c-7aa3-43dc-a72f-06e0245d0b85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -356,6 +362,9 @@
     </ClCompile>
     <ClCompile Include="Engine\Collision\2D\RectangleCollider.cpp">
       <Filter>ソース ファイル\Engine\Collision\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Character\TestChara.cpp">
+      <Filter>ソース ファイル\Application\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -598,6 +607,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Collision\2D\RectangleCollider.h">
       <Filter>ヘッダー ファイル\Engine\Collision\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Character\TestChara.h">
+      <Filter>ヘッダー ファイル\Application\Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
