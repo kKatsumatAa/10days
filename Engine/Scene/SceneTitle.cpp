@@ -9,7 +9,7 @@ void SceneTitle::Finalize()
 //---------------------------------------------------------------------------------------
 void SceneTitle::Initialize()
 {
-	ObjectManager::GetInstance().ClearAllObj();
+	//ObjectManager::GetInstance().ClearAllObj();
 	ParticleManager::GetInstance()->ClearParticles();
 
 	sceneM_->StopWaveAllScene();

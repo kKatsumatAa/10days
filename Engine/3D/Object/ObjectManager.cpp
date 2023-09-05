@@ -156,7 +156,14 @@ void ObjectManager::PostUpdate()
 				}
 
 				itM->second.erase(itG);
-				itG = itM->second.begin();
+				if (itM->second.size())
+				{
+					itG = itM->second.begin();
+				}
+				else
+				{
+					break;
+				}
 			}
 		}
 	}

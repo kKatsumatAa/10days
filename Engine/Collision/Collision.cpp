@@ -20,7 +20,7 @@ bool Collision::CheckSphere2Sphere(const Sphere& sphere, const Sphere& sphere2, 
 		//押し出すベクトルを計算
 		if (reject)
 		{
-			float rejectLen = sphere.radius + sphere2.radius - sqrtf(vec.GetLength());
+			float rejectLen = sphere.radius + sphere2.radius - sqrtf(vec.GetLength());//
 			*reject = XMVector3Normalize(sphere.center - sphere2.center);
 			*reject *= rejectLen;
 		}

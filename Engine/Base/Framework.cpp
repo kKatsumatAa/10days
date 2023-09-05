@@ -45,7 +45,6 @@ void Framework::Initialize()
 
 	//ƒV[ƒ“
 	sceneM_ = &SceneManager::GetInstance();
-	sceneM_->Initialize();
 }
 
 void Framework::Finalize()

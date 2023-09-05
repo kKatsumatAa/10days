@@ -8,6 +8,7 @@
 #include "CameraManager.h"
 #include "SceneTransitionManager.h"
 #include "SceneTransitionEffectState.h"
+#include "CircleCollider.h"
 
 
 //---------------------------------------------------------------------------------------
@@ -71,8 +72,14 @@ void SceneManager::Initialize()
 	//シーン遷移マネージャ
 	SceneTransitionManager::GetInstance().Initialize();
 
-	//画像アップロード
-	DirectXWrapper::GetInstance().UpLoadTexture();
+	//
+	ObjectManager::GetInstance().AddObject("test", std::make_unique<Object>());
+	sprite_ = ObjectManager::GetInstance().GetObjs("test")[0];
+	sprite_->SetCollider(std::make_unique<CircleCollider>());
+	sprite_->SetScale({ WindowsApp::WINDOW_WIDTH_,WindowsApp::WINDOW_HEIGHT_,1.0f });
+
+		//画像アップロード
+		DirectXWrapper::GetInstance().UpLoadTexture();
 }
 
 void SceneManager::Update()

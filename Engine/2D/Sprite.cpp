@@ -60,7 +60,7 @@ void Sprite::SpriteDraw()
 
 void Sprite::Update(const Vec2& pos, const Vec2& scale,
 	const Vec4& color, uint64_t textureHandle, const Vec2& ancorUV,
-	bool isReverseX, bool isReverseY, float rotation,
+	bool isReverseX, bool isReverseY, const Vec3& rotation,
 	ConstBuffTransform* cbt, ConstBufferDataMaterial* constMapMaterial)
 {
 	//テクスチャを設定していなかったら
@@ -96,15 +96,12 @@ void Sprite::Update(const Vec2& pos, const Vec2& scale,
 	//ワールド行列
 	WorldMat worldMat;
 
-	worldMat.rot_.z_ = AngletoRadi(rotation);
+	worldMat.rot_.x_ = AngletoRadi(rotation.x_);
+	worldMat.rot_.y_ = AngletoRadi(rotation.y_);
+	worldMat.rot_.z_ = AngletoRadi(rotation.z_);
 	worldMat.trans_ = { pos.x_ /*+ length.x * ancorUV.x * scale*/,pos.y_/* + length.y * ancorUV.y * scale*/,0.0f };
-	worldMat.CalcWorldMat();
-
-	//親がいたら
-	if (worldMat.parent_ != nullptr)
-	{
-		worldMat.matWorld_ *= worldMat.parent_->matWorld_;
-	}
+	
+	worldMat.CalcAllTreeMat();
 
 	XMMATRIX matW;
 	matW = { (float)worldMat.matWorld_.m_[0][0],(float)worldMat.matWorld_.m_[0][1],(float)worldMat.matWorld_.m_[0][2],(float)worldMat.matWorld_.m_[0][3],
@@ -130,7 +127,7 @@ void Sprite::Update(const Vec2& pos, const Vec2& scale,
 
 void Sprite::UpdateClipping(const Vec2& leftTop, const Vec2& scale, const XMFLOAT2& UVleftTop, const XMFLOAT2& UVlength,
 	const Vec4& color, uint64_t textureHandle, bool isPosLeftTop,
-	bool isReverseX, bool isReverseY, float rotation, ConstBuffTransform* cbt, ConstBufferDataMaterial* constMapMaterial)
+	bool isReverseX, bool isReverseY, const Vec3& rotation, ConstBuffTransform* cbt, ConstBufferDataMaterial* constMapMaterial)
 {
 	//テクスチャを設定していなかったら
 	uint64_t textureHandle_;
@@ -180,7 +177,9 @@ void Sprite::UpdateClipping(const Vec2& leftTop, const Vec2& scale, const XMFLOA
 	//ワールド行列
 	WorldMat worldMat;
 
-	worldMat.rot_.z_ = AngletoRadi(rotation);
+	worldMat.rot_.x_ = AngletoRadi(rotation.x_);
+	worldMat.rot_.y_ = AngletoRadi(rotation.y_);
+	worldMat.rot_.z_ = AngletoRadi(rotation.z_);
 
 	if (isPosLeftTop)
 	{
@@ -194,14 +193,7 @@ void Sprite::UpdateClipping(const Vec2& leftTop, const Vec2& scale, const XMFLOA
 			leftTop.y_ + texTop + UVlength.y * (float)length.y_ * scale.y_ / 2.0f,
 			0 };
 	}
-	worldMat.CalcWorldMat();
-
-
-	//親がいたら
-	if (worldMat.parent_ != nullptr)
-	{
-		worldMat.matWorld_ *= worldMat.parent_->matWorld_;
-	}
+	worldMat.CalcAllTreeMat();
 
 	XMMATRIX matW;
 	matW = { (float)worldMat.matWorld_.m_[0][0],(float)worldMat.matWorld_.m_[0][1],(float)worldMat.matWorld_.m_[0][2],(float)worldMat.matWorld_.m_[0][3],

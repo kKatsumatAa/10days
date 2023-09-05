@@ -386,13 +386,13 @@ public:
 		const Vec4& color = { 1.0f,1.0f,1.0f,1.0f },
 		uint64_t textureHandle = NULL, int32_t pipelineNum = 0);
 
-	void DrawBoxSprite(const Vec2& pos, const Vec2& scale, const Vec4& color = { 1.0f,1.0f,1.0f,1.0f }
-		, uint64_t textureHandle = NULL, const Vec2& ancorUV = { 0,0 }, bool isReverseX = false, bool isReverseY = false,
-		float rotation = 0.0f, int32_t pipelineNum = 0);
+	void DrawBoxSprite(uint64_t textureHandle = NULL, const Vec4& color = { 1.0f,1.0f,1.0f,1.0f }
+		,  const Vec2& ancorUV = { 0,0 }, bool isReverseX = false, bool isReverseY = false,
+		int32_t pipelineNum = 0);
 
-	void DrawClippingBoxSprite(const Vec2& leftTop, const Vec2& scale, const XMFLOAT2& UVleftTop, const XMFLOAT2& UVlength,
-		const Vec4& color = { 1.0f,1.0f,1.0f,1.0f }, uint64_t textureHandle = NULL, bool isPosLeftTop = true,
-		bool isReverseX = false, bool isReverseY = false, float rotation = 0.0f, int32_t pipelineNum = 0);
+	void DrawClippingBoxSprite(const XMFLOAT2& UVleftTop, const XMFLOAT2& UVlength,
+		uint64_t textureHandle = NULL, const Vec4& color = { 1.0f,1.0f,1.0f,1.0f },  bool isPosLeftTop = true,
+		bool isReverseX = false, bool isReverseY = false, int32_t pipelineNum = 0);
 
 	void DrawCube3D(Camera* camera = nullptr,
 		const Vec4& color = { 1.0f,1.0f,1.0f,1.0f }, uint64_t textureHandle = NULL, int32_t pipelineNum = 0);

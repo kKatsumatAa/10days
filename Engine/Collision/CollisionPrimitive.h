@@ -69,3 +69,39 @@ public:
 	//方向
 	DirectX::XMVECTOR dir = { 1.0f,0,0,0 };
 };
+
+
+#pragma region 2D
+
+/// <summary>
+/// 円
+/// </summary>
+struct Circle
+{
+public:
+	virtual ~Circle() { ; }
+
+public:
+	//中心座標
+	DirectX::XMFLOAT2 center = { 0,0 };
+	//半径
+	float radius = 1.0f;
+};
+
+/// <summary>
+/// 矩形
+/// </summary>
+struct Rectangle
+{
+public:
+	virtual ~Rectangle() { ; }
+
+public:
+	//中心座標
+	DirectX::XMFLOAT2 center = { 0,0 };
+	//縦横の幅
+	DirectX::XMFLOAT2 length = { 1.0f,1.0f };
+};
+
+
+#pragma endregion

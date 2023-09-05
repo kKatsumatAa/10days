@@ -76,5 +76,10 @@ public:
 	/// <returns></returns>
 	static bool CheckRay2Sphere(const Ray& ray, const Sphere& sphere,
 		float* distance = nullptr, DirectX::XMVECTOR* inter = nullptr);
+
+public://2D
+	static bool CheckCircle2Circle(const Ray& ray, const Sphere& sphere,
+		float* distance = nullptr, DirectX::XMVECTOR* inter = nullptr);
+
 };
 

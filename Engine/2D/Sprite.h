@@ -34,12 +34,12 @@ public:
 
 	void Update(const Vec2& pos, const Vec2& scale,
 		const Vec4& color, uint64_t textureHandle, const Vec2& ancorUV,
-		 bool isReverseX, bool isReverseY, float rotation,
+		 bool isReverseX, bool isReverseY, const Vec3& rotation,
 		ConstBuffTransform* cbt, ConstBufferDataMaterial* constMapMaterial);
 
 	void UpdateClipping(const Vec2& leftTop, const Vec2& scale, const XMFLOAT2& UVleftTop, const XMFLOAT2& UVlength,
 		const Vec4& color, uint64_t textureHandle, bool isPosLeftTop,
-		 bool isReverseX, bool isReverseY, float rotation, ConstBuffTransform* cbt, ConstBufferDataMaterial* constMapMaterial);
+		 bool isReverseX, bool isReverseY, const Vec3& rotation, ConstBuffTransform* cbt, ConstBufferDataMaterial* constMapMaterial);
 };
 
 //ã§í ÇÃèàóù

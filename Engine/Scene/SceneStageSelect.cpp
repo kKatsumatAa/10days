@@ -9,7 +9,7 @@ void SceneStageSelect::Finalize()
 //---------------------------------------------------------------------------------------
 void SceneStageSelect::Initialize()
 {
-	ObjectManager::GetInstance().ClearAllObj();
+	//ObjectManager::GetInstance().ClearAllObj();
 	ParticleManager::GetInstance()->ClearParticles();
 
 	sceneM_->StopWaveAllScene();

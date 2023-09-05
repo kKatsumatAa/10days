@@ -42,6 +42,9 @@ private:
 
 	std::unique_ptr<Camera> camera_;
 
+	//テスト
+	Object* sprite_ = nullptr;
+
 	//ゲームが終了したか
 	bool isEscapingGame_ = false;
 

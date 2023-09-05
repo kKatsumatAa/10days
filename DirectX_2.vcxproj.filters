@@ -121,6 +121,18 @@
     <Filter Include="ヘッダー ファイル\Application\Effect\GameVelocityManger">
       <UniqueIdentifier>{d05a26cc-58df-4baa-be3d-070e36bcfc50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Engine\Collision\2D">
+      <UniqueIdentifier>{a090383c-e2c0-48b1-ac98-ed43f9836fe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Engine\Collision\3D">
+      <UniqueIdentifier>{0d53845e-6cda-43f8-a5b1-11a3c7adf04a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Engine\Collision\2D">
+      <UniqueIdentifier>{8300ead6-94c1-4ebb-b52e-8489a2b720cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Engine\Collision\3D">
+      <UniqueIdentifier>{41139e75-f617-49dc-b004-dd6082b59310}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -252,15 +264,6 @@
     <ClCompile Include="Engine\Collision\CollisionPrimitive.cpp">
       <Filter>ソース ファイル\Engine\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Collision\PlaneCollider.cpp">
-      <Filter>ソース ファイル\Engine\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Collision\SphereCollider.cpp">
-      <Filter>ソース ファイル\Engine\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Collision\TriangleCollider.cpp">
-      <Filter>ソース ファイル\Engine\Collision</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Input\Input.cpp">
       <Filter>ソース ファイル\Engine\Input</Filter>
     </ClCompile>
@@ -309,9 +312,6 @@
     <ClCompile Include="Engine\Base\RootPipe.cpp">
       <Filter>ソース ファイル\Engine\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Collision\MeshCollider.cpp">
-      <Filter>ソース ファイル\Engine\Collision</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\3D\Object\TouchableObject.cpp">
       <Filter>ソース ファイル\Engine\3D\Object</Filter>
     </ClCompile>
@@ -338,6 +338,24 @@
     </ClCompile>
     <ClCompile Include="Application\Effect\GameVelocity\GameVelocityState.cpp">
       <Filter>ソース ファイル\Application\Effect\GameVelocityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Collision\3D\MeshCollider.cpp">
+      <Filter>ソース ファイル\Engine\Collision\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Collision\3D\PlaneCollider.cpp">
+      <Filter>ソース ファイル\Engine\Collision\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Collision\3D\SphereCollider.cpp">
+      <Filter>ソース ファイル\Engine\Collision\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Collision\3D\TriangleCollider.cpp">
+      <Filter>ソース ファイル\Engine\Collision\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Collision\2D\CircleCollider.cpp">
+      <Filter>ソース ファイル\Engine\Collision\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Collision\2D\RectangleCollider.cpp">
+      <Filter>ソース ファイル\Engine\Collision\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -479,18 +497,6 @@
     <ClInclude Include="Engine\Collision\CollisionTypes.h">
       <Filter>ヘッダー ファイル\Engine\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Collision\PlaneCollider.h">
-      <Filter>ヘッダー ファイル\Engine\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Collision\RaycastHit.h">
-      <Filter>ヘッダー ファイル\Engine\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Collision\SphereCollider.h">
-      <Filter>ヘッダー ファイル\Engine\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Collision\TriangleCollider.h">
-      <Filter>ヘッダー ファイル\Engine\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Input\Input.h">
       <Filter>ヘッダー ファイル\Engine\Input</Filter>
     </ClInclude>
@@ -539,9 +545,6 @@
     <ClInclude Include="Engine\Base\RootPipe.h">
       <Filter>ヘッダー ファイル\Engine\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Collision\MeshCollider.h">
-      <Filter>ヘッダー ファイル\Engine\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\3D\Object\TouchableObject.h">
       <Filter>ヘッダー ファイル\Engine\3D\Object</Filter>
     </ClInclude>
@@ -574,6 +577,27 @@
     </ClInclude>
     <ClInclude Include="Application\Effect\GameVelocity\GameVelocityState.h">
       <Filter>ヘッダー ファイル\Application\Effect\GameVelocityManger</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Collision\3D\MeshCollider.h">
+      <Filter>ヘッダー ファイル\Engine\Collision\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Collision\3D\PlaneCollider.h">
+      <Filter>ヘッダー ファイル\Engine\Collision\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Collision\3D\RaycastHit.h">
+      <Filter>ヘッダー ファイル\Engine\Collision\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Collision\3D\SphereCollider.h">
+      <Filter>ヘッダー ファイル\Engine\Collision\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Collision\3D\TriangleCollider.h">
+      <Filter>ヘッダー ファイル\Engine\Collision\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Collision\2D\CircleCollider.h">
+      <Filter>ヘッダー ファイル\Engine\Collision\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Collision\2D\RectangleCollider.h">
+      <Filter>ヘッダー ファイル\Engine\Collision\2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
