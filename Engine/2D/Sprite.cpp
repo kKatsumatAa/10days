@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include "CameraManager.h"
 
 using namespace DirectX;
 
@@ -100,7 +101,7 @@ void Sprite::Update(const Vec2& pos, const Vec2& scale,
 	worldMat.rot_.y_ = AngletoRadi(rotation.y_);
 	worldMat.rot_.z_ = AngletoRadi(rotation.z_);
 	worldMat.trans_ = { pos.x_ /*+ length.x * ancorUV.x * scale*/,pos.y_/* + length.y * ancorUV.y * scale*/,0.0f };
-	
+
 	worldMat.CalcAllTreeMat();
 
 	XMMATRIX matW;
@@ -111,7 +112,7 @@ void Sprite::Update(const Vec2& pos, const Vec2& scale,
 
 	//view
 	ViewMat view;
-	view.matView_ = XMMatrixIdentity();
+	view.matView_ = CameraManager::GetInstance().GetCamera2D()->GetCameraMatrix();
 
 
 	//•½s“Š‰e‚ÌŽË‰es—ñ¶¬
@@ -203,11 +204,11 @@ void Sprite::UpdateClipping(const Vec2& leftTop, const Vec2& scale, const XMFLOA
 
 	//view
 	ViewMat view;
-	view.matView_ = XMMatrixIdentity();
+	view.matView_ = CameraManager::GetInstance().GetCamera2D()->GetCameraMatrix();
 
 	//•½s“Š‰e‚ÌŽË‰es—ñ¶¬
 	ProjectionMat projection;
-	projection.matProjection_ = XMMatrixOrthographicOffCenterLH(0.0, WindowsApp::GetInstance().WINDOW_WIDTH_,
+	projection.matProjection_ = XMMatrixOrthographicOffCenterLH(0.0f, WindowsApp::GetInstance().WINDOW_WIDTH_,
 		WindowsApp::GetInstance().WINDOW_HEIGHT_, 0.0, 0.0f, 1.0f);
 
 	cbt->SetWorldMat(matW);

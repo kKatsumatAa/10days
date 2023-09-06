@@ -106,9 +106,6 @@
     <Filter Include="ヘッダー ファイル\Engine\PostEffect">
       <UniqueIdentifier>{06310e1f-70bb-4773-8867-d21016d4fdad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Engine\3D\Assimp">
-      <UniqueIdentifier>{db463434-2f88-4178-82f5-3b1f811d3713}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Application\Effect">
       <UniqueIdentifier>{f94d148a-9809-4fc6-a591-68ce3cc52be1}</UniqueIdentifier>
     </Filter>
@@ -366,6 +363,9 @@
     <ClCompile Include="Application\Character\TestChara.cpp">
       <Filter>ソース ファイル\Application\Character</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\2D\Camera2D.cpp">
+      <Filter>ソース ファイル\Engine\2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Util\Shake.h">
@@ -610,6 +610,9 @@
     </ClInclude>
     <ClInclude Include="Application\Character\TestChara.h">
       <Filter>ヘッダー ファイル\Application\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\2D\Camera2D.h">
+      <Filter>ヘッダー ファイル\Engine\2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

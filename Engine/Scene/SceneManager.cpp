@@ -160,6 +160,8 @@ void SceneManager::DrawImgui()
 		ObjectManager::GetInstance().DrawImGui();
 		//light
 		lightManager_->DrawImGui();
+		//ƒJƒƒ‰
+		CameraManager::GetInstance().ImguiUpdate();
 	}
 }
 

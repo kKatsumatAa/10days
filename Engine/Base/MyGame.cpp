@@ -9,8 +9,6 @@ void MyGame::Initialize()
 
 	//ゲーム固有の初期化
 	CameraManager::GetInstance().Initialize();
-	CameraManager::GetInstance().AddCamera("camera");
-	CameraManager::GetInstance().SetUsingCamera("camera");
 
 	//シーンファクトリーを生成し、マネージャーにセット
 	sceneFactory_ = std::make_unique<SceneFactory>();

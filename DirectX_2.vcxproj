@@ -103,6 +103,7 @@
     <ClCompile Include="Application\Character\TestChara.cpp" />
     <ClCompile Include="Application\Effect\GameVelocity\GameVelocityManager.cpp" />
     <ClCompile Include="Application\Effect\GameVelocity\GameVelocityState.cpp" />
+    <ClCompile Include="Engine\2D\Camera2D.cpp" />
     <ClCompile Include="Engine\2D\DebugText.cpp" />
     <ClCompile Include="Engine\2D\DrawIntNumImage.cpp" />
     <ClCompile Include="Engine\2D\Sprite.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Application\Character\TestChara.h" />
     <ClInclude Include="Application\Effect\GameVelocity\GameVelocityManager.h" />
     <ClInclude Include="Application\Effect\GameVelocity\GameVelocityState.h" />
+    <ClInclude Include="Engine\2D\Camera2D.h" />
     <ClInclude Include="Engine\2D\DebugText.h" />
     <ClInclude Include="Engine\2D\DrawIntNumImage.h" />
     <ClInclude Include="Engine\2D\Sprite.h" />

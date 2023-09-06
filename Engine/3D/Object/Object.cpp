@@ -184,7 +184,7 @@ void Object::Draw()
 	}
 	else if (sprite_)
 	{
-		DrawBoxSprite();
+		DrawBoxSprite(NULL,{1.0f,1.0f,1.0f,1.0f},{0.5f,0.5f});
 	}
 }
 

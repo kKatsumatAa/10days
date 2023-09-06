@@ -17,7 +17,7 @@ bool TestChara::Initialize(std::unique_ptr<WorldMat> worldMat)
 
 void TestChara::Draw()
 {
-	DrawBoxSprite(NULL, color_);
+	DrawBoxSprite(NULL, color_, { 0.5f,0.5f });
 	color_ = { 1.0f,1.0f,1.0f,1.0f };
 }
 
