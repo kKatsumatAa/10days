@@ -21,6 +21,17 @@ private:
 	Vec2 screenCenterPos_ = { WindowsApp::WINDOW_WIDTH_ / 2.0f,WindowsApp::WINDOW_HEIGHT_ / 2.0f };
 	//カメラ行列
 	DirectX::XMMATRIX cameraMatrix_;
+	//シェイク
+	Shake shake_;
+	
+	//追従
+	bool isFollow_ = false;
+	//追従用
+	float followLengthMax_ = 0;
+	//割合
+	float followT_ = 0;
+	//前の座標
+	Vec2 oldPos_;
 
 public:
 	void Initialize();
@@ -29,6 +40,7 @@ public:
 private:
 	void VisiableUpdate();
 	void MatrixUpdate();
+	void FollowUpdate();
 
 public:
 	void SetPos(const Vec2& pos) { pos_ = pos; }
@@ -41,4 +53,9 @@ public:
 	const Vec4& GetVisiableArea() { return visiableArea_; }
 	float GetRot() { return rot_; }
 	const DirectX::XMMATRIX& GetCameraMatrix() { return cameraMatrix_; }
+
+public:
+	void BeginShake(uint32_t time, float maxLength);
+	void BeginFollow(float maxLength);
+	void EndFollow();
 };

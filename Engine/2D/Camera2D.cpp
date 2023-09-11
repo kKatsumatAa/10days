@@ -8,6 +8,11 @@ void Camera2D::Initialize()
 
 void Camera2D::Update()
 {
+	FollowUpdate();
+
+	//シェイク更新
+	shake_.Update();
+
 	//見える範囲更新
 	VisiableUpdate();
 
@@ -24,7 +29,7 @@ void Camera2D::VisiableUpdate()
 void Camera2D::MatrixUpdate()
 {
 	//3Dに変換
-	Vec3 pos = { pos_.x,pos_.y,0 };
+	Vec3 pos = { pos_.x + shake_.GetShake(),pos_.y + shake_.GetShake(),0 };
 	Vec3 screenPos = { screenCenterPos_.x,screenCenterPos_.y,0 };
 
 	//行列作成
@@ -33,4 +38,52 @@ void Camera2D::MatrixUpdate()
 	cameraMatrix_ *= XMMatrixScaling(zoom_.x, zoom_.y, 1.0f);
 	cameraMatrix_ *= XMMatrixRotationZ(rot_);
 	cameraMatrix_ *= XMMatrixTranslation(screenPos.x, screenPos.y, screenPos.z);
+}
+
+void Camera2D::FollowUpdate()
+{
+	if (isFollow_)
+	{
+		float length = fabsf((pos_ - oldPos_).GetLength());
+		Vec2 dir = (pos_ - oldPos_).GetNormalize();
+
+		followT_ = min(followT_ + length / followLengthMax_ * 1.0f / 15.0f, 1.0f);
+
+		Vec2 offset = LerpVec2({ 0,0 }, dir * followLengthMax_, EaseIn(followT_));
+
+		if ((pos_ - (oldPos_ + offset)).GetNormalize().Dot((pos_ - oldPos_).GetNormalize()) < 0.0f)
+		{
+			SetPos(pos_);
+			followT_ = 0;
+		}
+		else
+		{
+			pos_ = oldPos_ + offset;
+		}
+		oldPos_ = pos_;
+		//followT_ += 1.0f / 10.0f;
+	}
+}
+
+//----------------------------------------------------------
+void Camera2D::BeginShake(uint32_t time, float maxLength)
+{
+	shake_.SetShake(time, maxLength);
+}
+
+void Camera2D::BeginFollow(float maxLength)
+{
+	//追従
+	isFollow_ = true;
+	//追従用
+	followLengthMax_ = maxLength;
+	//割合
+	followT_ = 0;
+	//前の座標
+	oldPos_ = pos_;
+}
+
+void Camera2D::EndFollow()
+{
+	isFollow_ = false;
 }

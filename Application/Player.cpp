@@ -11,6 +11,7 @@
 #include "GameVelocityManager.h"
 #include "GameVelocityState.h"
 #include "HitStop.h"
+#include "CameraManager.h"
 
 
 const float Player::kMowDist_{ 15.f };// “ã‚¬•¥‚¢‚Å‚«”ò‚Î‚·‹——£ ‚±‚Á‚¿•ÏX‚·‚é‚È‚çenemy.h‚ÌŠ„‡‚à˜M‚ç‚È‚¢‚ÆuŠÔˆÚ“®‚É‚È‚Á‚¿‚Ü‚¤
@@ -349,6 +350,9 @@ void Player::MoveUpdate(void)
 		state_ = State::ATTACK_MOW;
 	}
 #endif // _DEBUG
+
+	//ƒJƒƒ‰‚ğ’Ç]‚³‚¹‚é
+	CameraManager::GetInstance().GetCamera2D()->SetPos(position_);
 }
 
 void Player::MowAttackUpdate(void)
@@ -410,6 +414,7 @@ void Player::SkewerAttackUpdate(void)
 			//GameVelocityManager::GetInstance().BeginSlowMotion(30, 1.0f);
 			HitStopManager::GetInstance().BeginHitStop(60);
 			frameCount_SkewerEndHitStop_ = 0;
+			CameraManager::GetInstance().GetCamera2D()->EndFollow();
 		}
 		// ŠÖ”I—¹
 		return;
@@ -447,6 +452,10 @@ void Player::SkewerAttackUpdate(void)
 	pos4Sword_ = position_ + vec_move_ * Player::kMowSwordCenterDist_;
 	pos4SwordUp_ = position_ + vec_move_ * Player::kMowSwordCenterDist_;
 	pos4SwordBottom_ = position_ + vec_move_ * Player::kMowSwordCenterDist_;
+
+	//ƒJƒƒ‰‚ğ’x‚ê‚Ä’Ç]
+	CameraManager::GetInstance().GetCamera2D()->BeginFollow(50.0f);
+	CameraManager::GetInstance().GetCamera2D()->SetPos(position_);
 }
 
 void Player::OnCollision(void)
@@ -468,6 +477,8 @@ void Player::OnCollision(void)
 		// –³“GŠÔ’†‚Å‚È‚¢‚È‚ç
 		if (frameCount_invincible_ == 0)
 		{
+			CameraManager::GetInstance().GetCamera2D()->BeginShake(50, 5.0f);
+
 			// ƒmƒNƒo‚µ‚Ü`‚·
 			isKnockback_ = true;
 
