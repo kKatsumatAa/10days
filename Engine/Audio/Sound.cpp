@@ -50,6 +50,22 @@ void Sound::Initialize(const std::string& directoryPath)
 	}
 }
 
+void Sound::AllLoad()
+{
+	//BGMì«Ç›çûÇ›ÅAçƒê∂
+	Sound::GetInstance().LoadWave("title_BGM.wav", false);
+	Sound::GetInstance().LoadWave("play_BGM.wav", false);
+	Sound::GetInstance().LoadWave("result_BGM.wav", false);
+	//SEì«Ç›çûÇ›
+	Sound::GetInstance().LoadWave("decision_SE.wav", false);
+	Sound::GetInstance().LoadWave("sceneChange_SE.wav", false);
+	Sound::GetInstance().LoadWave("attack_SE.wav", false);
+	Sound::GetInstance().LoadWave("brake_SE.wav", false);
+	Sound::GetInstance().LoadWave("result_end_SE.wav", false);
+	Sound::GetInstance().LoadWave("result_SE.wav", false);
+	Sound::GetInstance().LoadWave("skewer_SE.wav", false);
+}
+
 void Sound::LoadWave(const std::string& filename, bool isConvert)
 {
 	std::string fullpath = sDirectoryPath_ + filename;

@@ -13,10 +13,8 @@ void ResultScene::Finalize()
 void ResultScene::Initialize(void)
 {
 	//‰æ‘œ“Ç‚İ‚İ
-	TextureManager::LoadGraph("result.png");
-	//BGM“Ç‚İ‚İAÄ¶
-	Sound::GetInstance().LoadWave("result_BGM.wav", false);
-	Sound::GetInstance().LoadWave("sceneChange_SE.wav", false);
+	png_result_ = TextureManager::LoadGraph("result.png");
+	//BGMÄ¶
 	Sound::GetInstance().PlayWave("result_BGM.wav", 1.0f, true);
 
 	Score::SaveScore();

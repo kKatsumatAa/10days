@@ -70,6 +70,8 @@ private:
 public://メンバ関数
 
 	static void Initialize(const std::string& directoryPath = "Resources/sound/");
+	//使う音全部読み込み
+	static void AllLoad();
 
 	/// <summary>
 /// 音の読み込み（第2は基本true,読み込めない/再生されないときはfalseにする）

@@ -16,11 +16,8 @@ void GameScene::Finalize()
 
 void GameScene::Initialize(void)
 {
-	//BGM“Ç‚Ýž‚ÝAÄ¶
-	Sound::GetInstance().LoadWave("play_BGM.wav", false);
+	//BGMÄ¶
 	Sound::GetInstance().PlayWave("play_BGM.wav", 1.0f, true);
-	//SE“Ç‚Ýž‚Ý
-	Sound::GetInstance().LoadWave("sceneChange_SE.wav", false);
 
 	// (0,0) ~ (1280,720) ‚æ‚è‚¿‚å‚¢“à‘¤
 	stage_->Initialize({ 10,10 }, { 1270,710 });

@@ -9,6 +9,7 @@
 #include "SceneTransitionManager.h"
 #include "SceneTransitionEffectState.h"
 #include "CircleCollider.h"
+#include "Sound.h"
 
 
 //---------------------------------------------------------------------------------------
@@ -74,6 +75,9 @@ void SceneManager::Initialize()
 
 	//画像アップロード
 	DirectXWrapper::GetInstance().UpLoadTexture();
+
+	//サウンド読み込み
+	Sound::GetInstance().AllLoad();
 }
 
 void SceneManager::Update()

@@ -14,12 +14,8 @@ void TitleScene::Initialize(void)
 {
 	//‰æ‘œ“Ç‚İ‚İ
 	titleImageHandle_ = TextureManager::LoadGraph("title.png");
-	//BGM“Ç‚İ‚İAÄ¶
-	Sound::GetInstance().LoadWave("title_BGM.wav", false);
+	//BGMÄ¶
 	Sound::GetInstance().PlayWave("title_BGM.wav", 1.0f, true);
-	//SE“Ç‚İ‚İ
-	Sound::GetInstance().LoadWave("decision_SE.wav", false);
-	Sound::GetInstance().LoadWave("sceneChange_SE.wav", false);
 
 	Score::LoadScore();
 }
