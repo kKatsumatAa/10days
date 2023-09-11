@@ -103,6 +103,8 @@ void SceneManager::Update()
 	lightManager_->SetSpecularColor({ specularColor_[0],specularColor_[1], specularColor_[2] });
 
 	lightManager_->Update();
+
+	Easing::EaseTimer::UpdateDeltaTime();
 }
 
 void SceneManager::Draw()

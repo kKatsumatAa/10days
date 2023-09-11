@@ -19,9 +19,9 @@ void ParticleManagerL::Init()
 	enemyDeadParticle.Init();
 }
 
-void ParticleManagerL::Update()
+void ParticleManagerL::Update(float velocity)
 {
-	enemyDeadParticle.Update();
+	enemyDeadParticle.Update(velocity);
 }
 
 void ParticleManagerL::Draw()

@@ -19,7 +19,7 @@ public:
 	static ParticleManagerL* GetInstance();
 
 	void Init();
-	void Update();
+	void Update(float velocity);
 	void Draw();
 	void Reset();
 };

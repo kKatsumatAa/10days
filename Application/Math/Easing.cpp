@@ -182,11 +182,6 @@ float Easing::InOutBack(float start, float end, float timeRate)
 	return start + dif;
 }
 
-void Easing::EaseTimer::Update()
-{
-	sTimer_++;
-}
-
 void Easing::EaseTimer::Reset()
 {
 	nowTime_ = 0.0f;
@@ -295,14 +290,14 @@ void Easing::EaseTimer::UpdateDeltaTime()
 
 	// 前回取得した時間からの経過時間を秒に変換してセット
 	// ( GetNowHiPerformanceCount で取得できる値はマイクロ秒単位なので 1000000 で割ることで秒単位になる )
-	DeltaTime = (NowTime - (float)Time) / 60.0f;
+	DeltaTime = (NowTime - (float)Time) / 1000000.0f;
 
 	// 今回取得した時間を保存
 	Time = NowTime;
 
 	// FPS関係の処理( 1秒経過する間に実行されたメインループの回数を FPS とする )
 	FPSCounter++;
-	if (NowTime - FPSCheckTime > 60.0f)
+	if (NowTime - FPSCheckTime > 1000000.0f)
 	{
 		FPS = FPSCounter;
 		FPSCounter = 0;

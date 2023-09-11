@@ -30,10 +30,8 @@ class Emitter final
 		//色
 		uint32_t color;
 		//生存時間(フレーム数)
-		Easing::EaseTimer aliveTimer;
-
-		//イージング用タイマー
-		Easing::EaseTimer easeTimer = 1.0f;
+		float timer = 0;
+		float timerMax = 30;
 
 		//距離
 		float radius = 0;
@@ -45,6 +43,10 @@ class Emitter final
 	public:
 		Particle() { ; }
 		void Draw();
+
+	public:
+		bool GetIsAlive() { return timer < timerMax; }
+		float GetTimeRate() { return timer / timerMax; }
 	};
 
 private:
@@ -80,7 +82,7 @@ public:
 	//初期化
 	void Init();
 	//更新
-	void Update(bool isGravity = false);
+	void Update(bool isGravity = false, float velocity = 1.0f);
 	//描画
 	void DrawCircleParticle();
 	void DrawGraph();

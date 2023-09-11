@@ -65,7 +65,7 @@ void GameScene::Update(void)
 		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
 	}
 
-	ParticleManagerL::GetInstance()->Update();
+	ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
 
 	CollisionManger::GetInstance()->Update();
 
