@@ -64,6 +64,7 @@ void Sound::AllLoad()
 	Sound::GetInstance().LoadWave("result_end_SE.wav", false);
 	Sound::GetInstance().LoadWave("result_SE.wav", false);
 	Sound::GetInstance().LoadWave("skewer_SE.wav", false);
+	Sound::GetInstance().LoadWave("skewer_hit_SE.wav", false);
 }
 
 void Sound::LoadWave(const std::string& filename, bool isConvert)

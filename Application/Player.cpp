@@ -285,6 +285,7 @@ void Player::MoveUpdate(void)
 		// pad-AâüÇµÇƒÇ»Ç¢éû && pad-R||RB Ç≈Attack_MOWèÛë‘Ç…ëJà⁄
 		if (PadInput::GetInstance().GetPushButton(GAMEPAD_A) == false && PadInput::GetInstance().GetReleaseTrigger(GAMEPAD_RIGHT_SHOULDER))
 		{
+			Sound::GetInstance().PlayWave("attack_SE.wav");
 			mow_.Attack(vec_move_, position_);
 			state_ = State::ATTACK_MOW;
 		}
@@ -309,6 +310,7 @@ void Player::MoveUpdate(void)
 		else if (PadInput::GetInstance().GetReleaseTrigger(GAMEPAD_A))
 		{
 			GameVelocityManager::GetInstance().EndSlowMotion(30, 1.0f);
+			Sound::GetInstance().PlayWave("skewer_SE.wav");
 		}
 		else
 		{
@@ -341,6 +343,7 @@ void Player::MoveUpdate(void)
 	// key-SPACEÇ≈Attack_MOWèÛë‘Ç…ëJà⁄
 	if (KeyboardInput::GetInstance().KeyTrigger(DIK_SPACE))
 	{
+		Sound::GetInstance().PlayWave("attack_SE.wav");
 		mow_.Attack(vec_move_, position_);
 		state_ = State::ATTACK_MOW;
 	}
