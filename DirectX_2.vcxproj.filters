@@ -423,6 +423,12 @@
     <ClCompile Include="Application\Base\ParticleManager.cpp">
       <Filter>ソース ファイル\Application\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Application\Effect\HitStopManager.cpp">
+      <Filter>ソース ファイル\Application\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Effect\HitStop.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Util\Shake.h">
@@ -715,6 +721,9 @@
     </ClInclude>
     <ClInclude Include="Application\Base\ParticleManager.h">
       <Filter>ヘッダー ファイル\Application\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Effect\HitStop.h">
+      <Filter>ヘッダー ファイル\Application\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,7 @@
 #include "EnemyManager.h"
 #include "GameVelocityManager.h"
 #include "GameVelocityState.h"
+#include "HitStop.h"
 
 
 const float Player::kMowDist_{ 15.f };// 薙ぎ払いで吹き飛ばす距離 こっち変更するならenemy.hの割合も弄らないと瞬間移動になっちまう
@@ -406,7 +407,8 @@ void Player::SkewerAttackUpdate(void)
 		// 多分、ほぼ確実に通ると思うから規定フレーム後(ヒットストップ後）に通ると思うんで、スローモーション終了させてヒットストップも終了
 		if (frameCount_SkewerEndHitStop_)
 		{
-			GameVelocityManager::GetInstance().BeginSlowMotion(30, 1.0f);
+			//GameVelocityManager::GetInstance().BeginSlowMotion(30, 1.0f);
+			HitStopManager::GetInstance().BeginHitStop(60);
 			frameCount_SkewerEndHitStop_ = 0;
 		}
 		// 関数終了

@@ -113,6 +113,8 @@
     <ClCompile Include="Application\CombinedEnemiesState.cpp" />
     <ClCompile Include="Application\Effect\GameVelocity\GameVelocityManager.cpp" />
     <ClCompile Include="Application\Effect\GameVelocity\GameVelocityState.cpp" />
+    <ClCompile Include="Application\Effect\HitStop.cpp" />
+    <ClCompile Include="Application\Effect\HitStopManager.cpp" />
     <ClCompile Include="Application\Enemy.cpp" />
     <ClCompile Include="Application\EnemyManager.cpp" />
     <ClCompile Include="Application\IEntity.cpp" />
@@ -210,6 +212,7 @@
     <ClInclude Include="Application\CombinedEnemiesState.h" />
     <ClInclude Include="Application\Effect\GameVelocity\GameVelocityManager.h" />
     <ClInclude Include="Application\Effect\GameVelocity\GameVelocityState.h" />
+    <ClInclude Include="Application\Effect\HitStop.h" />
     <ClInclude Include="Application\Enemy.h" />
     <ClInclude Include="Application\EnemyManager.h" />
     <ClInclude Include="Application\IEntity.h" />

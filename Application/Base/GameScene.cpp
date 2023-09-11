@@ -9,6 +9,7 @@
 #include "Score.h"
 #include "GameVelocityManager.h"
 #include "GameVelocityState.h"
+#include "HitStop.h"
 
 void GameScene::Finalize()
 {
@@ -42,32 +43,37 @@ void GameScene::Initialize(void)
 
 void GameScene::Update(void)
 {
-	stage_->Update();
-
-	player_->Update();
-	EnemyManager::GetInstance().Update();
-
-	if (KeyboardInput::GetInstance().KeyTrigger(DIK_0))
+	if (!HitStopManager::GetInstance().GetIsStop())
 	{
-		timer_.SetEndTime(10.f);
+		stage_->Update();
+
+		player_->Update();
+		EnemyManager::GetInstance().Update();
+
+		if (KeyboardInput::GetInstance().KeyTrigger(DIK_0))
+		{
+			timer_.SetEndTime(10.f);
+		}
+
+		if (timer_.GetIsEnd())
+		{
+			Score::HighScoreUpdate();
+
+			Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+			//BGMストップ
+			Sound::GetInstance().StopWave("play_BGM.wav");
+			SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
+		}
+
+		ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
+
+		CollisionManger::GetInstance()->Update();
+
+		//ゲームスピード
+		GameVelocityManager::GetInstance().Update();
 	}
 
-	if (timer_.GetIsEnd())
-	{
-		Score::HighScoreUpdate();
-
-		Sound::GetInstance().PlayWave("sceneChange_SE.wav");
-		//BGMストップ
-		Sound::GetInstance().StopWave("play_BGM.wav");
-		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
-	}
-
-	ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
-
-	CollisionManger::GetInstance()->Update();
-
-	//ゲームスピード
-	GameVelocityManager::GetInstance().Update();
+	HitStopManager::GetInstance().Update();
 }
 
 void GameScene::Draw(void)
@@ -96,4 +102,6 @@ void GameScene::DrawImgui()
 {
 	//ゲームスピード
 	GameVelocityManager::GetInstance().UpdateImGui();
+	//ヒットストップ
+	HitStopManager::GetInstance().DrawImGui();
 }
