@@ -16,8 +16,7 @@ void SceneTransitionManager::Initialize()
 {
 	isDoingEffect_ = false;
 
-	//シーン遷移音
-	Sound::GetInstance().LoadWave(TRANSITION_SOUND_NAME_, false);
+	transition_.StaticInit();
 
 	//ステート
 	ChangeEffectState(std::make_unique<TransitionEffectNothingState>());

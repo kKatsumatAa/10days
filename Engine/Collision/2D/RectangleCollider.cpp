@@ -13,21 +13,21 @@ void RectangleCollider::Update()
 
 	//回転用の行列
 	WorldMat rotWM;
-	rotWM.rot_.z_ = object_->GetRot().z_;
+	rotWM.rot_.z = object_->GetRot().z;
 	rotWM.CalcRotMat();
 	//ベクトルを回転させて頂点とする
-	Vec2 scale = { object_->GetScale().x_,object_->GetScale().y_ };
+	Vec2 scale = { object_->GetScale().x,object_->GetScale().y };
 
-	Vec3 leftUp = GetVec3xM4({ -scale.x_,-scale.y_,0 }, rotWM.GetRotMat(), 0);
-	Vec3 leftDown = GetVec3xM4({ -scale.x_,scale.y_,0 }, rotWM.GetRotMat(), 0);
-	Vec3 rightUp = GetVec3xM4({ scale.x_,-scale.y_,0 }, rotWM.GetRotMat(), 0);
-	Vec3 rightDown = GetVec3xM4({ scale.x_,scale.y_,0 }, rotWM.GetRotMat(), 0);
+	Vec3 leftUp = GetVec3xM4({ -scale.x,-scale.y,0 }, rotWM.GetRotMat(), 0);
+	Vec3 leftDown = GetVec3xM4({ -scale.x,scale.y,0 }, rotWM.GetRotMat(), 0);
+	Vec3 rightUp = GetVec3xM4({ scale.x,-scale.y,0 }, rotWM.GetRotMat(), 0);
+	Vec3 rightDown = GetVec3xM4({ scale.x,scale.y,0 }, rotWM.GetRotMat(), 0);
 
 	//中心座標に足して
-	MyRectangle::leftUp = center + Vec2(leftUp.x_, leftUp.y_);
-	MyRectangle::leftDown = center + Vec2(leftDown.x_, leftDown.y_);
-	MyRectangle::rightUp = center + Vec2(rightUp.x_, rightUp.y_);
-	MyRectangle::rightDown = center + Vec2(rightDown.x_, rightDown.y_);
+	MyRectangle::leftUp = center + Vec2(leftUp.x, leftUp.y);
+	MyRectangle::leftDown = center + Vec2(leftDown.x, leftDown.y);
+	MyRectangle::rightUp = center + Vec2(rightUp.x, rightUp.y);
+	MyRectangle::rightDown = center + Vec2(rightDown.x, rightDown.y);
 };
 
 

@@ -9,19 +9,19 @@ void TriangleCollider::Update()
 	float angle2 = PI * 2.0f;
 	float angle3 = PI * 2.0f + PI * 2.0f / 3.0f;
 
-	Triangle::p0 = { GetVec3xM4({ sinf(angle),cosf(angle),0 }, object_->GetMatWorld(), 1).x_,
-		GetVec3xM4({ sinf(angle),cosf(angle),0 }, object_->GetMatWorld(), 1).y_,
-		GetVec3xM4({ sinf(angle),cosf(angle),0 }, object_->GetMatWorld(), 1).z_ 
+	Triangle::p0 = { GetVec3xM4({ sinf(angle),cosf(angle),0 }, object_->GetMatWorld(), 1).x,
+		GetVec3xM4({ sinf(angle),cosf(angle),0 }, object_->GetMatWorld(), 1).y,
+		GetVec3xM4({ sinf(angle),cosf(angle),0 }, object_->GetMatWorld(), 1).z 
 	};//¶‰º
 
-	Triangle::p1 = { GetVec3xM4({ 0,cosf(angle2),0 }, object_->GetMatWorld(), 1).x_,
-		GetVec3xM4({ 0,cosf(angle2),0 }, object_->GetMatWorld(), 1).y_,
-		GetVec3xM4({ 0,cosf(angle2),0 }, object_->GetMatWorld(), 1).z_
+	Triangle::p1 = { GetVec3xM4({ 0,cosf(angle2),0 }, object_->GetMatWorld(), 1).x,
+		GetVec3xM4({ 0,cosf(angle2),0 }, object_->GetMatWorld(), 1).y,
+		GetVec3xM4({ 0,cosf(angle2),0 }, object_->GetMatWorld(), 1).z
 	};//¶‰º
 
-	Triangle::p2 = { GetVec3xM4({ sinf(angle3),cosf(angle3),0 }, object_->GetMatWorld(), 1).x_,
-		GetVec3xM4({ sinf(angle3),cosf(angle3),0 }, object_->GetMatWorld(), 1).y_,
-		GetVec3xM4({ sinf(angle3),cosf(angle3),0 }, object_->GetMatWorld(), 1).z_
+	Triangle::p2 = { GetVec3xM4({ sinf(angle3),cosf(angle3),0 }, object_->GetMatWorld(), 1).x,
+		GetVec3xM4({ sinf(angle3),cosf(angle3),0 }, object_->GetMatWorld(), 1).y,
+		GetVec3xM4({ sinf(angle3),cosf(angle3),0 }, object_->GetMatWorld(), 1).z
 	};//¶‰º
 
 	//–@ü‚ğŒvZ

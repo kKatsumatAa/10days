@@ -31,9 +31,6 @@ void Framework::Initialize()
 	//trueにすることでマウスがほかのアプリで使用されない
 	MouseInput::GetInstance().CreateDevice(/*true*/);
 
-	//
-	ParticleManager::GetInstance()->Initialize();
-
 	//Light
 	LightManager::StaticInitialize();
 

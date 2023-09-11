@@ -17,20 +17,20 @@ void Camera2D::Update()
 
 void Camera2D::VisiableUpdate()
 {
-	visiableArea_.x_ = pos_.x_ - visiableArea_.z_ / 2.0f;
-	visiableArea_.y_ = pos_.y_ - visiableArea_.w_ / 2.0f;
+	visiableArea_.x = pos_.x - visiableArea_.z / 2.0f;
+	visiableArea_.y = pos_.y - visiableArea_.w / 2.0f;
 }
 
 void Camera2D::MatrixUpdate()
 {
 	//3DÇ…ïœä∑
-	Vec3 pos = { pos_.x_,pos_.y_,0 };
-	Vec3 screenPos = { screenCenterPos_.x_,screenCenterPos_.y_,0 };
+	Vec3 pos = { pos_.x,pos_.y,0 };
+	Vec3 screenPos = { screenCenterPos_.x,screenCenterPos_.y,0 };
 
 	//çsóÒçÏê¨
 	cameraMatrix_ = XMMatrixIdentity();
-	cameraMatrix_ *= XMMatrixTranslation(-pos.x_, -pos.y_, -pos.z_);
-	cameraMatrix_ *= XMMatrixScaling(zoom_.x_, zoom_.y_, 1.0f);
+	cameraMatrix_ *= XMMatrixTranslation(-pos.x, -pos.y, -pos.z);
+	cameraMatrix_ *= XMMatrixScaling(zoom_.x, zoom_.y, 1.0f);
 	cameraMatrix_ *= XMMatrixRotationZ(rot_);
-	cameraMatrix_ *= XMMatrixTranslation(screenPos.x_, screenPos.y_, screenPos.z_);
+	cameraMatrix_ *= XMMatrixTranslation(screenPos.x, screenPos.y, screenPos.z);
 }

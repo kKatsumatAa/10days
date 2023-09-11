@@ -150,8 +150,8 @@ bool CollisionManager::RaycastUtil(const Vec3& endPos, const Vec3& startPos, uin
 	float length = dir.GetLength();
 	dir.Normalized();
 
-	ray.dir = { dir.x_,dir.y_,dir.z_ };
-	ray.start = { startPos.x_,startPos.y_,startPos.z_ };
+	ray.dir = { dir.x,dir.y,dir.z };
+	ray.start = { startPos.x,startPos.y,startPos.z };
 
 	return Raycast(ray, attribute, info, length);
 }

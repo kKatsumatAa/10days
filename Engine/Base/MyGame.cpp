@@ -14,7 +14,7 @@ void MyGame::Initialize()
 	sceneFactory_ = std::make_unique<SceneFactory>();
 	sceneM_->SetSceneFactory(sceneFactory_.get());
 	sceneM_->Initialize();
-	sceneM_->SetNextScene("TITLE");
+	sceneM_->SetNextScene(SceneFactory::Usage::TITLE);
 }
 
 void MyGame::Finalize()
@@ -32,8 +32,6 @@ void MyGame::Update()
 	Framework::Update();
 
 	//ゲーム固有の更新処理
-		//パーティクル
-	ParticleManager::GetInstance()->Update(1.0f);
 }
 
 void MyGame::Draw()

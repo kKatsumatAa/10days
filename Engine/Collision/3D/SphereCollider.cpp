@@ -17,5 +17,5 @@ void SphereCollider::Update()
 	};
 	//ワールド行列のスケールから半径
 	Sphere::radius =
-		(object_->GetScale().x_ + object_->GetScale().y_ + object_->GetScale().z_) / 3.0f;
+		(object_->GetScale().x + object_->GetScale().y + object_->GetScale().z) / 3.0f;
 }

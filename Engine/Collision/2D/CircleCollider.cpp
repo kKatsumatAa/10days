@@ -15,5 +15,5 @@ void CircleCollider::Update()
 	};
 	//ワールド行列のスケールから半径
 	Circle::radius =
-		(object_->GetScale().x_ / 2.0f + object_->GetScale().y_ / 2.0f) / 2.0f;
+		(object_->GetScale().x / 2.0f + object_->GetScale().y / 2.0f) / 2.0f;
 }

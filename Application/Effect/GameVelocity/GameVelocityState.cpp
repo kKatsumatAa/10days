@@ -46,7 +46,7 @@ void GameVelocityState::Update()
 	float t = (float)time_ / (float)slowTimeMax_;
 
 	//‘¬“xÝ’è
-	GameVelocityManager::GetInstance().SetVelocity(LerpVec3({ slowVelBegin_,0,0 }, { slowVelEnd_,0,0 }, EaseInOut(t)).x_);
+	GameVelocityManager::GetInstance().SetVelocity(LerpVec3({ slowVelBegin_,0,0 }, { slowVelEnd_,0,0 }, EaseInOut(t)).x);
 
 	if (t >= 1.0f)
 	{

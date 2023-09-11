@@ -23,7 +23,7 @@ public:
 
 	virtual void Initialize() = 0;
 	virtual void Update();
-	virtual void Draw() = 0;
+	virtual void Draw();
 
 	//時間の経過割合
 	float GetTimerT(int32_t timer, const int32_t TIMER_MAX) { return (float)timer / (float)TIMER_MAX; }
@@ -45,7 +45,6 @@ private:
 public:
 	void Initialize()override;
 	void Update()override;
-	void Draw()override;
 };
 
 //演出はじめ
@@ -57,7 +56,6 @@ private:
 public:
 	void Initialize()override;
 	void Update()override;
-	void Draw()override;
 };
 
 //演出中
@@ -69,7 +67,6 @@ private:
 public:
 	void Initialize()override;
 	void Update()override;
-	void Draw()override;
 };
 
 //演出終わり
@@ -81,5 +78,4 @@ private:
 public:
 	void Initialize()override;
 	void Update()override;
-	void Draw()override;
 };

@@ -65,7 +65,7 @@ void GameVelocityManager::Update()
 {
 	//ŽO‚Â–Ú‚ÌF‚à
 	Vec3 col = LerpVec3(VEL_COL_MIN_, { 1.0f,1.0f,1.0f }, gameVelocity_);
-	PostEffectManager::GetInstance().GetPostEffect3()->effectFlags_.color = { col.x_,col.y_,col.z_,1.0f };
+	PostEffectManager::GetInstance().GetPostEffect3()->effectFlags_.color = { col.x,col.y,col.z,1.0f };
 
 	//
 	slowState_->Update();

@@ -242,23 +242,23 @@ public:
 
 	//位置
 	void SetTrans(const Vec3& pos) { worldMat_->trans_ = pos; }
-	void SetTransX(float pos) { worldMat_->trans_.x_ = pos; }
-	void SetTransY(float pos) { worldMat_->trans_.y_ = pos; }
-	void SetTransZ(float pos) { worldMat_->trans_.z_ = pos; }
+	void SetTransX(float pos) { worldMat_->trans_.x = pos; }
+	void SetTransY(float pos) { worldMat_->trans_.y = pos; }
+	void SetTransZ(float pos) { worldMat_->trans_.z = pos; }
 	Vec3 GetTrans() { return worldMat_->trans_; }
 	//スケール
 	void SetScale(const Vec3& scale) { worldMat_->scale_ = scale; }
-	void SetScaleX(float scale) { worldMat_->scale_.x_ = scale; }
-	void SetScaleY(float scale) { worldMat_->scale_.y_ = scale; }
-	void SetScaleZ(float scale) { worldMat_->scale_.z_ = scale; }
+	void SetScaleX(float scale) { worldMat_->scale_.x = scale; }
+	void SetScaleY(float scale) { worldMat_->scale_.y = scale; }
+	void SetScaleZ(float scale) { worldMat_->scale_.z = scale; }
 	const Vec3& GetScale() { return worldMat_->scale_; }
 	//回転
 	void SetRot(const Vec3& rot) {
 		worldMat_->rot_ = rot;
 	}
-	void SetRotX(float rot) { worldMat_->rot_.x_ = rot; }
-	void SetRotY(float rot) { worldMat_->rot_.y_ = rot; }
-	void SetRotZ(float rot) { worldMat_->rot_.z_ = rot; }
+	void SetRotX(float rot) { worldMat_->rot_.x = rot; }
+	void SetRotY(float rot) { worldMat_->rot_.y = rot; }
+	void SetRotZ(float rot) { worldMat_->rot_.z = rot; }
 	const Vec3& GetRot() { return worldMat_->rot_; }
 	//行列を更新
 	void CalcWorldMat() { worldMat_->CalcWorldMat(); }

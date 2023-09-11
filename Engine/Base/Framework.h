@@ -2,7 +2,7 @@
 #include"SceneManager.h"
 #include"DebugText.h"
 #include"FbxLoader.h"
-#include"AbstractSceneFactory.h"
+#include"SceneFactory.h"
 #include"CameraManager.h"
 #include"MouseInput.h"
 #include"PostEffectManager.h"
@@ -17,7 +17,7 @@ protected:
 	MSG msg_{};	//メッセージ
 
 	//シーンファクトリー
-	std::unique_ptr<AbstractSceneFactory> sceneFactory_ = nullptr;
+	std::unique_ptr<SceneFactory> sceneFactory_ = nullptr;
 
 	std::unique_ptr <ImGuiManager> imguiM_;
 

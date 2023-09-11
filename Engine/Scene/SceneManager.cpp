@@ -18,9 +18,9 @@ SceneManager::~SceneManager()
 	state_->Finalize();
 }
 
-void SceneManager::SetNextScene(std::string sceneName)
+void SceneManager::SetNextScene(SceneFactory::Usage scene)
 {
-	nextScene_ = sceneFactory_->CreateScene(sceneName);
+	nextScene_ = sceneFactory_->CreateScene(scene);
 
 	//遷移演出開始
 	ChangeScene();
@@ -72,17 +72,6 @@ void SceneManager::Initialize()
 	//シーン遷移マネージャ
 	SceneTransitionManager::GetInstance().Initialize();
 
-	//仮
-	ObjectManager::GetInstance().AddObject("test", std::make_unique<TestChara>());
-	ObjectManager::GetInstance().AddObject("test", std::make_unique<TestChara>());
-	int32_t count = 0;
-	for (auto& testChara : ObjectManager::GetInstance().GetObjs("test"))
-	{
-		testChara->Initialize();
-		testChara->SetObjName(std::to_string(count));
-		count++;
-	}
-
 	//画像アップロード
 	DirectXWrapper::GetInstance().UpLoadTexture();
 }
@@ -124,8 +113,6 @@ void SceneManager::Draw()
 		state_->Draw();
 		//objマネージャ
 		ObjectManager::GetInstance().Draw();
-		//パーティクル
-		ParticleManager::GetInstance()->Draw();
 	}
 }
 
@@ -135,6 +122,17 @@ void SceneManager::DrawSprite()
 	if (!SceneTransitionManager::GetInstance().GetIsLoadingOnly() && state_)
 	{
 		state_->DrawSprite();
+
+		//// スローモーション用のフレームカウンタの値が0以外 && プレイヤーのSceneM用のフラグがtrueなら
+	//if (frameCount_slowMotion_ && Player::isSkewerScreenBlack4SceneM_)
+	//{
+	//    SetDrawBlendMode(DX_BLENDMODE_ALPHA, 100);
+	//    DrawBox(0, 0, 1280, 720, UtilL::Color::BLACK, true);
+	//    SetDrawBlendMode(DX_BLENDMODE_NOBLEND,0);
+	//}
+	//DrawFormatString(0, 100, UtilL::Color::WHITE, frameCount_slowMotion_ == 0 ? "no slow" : "slow");
+	//DrawFormatString(0, 120, UtilL::Color::WHITE, "slow: %d", frameCount_slowMotion_);
+	//DrawFormatString(0, 160, UtilL::Color::GREEN, "frameCount: %d", frameCount_debug_);
 	}
 
 	//シーン遷移マネージャ

@@ -83,13 +83,13 @@ void Sprite::Update(const Vec2& pos, const Vec2& scale,
 	Vec2 length = { (float)resDesc.Width ,(float)resDesc.Height };
 
 	//反転
-	if (isReverseX)length.x_ *= -1;
-	if (isReverseY)length.y_ *= -1;
+	if (isReverseX)length.x *= -1;
+	if (isReverseY)length.y *= -1;
 
-	vertices_[0] = { {-(float)(length.x_ * scale.x_ * ancorUV.x_),+(float)(length.y_ * scale.y_ * (1.0f - ancorUV.y_)),0.0f},{0.0f,1.0f} };//左下
-	vertices_[1] = { {-(float)(length.x_ * scale.x_ * ancorUV.x_),-(float)(length.y_ * scale.y_ * (ancorUV.y_)),0.0f},{0.0f,0.0f} };//左上
-	vertices_[2] = { {+(float)(length.x_ * scale.x_ * (1.0f - ancorUV.x_)),+(float)(length.y_ * scale.y_ * (1.0f - ancorUV.y_)),0.0f},{1.0f,1.0f} };//右下
-	vertices_[3] = { {+(float)(length.x_ * scale.x_ * (1.0f - ancorUV.x_)),-(float)(length.y_ * scale.y_ * (ancorUV.y_)),0.0f},{1.0f,0.0f} };//右上
+	vertices_[0] = { {-(float)(length.x * scale.x * ancorUV.x),+(float)(length.y * scale.y * (1.0f - ancorUV.y)),0.0f},{0.0f,1.0f} };//左下
+	vertices_[1] = { {-(float)(length.x * scale.x * ancorUV.x),-(float)(length.y * scale.y * (ancorUV.y)),0.0f},{0.0f,0.0f} };//左上
+	vertices_[2] = { {+(float)(length.x * scale.x * (1.0f - ancorUV.x)),+(float)(length.y * scale.y * (1.0f - ancorUV.y)),0.0f},{1.0f,1.0f} };//右下
+	vertices_[3] = { {+(float)(length.x * scale.x * (1.0f - ancorUV.x)),-(float)(length.y * scale.y * (ancorUV.y)),0.0f},{1.0f,0.0f} };//右上
 
 
 	constMapMaterial->color = color;
@@ -97,10 +97,10 @@ void Sprite::Update(const Vec2& pos, const Vec2& scale,
 	//ワールド行列
 	WorldMat worldMat;
 
-	worldMat.rot_.x_ = AngletoRadi(rotation.x_);
-	worldMat.rot_.y_ = AngletoRadi(rotation.y_);
-	worldMat.rot_.z_ = AngletoRadi(rotation.z_);
-	worldMat.trans_ = { pos.x_ /*+ length.x * ancorUV.x * scale*/,pos.y_/* + length.y * ancorUV.y * scale*/,0.0f };
+	worldMat.rot_.x = rotation.x;
+	worldMat.rot_.y = rotation.y;
+	worldMat.rot_.z = rotation.z;
+	worldMat.trans_ = { pos.x /*+ length.x * ancorUV.x * scale*/,pos.y/* + length.y * ancorUV.y * scale*/,0.0f };
 
 	worldMat.CalcAllTreeMat();
 
@@ -149,49 +149,49 @@ void Sprite::UpdateClipping(const Vec2& leftTop, const Vec2& scale, const XMFLOA
 	Vec2 length = { (float)resDesc.Width ,(float)resDesc.Height };
 
 	//反転
-	if (isReverseX)length.x_ *= -1;
-	if (isReverseY)length.y_ *= -1;
+	if (isReverseX)length.x *= -1;
+	if (isReverseY)length.y *= -1;
 
-	float texLeft = UVleftTop.x * +(float)length.x_ * scale.x_;
-	float texRight = (UVleftTop.x + UVlength.x) * +(float)length.x_ * scale.x_;
-	float texTop = UVleftTop.y * +(float)length.y_ * scale.y_;
-	float texBottom = (UVleftTop.y + UVlength.y) * +(float)length.y_ * scale.y_;
+	float texLeft = UVleftTop.x * +(float)length.x * scale.x;
+	float texRight = (UVleftTop.x + UVlength.x) * +(float)length.x * scale.x;
+	float texTop = UVleftTop.y * +(float)length.y * scale.y;
+	float texBottom = (UVleftTop.y + UVlength.y) * +(float)length.y * scale.y;
 
 	if (isPosLeftTop)
 	{
 		//左上からの座標
-		vertices_[0] = { {0,UVlength.y * length.y_ * scale.y_,0.0f},{UVleftTop.x,UVleftTop.y + UVlength.y} };//左下
+		vertices_[0] = { {0,UVlength.y * length.y * scale.y,0.0f},{UVleftTop.x,UVleftTop.y + UVlength.y} };//左下
 		vertices_[1] = { {0,0,0.0f},{UVleftTop.x,UVleftTop.y} };//左上
-		vertices_[2] = { {UVlength.x * length.x_ * scale.x_,UVlength.y * length.y_ * scale.y_,0.0f},{UVleftTop.x + UVlength.x,UVleftTop.y + UVlength.y} };//右下
-		vertices_[3] = { {UVlength.x * length.x_ * scale.x_,0,0.0f},{UVleftTop.x + UVlength.x,UVleftTop.y} };//右上
+		vertices_[2] = { {UVlength.x * length.x * scale.x,UVlength.y * length.y * scale.y,0.0f},{UVleftTop.x + UVlength.x,UVleftTop.y + UVlength.y} };//右下
+		vertices_[3] = { {UVlength.x * length.x * scale.x,0,0.0f},{UVleftTop.x + UVlength.x,UVleftTop.y} };//右上
 	}
 	else
 	{
 		//切り抜いた後の画像の中心からの位置！！！！！！！！
-		vertices_[0] = { {-UVlength.x * length.x_ * scale.x_ / 2.0f,UVlength.y * length.y_ * scale.y_ / 2.0f,0.0f},{UVleftTop.x,UVleftTop.y + UVlength.y} };//左下
-		vertices_[1] = { {-UVlength.x * length.x_ * scale.x_ / 2.0f,-UVlength.y * length.y_ * scale.y_ / 2.0f,0.0f},{UVleftTop.x,UVleftTop.y} };//左上
-		vertices_[2] = { {UVlength.x * length.x_ * scale.x_ / 2.0f,UVlength.y * length.y_ * scale.y_ / 2.0f,0.0f},{UVleftTop.x + UVlength.x,UVleftTop.y + UVlength.y} };//右下
-		vertices_[3] = { {UVlength.x * length.x_ * scale.x_ / 2.0f,-UVlength.y * length.y_ * scale.y_ / 2.0f,0.0f},{UVleftTop.x + UVlength.x,UVleftTop.y} };//右上
+		vertices_[0] = { {-UVlength.x * length.x * scale.x / 2.0f,UVlength.y * length.y * scale.y / 2.0f,0.0f},{UVleftTop.x,UVleftTop.y + UVlength.y} };//左下
+		vertices_[1] = { {-UVlength.x * length.x * scale.x / 2.0f,-UVlength.y * length.y * scale.y / 2.0f,0.0f},{UVleftTop.x,UVleftTop.y} };//左上
+		vertices_[2] = { {UVlength.x * length.x * scale.x / 2.0f,UVlength.y * length.y * scale.y / 2.0f,0.0f},{UVleftTop.x + UVlength.x,UVleftTop.y + UVlength.y} };//右下
+		vertices_[3] = { {UVlength.x * length.x * scale.x / 2.0f,-UVlength.y * length.y * scale.y / 2.0f,0.0f},{UVleftTop.x + UVlength.x,UVleftTop.y} };//右上
 	}
 	constMapMaterial->color = color;
 
 	//ワールド行列
 	WorldMat worldMat;
 
-	worldMat.rot_.x_ = AngletoRadi(rotation.x_);
-	worldMat.rot_.y_ = AngletoRadi(rotation.y_);
-	worldMat.rot_.z_ = AngletoRadi(rotation.z_);
+	worldMat.rot_.x = rotation.x;
+	worldMat.rot_.y = rotation.y;
+	worldMat.rot_.z = rotation.z;
 
 	if (isPosLeftTop)
 	{
 		//引数の左上座標を設定
-		worldMat.trans_ = { leftTop.x_,leftTop.y_,0 };
+		worldMat.trans_ = { leftTop.x,leftTop.y,0 };
 	}
 	else
 	{
 		//切り抜いた後の画像の中心を設定
-		worldMat.trans_ = { leftTop.x_ + texLeft + UVlength.x * (float)length.x_ * scale.x_ / 2.0f,
-			leftTop.y_ + texTop + UVlength.y * (float)length.y_ * scale.y_ / 2.0f,
+		worldMat.trans_ = { leftTop.x + texLeft + UVlength.x * (float)length.x * scale.x / 2.0f,
+			leftTop.y + texTop + UVlength.y * (float)length.y * scale.y / 2.0f,
 			0 };
 	}
 	worldMat.CalcAllTreeMat();

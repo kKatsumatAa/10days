@@ -1,6 +1,7 @@
 #pragma once
 #include"PostEffectManager.h"
 #include"Async.h"
+#include"SceneTransition.h"
 
 //前方宣言
 class SceneTransitionEffectState;
@@ -18,6 +19,9 @@ private:
 
 	//非同期用
 	Async async_;
+
+	//遷移用の処理
+	SceneTransition transition_;
 
 	//読み込みの関数保存用
 	std::function<void()>loadFunc_;
@@ -59,4 +63,7 @@ public:
 
 	//預かっていた読み込み用の関数を非同期で開始
 	void BeginAsyncLoad(std::function<void()> loadFunc);
+
+public:
+	SceneTransition& GetSceneTransition() { return transition_; }
 };

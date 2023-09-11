@@ -1,0 +1,60 @@
+#pragma once
+#include "Vec2.h"
+#include <cstdint>
+#include "Stage.h"
+#include "Object.h"
+#include <string>
+#include <functional>
+
+class IEntity : public Object
+{
+public:
+    // 定義
+    enum class Shape
+    {
+        CIRCLE,
+        SQUARE,
+    };
+
+    // 関数
+    IEntity(Stage* stagePtr) : stagePtr_(stagePtr) {};
+    virtual ~IEntity(void) = default;
+
+    virtual void Update(void) = 0;
+    virtual void Draw(void) = 0;
+
+    void OnCollision(void)
+    {
+        if (onCollision_) { onCollision_(); }
+    }
+protected:
+    // 変数
+    Stage* stagePtr_;
+
+    Vec2 position_; // 中心点
+    float rotation_; // 回転角(rad)
+    Vec2 radius_;   // 半径(xy)※円形の場合、x値のみを参照する
+
+    Shape shape_;
+    std::string id_;
+    IEntity* other_;
+    std::function<void(void)> onCollision_;
+
+public:
+    // setter
+    void SetPos(const Vec2& pos) { position_ = pos; }
+    void SetRot(float rot) { rotation_ = rot; }
+    void SetRad(const Vec2& rad) { radius_ = rad; }
+    void SetOther(IEntity* other) { other_ = other; }
+    void SetOnCollision(const std::function<void(void)> callback_onCollision) { onCollision_ = callback_onCollision; }
+
+    // getter
+    const Vec2& GetPos(void) { return position_; }
+    float GetRot(void) { return rotation_; }
+    const Vec2& GetRad(void) { return radius_; }
+    const std::string& GetId(void) { return id_; }
+    IEntity* GetOther(void) { return other_; }
+    Shape GetShape(void) { return shape_; }
+    const std::function<void(void)>& GetOnCollision(void) { return onCollision_; }
+};
+

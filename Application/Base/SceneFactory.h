@@ -1,0 +1,27 @@
+#pragma once
+#include <memory>
+#include <string>
+#include "SceneState.h"
+
+// 新規Sceneクラスを作るごとに、こことCreateScene()に追記していくこと
+#include "DemoScene.h"
+#include "TitleScene.h"
+#include "GameScene.h"
+#include "ResultScene.h"
+
+class SceneFactory final
+{
+public:
+    // 定義
+    enum class Usage
+    {
+        DEMO,
+        TITLE,
+        GAME,
+        RESULT,
+    };
+
+    // 関数
+    std::unique_ptr<SceneState> CreateScene(Usage scene);
+};
+

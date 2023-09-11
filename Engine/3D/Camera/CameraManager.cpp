@@ -94,18 +94,18 @@ void CameraManager::Update()
 
 				//‰ñ“]
 				Vec3 rotMove = {
-					vel.y_ * 0.01f,
-					vel.x_ * 0.01f,
+					vel.y * 0.01f,
+					vel.x * 0.01f,
 					0
 				};
 
 				debugWorldMat_.rot_ += rotMove;
-				debugWorldMat_.rot_.x_ = min(debugWorldMat_.rot_.x_, PI / 2.0f);
-				debugWorldMat_.rot_.x_ = max(debugWorldMat_.rot_.x_, -PI / 2.0f);
+				debugWorldMat_.rot_.x = min(debugWorldMat_.rot_.x, PI / 2.0f);
+				debugWorldMat_.rot_.x = max(debugWorldMat_.rot_.x, -PI / 2.0f);
 			}
 
-			cameraPos_.z_ = min(cameraPos_.z_ + (float)MouseInput::GetInstance().GetWheelAmountOfRot() * 0.02f, -1.0f);
-			cameraPos_.z_ = max(cameraPos_.z_ + (float)MouseInput::GetInstance().GetWheelAmountOfRot() * 0.02f, -1000.0f);
+			cameraPos_.z = min(cameraPos_.z + (float)MouseInput::GetInstance().GetWheelAmountOfRot() * 0.02f, -1.0f);
+			cameraPos_.z = max(cameraPos_.z + (float)MouseInput::GetInstance().GetWheelAmountOfRot() * 0.02f, -1000.0f);
 
 			debugWorldMat_.CalcWorldMat();
 			Vec3 pos = cameraPos_;
@@ -133,9 +133,9 @@ void CameraManager::ImguiUpdate()
 		Vec3 target = usingCamera_->GetTarget();
 		Vec3 up = usingCamera_->GetUp();
 
-		ImGui::DragFloat3("Eye", &eye.x_);
-		ImGui::DragFloat3("Target", &target.x_);
-		ImGui::DragFloat3("Up", &up.x_);
+		ImGui::DragFloat3("Eye", &eye.x);
+		ImGui::DragFloat3("Target", &target.x);
+		ImGui::DragFloat3("Up", &up.x);
 
 		usingCamera_->SetEye(eye);
 		usingCamera_->SetTarget(target);
@@ -149,9 +149,9 @@ void CameraManager::ImguiUpdate()
 		float rot = usingCamera2D_->GetRot();
 		Vec2 zoom = usingCamera2D_->GetZoom();
 
-		ImGui::DragFloat2("Pos", &pos.x_);
+		ImGui::DragFloat2("Pos", &pos.x);
 		ImGui::DragFloat("Rot", &rot);
-		ImGui::DragFloat2("Zoom", &zoom.x_);
+		ImGui::DragFloat2("Zoom", &zoom.x);
 
 		usingCamera2D_->SetPos(pos);
 		usingCamera2D_->SetRot(rot);
@@ -168,9 +168,9 @@ void CameraManager::ImguiUpdate()
 			Vec3 target = cameras.second->GetTarget();
 			Vec3 up = cameras.second->GetUp();
 
-			ImGui::DragFloat3("Eye", &eye.x_);
-			ImGui::DragFloat3("Target", &target.x_);
-			ImGui::DragFloat3("Up", &up.x_);
+			ImGui::DragFloat3("Eye", &eye.x);
+			ImGui::DragFloat3("Target", &target.x);
+			ImGui::DragFloat3("Up", &up.x);
 
 			cameras.second->SetEye(eye);
 			cameras.second->SetTarget(target);

@@ -15,5 +15,5 @@ void PlaneCollider::Update()
 	//‰ñ“]‚Ì‚Ý
 	Vec3 normal = GetVec3xM4({ 0,0,-1.0f }, worldNormal.matWorld_, 1);
 	normal.Normalized();
-	Plane::normal = { normal.x_,normal.y_,normal.z_,1.0f };
+	Plane::normal = { normal.x,normal.y,normal.z,1.0f };
 }

@@ -714,7 +714,7 @@ void Object::DrawBoxSprite(uint64_t textureHandle, const Vec4& color,
 		//スプライトクラスの初期化
 		sprite_->Initialize();
 	}
-	sprite_->Update({ GetTrans().x_, GetTrans().y_ }, { GetScale().x_,GetScale().y_ },
+	sprite_->Update({ GetTrans().x, GetTrans().y }, { GetScale().x,GetScale().y },
 		color, textureHandle, ancorUV, isReverseX, isReverseY, GetRot(), &cbt_, constMapMaterial_);
 
 	Update(SPRITE, pipelineNum, textureHandle, &cbt_, nullptr);
@@ -730,7 +730,7 @@ void Object::DrawClippingBoxSprite(const XMFLOAT2& UVleftTop, const XMFLOAT2& UV
 		//スプライトクラスの初期化
 		sprite_->Initialize();
 	}
-	sprite_->UpdateClipping({ GetTrans().x_,GetTrans().y_ }, { GetScale().x_,GetScale().y_ },
+	sprite_->UpdateClipping({ GetTrans().x,GetTrans().y }, { GetScale().x,GetScale().y },
 		UVleftTop, UVlength, color, textureHandle,
 		isPosLeftTop, isReverseX, isReverseY, { GetRot() }, &cbt_, constMapMaterial_);
 
@@ -814,9 +814,9 @@ void Object::DrawImGui(std::function<void()>imguiF)
 	//トランスなど
 	if (ImGui::TreeNode("TransScaleRot")) {
 
-		ImGui::DragFloat3("Trans: ", &worldMat_->trans_.x_);
-		ImGui::DragFloat3("Scale: ", &worldMat_->scale_.x_);
-		ImGui::DragFloat3("Rot: ", &worldMat_->rot_.x_);
+		ImGui::DragFloat3("Trans: ", &worldMat_->trans_.x);
+		ImGui::DragFloat3("Scale: ", &worldMat_->scale_.x);
+		ImGui::DragFloat3("Rot: ", &worldMat_->rot_.x);
 
 		ImGui::TreePop();
 	}
@@ -824,8 +824,8 @@ void Object::DrawImGui(std::function<void()>imguiF)
 	//正面ベクトル
 	if (ImGui::TreeNode("FrontVec")) {
 
-		ImGui::Text("FrontVec: %.2f %.2f %.2f", frontVec_.x_, frontVec_.y_, frontVec_.z_);
-		ImGui::Text("FrontVecTmp: %.2f %.2f %.2f", frontVecTmp_.x_, frontVecTmp_.y_, frontVecTmp_.z_);
+		ImGui::Text("FrontVec: %.2f %.2f %.2f", frontVec_.x, frontVec_.y, frontVec_.z);
+		ImGui::Text("FrontVecTmp: %.2f %.2f %.2f", frontVecTmp_.x, frontVecTmp_.y, frontVecTmp_.z);
 
 		ImGui::TreePop();
 	}

@@ -261,8 +261,8 @@ bool Collision::CheckCircle2Circle(const Circle& circle, const Circle& circle2, 
 	Sphere sphere;
 	Sphere sphere2;
 
-	sphere.center = { circle.center.x_,circle.center.y_ };
-	sphere2.center = { circle2.center.x_,circle2.center.y_ };
+	sphere.center = { circle.center.x,circle.center.y };
+	sphere2.center = { circle2.center.x,circle2.center.y };
 
 	sphere.radius = circle.radius;
 	sphere2.radius = circle2.radius;

@@ -7,12 +7,11 @@
 #include"Async.h"
 #include "PadInput.h"
 #include "SceneState.h"
-#include "AbstractSceneFactory.h"
 #include "ModelManager.h"
 #include "LevelManager.h"
 #include "MouseInput.h"
 #include "PostEffectManager.h"
-#include "TestChara.h"
+#include "SceneFactory.h"
 
 
 
@@ -26,7 +25,7 @@ private:
 	std::unique_ptr<SceneState> state_;
 	std::unique_ptr<SceneState> nextScene_;
 	//シーンファクトリー（ポインタを借りる）
-	AbstractSceneFactory* sceneFactory_ = nullptr;
+	SceneFactory* sceneFactory_ = nullptr;
 
 private:
 	uint64_t texhandle_[10];
@@ -62,10 +61,10 @@ public:
 
 public:
 	//次のシーンセット
-	void SetNextScene(std::string sceneName);
+	void SetNextScene(SceneFactory::Usage scene);
 
 	//シーンファクトリーのセッター
-	void SetSceneFactory(AbstractSceneFactory* sceneFactory) { sceneFactory_ = sceneFactory; }
+	void SetSceneFactory(SceneFactory* sceneFactory) { sceneFactory_ = sceneFactory; }
 
 	void Initialize();
 	void Update();
