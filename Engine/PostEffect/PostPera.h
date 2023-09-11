@@ -59,6 +59,7 @@ private:
 		uint32_t isScanningLine = false;
 		//グレースケール
 		uint32_t isGrayScale = false;
+		float grayScalePow = 1.0f;
 		//ガラスフィルター
 		uint32_t isGlassFilter = false;
 		//モザイク
@@ -83,8 +84,6 @@ private:
 		float nFocusWidth = 0.005f;
 		//フォーカスのスムースステップの幅の上限
 		float focusDiffPow = 0.01f;
-		//
-		Vec2 pad;
 		//色
 		Vec4 color = { 1.0f,1.0f,1.0f,1.0f };
 		//時間

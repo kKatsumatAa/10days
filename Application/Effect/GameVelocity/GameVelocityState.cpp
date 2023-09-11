@@ -40,7 +40,7 @@ void GameVelocityState::Initialize(float slowVelBegin, float slowVelEnd, int32_t
 }
 
 //共通の処理
-void GameVelocityState::Update()
+void GameVelocityState::CommonUpdate(const std::function<void()>& endF)
 {
 	//経過割合
 	float t = (float)time_ / (float)slowTimeMax_;
@@ -50,6 +50,11 @@ void GameVelocityState::Update()
 
 	if (t >= 1.0f)
 	{
+		if (endF)
+		{
+			endF();
+		}
+
 		GameVelocityManager::GetInstance().ChangeSlowState(nextStateName_);
 	}
 
@@ -61,16 +66,14 @@ void GameVelocityState::Update()
 //何もしない
 void GameVelocityStateNone::Initialize(float slowVelBegin, float slowVelEnd, int32_t slowTimeMax)
 {
-	//スローモーションフラグオフ
-	GameVelocityManager::GetInstance().SetIsSlowMotion(false);
-
 	//共通の処理
 	GameVelocityState::Initialize(slowVelBegin, slowVelEnd, slowTimeMax);
 }
 
 void GameVelocityStateNone::Update()
 {
-	//GameVelocityManagerの方でステート変更するのでなし
+	//スローモーションフラグオフ
+	GameVelocityManager::GetInstance().SetIsSlowMotion(false);
 }
 
 
@@ -88,7 +91,7 @@ void GameVelocityStateBegin::Initialize(float slowVelBegin, float slowVelEnd, in
 void GameVelocityStateBegin::Update()
 {
 	//共通の処理
-	GameVelocityState::Update();
+	CommonUpdate(NULL);
 }
 
 
@@ -120,5 +123,6 @@ void GameVelocityStateEnd::Initialize(float slowVelBegin, float slowVelEnd, int3
 void GameVelocityStateEnd::Update()
 {
 	//共通の処理
-	GameVelocityState::Update();
+	std::function<void()>endF = [=]() {GameVelocityManager::GetInstance().SetIsSlowMotion(false); };
+	CommonUpdate(endF);
 }

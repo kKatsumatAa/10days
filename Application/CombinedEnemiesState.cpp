@@ -2,6 +2,9 @@
 #include "CombinedEnemies.h"
 #include "Util.h"
 #include "MathUtil.h"
+#include "GameVelocityManager.h"
+#include "GameVelocityState.h"
+#include "MathUtil.h"
 
 
 
@@ -75,7 +78,7 @@ void ICombinedEnemiesState::TimerUpdate(const std::function<void(float)>& f, con
 		return;
 	}
 
-	timer_++;
+	timer_ += GameVelocityManager::GetInstance().GetVelocity();
 }
 
 void ICombinedEnemiesState::ShakeUpdate(float minS, float maxS, float rate, float t)

@@ -30,6 +30,7 @@ cbuffer ConstBufferEffectFlags : register(b0)
     unsigned int isScanningLine;
 	//グレースケール
     unsigned int isGrayScale;
+    float grayScalePow;
 	//ガラスフィルター
     unsigned int isGlassFilter;
 	//モザイク

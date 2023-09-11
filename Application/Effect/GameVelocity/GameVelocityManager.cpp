@@ -32,26 +32,35 @@ void GameVelocityManager::SetSlowMotionData(int32_t lerpFrame, float velocity, b
 
 void GameVelocityManager::BeginSlowMotion(int32_t lerpFrame, float endVelocity)
 {
-	//線形補完用に保存
-	SetSlowMotionData(lerpFrame, endVelocity, true);
+	//if (!GetIsSlowMotion())
+	{
+		//線形補完用に保存
+		SetSlowMotionData(lerpFrame, endVelocity, true);
 
-	ChangeSlowState("BEGIN");
+		ChangeSlowState("BEGIN");
+	}
 }
 
 void GameVelocityManager::EndSlowMotion(int32_t lerpFrame, float endVelocity)
 {
-	//線形補完用に保存
-	SetSlowMotionData(lerpFrame, endVelocity, false);
+	if (GetIsSlowMotion())
+	{
+		//線形補完用に保存
+		SetSlowMotionData(lerpFrame, endVelocity, true);
 
-	ChangeSlowState("END");
+		ChangeSlowState("END");
+	}
 }
 
 void GameVelocityManager::EndSlowMotion()
 {
-	//線形補完用に保存
-	SetSlowMotionData(slowData_.slowTimeMax, slowData_.slowVelBegin, false);
+	if (!GetIsSlowMotion())
+	{
+		//線形補完用に保存
+		SetSlowMotionData(slowData_.slowTimeMax, slowData_.slowVelBegin, true);
 
-	ChangeSlowState("END");
+		ChangeSlowState("END");
+	}
 }
 
 //-----------------------------------------------------------------------------------------
@@ -64,8 +73,8 @@ float GameVelocityManager::GetVelocity()
 void GameVelocityManager::Update()
 {
 	//三つ目の色も
-	Vec3 col = LerpVec3(VEL_COL_MIN_, { 1.0f,1.0f,1.0f }, gameVelocity_);
-	PostEffectManager::GetInstance().GetPostEffect3()->effectFlags_.color = { col.x,col.y,col.z,1.0f };
+	PostEffectManager::GetInstance().GetPostEffect3()->effectFlags_.isGrayScale = true;
+	PostEffectManager::GetInstance().GetPostEffect3()->effectFlags_.grayScalePow = 1.0f - gameVelocity_;
 
 	//
 	slowState_->Update();

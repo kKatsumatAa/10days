@@ -1,5 +1,6 @@
 #include "Enemy.h"
-
+#include "GameVelocityManager.h"
+#include "GameVelocityState.h"
 #include <cstdint>
 #include "UtilL.h"
 #include "MathUtil.h"
@@ -144,7 +145,7 @@ void Enemy::Draw(void)
 		if (frameCount_move_ == 0)
 		{
 			// 敵の色は赤色に
-			DrawBoxSprite(png_enemy_, { 1.0f,0.5f,0.5f,1.0f }, { 0.5f,0.5f });
+			DrawBoxSprite(png_enemy_, { 1.0f,0.1f,0.1f,1.0f }, { 0.5f,0.5f });
 
 			/*DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, UtilL::Color::WHITE, false, 1);*/
 		}
@@ -153,7 +154,7 @@ void Enemy::Draw(void)
 		if (frameCount_wait_ >= kMoveInterval_)
 		{
 			// 敵の色は緑色に
-			DrawBoxSprite(png_enemy_, { 0.5f,1.0f,0.5f,1.0f }, { 0.5f,0.5f });
+			DrawBoxSprite(png_enemy_, { 0.1f,1.0f,0.1f,1.0f }, { 0.5f,0.5f });
 			/*DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, UtilL::Color::GREEN, false, 1);*/
 		}
 	}

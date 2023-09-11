@@ -1,5 +1,5 @@
 #include "GameScene.h"
-
+#include "CollisionManger.h"
 #include "SceneManager.h"
 #include "KeyboardInput.h"
 #include "PadInput.h"
@@ -7,6 +7,8 @@
 #include "EnemyManager.h"
 #include "ParticleManager.h"
 #include "Score.h"
+#include "GameVelocityManager.h"
+#include "GameVelocityState.h"
 
 void GameScene::Finalize()
 {
@@ -33,6 +35,9 @@ void GameScene::Initialize(void)
 	timer_.Start(1000000000);
 
 	ParticleManagerL::GetInstance()->Init();
+
+	//ゲームスピード
+	GameVelocityManager::GetInstance().Initialize();
 
 	Score::Init();
 	Update();
@@ -61,6 +66,11 @@ void GameScene::Update(void)
 	}
 
 	ParticleManagerL::GetInstance()->Update();
+
+	CollisionManger::GetInstance()->Update();
+
+	//ゲームスピード
+	GameVelocityManager::GetInstance().Update();
 }
 
 void GameScene::Draw(void)
@@ -87,4 +97,6 @@ void GameScene::DrawSprite()
 
 void GameScene::DrawImgui()
 {
+	//ゲームスピード
+	GameVelocityManager::GetInstance().UpdateImGui();
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include<memory>
 #include<string>
+#include<functional>
 
 
 //‘O•ûéŒ¾
@@ -25,7 +26,8 @@ public:
 	virtual ~GameVelocityState() { ; }
 
 	virtual void Initialize(float slowVelBegin, float slowVelEnd, int32_t slowTimeMax);
-	virtual void Update();
+	virtual void Update() = 0;
+	void CommonUpdate(const std::function<void()>& endF);
 
 public:
 	static std::unique_ptr<GameVelocityState>GetState(const std::string& name);

@@ -163,9 +163,9 @@ PSOutput PS(Output input) : SV_TARGET
         y = tcolor.x * 0.199 + tcolor.y * 0.487 + tcolor.z * 0.014;
 
 		// グレースケール変換
-        tcolor.x = y;
-        tcolor.y = y;
-        tcolor.z = y;
+        tcolor.x = lerp(tcolor.r, y, grayScalePow);
+        tcolor.y = lerp(tcolor.g, y, grayScalePow);
+        tcolor.z = lerp(tcolor.b, y, grayScalePow);
 
 		// 出力するピクセル色
         ret = tcolor;

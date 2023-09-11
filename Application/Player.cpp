@@ -292,15 +292,23 @@ void Player::MoveUpdate(void)
 		// pad-A長押しでATTACK_SKEWER状態に遷移
 		if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
 		{
+			if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+			{
+				// スローモーション開始
+				GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
+			}
+
 			// ATTACK_SKEWER状態に入るための溜め計測フレームを加算
 			//frameCount_4Skewer_++;
 			frameCount_4Skewer_ += 5; // スローモーション回避のため力技だけど5フレーム分ずつカウントします。
 
 			// ↑仕様上押してからスローモーション開始になるので、最初のフレーム分カウントが +n されてしまうのを簡単に回避する方法思いつきません。
 
-			// スローモーション開始
-			GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
 			isSkewerScreenBlack4SceneM_ = true;
+		}
+		else if (PadInput::GetInstance().GetReleaseTrigger(GAMEPAD_A))
+		{
+			GameVelocityManager::GetInstance().EndSlowMotion(30, 1.0f);
 		}
 		else
 		{
@@ -318,9 +326,6 @@ void Player::MoveUpdate(void)
 			// 離した瞬間に初期化
 			frameCount_4Skewer_ = 0;
 			isSkewerScreenBlack4SceneM_ = false;
-
-			// スローモーション解除
-			GameVelocityManager::GetInstance().EndSlowMotion(30, 1.0f);
 		}
 	}
 
@@ -423,7 +428,7 @@ void Player::SkewerAttackUpdate(void)
 		skewer_.End(); // isSkewerをfalseにする。
 		if (EnemyManager::GetInstance().GetSkewerEnemiesLength())
 		{
-			GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
+			//GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
 			frameCount_SkewerEndHitStop_++;
 		}
 	}
