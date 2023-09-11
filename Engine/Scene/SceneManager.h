@@ -73,6 +73,7 @@ public:
 
 	void DrawImgui();
 
+	void LoadAllSound();
 	void StopWaveAllScene();
 
 public:

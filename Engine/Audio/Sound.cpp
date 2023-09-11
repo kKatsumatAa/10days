@@ -50,23 +50,6 @@ void Sound::Initialize(const std::string& directoryPath)
 	}
 }
 
-void Sound::AllLoad()
-{
-	//BGM読み込み、再生
-	Sound::GetInstance().LoadWave("title_BGM.wav", false);
-	Sound::GetInstance().LoadWave("play_BGM.wav", false);
-	Sound::GetInstance().LoadWave("result_BGM.wav", false);
-	//SE読み込み
-	Sound::GetInstance().LoadWave("decision_SE.wav", false);
-	Sound::GetInstance().LoadWave("sceneChange_SE.wav", false);
-	Sound::GetInstance().LoadWave("attack_SE.wav", false);
-	Sound::GetInstance().LoadWave("brake_SE.wav", false);
-	Sound::GetInstance().LoadWave("result_end_SE.wav", false);
-	Sound::GetInstance().LoadWave("result_SE.wav", false);
-	Sound::GetInstance().LoadWave("skewer_SE.wav", false);
-	Sound::GetInstance().LoadWave("skewer_hit_SE.wav", false);
-}
-
 void Sound::LoadWave(const std::string& filename, bool isConvert)
 {
 	std::string fullpath = sDirectoryPath_ + filename;
@@ -204,7 +187,8 @@ void Sound::PlayWave(const std::string& filename, float volume, bool Loop)
 	result = sourceVoice->Start();
 
 	//停止用
-	soundData.pSourceVoice.push_back(sourceVoice);
+	CheckSoundData checkDataL = { sourceVoice, &buf };
+	soundData.checkDatas.push_back(checkDataL);
 }
 
 Sound::SoundData* Sound::GetSoundData(const std::string& name)
@@ -226,34 +210,37 @@ void Sound::StopWave(const std::string& filename)
 	//そのファイル名があれば
 	SoundData* soundData = GetSoundData(filename);
 
-	if (soundData->pSourceVoice.size() > 0)
+	if (soundData->checkDatas.size() > 0)
 	{
-		for (IXAudio2SourceVoice* source : soundData->pSourceVoice)
+		for (auto checkData : soundData->checkDatas)
 		{
 			//再生中の同じ名前のをすべて止める
-			if (source != nullptr) { source->Stop(); }
+			if (checkData.pSourceVoice != nullptr) { checkData.pSourceVoice->Stop(); }
 		}
 
 		//vectorを空にする
-		soundData->pSourceVoice.clear();
+		soundData->checkDatas.clear();
 	}
 }
 bool Sound::CheckPlayingWave(const std::string& name)
 {
 	SoundData* soundData = GetSoundData(name);
 
-	if (soundData->pSourceVoice.size() > 0)
+	if (soundData->checkDatas.size() > 0)
 	{
-		for (IXAudio2SourceVoice* source : soundData->pSourceVoice)
+		//一つでも再生されてたら
+		for (auto checkData : soundData->checkDatas)
 		{
-			if (source != nullptr)
+			if (checkData.pSourceVoice == nullptr)
 			{
-				//再生が終わってなければ
-				HRESULT result = source->ExitLoop();
-				if (result == S_OK)
-				{
-					return false;
-				}
+				continue;
+			}
+
+			XAUDIO2_VOICE_STATE state;
+			checkData.pSourceVoice->GetState(&state);
+			if (state.SamplesPlayed < checkData.pBuf->PlayLength && 0 != state.SamplesPlayed)
+			{
+				return false;
 			}
 		}
 	}

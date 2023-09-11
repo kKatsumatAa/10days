@@ -41,6 +41,12 @@ public://サブクラス
 		WAVEFORMATEX fmt;//"波形フォーマット"
 	};
 
+	struct CheckSoundData
+	{
+		IXAudio2SourceVoice* pSourceVoice;
+		XAUDIO2_BUFFER* pBuf;
+	};
+
 	struct SoundData
 	{
 		//波形フォーマット
@@ -50,7 +56,7 @@ public://サブクラス
 		//バッファのサイズ
 		uint32_t bufferSize;
 		//
-		std::vector<IXAudio2SourceVoice*> pSourceVoice = { nullptr };
+		std::vector<CheckSoundData> checkDatas;
 	};
 
 private:
@@ -70,8 +76,6 @@ private:
 public://メンバ関数
 
 	static void Initialize(const std::string& directoryPath = "Resources/sound/");
-	//使う音全部読み込み
-	static void AllLoad();
 
 	/// <summary>
 /// 音の読み込み（第2は基本true,読み込めない/再生されないときはfalseにする）

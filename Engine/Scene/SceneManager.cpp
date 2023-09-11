@@ -49,11 +49,6 @@ void SceneManager::ChangeScene()
 	}
 }
 
-void SceneManager::StopWaveAllScene()
-{
-}
-
-
 //---------------------------------------------------------------------------------------------------
 void SceneManager::Initialize()
 {
@@ -77,9 +72,45 @@ void SceneManager::Initialize()
 	DirectXWrapper::GetInstance().UpLoadTexture();
 
 	//サウンド読み込み
-	Sound::GetInstance().AllLoad();
+	LoadAllSound();
 }
 
+void SceneManager::LoadAllSound()
+{
+	//BGM読み込み、再生
+	Sound::GetInstance().LoadWave("title_BGM.wav", false);
+	Sound::GetInstance().LoadWave("play_BGM.wav", false);
+	Sound::GetInstance().LoadWave("result_BGM.wav", false);
+	//SE読み込み
+	Sound::GetInstance().LoadWave("decision_SE.wav", false);
+	Sound::GetInstance().LoadWave("sceneChange_SE.wav", false);
+	Sound::GetInstance().LoadWave("attack_SE.wav", false);
+	Sound::GetInstance().LoadWave("brake_SE.wav", false);
+	Sound::GetInstance().LoadWave("result_end_SE.wav", false);
+	Sound::GetInstance().LoadWave("result_SE.wav", false);
+	Sound::GetInstance().LoadWave("skewer_SE.wav", false);
+	Sound::GetInstance().LoadWave("skewer_hit_SE.wav", false);
+}
+
+void SceneManager::StopWaveAllScene()
+{
+	//BGM読み込み、再生
+	Sound::GetInstance().StopWave("title_BGM.wav");
+	Sound::GetInstance().StopWave("play_BGM.wav");
+	Sound::GetInstance().StopWave("result_BGM.wav");
+	//SE読み込み		 
+	Sound::GetInstance().StopWave("decision_SE.wav");
+	Sound::GetInstance().StopWave("sceneChange_SE.wav");
+	Sound::GetInstance().StopWave("attack_SE.wav");
+	Sound::GetInstance().StopWave("brake_SE.wav");
+	Sound::GetInstance().StopWave("result_end_SE.wav");
+	Sound::GetInstance().StopWave("result_SE.wav");
+	Sound::GetInstance().StopWave("skewer_SE.wav");
+	Sound::GetInstance().StopWave("skewer_hit_SE.wav");
+}
+
+
+//---------------------------------------------------------------------------------
 void SceneManager::Update()
 {
 	//シーン遷移マネージャ
