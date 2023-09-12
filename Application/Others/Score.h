@@ -29,4 +29,7 @@ public:
 
 	DrawIntNumImage drawNum_;		//数字描画用
 	DrawIntNumImage drawNumHigh_;	//数字描画用
+
+	float nScoreSize_;		//現在のスコアの描画サイズ
+	float hScoreSize_;		//今までのハイスコアの描画サイズ
 };

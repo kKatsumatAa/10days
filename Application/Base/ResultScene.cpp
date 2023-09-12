@@ -89,6 +89,7 @@ void ResultScene::DrawSprite2()
     //DrawFormatString(0, 0, UtilL::Color::WHITE, "pad-A or key-R[DEBUG]‚Åtitle");
 
     Score::GetInstance()->Draw();
+    Score::GetInstance()->DrawHighScore();
     UI::GetInstance()->Draw(UIType::Abutton);
 }
 

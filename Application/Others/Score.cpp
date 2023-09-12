@@ -17,9 +17,12 @@ void Score::Init()
 {
 	nowScore_ = 0;
 	drawNum_.Initialize(TextureManager::LoadGraph("number.png"));
-	drawNum_.SetNum(nowScore_, { (float)(1250 - 60),20.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.6f);
+	nScoreSize_ = 0.6f;
+	drawNum_.SetNum(nowScore_, { 1250.f - nScoreSize_* 100.f,20.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, nScoreSize_);
+
 	drawNumHigh_.Initialize(TextureManager::LoadGraph("number.png"));
-	drawNumHigh_.SetNum(highScore_, { (float)(1250 - 60),20.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.6f);
+	hScoreSize_ = 0.6f;
+	drawNumHigh_.SetNum(highScore_, { 400.f - hScoreSize_ * 100.f,200.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, hScoreSize_);
 }
 
 void Score::Add(uint32_t enemyNum)
@@ -28,8 +31,8 @@ void Score::Add(uint32_t enemyNum)
 	score = (uint32_t)((float)(enemyNum * 500) * (0.9f + 0.1f * (float)enemyNum));
 	nowScore_ += score;
 
-	//最大桁数求める
-	uint32_t digit = 0;	//桁数
+	//桁数求める
+	float digit = 0.f;	//桁数
 	uint32_t result = nowScore_;	//値が変更されないように格納
 
 	while (result > 0)
@@ -39,7 +42,7 @@ void Score::Add(uint32_t enemyNum)
 	}
 
 	//scale(第5引数) * 画像の大きさ = 桁ごとにずらす値(digitに掛けてる値)
-	drawNum_.SetNum(nowScore_, { (float)(1250 - digit * 60),20.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.6f);
+	drawNum_.SetNum(nowScore_, { 1250.f - digit * nScoreSize_ * 100.f,20.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, nScoreSize_);
 }
 
 void Score::Draw()
@@ -68,7 +71,19 @@ void Score::HighScoreUpdate()
 	if (highScore_ < nowScore_)
 	{
 		highScore_ = nowScore_;
-		drawNumHigh_.SetNum(highScore_, { 0,0 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.6f);
+
+		//桁数求める
+		float digit = 0.f;	//桁数
+		uint32_t result = highScore_;	//値が変更されないように格納
+
+		while (result > 0)
+		{
+			result /= 10;
+			digit++;
+		}
+
+		//scale(第5引数) * 画像の大きさ = 桁ごとにずらす値(digitに掛けてる値)
+		drawNumHigh_.SetNum(highScore_, { 400.f - digit * hScoreSize_ * 100.f,200.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, hScoreSize_);
 	}
 }
 
