@@ -99,6 +99,9 @@ private:
     Object swordBottom_;
 
 public:
+    // setter
+    void SetVecMove(const Vec2& vec) { vec_move_ = vec; }
+
     // getter
     bool GetIsSkewerEndShrink(void) { return isSkewerEndShrink_; }
     const Vec2& GetDirectionVec() { return pos4Line_; }

@@ -108,6 +108,7 @@
     <ClCompile Include="Application\Base\SceneFactory.cpp" />
     <ClCompile Include="Application\Base\SceneTransition.cpp" />
     <ClCompile Include="Application\Base\TitleScene.cpp" />
+    <ClCompile Include="Application\Base\TutorialScene.cpp" />
     <ClCompile Include="Application\CollisionManger.cpp" />
     <ClCompile Include="Application\CombinedEnemies.cpp" />
     <ClCompile Include="Application\CombinedEnemiesState.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Application\Base\SceneFactory.h" />
     <ClInclude Include="Application\Base\SceneTransition.h" />
     <ClInclude Include="Application\Base\TitleScene.h" />
+    <ClInclude Include="Application\Base\TutorialScene.h" />
     <ClInclude Include="Application\CollisionManger.h" />
     <ClInclude Include="Application\CombinedEnemies.h" />
     <ClInclude Include="Application\CombinedEnemiesState.h" />
