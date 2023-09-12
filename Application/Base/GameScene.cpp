@@ -63,6 +63,13 @@ void GameScene::Initialize(void)
 	UI::GetInstance()->SetAncorPoint(UIType::Abutton, {0.f,0.f});
 	UI::GetInstance()->SetPos(UIType::Skewer, { 100.f,130.f });
 	UI::GetInstance()->SetSize(UIType::Skewer, 0.2f);
+
+    UI::GetInstance()->SetPos(UIType::Retry, { 640,300 });
+    UI::GetInstance()->SetSize(UIType::Retry, 0.6f);
+    UI::GetInstance()->SetAncorPoint(UIType::Retry, { 0.5f,0.5f });
+    UI::GetInstance()->SetPos(UIType::ToTitle, { 640,500 });
+    UI::GetInstance()->SetSize(UIType::ToTitle, 0.6f);
+    UI::GetInstance()->SetAncorPoint(UIType::ToTitle, { 0.5f,0.5f });
 }
 
 void GameScene::Update(void)
@@ -71,7 +78,7 @@ void GameScene::Update(void)
 	uint32_t timer = (uint32_t)timer_.GetEndTime() - (uint32_t)timer_.GetElapsedTime();
 	drawNum_.SetNum(timer, {0,150}, {1.0f / 10.0f,1.0f}, {100,160}, 1.0f);	//残り秒数表示
 
-	if (PadInput::GetInstance().GetTriggerButton(VK_GAMEPAD_MENU))
+	if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_START))
 	{
 		if (isMenu_)
 		{
@@ -83,6 +90,21 @@ void GameScene::Update(void)
 			// 串刺し用にボタン押してたら解除する用関数
 			player_->ResetSkewerInfo4Pause();
 		}
+
+        if (destination_ == Destination::RETRY)
+        {
+            UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,0.3f });
+            UI::GetInstance()->SetSize(UIType::ToTitle, 0.4f);
+            UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,1 });
+            UI::GetInstance()->SetSize(UIType::Retry, 1);
+        }
+        else if (destination_ == Destination::TITLE)
+        {
+            UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,0.3f });
+            UI::GetInstance()->SetSize(UIType::Retry, 0.4f);
+            UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,1 });
+            UI::GetInstance()->SetSize(UIType::ToTitle, 1);
+        }
 	}
 
 	if (isMenu_ == false)
@@ -149,31 +171,53 @@ void GameScene::Update(void)
 		{
 			destination_++;
 			destination_ = (std::min)(destination_, 1);
-		}
+            UI::GetInstance()->SetColor(UIType::Retry, {1,1,1,0.3f});
+            UI::GetInstance()->SetSize(UIType::Retry, 0.4f);
+            UI::GetInstance()->SetColor(UIType::ToTitle, {1,1,1,1});
+            UI::GetInstance()->SetSize(UIType::ToTitle, 1);
+        }
 		else if (PadInput::GetInstance().GetLeftStickTilt().y <= -0.3f)
 		{
 			destination_--;
 			destination_ = (std::max)(destination_, 0);
-		}
+            UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,0.3f });
+            UI::GetInstance()->SetSize(UIType::ToTitle, 0.4f);
+            UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,1 });
+            UI::GetInstance()->SetSize(UIType::Retry, 1);
+        }
 
 		if (destination_ == Destination::RETRY)
 		{
 			if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
 			{
-				//PlaySoundMem(sceneChange_SE_, DX_PLAYTYPE_NORMAL);
-				////BGMストップ
-				//StopSoundMem(game_BGM_);
-				//SceneManager::GetInstance()->RequestChangeScene(SceneFactory::Usage::GAME);
+                Score::GetInstance()->HighScoreUpdate();
+
+                Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+                //BGMストップ
+                Sound::GetInstance().StopWave("play_BGM.wav");
+                SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
+                // いいだくん
+                if (GameVelocityManager::GetInstance().GetIsSlowMotion())
+                {
+                    GameVelocityManager::GetInstance().EndSlowMotion(30, 1.0f);
+                }
 			}
 		}
 		else if (destination_ == Destination::TITLE)
 		{
 			if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
 			{
-				//PlaySoundMem(sceneChange_SE_, DX_PLAYTYPE_NORMAL);
-				////BGMストップ
-				//StopSoundMem(game_BGM_);
-				//SceneManager::GetInstance()->RequestChangeScene(SceneFactory::Usage::TITLE);
+                Score::GetInstance()->HighScoreUpdate();
+
+                Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+                //BGMストップ
+                Sound::GetInstance().StopWave("play_BGM.wav");
+                SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
+                // いいだくん
+                if (GameVelocityManager::GetInstance().GetIsSlowMotion())
+                {
+                    GameVelocityManager::GetInstance().EndSlowMotion(30, 1.0f);
+                }
 			}
 		}
 	}
@@ -215,6 +259,12 @@ void GameScene::DrawSprite()
 	UI::GetInstance()->Draw(UIType::Attack);
 	UI::GetInstance()->Draw(UIType::Abutton);
 	UI::GetInstance()->Draw(UIType::Skewer);
+
+    if (isMenu_)
+    {
+        UI::GetInstance()->Draw(UIType::Retry);
+        UI::GetInstance()->Draw(UIType::ToTitle);
+    }
 }
 
 void GameScene::DrawImgui()
