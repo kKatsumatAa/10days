@@ -6,9 +6,11 @@
 #include <sstream>
 #include <assert.h>
 
-uint32_t Score::nowScore_ = 0;
-uint32_t Score::highScore_ = 0;
-DrawIntNumImage Score::drawNum_;
+Score* Score::GetInstance()
+{
+	static Score instance;
+	return &instance;
+}
 
 void Score::Init()
 {

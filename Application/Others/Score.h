@@ -5,24 +5,26 @@
 class Score
 {
 public:
+	static Score* GetInstance();
+
 	//初期化
-	static void Init();
+	void Init();
 	//スコア追加
-	static void Add(uint32_t enemyNum);
+	void Add(uint32_t enemyNum);
 	//スコア描画
-	static void Draw();
-	static void DrawImGui();
+	void Draw();
+	void DrawImGui();
 
 	//ハイスコアの更新(したか確認)
-	static void HighScoreUpdate();
+	void HighScoreUpdate();
 
 	//ハイスコア保存
-	static void SaveScore();
+	void SaveScore();
 	//ハイスコア読み込み
-	static void LoadScore();
+	void LoadScore();
 
-	static uint32_t nowScore_;		//現在のスコア
-	static uint32_t highScore_;		//今までのハイスコア
+	uint32_t nowScore_;		//現在のスコア
+	uint32_t highScore_;	//今までのハイスコア
 
-	static DrawIntNumImage drawNum_;
+	DrawIntNumImage drawNum_;	//数字描画用
 };

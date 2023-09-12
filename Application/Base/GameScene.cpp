@@ -39,7 +39,7 @@ void GameScene::Initialize(void)
 
 	drawNum_.Initialize(TextureManager::LoadGraph("number.png"));
 
-	Score::Init();
+	Score::GetInstance()->Init();
 	Update();
 }
 
@@ -100,7 +100,7 @@ void GameScene::Update(void)
 
 				if (timer_.GetIsEnd())
 				{
-					Score::HighScoreUpdate();
+					Score::GetInstance()->HighScoreUpdate();
 
 					Sound::GetInstance().PlayWave("sceneChange_SE.wav");
 					//BGMストップ
@@ -171,14 +171,14 @@ void GameScene::DrawSprite()
 	player_->Draw();
 	EnemyManager::GetInstance().Draw();
 
-	drawNum_.Draw();
+	//drawNum_.Draw();
 
 	////DrawFormatString(0, 380, UtilL::Color::RED, "Scene: GAME");
 	////DrawFormatString(0, 0, UtilL::Color::WHITE, "[DEBUG]key-0で終了時間を10秒に変更。既に経過してる場合はGameScene終了");
 	////DrawFormatString(0, 20, UtilL::Color::WHITE, "time: %f", timer_.GetElapsedTime());
 	////DrawPad();
 
-	//Score::Draw();
+	Score::GetInstance()->Draw();
 }
 
 void GameScene::DrawImgui()
@@ -187,6 +187,4 @@ void GameScene::DrawImgui()
 	GameVelocityManager::GetInstance().UpdateImGui();
 	//ヒットストップ
 	HitStopManager::GetInstance().DrawImGui();
-    //スコア
-    Score::DrawImGui();
 }
