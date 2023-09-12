@@ -446,7 +446,9 @@ void Player::SkewerAttackUpdate(void)
 		if (frameCount_SkewerEndHitStop_)
 		{
 			//GameVelocityManager::GetInstance().BeginSlowMotion(30, 1.0f);
-			HitStopManager::GetInstance().BeginHitStop(60);
+			uint32_t deadEneNum;
+			EnemyManager::GetInstance().GetDefeatedEnemiesNum(deadEneNum);
+			HitStopManager::GetInstance().BeginHitStop(3 + deadEneNum * 2);
 			frameCount_SkewerEndHitStop_ = 0;
 			CameraManager::GetInstance().GetCamera2D()->EndFollow();
 			isSkewerEndShrink_ = true;

@@ -52,7 +52,7 @@ void GameScene::Update(void)
 {
 	//設定した (制限時間) - (経過時間)
 	uint32_t timer = (uint32_t)timer_.GetEndTime() - (uint32_t)timer_.GetElapsedTime();
-	drawNum_.SetNum(timer, {0,100}, {1.0f / 10.0f,1.0f}, {100,160}, 1.0f);	//残り秒数表示
+	drawNum_.SetNum(timer, {0,150}, {1.0f / 10.0f,1.0f}, {100,160}, 1.0f);	//残り秒数表示
 
 	if (PadInput::GetInstance().GetTriggerButton(VK_GAMEPAD_MENU))
 	{
