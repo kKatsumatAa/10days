@@ -37,120 +37,124 @@ void GameScene::Initialize(void)
 	//ゲームスピード
 	GameVelocityManager::GetInstance().Initialize();
 
+	drawNum_.Initialize(TextureManager::LoadGraph("number.png"));
+
 	Score::Init();
 	Update();
 }
 
 void GameScene::Update(void)
 {
-    if (PadInput::GetInstance().GetTriggerButton(VK_GAMEPAD_MENU))
-    {
-        if (isMenu_)
-        {
-            isMenu_ = false;
-        }
-        else
-        {
-            isMenu_ = true;
-            // 串刺し用にボタン押してたら解除する用関数
-            player_->ResetSkewerInfo4Pause();
-        }
-    }
+	drawNum_.SetNum(num_++, { 0,0 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 1.0f);
 
-    if (isMenu_ == false)
-    {
-        switch (progress_)
-        {
-        case GameScene::Progress::PRE:            // フレームカウントが規定値超えたら遷移
-            if (frameCount_preGame_ > kMaxFrame_preGame_)
-            {
-                // 進行値をGAMEに
-                progress_ = Progress::GAME;
-            }
-            break;
-        case GameScene::Progress::GAME:
-            break;
-        case GameScene::Progress::POST:
-            break;
-        default:
-            break;
-        }
+	if (PadInput::GetInstance().GetTriggerButton(VK_GAMEPAD_MENU))
+	{
+		if (isMenu_)
+		{
+			isMenu_ = false;
+		}
+		else
+		{
+			isMenu_ = true;
+			// 串刺し用にボタン押してたら解除する用関数
+			player_->ResetSkewerInfo4Pause();
+		}
+	}
 
-        if (progress_ == Progress::PRE)
-        {
-            frameCount_preGame_++;
-        }
-        else if (progress_ == Progress::GAME)
-        {
-            if (!HitStopManager::GetInstance().GetIsStop())
-            {
-                stage_->Update();
+	if (isMenu_ == false)
+	{
+		switch (progress_)
+		{
+		case GameScene::Progress::PRE:            // フレームカウントが規定値超えたら遷移
+			if (frameCount_preGame_ > kMaxFrame_preGame_)
+			{
+				// 進行値をGAMEに
+				progress_ = Progress::GAME;
+			}
+			break;
+		case GameScene::Progress::GAME:
+			break;
+		case GameScene::Progress::POST:
+			break;
+		default:
+			break;
+		}
 
-                player_->Update();
-                EnemyManager::GetInstance().Update();
+		if (progress_ == Progress::PRE)
+		{
+			frameCount_preGame_++;
+		}
+		else if (progress_ == Progress::GAME)
+		{
+			if (!HitStopManager::GetInstance().GetIsStop())
+			{
+				stage_->Update();
 
-                if (KeyboardInput::GetInstance().KeyTrigger(DIK_0))
-                {
-                    timer_.SetEndTime(10.f);
-                }
+				player_->Update();
+				EnemyManager::GetInstance().Update();
 
-                if (timer_.GetIsEnd())
-                {
-                    Score::HighScoreUpdate();
+				if (KeyboardInput::GetInstance().KeyTrigger(DIK_0))
+				{
+					timer_.SetEndTime(10.f);
+				}
 
-                    Sound::GetInstance().PlayWave("sceneChange_SE.wav");
-                    //BGMストップ
-                    Sound::GetInstance().StopWave("play_BGM.wav");
-                    SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
-                }
+				if (timer_.GetIsEnd())
+				{
+					Score::HighScoreUpdate();
 
-                ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
+					Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+					//BGMストップ
+					Sound::GetInstance().StopWave("play_BGM.wav");
+					SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
+				}
 
-                CollisionManger::GetInstance()->Update();
+				ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
 
-                //ゲームスピード
-                GameVelocityManager::GetInstance().Update();
-            }
+				CollisionManger::GetInstance()->Update();
 
-            HitStopManager::GetInstance().Update();
-        }
-    }
-    else
-    {
-        if (PadInput::GetInstance().GetLeftStickTilt().y >= 0.3f)
-        {
-            destination_++;
-            destination_ = (std::min)(destination_, 1);
-        }
-        else if (PadInput::GetInstance().GetLeftStickTilt().y <= -0.3f)
-        {
-            destination_--;
-            destination_ = (std::max)(destination_, 0);
-        }
+				//ゲームスピード
+				GameVelocityManager::GetInstance().Update();
+			}
 
-        if (destination_ == Destination::RETRY)
-        {
-            if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
-            {
-                //PlaySoundMem(sceneChange_SE_, DX_PLAYTYPE_NORMAL);
-                ////BGMストップ
-                //StopSoundMem(game_BGM_);
-                //SceneManager::GetInstance()->RequestChangeScene(SceneFactory::Usage::GAME);
-            }
-        }
-        else if (destination_ == Destination::TITLE)
-        {
-            if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
-            {
-                //PlaySoundMem(sceneChange_SE_, DX_PLAYTYPE_NORMAL);
-                ////BGMストップ
-                //StopSoundMem(game_BGM_);
-                //SceneManager::GetInstance()->RequestChangeScene(SceneFactory::Usage::TITLE);
-            }
-        }
-    }
+			HitStopManager::GetInstance().Update();
+		}
+	}
+	else
+	{
+		if (PadInput::GetInstance().GetLeftStickTilt().y >= 0.3f)
+		{
+			destination_++;
+			destination_ = (std::min)(destination_, 1);
+		}
+		else if (PadInput::GetInstance().GetLeftStickTilt().y <= -0.3f)
+		{
+			destination_--;
+			destination_ = (std::max)(destination_, 0);
+		}
 
-	
+		if (destination_ == Destination::RETRY)
+		{
+			if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+			{
+				//PlaySoundMem(sceneChange_SE_, DX_PLAYTYPE_NORMAL);
+				////BGMストップ
+				//StopSoundMem(game_BGM_);
+				//SceneManager::GetInstance()->RequestChangeScene(SceneFactory::Usage::GAME);
+			}
+		}
+		else if (destination_ == Destination::TITLE)
+		{
+			if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+			{
+				//PlaySoundMem(sceneChange_SE_, DX_PLAYTYPE_NORMAL);
+				////BGMストップ
+				//StopSoundMem(game_BGM_);
+				//SceneManager::GetInstance()->RequestChangeScene(SceneFactory::Usage::TITLE);
+			}
+		}
+	}
+
+
 }
 
 void GameScene::Draw(void)
@@ -166,6 +170,8 @@ void GameScene::DrawSprite()
 
 	player_->Draw();
 	EnemyManager::GetInstance().Draw();
+
+	drawNum_.Draw();
 
 	////DrawFormatString(0, 380, UtilL::Color::RED, "Scene: GAME");
 	////DrawFormatString(0, 0, UtilL::Color::WHITE, "[DEBUG]key-0で終了時間を10秒に変更。既に経過してる場合はGameScene終了");

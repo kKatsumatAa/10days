@@ -68,18 +68,17 @@ void DrawIntNumImage::Draw()
 			if (numImages_[i].isTrue)
 			{
 				//桁の数も考慮して、中心座標からの距離を出し、真の座標とする　　　　　　　　　　//大きい桁からスタートなので逆順にして、左から並べる（座標）
-				Vec2 pos = { numImages_[i].pos.x + numImages_[i].numImageSize.x / 2.0f * ((float)(numCount_ - 1) - (float)i - (float)numCount_ / 2.0f) * numImages_[i].scale
-					+ (numImages_[i].numImageSize.x / 4.0f * numImages_[i].scale)
+				Vec2 pos = { numImages_[i].pos.x + numImages_[i].numImageSize.x * ((float)(numCount_ - 1) - (float)i)
+					* numImages_[i].scale
 					,numImages_[i].pos.y };
 
-				pos.x -= numImages_[i].numImageSize.x / 2.0f * numImages_[i].scale;
-				pos.y -= numImages_[i].numImageSize.y / 2.0f * numImages_[i].scale;
+
 
 				numImages_[i].obj.SetTrans({ pos.x, pos.y ,0 });
 				numImages_[i].obj.SetScale({ numImages_[i].scale, numImages_[i].scale,1.0f });
 
-					numImages_[i].obj.DrawClippingBoxSprite({ numImages_[i].num * numImages_[i].sizeUV.x,0 },
-						{ numImages_[i].sizeUV.x,numImages_[i].sizeUV.y }, texhandle_, numImages_[i].color, true);
+				numImages_[i].obj.DrawClippingBoxSprite({ numImages_[i].num * numImages_[i].sizeUV.x,0 },
+					{ numImages_[i].sizeUV.x,numImages_[i].sizeUV.y }, texhandle_, numImages_[i].color, true);
 			}
 		}
 	}

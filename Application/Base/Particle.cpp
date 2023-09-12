@@ -13,6 +13,7 @@ Emitter::Emitter()
 
 void Emitter::Init()
 {
+	particles_.clear();
 }
 
 void Emitter::Update(bool isGravity, float velocity)

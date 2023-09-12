@@ -27,7 +27,7 @@ private:
 	};
 
 private:
-	NumImage numImages_[5];
+	NumImage numImages_[6];
 	//—]‚è
 	int32_t numRemainder_;
 	//‚»‚ÌŒ…
