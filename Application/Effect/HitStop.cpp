@@ -22,7 +22,7 @@ void HitStopManager::Update()
 {
 	if (timer_ <= timerMax_)
 	{
-		PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.barrelCurvePow = 1.0f - EaseIn(GetTimeRate());
+		PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.barrelCurvePow = min(1.0f - EaseIn(GetTimeRate()), MAX_EFFECT_POW_);
 
 		timer_++;
 	}
