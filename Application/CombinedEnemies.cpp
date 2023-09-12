@@ -23,6 +23,16 @@ void CombinedEnemies::Initialize(Player* player, Stage* stage, const Vec2& direc
 	ChangeState("AFTER_COMBINED");
 }
 
+bool CombinedEnemies::GetIsBigDango()
+{
+	if (enemies_.size() == 1 && enemies_[0]->GetIsBigDango())
+	{
+		return true;
+	}
+
+	return false;
+}
+
 //-----------------------------------------------------------------------------------------------------
 bool CombinedEnemies::GetIsDockingAnyEnemy()
 {
@@ -281,7 +291,7 @@ void CombinedEnemies::BigDangoUpdate()
 		return;
 	}
 
-	if (enemiesNum_ > 1)
+	if (enemiesNum_ >= TO_BIG_NUM_)
 	{
 		for (auto itr = enemies_.begin(); itr != enemies_.end(); itr++)
 		{
