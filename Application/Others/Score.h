@@ -7,9 +7,10 @@ public:
 	//初期化
 	static void Init();
 	//スコア追加
-	static void Add(uint32_t score);
+	static void Add(uint32_t enemyNum);
 	//スコア描画
 	static void Draw();
+	static void DrawImGui();
 
 	//ハイスコアの更新(したか確認)
 	static void HighScoreUpdate();

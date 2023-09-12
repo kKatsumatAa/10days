@@ -7,6 +7,8 @@ class HitStopManager final
 private:
 	uint32_t timer_ = 0;
 	uint32_t timerMax_ = 0;
+	//òpã»ÇÃç≈ëÂã≠Ç≥
+	const float MAX_EFFECT_POW_ = 0.5f;
 
 private:
 	HitStopManager() { ; }

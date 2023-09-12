@@ -162,10 +162,10 @@ void GameScene::DrawSprite()
 {
 	stage_->Draw();
 
+	ParticleManagerL::GetInstance()->Draw();
+
 	player_->Draw();
 	EnemyManager::GetInstance().Draw();
-
-	ParticleManagerL::GetInstance()->Draw();
 
 	////DrawFormatString(0, 380, UtilL::Color::RED, "Scene: GAME");
 	////DrawFormatString(0, 0, UtilL::Color::WHITE, "[DEBUG]key-0で終了時間を10秒に変更。既に経過してる場合はGameScene終了");
@@ -181,4 +181,6 @@ void GameScene::DrawImgui()
 	GameVelocityManager::GetInstance().UpdateImGui();
 	//ヒットストップ
 	HitStopManager::GetInstance().DrawImGui();
+    //スコア
+    Score::DrawImGui();
 }
