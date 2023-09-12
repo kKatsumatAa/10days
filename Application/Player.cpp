@@ -141,7 +141,7 @@ void Player::Draw(void)
 		arrow_.Object::SetScale({ kPngScale_ * 3.0f, kPngScale_ * 3.0f,0 });
 		arrow_.Object::SetTrans({ position_.x,position_.y,0 });
 		arrow_.Object::SetRot({ 0,0,rotation_ });
-		arrow_.DrawBoxSprite(png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
+		arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
 
 		//DrawFormatString(1000, 60, UtilL::Color::GREEN, "溜め状態");
 		//DrawFormatString(1000, 80, UtilL::Color::GREEN, "frame: %d/%d", frameCount_4Skewer_, kChargeFrame4Skewer_);
@@ -164,11 +164,11 @@ void Player::Draw(void)
 			// 矢印の座標を決め打ちで決める。（今は初期状態だと右向いてるので、右方向にきめうち）
 			pos_arrow = position_ + Vec2(1, 0) * kMowArrowDist2Self_;
 			arrow_.Object::SetTrans({ pos_arrow.x, pos_arrow.y,0 });
-			arrow_.DrawBoxSprite(png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
+			arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
 		}
 		else // 移動ベクトルが0じゃなかったら。
 		{
-			arrow_.DrawBoxSprite(png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
+			arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
 		}
 	}
 
@@ -180,7 +180,7 @@ void Player::Draw(void)
 		sword_.Object::SetScale({ kPngScale_, kPngScale_,0 });
 		sword_.Object::SetTrans({ pos4Sword_.x, pos4Sword_.y,0 });
 		sword_.Object::SetRot({ 0,0,rot4Sword2_ });
-		sword_.DrawBoxSprite(png_sword_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+		sword_.DrawBoxSprite(nullptr, png_sword_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 		//DrawCircle((int32_t)pos4Sword_.x, (int32_t)pos4Sword_.y, 1, UtilL::Color::BLUE, true, 1);
 	}
 	//DrawFormatString(1000, 120, UtilL::Color::GREEN, "rot4s: %f", rot4RotationSword_);
@@ -196,25 +196,25 @@ void Player::Draw(void)
 			//突進パーティクル
 			ParticleManagerL::GetInstance()->SkewerEffect(pos4SwordUp_, -vec_move_);
 
-            dist_p4su2p4sb_ = EnemyManager::GetInstance().GetSkewerEnemiesLength() - 18;
+			dist_p4su2p4sb_ = EnemyManager::GetInstance().GetSkewerEnemiesLength() - 18;
 		}
 
 		// 串
 		sword_.Object::SetScale({ kPngScale_, kPngScale_,0 });
 		sword_.Object::SetTrans({ pos4Sword_.x, pos4Sword_.y,0 });
 		sword_.Object::SetRot({ 0,0,rotation_ });
-		sword_.DrawBoxSprite(png_sword_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+		sword_.DrawBoxSprite(nullptr, png_sword_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
 
 		swordUp_.Object::SetScale({ kPngScale_, kPngScale_,0 });
 		swordUp_.Object::SetTrans({ pos4SwordUp_.x, pos4SwordUp_.y,0 });
 		swordUp_.Object::SetRot({ 0,0,rotation_ });
-		swordUp_.DrawBoxSprite(png_swordUp_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+		swordUp_.DrawBoxSprite(nullptr, png_swordUp_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
 		swordBottom_.Object::SetScale({ kPngScale_, kPngScale_,0 });
 		swordBottom_.Object::SetTrans({ pos4SwordBottom_.x, pos4SwordBottom_.y,0 });
 		swordBottom_.Object::SetRot({ 0,0,rotation_ });
-		swordBottom_.DrawBoxSprite(png_swordBottom_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+		swordBottom_.DrawBoxSprite(nullptr, png_swordBottom_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 		skewer_.Draw();
 	}
 
@@ -226,7 +226,7 @@ void Player::Draw(void)
 		Object::SetScale({ kPngScale_, kPngScale_,0 });
 		Object::SetTrans({ position_.x, position_.y,0 });
 		Object::SetRot({ 0,0,rotation_ });
-		DrawBoxSprite(png_player_, { 1.0f,1.0f,0,1.0f }, { 0.5f,0.5f });
+		DrawBoxSprite(nullptr, png_player_, { 1.0f,1.0f,0,1.0f }, { 0.5f,0.5f });
 		//DrawFormatString(1000, 20, UtilL::Color::YELLOW, "無敵状態");
 		//DrawFormatString(1000, 40, UtilL::Color::YELLOW, "frame: %d", kMaxInvincibleFrame_ - frameCount_invincible_);
 	}
@@ -239,7 +239,7 @@ void Player::Draw(void)
 		Object::SetScale({ kPngScale_, kPngScale_,0 });
 		Object::SetTrans({ position_.x, position_.y,0 });
 		Object::SetRot({ 0,0,rotation_ });
-		DrawBoxSprite(png_player_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+		DrawBoxSprite(nullptr, png_player_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 	}
 
 	// 串刺し攻撃時の判定座標
@@ -249,37 +249,37 @@ void Player::Draw(void)
 
 void Player::ResetSkewerInfo4Pause(void)
 {
-    // 離した瞬間に初期化
-    frameCount_4Skewer_ = 0;
-    isSkewerScreenBlack4SceneM_ = false;
+	// 離した瞬間に初期化
+	frameCount_4Skewer_ = 0;
+	isSkewerScreenBlack4SceneM_ = false;
 
-    // スローモーション解除
-    // スローモーション切る奴
-    //SceneManager::GetInstance()->EndSlowMotion();
+	// スローモーション解除
+	// スローモーション切る奴
+	//SceneManager::GetInstance()->EndSlowMotion();
 }
 
 void Player::MoveUpdate(void)
 {
 
-    // 串刺し終了後の縮みフラグオンなら
-    if (isSkewerEndShrink_)
-    {
-        // フレームカウンタが規定値以上なら終了
-        if (frameCount_SkewerEndShrink_ > kMaxFrameSkewerEndShrink_)
-        {
-            isSkewerEndShrink_ = false;
-            frameCount_SkewerEndShrink_ = 0;
-        }
-        else // 規定値未満なら加算
-        {
-            float rate = (std::min)((float)frameCount_SkewerEndShrink_ / kMaxFrameSkewerEndShrink_, 1.f);
-            position_ = position_ + vec_move_ * Math::Ease::EaseInSine(rate) * dist_p4su2p4sb_;
+	// 串刺し終了後の縮みフラグオンなら
+	if (isSkewerEndShrink_)
+	{
+		// フレームカウンタが規定値以上なら終了
+		if (frameCount_SkewerEndShrink_ > kMaxFrameSkewerEndShrink_)
+		{
+			isSkewerEndShrink_ = false;
+			frameCount_SkewerEndShrink_ = 0;
+		}
+		else // 規定値未満なら加算
+		{
+			float rate = (std::min)((float)frameCount_SkewerEndShrink_ / kMaxFrameSkewerEndShrink_, 1.f);
+			position_ = position_ + vec_move_ * Math::Ease::EaseInSine(rate) * dist_p4su2p4sb_;
 
-            // フレーム加算
-            frameCount_SkewerEndShrink_++;
-        }
+			// フレーム加算
+			frameCount_SkewerEndShrink_++;
+		}
 
-    }
+	}
 
 	// 入力
 	Vec2 input{};
@@ -449,7 +449,7 @@ void Player::SkewerAttackUpdate(void)
 			HitStopManager::GetInstance().BeginHitStop(60);
 			frameCount_SkewerEndHitStop_ = 0;
 			CameraManager::GetInstance().GetCamera2D()->EndFollow();
-            isSkewerEndShrink_ = true;
+			isSkewerEndShrink_ = true;
 		}
 		// 関数終了
 		return;

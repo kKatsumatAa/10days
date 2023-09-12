@@ -5,6 +5,8 @@
 #include "SceneManager.h"
 #include "KeyboardInput.h"
 #include "Score.h"
+#include "CameraManager.h"
+
 
 void TitleScene::Finalize()
 {
@@ -55,7 +57,7 @@ void TitleScene::Draw(void)
 void TitleScene::DrawSprite()
 {
 	//ƒ^ƒCƒgƒ‹
-	titleObj_.DrawBoxSprite(titleImageHandle_);
+	titleObj_.DrawBoxSprite(CameraManager::GetInstance().GetCamera2D("UICamera"), titleImageHandle_);
 
 	//DrawFormatString(0, 380, UtilL::Color::RED, "Scene: TITLE");
 	//DrawFormatString(0, 0, UtilL::Color::RED, "press pad-A or key-SPACE");

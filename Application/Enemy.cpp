@@ -15,8 +15,8 @@ const float Enemy::kPushBackDist_ = 2.0f;
 const float Enemy::kPngScale_ = 0.07f;
 const float Enemy::KRadius_ = 16.f;
 
-Enemy::Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle) 
-	: IEntity(stagePtr), playerPtr_(playerPtr), colMPtr_(colMPtr),png_enemy_(texHandle)
+Enemy::Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle)
+	: IEntity(stagePtr), playerPtr_(playerPtr), colMPtr_(colMPtr), png_enemy_(texHandle)
 {
 	// 衝突マネージャへの登録
 	colMPtr->Register(this);
@@ -143,7 +143,7 @@ void Enemy::Draw(void)
 		if (frameCount_move_ == 0)
 		{
 			// 敵の色は通常色に
-			DrawBoxSprite(png_enemy_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+			DrawBoxSprite(nullptr, png_enemy_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
 			/*DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, UtilL::Color::WHITE, false, 1);*/
 		}
@@ -152,7 +152,7 @@ void Enemy::Draw(void)
 		if (frameCount_wait_ >= kMoveInterval_)
 		{
 			// 敵の色は緑色に
-			DrawBoxSprite(png_enemy_, { 0.1f,1.0f,0.1f,1.0f }, { 0.5f,0.5f });
+			DrawBoxSprite(nullptr, png_enemy_, { 0.1f,1.0f,0.1f,1.0f }, { 0.5f,0.5f });
 			/*DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, UtilL::Color::GREEN, false, 1);*/
 		}
 	}
@@ -169,113 +169,113 @@ void Enemy::MowDownFlagUpdate()
 
 void Enemy::OnCollision(void)
 {
-    // 接触対象の名称が player_skewerAttack
-    if (other_->GetId() == "player_skewerAttack")
-    {
-        // キャストして復元
-        PlayerSkewerAttack* skewerPtr = static_cast<PlayerSkewerAttack*>(other_);
-        // 串刺し攻撃中は死なない
-        if (skewerPtr->GetIsSkewer())
-        {
-            isSkewer_ = true;
-        }
-        else
-        {
-            Dead();
-        }
+	// 接触対象の名称が player_skewerAttack
+	if (other_->GetId() == "player_skewerAttack")
+	{
+		// キャストして復元
+		PlayerSkewerAttack* skewerPtr = static_cast<PlayerSkewerAttack*>(other_);
+		// 串刺し攻撃中は死なない
+		if (skewerPtr->GetIsSkewer())
+		{
+			isSkewer_ = true;
+		}
+		else
+		{
+			Dead();
+		}
 
-    }
+	}
 
-    // 接触対象の名称が enemy
-    if (other_->GetId() == "enemy")
-    {
-        Enemy* enemyPtr = static_cast<Enemy*>(other_);
+	// 接触対象の名称が enemy
+	if (other_->GetId() == "enemy")
+	{
+		Enemy* enemyPtr = static_cast<Enemy*>(other_);
 
-        // 薙ぎ払われてる最中に他の敵と触れたら
-        if (isMowDown_ || isSkewer_)
-        {
-            // 合体OKフラグオン
-            isDocking_ = true;
-            enemyPtr->isDocking_ = true;
-            // 関数終了
-            return;
-        }
-        //串しざされ中にほかの敵と触れたら
-        if (isSkewer_)
-        {
-            //相手も串しざされる
-            enemyPtr->isSkewer_ = true;
-        }
+		// 薙ぎ払われてる最中に他の敵と触れたら
+		if (isMowDown_ || isSkewer_)
+		{
+			// 合体OKフラグオン
+			isDocking_ = true;
+			enemyPtr->isDocking_ = true;
+			// 関数終了
+			return;
+		}
+		//串しざされ中にほかの敵と触れたら
+		if (isSkewer_)
+		{
+			//相手も串しざされる
+			enemyPtr->isSkewer_ = true;
+		}
 
-        // 他の敵から自分までの方向ベクトル
-        Vec2 vec_enemy2enemyself = (position_ - other_->GetPos()).GetNormalize();
+		// 他の敵から自分までの方向ベクトル
+		Vec2 vec_enemy2enemyself = (position_ - other_->GetPos()).GetNormalize();
 
-        // 押し戻し後の座標 = 座標 + (正規化された押し戻し方向 * 速度)
-        Vec2 pushBacked_pos = position_ + vec_enemy2enemyself * kPushBackDist_;
+		// 押し戻し後の座標 = 座標 + (正規化された押し戻し方向 * 速度)
+		Vec2 pushBacked_pos = position_ + vec_enemy2enemyself * kPushBackDist_;
 
-        // ノックバック後の座標 (+ 半径)が、ステージの内側なら座標反映
-        if (pushBacked_pos.x - radius_.x > stagePtr_->GetLT().x && pushBacked_pos.y - radius_.x > stagePtr_->GetLT().y && // 現在、半径は円としてxしか使っていないので
-            pushBacked_pos.x + radius_.x < stagePtr_->GetRB().x && pushBacked_pos.y + radius_.x < stagePtr_->GetRB().y)   // yが使われていないのは意図的
-        {
-            // 反映
-            position_ = pushBacked_pos;
-        }
-    }
+		// ノックバック後の座標 (+ 半径)が、ステージの内側なら座標反映
+		if (pushBacked_pos.x - radius_.x > stagePtr_->GetLT().x && pushBacked_pos.y - radius_.x > stagePtr_->GetLT().y && // 現在、半径は円としてxしか使っていないので
+			pushBacked_pos.x + radius_.x < stagePtr_->GetRB().x && pushBacked_pos.y + radius_.x < stagePtr_->GetRB().y)   // yが使われていないのは意図的
+		{
+			// 反映
+			position_ = pushBacked_pos;
+		}
+	}
 
-    // 接触対象の名称が player
-    if (other_->GetId() == "player")
-    {
-        // キャストして復元
-        Player* playerPtr = static_cast<Player*>(other_);
+	// 接触対象の名称が player
+	if (other_->GetId() == "player")
+	{
+		// キャストして復元
+		Player* playerPtr = static_cast<Player*>(other_);
 
-        // 串刺しされてる最中なら押し戻し要らん
-        if (playerPtr->GetIsSkewer()) return;
+		// 串刺しされてる最中なら押し戻し要らん
+		if (playerPtr->GetIsSkewer()) return;
 
-        // playerから自分までの方向ベクトル
-        Vec2 vec_player2enemy = (position_ - other_->GetPos()).GetNormalize();
+		// playerから自分までの方向ベクトル
+		Vec2 vec_player2enemy = (position_ - other_->GetPos()).GetNormalize();
 
-        // 押し戻し後の座標 = 座標 + (正規化された押し戻し方向 * 速度)
-        Vec2 pushBacked_pos = position_ + vec_player2enemy * kPushBackDist_;
+		// 押し戻し後の座標 = 座標 + (正規化された押し戻し方向 * 速度)
+		Vec2 pushBacked_pos = position_ + vec_player2enemy * kPushBackDist_;
 
-        // ノックバック後の座標 (+ 半径)が、ステージの内側なら座標反映
-        if (pushBacked_pos.x - radius_.x > stagePtr_->GetLT().x && pushBacked_pos.y - radius_.x > stagePtr_->GetLT().y && // 現在、半径は円としてxしか使っていないので
-            pushBacked_pos.x + radius_.x < stagePtr_->GetRB().x && pushBacked_pos.y + radius_.x < stagePtr_->GetRB().y)   // yが使われていないのは意図的
-        {
-            // 反映
-            position_ = pushBacked_pos;
-        }
-    }
+		// ノックバック後の座標 (+ 半径)が、ステージの内側なら座標反映
+		if (pushBacked_pos.x - radius_.x > stagePtr_->GetLT().x && pushBacked_pos.y - radius_.x > stagePtr_->GetLT().y && // 現在、半径は円としてxしか使っていないので
+			pushBacked_pos.x + radius_.x < stagePtr_->GetRB().x && pushBacked_pos.y + radius_.x < stagePtr_->GetRB().y)   // yが使われていないのは意図的
+		{
+			// 反映
+			position_ = pushBacked_pos;
+		}
+	}
 
-    // 接触対象の名称が player_mowAttackSupport
-    if (other_->GetId() == "player_mowAttackSupport") // 絶対にsupportが先に触れる。逆に触れないと正常な判定は期待できない
-    {
-        //isContactMowSupport_ = true;
-    }
+	// 接触対象の名称が player_mowAttackSupport
+	if (other_->GetId() == "player_mowAttackSupport") // 絶対にsupportが先に触れる。逆に触れないと正常な判定は期待できない
+	{
+		//isContactMowSupport_ = true;
+	}
 
-    // 接触対象の名称が player_attack && supportに既に触れているもの
-    if (other_->GetId() == "player_mowAttack"/* && isContactMowSupport_*/)
-    {
-        // 薙ぎ払いの半円に触れている状態で、プレイヤーの向きと、プレイヤーから敵への向きの内積値が、正の値の場合、正面の半円内にいると思われる。
-        if (playerPtr_->GetMoveVec().GetNormalize().Dot((position_ - playerPtr_->GetPos()).GetNormalize()) >= 0.f)
-        {
-            // ptrをキャストして復元
-            PlayerMowAttack* paPtr = static_cast<PlayerMowAttack*>(other_);
+	// 接触対象の名称が player_attack && supportに既に触れているもの
+	if (other_->GetId() == "player_mowAttack"/* && isContactMowSupport_*/)
+	{
+		// 薙ぎ払いの半円に触れている状態で、プレイヤーの向きと、プレイヤーから敵への向きの内積値が、正の値の場合、正面の半円内にいると思われる。
+		if (playerPtr_->GetMoveVec().GetNormalize().Dot((position_ - playerPtr_->GetPos()).GetNormalize()) >= 0.f)
+		{
+			// ptrをキャストして復元
+			PlayerMowAttack* paPtr = static_cast<PlayerMowAttack*>(other_);
 
-            // 攻撃猶予中なら
-            if (paPtr->GetFrameCountAttack()) //** 現状下記の条件式だと、範囲内に中心点はいないけど、半径は触れているみたいな状態が考慮されていない。やり方もわからない。
-            {
-                // 座標を、当たり判定円の中心(=プレイヤーの中心座標）+ プレイヤーの正面 * (プレイヤーの半径 + 5.f)に設定
-                position_ = paPtr->GetPos() + paPtr->GetVecMove() * 15.f;
-                //position_ = { 300,300 };
+			// 攻撃猶予中なら
+			if (paPtr->GetFrameCountAttack()) //** 現状下記の条件式だと、範囲内に中心点はいないけど、半径は触れているみたいな状態が考慮されていない。やり方もわからない。
+			{
+				// 座標を、当たり判定円の中心(=プレイヤーの中心座標）+ プレイヤーの正面 * (プレイヤーの半径 + 5.f)に設定
+				position_ = paPtr->GetPos() + paPtr->GetVecMove() * 15.f;
+				//position_ = { 300,300 };
 
-                // 薙ぎ払われたフラグオン
-                isMowDown_ = true;
-                isMowDownTrigger_ = true;
-                // 吹き飛ばされる方向を記録
-                vec_mow_ = paPtr->GetVecMove();
-            }
-        }
-    }
+				// 薙ぎ払われたフラグオン
+				isMowDown_ = true;
+				isMowDownTrigger_ = true;
+				// 吹き飛ばされる方向を記録
+				vec_mow_ = paPtr->GetVecMove();
+			}
+		}
+	}
 }
 
 void Enemy::Docking()

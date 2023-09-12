@@ -15,7 +15,7 @@ HitStopManager& HitStopManager::GetInstance()
 void HitStopManager::Initialize()
 {
 	timer_ = 0;
-	timer_ = 0;
+	timerMax_ = 0;
 }
 
 void HitStopManager::Update()

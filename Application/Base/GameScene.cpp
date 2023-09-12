@@ -10,6 +10,7 @@
 #include "GameVelocityManager.h"
 #include "GameVelocityState.h"
 #include "HitStop.h"
+#include "CameraManager.h"
 
 void GameScene::Finalize()
 {
@@ -17,6 +18,10 @@ void GameScene::Finalize()
 
 void GameScene::Initialize(void)
 {
+	//全体のカメラ
+	CameraManager::GetInstance().AddCamera2D("GameCamera");
+	CameraManager::GetInstance().SetUsingCamera2D("GameCamera");
+
 	//BGM再生
 	Sound::GetInstance().PlayWave("play_BGM.wav", 1.0f, true);
 
@@ -171,7 +176,7 @@ void GameScene::DrawSprite()
 	player_->Draw();
 	EnemyManager::GetInstance().Draw();
 
-	drawNum_.Draw();
+	drawNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
 
 	////DrawFormatString(0, 380, UtilL::Color::RED, "Scene: GAME");
 	////DrawFormatString(0, 0, UtilL::Color::WHITE, "[DEBUG]key-0で終了時間を10秒に変更。既に経過してる場合はGameScene終了");

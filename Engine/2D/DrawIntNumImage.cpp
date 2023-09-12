@@ -58,7 +58,7 @@ void DrawIntNumImage::SetNum(int32_t num, const Vec2& pos, const Vec2& sizeUV, c
 	}
 }
 
-void DrawIntNumImage::Draw()
+void DrawIntNumImage::Draw(Camera2D* camera)
 {
 	if (isStartDigit_)
 	{
@@ -77,7 +77,7 @@ void DrawIntNumImage::Draw()
 				numImages_[i].obj.SetTrans({ pos.x, pos.y ,0 });
 				numImages_[i].obj.SetScale({ numImages_[i].scale, numImages_[i].scale,1.0f });
 
-				numImages_[i].obj.DrawClippingBoxSprite({ numImages_[i].num * numImages_[i].sizeUV.x,0 },
+				numImages_[i].obj.DrawClippingBoxSprite(camera, { numImages_[i].num * numImages_[i].sizeUV.x,0 },
 					{ numImages_[i].sizeUV.x,numImages_[i].sizeUV.y }, texhandle_, numImages_[i].color, true);
 			}
 		}

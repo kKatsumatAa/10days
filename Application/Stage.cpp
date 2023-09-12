@@ -21,7 +21,7 @@ void Stage::Draw(void)
 	obj_.SetTrans({ 640.0f,360.0f,0 });
 	obj_.SetScale({ 1.1f,1.1f,1.0f });
 
-	obj_.DrawBoxSprite(png_Stage_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+	obj_.DrawBoxSprite(nullptr, png_Stage_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 	// çsìÆêßå¿îÕàÕï\é¶
 	//DrawBox((int32_t)leftTop_.x, (int32_t)leftTop_.y, (int32_t)RightBottom_.x, (int32_t)RightBottom_.y, 0x00ff00, false);
 }

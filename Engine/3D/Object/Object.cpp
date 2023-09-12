@@ -184,7 +184,7 @@ void Object::Draw()
 	}
 	else if (sprite_)
 	{
-		DrawBoxSprite(NULL,{1.0f,1.0f,1.0f,1.0f},{0.5f,0.5f});
+		DrawBoxSprite(nullptr, NULL, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 	}
 }
 
@@ -704,7 +704,7 @@ void Object::DrawBox(Camera* camera, const Vec4& color, uint64_t textureHandle, 
 	Update(BOX, pipelineNum, textureHandle, &cbt_, camera);
 }
 
-void Object::DrawBoxSprite(uint64_t textureHandle, const Vec4& color,
+void Object::DrawBoxSprite(Camera2D* camera, uint64_t textureHandle, const Vec4& color,
 	const Vec2& ancorUV, bool isReverseX, bool isReverseY,
 	int32_t pipelineNum)
 {
@@ -714,13 +714,13 @@ void Object::DrawBoxSprite(uint64_t textureHandle, const Vec4& color,
 		//スプライトクラスの初期化
 		sprite_->Initialize();
 	}
-	sprite_->Update({ GetTrans().x, GetTrans().y }, { GetScale().x,GetScale().y },
+	sprite_->Update(camera, { GetTrans().x, GetTrans().y }, { GetScale().x,GetScale().y },
 		color, textureHandle, ancorUV, isReverseX, isReverseY, GetRot(), &cbt_, constMapMaterial_);
 
 	Update(SPRITE, pipelineNum, textureHandle, &cbt_, nullptr);
 }
 
-void Object::DrawClippingBoxSprite(const XMFLOAT2& UVleftTop, const XMFLOAT2& UVlength,
+void Object::DrawClippingBoxSprite(Camera2D* camera, const XMFLOAT2& UVleftTop, const XMFLOAT2& UVlength,
 	uint64_t textureHandle, const Vec4& color, bool isPosLeftTop, bool isReverseX, bool isReverseY,
 	int32_t pipelineNum)
 {
@@ -730,7 +730,7 @@ void Object::DrawClippingBoxSprite(const XMFLOAT2& UVleftTop, const XMFLOAT2& UV
 		//スプライトクラスの初期化
 		sprite_->Initialize();
 	}
-	sprite_->UpdateClipping({ GetTrans().x,GetTrans().y }, { GetScale().x,GetScale().y },
+	sprite_->UpdateClipping(camera, { GetTrans().x,GetTrans().y }, { GetScale().x,GetScale().y },
 		UVleftTop, UVlength, color, textureHandle,
 		isPosLeftTop, isReverseX, isReverseY, { GetRot() }, &cbt_, constMapMaterial_);
 
