@@ -30,6 +30,9 @@ Player::Player(CollisionManger* colMPtr, Stage* stagePtr) : IEntity(stagePtr), m
 
 	// 衝突callback反映
 	onCollision_ = std::bind(&Player::OnCollision, this);
+
+    // 判定がその場に残り続けちゃうから、絶対に引っかからない座標に転送するごり押し。 pos(-10万,-10万)
+    skewer_.SetPos({ -100000.f, -100000.f });
 }
 
 Player::~Player(void)
