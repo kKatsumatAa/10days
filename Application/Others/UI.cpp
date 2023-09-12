@@ -36,6 +36,7 @@ void UI::AllLoad()
 	ui_[(uint32_t)UIType::ToTitle] = TextureManager::LoadGraph("toTitle.png");
 	ui_[(uint32_t)UIType::NowScore] = TextureManager::LoadGraph("score.png");
 	ui_[(uint32_t)UIType::HighScore] = TextureManager::LoadGraph("highScore.png");
+	ui_[(uint32_t)UIType::Makimono] = TextureManager::LoadGraph("makimono.png");
 
 	ui_[(uint32_t)UIType::Tutorial1] = TextureManager::LoadGraph("tutorial_UI_01.png");
 	ui_[(uint32_t)UIType::Tutorial2] = TextureManager::LoadGraph("tutorial_UI_02.png");
@@ -60,7 +61,7 @@ void UI::Draw(UIType uiType)
 	objUI_[(uint32_t)uiType].DrawBoxSprite(
 		CameraManager::GetInstance().GetCamera2D("UICamera"),
 		ui_[(uint32_t)uiType],
-		{ 1.0f,1.0f,1.0f,1.0f },
+		color_[(uint32_t)uiType],
 		ancorPoint_[(uint32_t)uiType]);
 }
 
