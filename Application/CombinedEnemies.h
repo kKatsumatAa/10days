@@ -46,6 +46,8 @@ private:
 	bool isSkewer_ = false;
 	//生きているか
 	bool isAlive_ = true;
+	//
+	float scaleExtend_ = 1.0f;
 
 
 public:
@@ -94,6 +96,8 @@ private:
 	void Skewer();
 	//薙ぎ払われた瞬間フラグの更新
 	void EnemiesMowDownTriggerUpdate();
+	//デカ団子の更新
+	void BigDangoUpdate();
 
 public:
 	const Vec2& GetCentorPos() { return centorPos_; }

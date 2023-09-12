@@ -192,7 +192,7 @@ void Enemy::OnCollision(void)
 		Enemy* enemyPtr = static_cast<Enemy*>(other_);
 
 		// “ã‚¬•¥‚í‚ê‚Ä‚éÅ’†‚É‘¼‚Ì“G‚ÆG‚ê‚½‚ç
-		if (isMowDown_ || isSkewer_)
+		if ((isMowDown_ || isSkewer_) && !isBigDango_ && !enemyPtr->isBigDango_)
 		{
 			// ‡‘ÌOKƒtƒ‰ƒOƒIƒ“
 			isDocking_ = true;
