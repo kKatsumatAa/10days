@@ -28,7 +28,7 @@ class Emitter final
 		float gravity = 0.98f;
 
 		//色
-		uint32_t color;
+		Vec4 color;
 		//生存時間(フレーム数)
 		float timer = 0;
 		float timerMax = 30;
@@ -90,7 +90,7 @@ public:
 	//パーティクル追加
 	//lifeは秒数指定
 	void Add(uint32_t addNum, float life, float minScale, float maxScale, Vec2 minVelo, Vec2 maxVelo,
-		Vec2 accel = { 0,0 }, float minRot = 0.0f, float maxRot = 0.0f, uint32_t color = 0xffffff);
+		Vec2 accel = { 0,0 }, float minRot = 0.0f, float maxRot = 0.0f, Vec4 color = {1.f,1.f,1.f,1.f});
 	//パーティクル全消し
 	void ClearParticles() { particles_.clear(); }
 

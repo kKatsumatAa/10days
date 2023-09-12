@@ -67,7 +67,7 @@ void Emitter::DrawGraph()
 	}
 }
 
-void Emitter::Add(uint32_t addNum, float life, float minScale, float maxScale, Vec2 minVelo, Vec2 maxVelo, Vec2 accel, float minRot, float maxRot, uint32_t color)
+void Emitter::Add(uint32_t addNum, float life, float minScale, float maxScale, Vec2 minVelo, Vec2 maxVelo, Vec2 accel, float minRot, float maxRot, Vec4 color)
 {
 	for (uint32_t i = 0; i < addNum; i++)
 	{
@@ -143,5 +143,5 @@ void Emitter::Particle::Draw()
 	obj_->SetTrans({ pos.x,pos.y,0 });
 	obj_->SetRot({ 0,0,rot });
 
-	obj_->DrawBoxSprite();
+	obj_->DrawBoxSprite(0U,color);
 }
