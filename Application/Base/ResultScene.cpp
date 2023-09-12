@@ -1,5 +1,5 @@
 #include "ResultScene.h"
-
+#include "CameraManager.h"
 #include "Util.h"
 #include "KeyboardInput.h"
 #include "PadInput.h"
@@ -49,7 +49,7 @@ void ResultScene::Draw(void)
 void ResultScene::DrawSprite()
 {
 	//ƒŠƒUƒ‹ƒg‰æ‘œ
-	result_.DrawBoxSprite(png_result_);
+	result_.DrawBoxSprite(CameraManager::GetInstance().GetCamera2D("UICamera"), png_result_);
 
 	//DrawFormatString(0, 380, UtilL::Color::RED, "Scene: RESULT");
 	//DrawFormatString(0, 0, UtilL::Color::WHITE, "pad-A or key-R[DEBUG]‚Åtitle");

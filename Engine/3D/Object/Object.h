@@ -7,6 +7,7 @@
 #include "PostPera.h"
 #include <FbxLoader.h>
 #include "Camera.h"
+#include "Camera2D.h"
 #include "RootPipe.h"
 
 class BaseCollider;
@@ -386,12 +387,12 @@ public:
 		const Vec4& color = { 1.0f,1.0f,1.0f,1.0f },
 		uint64_t textureHandle = NULL, int32_t pipelineNum = 0);
 
-	void DrawBoxSprite(uint64_t textureHandle = NULL, const Vec4& color = { 1.0f,1.0f,1.0f,1.0f }
-		,  const Vec2& ancorUV = { 0,0 }, bool isReverseX = false, bool isReverseY = false,
+	void DrawBoxSprite(Camera2D* camera, uint64_t textureHandle = NULL, const Vec4& color = { 1.0f,1.0f,1.0f,1.0f }
+		, const Vec2& ancorUV = { 0,0 }, bool isReverseX = false, bool isReverseY = false,
 		int32_t pipelineNum = 0);
 
-	void DrawClippingBoxSprite(const XMFLOAT2& UVleftTop, const XMFLOAT2& UVlength,
-		uint64_t textureHandle = NULL, const Vec4& color = { 1.0f,1.0f,1.0f,1.0f },  bool isPosLeftTop = true,
+	void DrawClippingBoxSprite(Camera2D* camera, const XMFLOAT2& UVleftTop, const XMFLOAT2& UVlength,
+		uint64_t textureHandle = NULL, const Vec4& color = { 1.0f,1.0f,1.0f,1.0f }, bool isPosLeftTop = true,
 		bool isReverseX = false, bool isReverseY = false, int32_t pipelineNum = 0);
 
 	void DrawCube3D(Camera* camera = nullptr,

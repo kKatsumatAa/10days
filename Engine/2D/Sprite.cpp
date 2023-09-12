@@ -59,7 +59,7 @@ void Sprite::SpriteDraw()
 	DirectXWrapper::GetInstance().GetCommandList()->DrawInstanced(4, 1, 0, 0);
 }
 
-void Sprite::Update(const Vec2& pos, const Vec2& scale,
+void Sprite::Update(Camera2D* camera, const Vec2& pos, const Vec2& scale,
 	const Vec4& color, uint64_t textureHandle, const Vec2& ancorUV,
 	bool isReverseX, bool isReverseY, const Vec3& rotation,
 	ConstBuffTransform* cbt, ConstBufferDataMaterial* constMapMaterial)
@@ -102,31 +102,11 @@ void Sprite::Update(const Vec2& pos, const Vec2& scale,
 	worldMat.rot_.z = rotation.z;
 	worldMat.trans_ = { pos.x /*+ length.x * ancorUV.x * scale*/,pos.y/* + length.y * ancorUV.y * scale*/,0.0f };
 
-	worldMat.CalcAllTreeMat();
-
-	XMMATRIX matW;
-	matW = { (float)worldMat.matWorld_.m_[0][0],(float)worldMat.matWorld_.m_[0][1],(float)worldMat.matWorld_.m_[0][2],(float)worldMat.matWorld_.m_[0][3],
-			 (float)worldMat.matWorld_.m_[1][0],(float)worldMat.matWorld_.m_[1][1],(float)worldMat.matWorld_.m_[1][2],(float)worldMat.matWorld_.m_[1][3],
-			 (float)worldMat.matWorld_.m_[2][0],(float)worldMat.matWorld_.m_[2][1],(float)worldMat.matWorld_.m_[2][2],(float)worldMat.matWorld_.m_[2][3],
-			 (float)worldMat.matWorld_.m_[3][0],(float)worldMat.matWorld_.m_[3][1],(float)worldMat.matWorld_.m_[3][2],(float)worldMat.matWorld_.m_[3][3] };
-
-	//view
-	ViewMat view;
-	view.matView_ = CameraManager::GetInstance().GetCamera2D()->GetCameraMatrix();
-
-
-	//平行投影の射影行列生成
-	ProjectionMat projection;
-
-	projection.matProjection_ = XMMatrixOrthographicOffCenterLH(0.0, WindowsApp::GetInstance().WINDOW_WIDTH_,
-		WindowsApp::GetInstance().WINDOW_HEIGHT_, 0.0, 0.0f, 1.0f);
-
-	cbt->SetWorldMat(matW);
-	cbt->SetViewProjMat(view.matView_ * projection.matProjection_);
-	cbt->SetCameraPos(view.eye_);
+	//行列計算、セット
+	CalcAndSetMat(cbt, worldMat, camera);
 }
 
-void Sprite::UpdateClipping(const Vec2& leftTop, const Vec2& scale, const XMFLOAT2& UVleftTop, const XMFLOAT2& UVlength,
+void Sprite::UpdateClipping(Camera2D* camera, const Vec2& leftTop, const Vec2& scale, const XMFLOAT2& UVleftTop, const XMFLOAT2& UVlength,
 	const Vec4& color, uint64_t textureHandle, bool isPosLeftTop,
 	bool isReverseX, bool isReverseY, const Vec3& rotation, ConstBuffTransform* cbt, ConstBufferDataMaterial* constMapMaterial)
 {
@@ -194,6 +174,29 @@ void Sprite::UpdateClipping(const Vec2& leftTop, const Vec2& scale, const XMFLOA
 			leftTop.y + texTop + UVlength.y * (float)length.y * scale.y / 2.0f,
 			0 };
 	}
+
+	//行列計算、セット
+	CalcAndSetMat(cbt, worldMat, camera);
+}
+
+//--------------------------------------------------------
+XMMATRIX Sprite::GetCameraMatrix(Camera2D* camera)
+{
+	ViewMat view;
+	if (camera)
+	{
+		view.matView_ = camera->GetCameraMatrix();
+	}
+	else
+	{
+		view.matView_ = CameraManager::GetInstance().GetCamera2D()->GetCameraMatrix();
+	}
+
+	return view.matView_;
+}
+
+void Sprite::CalcAndSetMat(ConstBuffTransform* cbt, WorldMat& worldMat, Camera2D* camera)
+{
 	worldMat.CalcAllTreeMat();
 
 	XMMATRIX matW;
@@ -204,7 +207,7 @@ void Sprite::UpdateClipping(const Vec2& leftTop, const Vec2& scale, const XMFLOA
 
 	//view
 	ViewMat view;
-	view.matView_ = CameraManager::GetInstance().GetCamera2D()->GetCameraMatrix();
+	view.matView_ = GetCameraMatrix(camera);
 
 	//平行投影の射影行列生成
 	ProjectionMat projection;
