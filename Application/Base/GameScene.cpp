@@ -30,7 +30,7 @@ void GameScene::Initialize(void)
 	EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
 
 	//timer_.Start(kMaxGameTimer_);
-	timer_.Start(1000000000);
+	timer_.Start(50000);	//制限時間50000秒に
 
 	ParticleManagerL::GetInstance()->Init();
 
@@ -45,7 +45,9 @@ void GameScene::Initialize(void)
 
 void GameScene::Update(void)
 {
-	drawNum_.SetNum(num_++, { 0,0 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 1.0f);
+	//設定した (制限時間) - (経過時間)
+	uint32_t timer = (uint32_t)timer_.GetEndTime() - (uint32_t)timer_.GetElapsedTime();
+	drawNum_.SetNum(timer, {0,100}, {1.0f / 10.0f,1.0f}, {100,160}, 1.0f);	//残り秒数表示
 
 	if (PadInput::GetInstance().GetTriggerButton(VK_GAMEPAD_MENU))
 	{
@@ -171,7 +173,7 @@ void GameScene::DrawSprite()
 	player_->Draw();
 	EnemyManager::GetInstance().Draw();
 
-	//drawNum_.Draw();
+	drawNum_.Draw();
 
 	////DrawFormatString(0, 380, UtilL::Color::RED, "Scene: GAME");
 	////DrawFormatString(0, 0, UtilL::Color::WHITE, "[DEBUG]key-0で終了時間を10秒に変更。既に経過してる場合はGameScene終了");
