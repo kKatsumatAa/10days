@@ -31,8 +31,8 @@ Player::Player(CollisionManger* colMPtr, Stage* stagePtr) : IEntity(stagePtr), m
 	// 衝突callback反映
 	onCollision_ = std::bind(&Player::OnCollision, this);
 
-    // 判定がその場に残り続けちゃうから、絶対に引っかからない座標に転送するごり押し。 pos(-10万,-10万)
-    skewer_.SetPos({ -100000.f, -100000.f });
+	// 判定がその場に残り続けちゃうから、絶対に引っかからない座標に転送するごり押し。 pos(-10万,-10万)
+	skewer_.SetPos({ -100000.f, -100000.f });
 }
 
 Player::~Player(void)
@@ -40,6 +40,12 @@ Player::~Player(void)
 	// 登録の抹消
 	onCollision_ = nullptr;
 	colMPtr_->UnRegister(this);
+}
+
+void Player::Initialize()
+{
+	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isRadialBlur = false;
+	CameraManager::GetInstance().GetCamera2D()->EndFollow();
 }
 
 void Player::Update(void)
@@ -153,8 +159,8 @@ void Player::Draw(void)
 	{
 		// 攻撃範囲とdebugの表示
 #pragma region 薙ぎ払い攻撃の範囲を移動させてる
-        mow_.SetPos(position_);
-        mow_.SetRot(rotation_);
+		mow_.SetPos(position_);
+		mow_.SetRot(rotation_);
 #pragma endregion
 		mow_.Draw();
 
@@ -443,9 +449,13 @@ void Player::MowAttackUpdate(void)
 
 void Player::SkewerAttackUpdate(void)
 {
+	CameraManager::GetInstance().GetCamera2D()->BeginFollow(50.0f);
+	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isRadialBlur = true;
+
 	// isSkewerがfalseならMOVE状態へ遷移
 	if (skewer_.GetIsSkewer() == false)
 	{
+		PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isRadialBlur = false;
 		CameraManager::GetInstance().GetCamera2D()->EndFollow();
 		state_ = State::MOVE;
 		// 判定がその場に残り続けちゃうから、絶対に引っかからない座標に転送するごり押し。 pos(-10万,-10万)
@@ -453,10 +463,6 @@ void Player::SkewerAttackUpdate(void)
 		// 多分、ほぼ確実に通ると思うから規定フレーム後(ヒットストップ後）に通ると思うんで、スローモーション終了させてヒットストップも終了
 		if (frameCount_SkewerEndHitStop_)
 		{
-			CameraManager::GetInstance().GetCamera2D()->SetPos(position_);
-			uint32_t deadEneNum;
-			EnemyManager::GetInstance().GetDefeatedEnemiesNum(deadEneNum);
-			HitStopManager::GetInstance().BeginHitStop(20 + (uint32_t)(deadEneNum * 0.5f));
 			frameCount_SkewerEndHitStop_ = 0;
 			isSkewerEndShrink_ = true;
 		}
@@ -480,6 +486,13 @@ void Player::SkewerAttackUpdate(void)
 	else // 串刺し1フレーム後の座標 (+ 半径)が、ステージ外なら串刺し状態終了
 	{
 		skewer_.End(); // isSkewerをfalseにする。
+
+		CameraManager::GetInstance().GetCamera2D()->EndFollow();
+		if (EnemyManager::GetInstance().GetSkewerEnemiesNum())
+		{
+			HitStopManager::GetInstance().BeginHitStop(20 + (uint32_t)(EnemyManager::GetInstance().GetSkewerEnemiesNum() * 0.2f));
+		}
+
 		if (EnemyManager::GetInstance().GetSkewerEnemiesLength())
 		{
 			//GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
@@ -497,9 +510,10 @@ void Player::SkewerAttackUpdate(void)
 	pos4SwordUp_ = position_ + vec_move_ * Player::kMowSwordCenterDist_;
 	pos4SwordBottom_ = position_ + vec_move_ * Player::kMowSwordCenterDist_;
 
+
 	//カメラを遅れて追従
-	CameraManager::GetInstance().GetCamera2D()->BeginFollow(50.0f);
 	CameraManager::GetInstance().GetCamera2D()->SetPos(position_);
+	CameraManager::GetInstance().GetCamera2D()->Update();
 }
 
 void Player::OnCollision(void)

@@ -13,6 +13,10 @@
 
 void TutorialScene::Initialize(void)
 {
+    //ƒQ[ƒ€‚ÌƒJƒƒ‰
+    CameraManager::GetInstance().AddCamera2D("GameCamera");
+    CameraManager::GetInstance().SetUsingCamera2D("GameCamera");
+
     //BGMÄ¶
     Sound::GetInstance().PlayWave("play_BGM.wav", 1.0f, true);
 

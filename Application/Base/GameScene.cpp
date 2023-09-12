@@ -21,10 +21,6 @@ void GameScene::Initialize(void)
 {
 	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isGrayScale = false;
 
-	//‘S‘Ì‚ÌƒJƒƒ‰
-	CameraManager::GetInstance().AddCamera2D("GameCamera");
-	CameraManager::GetInstance().SetUsingCamera2D("GameCamera");
-
 	//BGMÄ¶
 	Sound::GetInstance().PlayWave("play_BGM.wav", 1.0f, true);
 
@@ -35,6 +31,7 @@ void GameScene::Initialize(void)
     player_->SetRot(0);
     player_->SetRad({ 10,0 });
     player_->SetVecMove({ 0,-1 });
+	player_->Initialize();
 
 	EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
 

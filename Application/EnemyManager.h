@@ -101,6 +101,8 @@ public:
 
 	//“|‚µ‚½“G‚Ì”(“|‚³‚ê‚½“G‚ª‚¢‚½‚çtrue)
 	bool GetDefeatedEnemiesNum(uint32_t& enemiesNum);
+	//“Ëi‚³‚ê‚Ä‚é“G‚Ì”
+	uint32_t GetSkewerEnemiesNum();
 
 public:
 	//“Ëi‚³‚ê‚Ä‚é“G‚Ì‰ò‚Ì”¼Œa

@@ -119,8 +119,14 @@ void CameraManager::Update()
 	//ƒJƒƒ‰Ø‚è‘Ö‚¦
 	ChangeCamera();
 
-	usingCamera_->Update();
-	usingCamera2D_->Update();
+	if (usingCamera_)
+	{
+		usingCamera_->Update();
+	}
+	if (usingCamera2D_)
+	{
+		usingCamera2D_->Update();
+	}
 }
 
 void CameraManager::ImguiUpdate()

@@ -179,10 +179,6 @@ void Enemy::OnCollision(void)
 		{
 			isSkewer_ = true;
 		}
-		else
-		{
-			Dead();
-		}
 
 	}
 

@@ -73,9 +73,9 @@ void SceneManager::Initialize()
 
 	//全体のカメラ
 	CameraManager::GetInstance().AddCamera2D("UICamera");
+	CameraManager::GetInstance().SetUsingCamera2D("UICamera");
 	Camera2D* camera = CameraManager::GetInstance().GetCamera2D("UICamera");
-	//camera->SetPos({ WindowsApp::WINDOW_WIDTH_ / 2.0f, WindowsApp::WINDOW_HEIGHT_ / 2.0f });
-	camera->Update();
+	camera->Initialize();
 
 	//サウンド読み込み
 	LoadAllSound();

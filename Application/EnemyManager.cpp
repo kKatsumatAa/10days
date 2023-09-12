@@ -505,6 +505,21 @@ bool EnemyManager::GetDefeatedEnemiesNum(uint32_t& enemiesNum)
 	return false;
 }
 
+uint32_t EnemyManager::GetSkewerEnemiesNum()
+{
+	uint32_t count = 0;
+
+	for (auto& enemies : combinedEnemiesArray_)
+	{
+		if (enemies->GetIsSkewer())
+		{
+			count += enemies->GetEnemiesNum();
+		}
+	}
+
+	return count;
+}
+
 float EnemyManager::GetSkewerEnemiesLength()
 {
 	for (auto& enemies : combinedEnemiesArray_)
