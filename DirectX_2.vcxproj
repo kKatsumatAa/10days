@@ -114,7 +114,6 @@
     <ClCompile Include="Application\Effect\GameVelocity\GameVelocityManager.cpp" />
     <ClCompile Include="Application\Effect\GameVelocity\GameVelocityState.cpp" />
     <ClCompile Include="Application\Effect\HitStop.cpp" />
-    <ClCompile Include="Application\Effect\HitStopManager.cpp" />
     <ClCompile Include="Application\Enemy.cpp" />
     <ClCompile Include="Application\EnemyManager.cpp" />
     <ClCompile Include="Application\IEntity.cpp" />
