@@ -118,13 +118,13 @@ private:
 	static D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle;
 
 	//定数バッファの生成
-	ComPtr < ID3D12Resource> constBuffMaterial_ = nullptr;
+	ComPtr<ID3D12Resource> constBuffMaterial_ = nullptr;
 	//定数バッファ用データ構造体（マテリアル）
 	//定数バッファのマッピング
 	ConstBufferDataMaterial* constMapMaterial_ = nullptr;
 
 	//スプライト
-	std::unique_ptr<Sprite> sprite_;
+	std::unique_ptr<Sprite> sprite_ = nullptr;
 
 	//ライト
 	static LightManager* sLightManager_;

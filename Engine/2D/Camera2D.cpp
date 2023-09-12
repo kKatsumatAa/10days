@@ -47,7 +47,7 @@ void Camera2D::FollowUpdate()
 		float length = fabsf((pos_ - oldPos_).GetLength());
 		Vec2 dir = (pos_ - oldPos_).GetNormalize();
 
-		followT_ = min(followT_ + length / followLengthMax_ * 1.0f / 15.0f, 1.0f);
+		followT_ = min(followT_ + length / followLengthMax_ / 9.0f, 1.0f);
 
 		Vec2 offset = LerpVec2({ 0,0 }, dir * followLengthMax_, EaseIn(followT_));
 

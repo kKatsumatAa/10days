@@ -107,20 +107,6 @@ PSOutput PS(Output input) : SV_TARGET
         isEffect = true;
     }
 
-//íMèÛ
-    if (isBarrelCurve)
-    {
-        float2 samplePoint = input.uv;
-        samplePoint -= float2(0.5, 0.5);
-        float distPower = pow(length(samplePoint), 0.1 * barrelCurvePow);
-        samplePoint *= float2(distPower, distPower);
-        samplePoint += float2(0.5, 0.5);
-        float4 Tex = tex0.Sample(smp, samplePoint);
-        ret = Tex;
-
-        isEffect = true;
-    }
-
 //ëñç∏ê¸
     if (isScanningLine)
     {
@@ -169,6 +155,20 @@ PSOutput PS(Output input) : SV_TARGET
         ret += tex0.Sample(smp, input.uv + float2(-2 * dx, 2 * dy)) * 0; // ç∂â∫
         ret += tex0.Sample(smp, input.uv + float2(0, 2 * dy)) * -1; // â∫ 
         ret += tex0.Sample(smp, input.uv + float2(2 * dx, 2 * dy)) * -2; // âE â∫ 
+
+        isEffect = true;
+    }
+    
+    //íMèÛ
+    if (isBarrelCurve)
+    {
+        float2 samplePoint = input.uv;
+        samplePoint -= float2(0.5, 0.5);
+        float distPower = pow(length(samplePoint), 0.1 * barrelCurvePow);
+        samplePoint *= float2(distPower, distPower);
+        samplePoint += float2(0.5, 0.5);
+        float4 Tex = tex0.Sample(smp, samplePoint);
+        ret = Tex;
 
         isEffect = true;
     }
