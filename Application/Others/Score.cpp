@@ -1,4 +1,5 @@
 #include "Score.h"
+#include "ImGuiManager.h"
 
 #include <fstream>
 #include <string>
@@ -25,6 +26,16 @@ void Score::Draw()
 {
 	//DrawFormatString(700, 0, 0xffffff, "SCORE:%d", nowScore_);
 	//DrawFormatString(700, 20, 0xffffff, "HIGHSCORE:%d", highScore_);
+}
+
+void Score::DrawImGui()
+{
+	ImGui::Begin("Score");
+
+	ImGui::Text("NowScore: %d", (int)nowScore_);
+	ImGui::Text("HighScore: %d", (int)highScore_);
+
+	ImGui::End();
 }
 
 void Score::HighScoreUpdate()

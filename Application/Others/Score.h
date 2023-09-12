@@ -10,6 +10,7 @@ public:
 	static void Add(uint32_t enemyNum);
 	//スコア描画
 	static void Draw();
+	static void DrawImGui();
 
 	//ハイスコアの更新(したか確認)
 	static void HighScoreUpdate();
