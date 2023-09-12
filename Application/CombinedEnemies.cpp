@@ -1,6 +1,8 @@
 #include "CombinedEnemies.h"
 #include "CombinedEnemiesState.h"
 #include "Util.h"
+#include "HitStop.h"
+#include "CameraManager.h"
 
 
 CombinedEnemies::~CombinedEnemies()
@@ -269,7 +271,7 @@ void CombinedEnemies::SkewerUpdate()
 	float enemyRadius = length_ / (float)enemiesNum_ / 2.0f;
 	centorPos_ = player_->GetPos4SwordBottom() + (player_->GetMoveVec() * (length_ / 2.0f + enemyRadius));
 
-	if (!player_->GetIsSkewer() && isSkewer_)
+	if (!player_->GetIsSkewer() && isSkewer_ && !HitStopManager::GetInstance().GetIsStop())
 	{
 		Dead();
 	}
