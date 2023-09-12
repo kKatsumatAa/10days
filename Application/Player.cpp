@@ -441,6 +441,7 @@ void Player::SkewerAttackUpdate(void)
 	// isSkewerがfalseならMOVE状態へ遷移
 	if (skewer_.GetIsSkewer() == false)
 	{
+        CameraManager::GetInstance().GetCamera2D()->EndFollow();
 		state_ = State::MOVE;
 		// 判定がその場に残り続けちゃうから、絶対に引っかからない座標に転送するごり押し。 pos(-10万,-10万)
 		skewer_.SetPos({ -100000.f, -100000.f });
@@ -452,7 +453,6 @@ void Player::SkewerAttackUpdate(void)
 			EnemyManager::GetInstance().GetDefeatedEnemiesNum(deadEneNum);
 			HitStopManager::GetInstance().BeginHitStop(3 + deadEneNum * 2);
 			frameCount_SkewerEndHitStop_ = 0;
-			CameraManager::GetInstance().GetCamera2D()->EndFollow();
 			isSkewerEndShrink_ = true;
 		}
 		// 関数終了
