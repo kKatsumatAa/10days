@@ -97,6 +97,7 @@ private:
 
 public:
 	void AddEnemy(std::unique_ptr<Enemy>enemy);
+	void AddEnemy(const Vec2& pos, uint32_t combinedNum);
 
 	//“|‚µ‚½“G‚Ì”(“|‚³‚ê‚½“G‚ª‚¢‚½‚çtrue)
 	bool GetDefeatedEnemiesNum(uint32_t& enemiesNum);

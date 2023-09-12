@@ -459,6 +459,10 @@ void CombinedEnemies::AddEnemy(std::unique_ptr<Enemy> enemy)
 	enemiesNum_++;
 	//合体フラグオフ
 	AllEnemiesDockingEnd();
+	if (enemies_.size() == 1)
+	{
+		centorPos_ = enemies_[0]->GetPos();
+	}
 
 	//どちらかが薙ぎ払われてたら
 	/*else*/ if (GetIsMowDown())
