@@ -27,6 +27,7 @@ void UI::AllLoad()
 	ui_[(uint32_t)UIType::Abutton] = TextureManager::LoadGraph("Abutton.png");
 	ui_[(uint32_t)UIType::Bbutton] = TextureManager::LoadGraph("Bbutton.png");
 	ui_[(uint32_t)UIType::Rbutton] = TextureManager::LoadGraph("Rbutton.png");
+	ui_[(uint32_t)UIType::Menubutton] = TextureManager::LoadGraph("Menubutton.png");
 	ui_[(uint32_t)UIType::Lstick] = TextureManager::LoadGraph("Lstick.png");
 	ui_[(uint32_t)UIType::Move] = TextureManager::LoadGraph("move.png");
 	ui_[(uint32_t)UIType::Attack] = TextureManager::LoadGraph("attack.png");
@@ -34,6 +35,7 @@ void UI::AllLoad()
 	ui_[(uint32_t)UIType::Pause] = TextureManager::LoadGraph("pause.png");
 	ui_[(uint32_t)UIType::Retry] = TextureManager::LoadGraph("retry.png");
 	ui_[(uint32_t)UIType::ToTitle] = TextureManager::LoadGraph("toTitle.png");
+	ui_[(uint32_t)UIType::Time] = TextureManager::LoadGraph("time.png");
 	ui_[(uint32_t)UIType::NowScore] = TextureManager::LoadGraph("score.png");
 	ui_[(uint32_t)UIType::HighScore] = TextureManager::LoadGraph("highScore.png");
 	ui_[(uint32_t)UIType::Makimono] = TextureManager::LoadGraph("makimono.png");

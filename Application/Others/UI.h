@@ -17,6 +17,7 @@ enum class UIType
 	Pause,		//ポーズ
 	Retry,		//リトライ
 	ToTitle,	//タイトルへ
+	Time,		//残り時間
 	NowScore,	//今回の記録
 	HighScore,	//最高記録
 	Makimono,	//巻物

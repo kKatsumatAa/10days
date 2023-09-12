@@ -27,7 +27,7 @@ public:
     };
 
     // 定数
-    const int32_t kMaxFrameSkipTutorial_{ 210 }; // pad-B何フレーム長押しでチュートリアルをスキップするか
+    const int32_t kMaxFrameSkipTutorial_{ 100 }; // pad-B何フレーム長押しでチュートリアルをスキップするか
     const int32_t kMaxFrame4StartTrans_{ 50 }; // 透明化しはじめるまで何フレームかかるか
     const int32_t kMaxFrameTransColor_{ 90 }; // 透明になるまで何フレームかかるか
     const int32_t kIntervalNextSign_{ 50 }; // 透明化してから次の看板表示まで何フレーム待つか
