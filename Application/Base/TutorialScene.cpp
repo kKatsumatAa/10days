@@ -473,7 +473,10 @@ void TutorialScene::DrawSprite(void)
     EnemyManager::GetInstance().Draw();
 
     ParticleManagerL::GetInstance()->Draw();
+}
 
+void TutorialScene::DrawSprite2(void)
+{
     Score::GetInstance()->Draw();
 
     UI::GetInstance()->Draw(UIType::Makimono);
@@ -486,10 +489,6 @@ void TutorialScene::DrawSprite(void)
     UI::GetInstance()->Draw(UIType::Abutton);
     UI::GetInstance()->Draw(UIType::Skewer);
 
-}
-
-void TutorialScene::DrawSprite2(void)
-{
     if (progressNum_ == 1)
     {
         UI::GetInstance()->Draw(UIType::Tutorial1);

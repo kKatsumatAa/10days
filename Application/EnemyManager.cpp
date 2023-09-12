@@ -21,6 +21,7 @@ void EnemyManager::Initialize(Player* player, Stage* stage)
 	combinedEnemiesArray_.clear();
 
 	enemyTexHandle_ = TextureManager::LoadGraph("enemy.png");
+	BigEnemyTexHandle_ = TextureManager::LoadGraph("big_enemy.png");
 }
 
 void EnemyManager::SaveMowDownEnemies()
@@ -479,7 +480,8 @@ void EnemyManager::AddEnemy(const Vec2& pos, uint32_t combinedNum)
 
 	for (uint32_t i = 0; i < combinedNum; i++)
 	{
-		std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>(CollisionManger::GetInstance(), player_, stage_, enemyTexHandle_);
+		std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>(CollisionManger::GetInstance(), player_, 
+			stage_, enemyTexHandle_, BigEnemyTexHandle_);
 		enemy->SetPos(pos);
 		Vec2 dir = player_->GetPos() - pos;
 		enemy->SetRot(atan2f(dir.y, dir.x));

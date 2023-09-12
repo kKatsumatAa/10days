@@ -207,7 +207,7 @@ void Player::Draw(void)
 			pos4SwordUp_ += vec_move_ * (6 + EnemyManager::GetInstance().GetSkewerEnemiesLength());
 			pos4SwordBottom_ -= vec_move_ * 12;
 			//突進パーティクル
-			ParticleManagerL::GetInstance()->SkewerEffect(pos4SwordUp_, -vec_move_);
+			ParticleManagerL::GetInstance()->SkewerEffect(position_, -vec_move_);
 
 			dist_p4su2p4sb_ = EnemyManager::GetInstance().GetSkewerEnemiesLength() - 18;
 		}

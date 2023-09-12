@@ -15,8 +15,8 @@ const float Enemy::kPushBackDist_ = 2.0f;
 const float Enemy::kPngScale_ = 0.07f;
 const float Enemy::KRadius_ = 16.f;
 
-Enemy::Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle)
-	: IEntity(stagePtr), playerPtr_(playerPtr), colMPtr_(colMPtr), png_enemy_(texHandle)
+Enemy::Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle, uint64_t bigTexHandle)
+	: IEntity(stagePtr), playerPtr_(playerPtr), colMPtr_(colMPtr), png_enemy_(texHandle), png_enemy_big_(bigTexHandle)
 {
 	// 衝突マネージャへの登録
 	colMPtr->Register(this);
@@ -139,11 +139,17 @@ void Enemy::Draw(void)
 	// 生きてるなら
 	if (isAlive_)
 	{
+		uint64_t texHandle = png_enemy_;
+		if (isBigDango_)
+		{
+			texHandle = png_enemy_big_;
+		}
+
 		// 縮み状態なら
 		if (frameCount_move_ == 0)
 		{
 			// 敵の色は通常色に
-			DrawBoxSprite(nullptr, png_enemy_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+			DrawBoxSprite(nullptr, texHandle, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
 			/*DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, UtilL::Color::WHITE, false, 1);*/
 		}
@@ -152,7 +158,7 @@ void Enemy::Draw(void)
 		if (frameCount_wait_ >= kMoveInterval_)
 		{
 			// 敵の色は緑色に
-			DrawBoxSprite(nullptr, png_enemy_, { 0.1f,1.0f,0.1f,1.0f }, { 0.5f,0.5f });
+			DrawBoxSprite(nullptr, texHandle, { 0.1f,1.0f,0.1f,1.0f }, { 0.5f,0.5f });
 			/*DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, UtilL::Color::GREEN, false, 1);*/
 		}
 	}
