@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <assert.h>
 
 uint32_t Score::nowScore_ = 0;
 uint32_t Score::highScore_ = 0;
@@ -55,11 +56,11 @@ void Score::LoadScore()
 	std::ifstream reading_file;
 
 	reading_file.open("./Resources/data/highScore.txt");
-	////ファイルオープン失敗をチェック
-	//if (reading_file.fail())
-	//{
-	//	assert(0);
-	//}
+	//ファイルオープン失敗をチェック
+	if (reading_file.fail())
+	{
+		assert(0);
+	}
 
 	std::string line;
 
