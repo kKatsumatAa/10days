@@ -34,7 +34,7 @@ void TitleScene::Update(void)
 		Sound::GetInstance().PlayWave("sceneChange_SE.wav");
 		//BGMストップ
 		Sound::GetInstance().StopWave("title_BGM.wav");
-		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
+		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);
 	}
 
 	// debag用key-Rで切替
@@ -44,7 +44,7 @@ void TitleScene::Update(void)
 		Sound::GetInstance().PlayWave("sceneChange_SE.wav");
 		//BGMストップ
 		Sound::GetInstance().StopWave("title_BGM.wav");
-		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
+		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);
 	}
 	if (KeyboardInput::GetInstance().KeyTrigger(DIK_R))
 	{

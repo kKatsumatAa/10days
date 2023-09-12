@@ -426,6 +426,9 @@
     <ClCompile Include="Application\Others\UI.cpp">
       <Filter>ソース ファイル\Application\Others</Filter>
     </ClCompile>
+    <ClCompile Include="Application\Base\TutorialScene.cpp">
+      <Filter>ソース ファイル\Application\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Util\Shake.h">
@@ -721,6 +724,9 @@
     </ClInclude>
     <ClInclude Include="Application\Others\UI.h">
       <Filter>ヘッダー ファイル\Application\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Base\TutorialScene.h">
+      <Filter>ヘッダー ファイル\Application\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
