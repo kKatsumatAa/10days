@@ -38,7 +38,7 @@ void GameScene::Initialize(void)
 	EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
 
 	//timer_.Start(kMaxGameTimer_);
-	timer_.Start(50000);	//制限時間50000秒に
+	timer_.Start(60);	//制限時間50000秒に
 
 	ParticleManagerL::GetInstance()->Init();
 
@@ -50,28 +50,39 @@ void GameScene::Initialize(void)
 	Score::GetInstance()->Init();
 	Update();
 
-	float opeUIPlusY = 280.0f;	//操作UIのY座標ずらす用
+	float opeUIPlusY = 260.0f;	//操作UIのY座標ずらす用
 	UI::GetInstance()->SetPos(UIType::Makimono, { 0.f,0.f });
 	UI::GetInstance()->SetColor(UIType::Makimono, { 0.7f,0.7f,0.7f,1.f });
 
-	UI::GetInstance()->SetPos(UIType::Lstick, { 100.f,100.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Time, { 100.f,180.f });
+	UI::GetInstance()->SetSize(UIType::Time, 0.2f);
+	UI::GetInstance()->SetAncorPoint(UIType::Time, { 0.5f,0.5f });
+
+	UI::GetInstance()->SetPos(UIType::Menubutton, { 100.f,0.f + opeUIPlusY });
+	UI::GetInstance()->SetSize(UIType::Menubutton, 0.3f);
+	UI::GetInstance()->SetAncorPoint(UIType::Menubutton, { 0.5f,0.5f });
+	UI::GetInstance()->SetPos(UIType::Pause, { 100.f,50.f + opeUIPlusY });
+	UI::GetInstance()->SetSize(UIType::Pause, 0.21f);
+	UI::GetInstance()->SetAncorPoint(UIType::Pause, { 0.5f,0.5f });
+
+	UI::GetInstance()->SetPos(UIType::Lstick, { 100.f,120.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Lstick, 0.3f);
 	UI::GetInstance()->SetAncorPoint(UIType::Lstick, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Move, { 100.f,150.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Move, { 100.f,170.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Move, 0.2f);
 	UI::GetInstance()->SetAncorPoint(UIType::Move, { 0.5f,0.5f });
 
-	UI::GetInstance()->SetPos(UIType::Rbutton, { 100.f,220.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Rbutton, { 100.f,240.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Rbutton, 0.3f);
 	UI::GetInstance()->SetAncorPoint(UIType::Rbutton, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Attack, { 100.f,270.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Attack, { 100.f,290.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Attack, 0.2f);
 	UI::GetInstance()->SetAncorPoint(UIType::Attack, { 0.5f,0.5f });
 
-	UI::GetInstance()->SetPos(UIType::Abutton, { 100.f,340.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Abutton, { 100.f,360.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Abutton, 0.3f);
 	UI::GetInstance()->SetAncorPoint(UIType::Abutton, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Skewer, { 100.f,390.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Skewer, { 100.f,410.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Skewer, 0.2f);
 	UI::GetInstance()->SetAncorPoint(UIType::Skewer, { 0.5f,0.5f });
 
@@ -87,7 +98,7 @@ void GameScene::Update(void)
 {
 	//設定した (制限時間) - (経過時間)
 	uint32_t timer = (uint32_t)timer_.GetEndTime() - (uint32_t)timer_.GetElapsedTime();
-	drawNum_.SetNum(timer, { 0,150 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 1.0f);	//残り秒数表示
+	drawNum_.SetNum(timer, { 35,50 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.7f);	//残り秒数表示
 
 	if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_START))
 	{
@@ -253,11 +264,14 @@ void GameScene::DrawSprite()
 
 void GameScene::DrawSprite2()
 {
-	drawNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
 
 	Score::GetInstance()->Draw();
 
 	UI::GetInstance()->Draw(UIType::Makimono);
+	drawNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
+	UI::GetInstance()->Draw(UIType::Time);
+	UI::GetInstance()->Draw(UIType::Menubutton);
+	UI::GetInstance()->Draw(UIType::Pause);
 	UI::GetInstance()->Draw(UIType::Lstick);
 	UI::GetInstance()->Draw(UIType::Move);
 	UI::GetInstance()->Draw(UIType::Rbutton);
