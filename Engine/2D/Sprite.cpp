@@ -4,6 +4,11 @@
 using namespace DirectX;
 
 
+Sprite::~Sprite()
+{
+	vbView_.SizeInBytes = 0;
+}
+
 void Sprite::Initialize()
 {
 	//sprite—p

@@ -270,6 +270,29 @@ void CombinedEnemies::EnemiesMowDownTriggerUpdate()
 	}
 }
 
+void CombinedEnemies::BigDangoUpdate()
+{
+	if (enemiesNum_ > 1)
+	{
+		for (auto itr = enemies_.begin(); itr != enemies_.end(); itr++)
+		{
+			if (enemies_.size() == 1)
+			{
+				break;
+			}
+
+			enemies_.erase(itr);
+			itr = enemies_.begin();
+		}
+
+		enemiesNum_ = 1;
+
+		enemies_[0]->SetIsBigDango(true);
+		enemies_[0]->SetRad({ length * 2.0f,0 });
+		scaleExtend_ = length / 8.0f;
+	}
+}
+
 //-------------------------------------------------
 void CombinedEnemies::Dead()
 {
@@ -290,13 +313,8 @@ void CombinedEnemies::EnemiesPosUpdate()
 	if (enemiesNum_ == 1 && !GetIsMowDownTriggerAnyEnemy())
 	{
 		centorPos_ = enemies_[0]->GetPos();
-		//ステージ内に収める
-		//SetInStageEnemiesPos();
 		return;
 	}
-
-	//ステージ内に収める
-	//SetInStageEnemiesPos();
 
 	//中央のインデックス
 	float centorIndex = (float)enemiesNum_ / 2.0f - 0.5f;
@@ -315,7 +333,7 @@ void CombinedEnemies::EnemiesScaleReset()
 {
 	for (auto& enemy : enemies_)
 	{
-		enemy->SetScale({ 1.0f,1.0f });
+		enemy->SetScale({ scaleExtend_,scaleExtend_ });
 	}
 }
 
@@ -353,7 +371,7 @@ void CombinedEnemies::SetScaleSinRot(float minS, float maxS, float rate, int32_t
 		scale.x = min(max(scale.x, minS), maxS);
 		scale.y = min(max(scale.y, minS), maxS);
 
-		enemy->SetScale(scale);
+		enemy->SetScale(scale * scaleExtend_);
 		count++;
 	}
 }
@@ -367,13 +385,15 @@ void CombinedEnemies::SetScale(const Vec2& scale)
 		scaleL += {GetRand(-scale.x * 0.1f, scale.x * 0.1f),
 			GetRand(-scale.y * 0.1f, scale.y * 0.1f)};
 
-		enemy->SetScale(scaleL);
+		enemy->SetScale(scaleL * scaleExtend_);
 	}
 }
 
 //------------------------------------------------------------------------------
 void CombinedEnemies::Update()
 {
+	BigDangoUpdate();
+
 	//薙ぎ払いの更新
 	//AnyEnemyMowDownUpdate();
 	//突進の更新

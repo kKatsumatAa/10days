@@ -42,6 +42,8 @@ private:
 	// 薙ぎ払われたか
 	bool isMowDown_ = false;
 	bool isMowDownTrigger_ = false;
+	//デカ団子
+	bool isBigDango_ = false;
 	Vec2 vec_mow_{}; // 吹っ飛ばされる方向
 	// 吹き飛ばされる距離だけちゃんと移動したか計測する変数
 	//float tortalMowDist{};
@@ -63,6 +65,7 @@ public:
 	void SetIsMowDownTrigger(bool isMowDownTrigger) { isMowDownTrigger_ = isMowDownTrigger; }
 	void SetIsDocking(bool isDocking) { isDocking_ = isDocking; }
 	void SetIsSkewer(bool isSkewer) { isSkewer_ = isSkewer; }
+	void SetIsBigDango(bool isBigDango) { isBigDango_ = isBigDango; }
 	void SetScale(const Vec2& scale) { scale_ = scale; }
 
 	// getter
@@ -72,6 +75,7 @@ public:
 	bool GetIsDocking() { return isDocking_; }
 	const Vec2& GetMowDownVec() { return vec_mow_; }
 	bool GetIsSkewer(void) { return isSkewer_; }
+	bool GetIsBigDango(void) { return isBigDango_; }
 	const Vec2& GetScale() { return scale_; }
 
 public:

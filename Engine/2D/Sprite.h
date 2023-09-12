@@ -30,6 +30,8 @@ public:
 	D3D12_VERTEX_BUFFER_VIEW vbView_{};
 
 public:
+	~Sprite();
+
 	void Initialize();
 	void SpriteDraw();
 
