@@ -50,6 +50,10 @@ private:
 	const float BIG_DANGO_EXTEND_ = Enemy::KRadius_ * 2.0f * 7.0f;
 	const float BIG_SCALE_EXTEND_ = 1.0f / 32.0f;
 
+public:
+	//
+	static const uint32_t TO_BIG_NUM_ = 8;
+
 
 public:
 	~CombinedEnemies();
@@ -129,6 +133,7 @@ public:
 	bool GetIsMowDown() { return isMowDown_; }
 	bool GetIsSkewer() { return isSkewer_; }
 	bool GetIsAlive() { return isAlive_; }
+	bool GetIsBigDango();
 
 	const Vec2& GetTargetPos() { return player_->GetPos(); }
 

@@ -410,6 +410,10 @@ void EnemyManager::Update()
 		{
 			//“|‚³‚ê‚½“G‚Ì”—p
 			defeatedEnemiesNum_ = itr->get()->GetEnemiesNum();
+			if (itr->get()->GetIsBigDango())
+			{
+				defeatedEnemiesNum_ = CombinedEnemies::TO_BIG_NUM_ * 2 + 1;
+			}
 			isDefeatedEnemies_ = true;
 			//ƒXƒRƒA‰ÁZ
 			Score::GetInstance()->Add(defeatedEnemiesNum_);
