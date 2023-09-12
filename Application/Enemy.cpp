@@ -288,11 +288,6 @@ void Enemy::Dead()
 {
 	if (isAlive_)
 	{
-		//“¯Žž‚É–Â‚ç‚È‚¢‚æ‚¤‚É
-		if (Sound::GetInstance().CheckPlayingWave("brake_SE.wav"))
-		{
-			Sound::GetInstance().PlayWave("brake_SE.wav");
-		}
 		ParticleManagerL::GetInstance()->EnemyDeadEffect(position_);
 	}
 	isAlive_ = false;

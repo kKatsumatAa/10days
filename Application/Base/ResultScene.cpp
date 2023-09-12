@@ -17,7 +17,7 @@ void ResultScene::Initialize(void)
 	//BGMÄ¶
 	Sound::GetInstance().PlayWave("result_BGM.wav", 1.0f, true);
 
-	Score::SaveScore();
+	Score::GetInstance()->SaveScore();
 }
 
 void ResultScene::Update(void)
@@ -54,7 +54,7 @@ void ResultScene::DrawSprite()
 	//DrawFormatString(0, 380, UtilL::Color::RED, "Scene: RESULT");
 	//DrawFormatString(0, 0, UtilL::Color::WHITE, "pad-A or key-R[DEBUG]‚Åtitle");
 
-	Score::Draw();
+	Score::GetInstance()->Draw();
 }
 
 void ResultScene::DrawImgui()

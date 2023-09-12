@@ -6,12 +6,17 @@
 #include <sstream>
 #include <assert.h>
 
-uint32_t Score::nowScore_ = 0;
-uint32_t Score::highScore_ = 0;
+Score* Score::GetInstance()
+{
+	static Score instance;
+	return &instance;
+}
 
 void Score::Init()
 {
 	nowScore_ = 0;
+	drawNum_.Initialize(TextureManager::LoadGraph("number.png"));
+	drawNum_.SetNum(nowScore_, { 0,0 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 1.0f);
 	//ハイスコアの読み込み//
 }
 
@@ -20,12 +25,12 @@ void Score::Add(uint32_t enemyNum)
 	uint32_t score;
 	score = (uint32_t)((float)(enemyNum * 500) * (0.9f + 0.1f * (float)enemyNum));
 	nowScore_ += score;
+	drawNum_.SetNum(nowScore_, { 0,0 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 1.0f);
 }
 
 void Score::Draw()
 {
-	//DrawFormatString(700, 0, 0xffffff, "SCORE:%d", nowScore_);
-	//DrawFormatString(700, 20, 0xffffff, "HIGHSCORE:%d", highScore_);
+	drawNum_.Draw();
 }
 
 void Score::DrawImGui()
