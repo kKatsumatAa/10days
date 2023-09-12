@@ -11,6 +11,7 @@
 #include "GameVelocityState.h"
 #include "HitStop.h"
 #include "CameraManager.h"
+#include "UI.h"
 
 void GameScene::Finalize()
 {
@@ -46,6 +47,22 @@ void GameScene::Initialize(void)
 
 	Score::GetInstance()->Init();
 	Update();
+
+	UI::GetInstance()->SetPos(UIType::Lstick, { 30.f,30.f });
+	UI::GetInstance()->SetSize(UIType::Lstick, 0.2f);
+	UI::GetInstance()->SetPos(UIType::Move, { 100.f,30.f });
+	UI::GetInstance()->SetSize(UIType::Move, 0.2f);
+
+	UI::GetInstance()->SetPos(UIType::Rbutton, { 30.f,80.f });
+	UI::GetInstance()->SetSize(UIType::Rbutton, 0.2f);
+	UI::GetInstance()->SetPos(UIType::Attack, { 100.f,80.f });
+	UI::GetInstance()->SetSize(UIType::Attack, 0.2f);
+
+	UI::GetInstance()->SetPos(UIType::Abutton, { 30.f,130.f });
+	UI::GetInstance()->SetSize(UIType::Abutton, 0.2f);
+	UI::GetInstance()->SetAncorPoint(UIType::Abutton, {0.f,0.f});
+	UI::GetInstance()->SetPos(UIType::Skewer, { 100.f,130.f });
+	UI::GetInstance()->SetSize(UIType::Skewer, 0.2f);
 }
 
 void GameScene::Update(void)
@@ -180,12 +197,14 @@ void GameScene::DrawSprite()
 
 	drawNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
 
-	////DrawFormatString(0, 380, UtilL::Color::RED, "Scene: GAME");
-	////DrawFormatString(0, 0, UtilL::Color::WHITE, "[DEBUG]key-0で終了時間を10秒に変更。既に経過してる場合はGameScene終了");
-	////DrawFormatString(0, 20, UtilL::Color::WHITE, "time: %f", timer_.GetElapsedTime());
-	////DrawPad();
-
 	Score::GetInstance()->Draw();
+
+	UI::GetInstance()->Draw(UIType::Lstick);
+	UI::GetInstance()->Draw(UIType::Move);
+	UI::GetInstance()->Draw(UIType::Rbutton);
+	UI::GetInstance()->Draw(UIType::Attack);
+	UI::GetInstance()->Draw(UIType::Abutton);
+	UI::GetInstance()->Draw(UIType::Skewer);
 }
 
 void GameScene::DrawImgui()

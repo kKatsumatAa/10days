@@ -34,9 +34,9 @@ enum class UIType
 class UI
 {
 private:
-	std::vector<Object> objUI_{ (uint32_t)UIType::Max };	//UI描画用オブジェクト群
-	std::vector<uint64_t> ui_{ (uint32_t)UIType::Max };		//UIテクスチャハンドル群
-	std::vector<Vec2> ancorPoint_{ (uint32_t)UIType::Max };	//UI描画基準点群
+	std::vector<Object> objUI_{((uint32_t)UIType::Max)};		//UI描画用オブジェクト群
+	std::vector<uint64_t> ui_{};		//UIテクスチャハンドル群
+	std::vector<Vec2> ancorPoint_{};	//UI描画基準点群
 
 public:
 	UI();
