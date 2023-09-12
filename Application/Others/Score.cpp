@@ -19,7 +19,7 @@ void Score::Init()
 	drawNum_.Initialize(TextureManager::LoadGraph("number.png"));
 	drawNum_.SetNum(nowScore_, { (float)(1250 - 60),20.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.6f);
 	drawNumHigh_.Initialize(TextureManager::LoadGraph("number.png"));
-	drawNum_.SetNum(highScore_, { (float)(1250 - 60),20.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.6f);
+	drawNumHigh_.SetNum(highScore_, { (float)(1250 - 60),20.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.6f);
 }
 
 void Score::Add(uint32_t enemyNum)

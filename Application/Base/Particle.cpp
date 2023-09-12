@@ -23,6 +23,7 @@ void Emitter::Update(bool isGravity, float velocity)
 	{
 		if (!particles_[i].GetIsAlive())
 		{
+			particles_[i].obj_.release();
 			particles_.erase(particles_.begin() + i);
 			i = (size_t)-1;
 		}
