@@ -26,7 +26,19 @@ void Score::Add(uint32_t enemyNum)
 	uint32_t score;
 	score = (uint32_t)((float)(enemyNum * 500) * (0.9f + 0.1f * (float)enemyNum));
 	nowScore_ += score;
-	drawNum_.SetNum(nowScore_, { 0,0 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 1.0f);
+
+	//最大桁数求める
+	uint32_t digit = 0;	//桁数
+	uint32_t result = nowScore_;	//値が変更されないように格納
+
+	while (result > 0)
+	{
+		result /= 10;
+		digit++;
+	}
+
+	//scale(第5引数) * 画像の大きさ = 桁ごとにずらす値(digitに掛けてる値)
+	drawNum_.SetNum(nowScore_, { (float)(1250 - digit * 60),20.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.6f);
 }
 
 void Score::Draw()

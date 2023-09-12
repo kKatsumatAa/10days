@@ -428,6 +428,7 @@ void EnemyManager::Update()
 			}
 		}
 	}
+	defeatedEnemiesNum_ = 0;
 
 	//“ã‚¬•¥‚í‚ê‚Ä‚éÅ’†‚Ì•Û‘¶‚µ‚Ä‚¨‚­XV
 	SaveMowDownEnemies();
