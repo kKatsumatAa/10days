@@ -181,6 +181,16 @@ void GameScene::Update(void)
 
 }
 
+void GameScene::GameSceneUpdate(void)
+{
+    stage_->Update();
+
+    player_->Update();
+    EnemyManager::GetInstance().Update();
+
+    ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
+}
+
 void GameScene::Draw(void)
 {
 
