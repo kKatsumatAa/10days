@@ -12,6 +12,7 @@
 #include "GameVelocityState.h"
 #include "HitStop.h"
 #include "CameraManager.h"
+#include "ParticleManager.h"
 
 
 const float Player::kMowDist_{ 15.f };// 薙ぎ払いで吹き飛ばす距離 こっち変更するならenemy.hの割合も弄らないと瞬間移動になっちまう
@@ -193,7 +194,8 @@ void Player::Draw(void)
 			pos4Sword_ += vec_move_ * 5;
 			pos4SwordUp_ += vec_move_ * (6 + EnemyManager::GetInstance().GetSkewerEnemiesLength());
 			pos4SwordBottom_ -= vec_move_ * 12;
-
+			//突進パーティクル
+			ParticleManagerL::GetInstance()->SkewerEffect(pos4SwordUp_, -vec_move_);
 		}
 
 		// 串
@@ -330,6 +332,7 @@ void Player::MoveUpdate(void)
 			// 離した瞬間に初期化
 			frameCount_4Skewer_ = 0;
 			isSkewerScreenBlack4SceneM_ = false;
+
 		}
 	}
 

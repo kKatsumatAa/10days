@@ -291,7 +291,7 @@ void Enemy::Dead()
 		{
 			Sound::GetInstance().PlayWave("brake_SE.wav");
 		}
-		ParticleManagerL::GetInstance()->BossHitEnemyEffect(position_);
+		ParticleManagerL::GetInstance()->EnemyDeadEffect(position_);
 		Score::Add(5000);
 	}
 	isAlive_ = false;

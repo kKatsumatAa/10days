@@ -9,11 +9,14 @@ private:
 
 private:
 	// パーティクルのインスタンス
-	Emitter enemyDeadParticle;		//敵死んだ時
+	Emitter enemyDeadParticle_;		//敵死んだ時
+	Emitter skewerParticle_;		//突進時
 
 public:
 	//ボスに敵を当てた時
-	void BossHitEnemyEffect(const Vec2& pos);
+	void EnemyDeadEffect(const Vec2& pos);
+	//ボスに敵を当てた時
+	void SkewerEffect(const Vec2& pos, const Vec2& velo);
 
 public:
 	static ParticleManagerL* GetInstance();
