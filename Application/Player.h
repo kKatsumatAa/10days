@@ -47,6 +47,7 @@ public:
     Player(CollisionManger* colMPtr, Stage* stagePtr);
     ~Player(void) override;
 
+    void Initialize();
     void Update(void) override;
     void Draw(void) override;
 

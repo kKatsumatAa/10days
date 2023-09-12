@@ -18,14 +18,6 @@ protected:
 	CombinedEnemies* enemies_ = nullptr;
 	//
 	std::string nextStateName_;
-protected:
-	//ぶるんのパラメータ
-	//最小スケール
-	float minScale_ = 1.0f;
-	//最大スケール
-	float maxScale_ = 1.0f;
-	//どのくらいのスピードでやるか
-	float shakeRate_ = 1.0f;
 
 public:
 	virtual ~ICombinedEnemiesState() { ; }
@@ -50,6 +42,15 @@ class CombinedEnemiesStateMoveMowDown : public ICombinedEnemiesState
 private:
 	Vec2 direction_ = { 0,0 };
 
+protected:
+	//ぶるんのパラメータ
+	//最小スケール
+	float minScale_ = 0.6f;
+	//最大スケール
+	float maxScale_ = 1.1f;
+	//どのくらいのスピードでやるか
+	float shakeRate_ = 0.9f;
+
 public:
 	void Initialize()override;
 	void Update()override;
@@ -61,6 +62,15 @@ class CombinedEnemiesStateSkewer : public ICombinedEnemiesState
 private:
 	Vec2 direction_ = { 0,0 };
 
+protected:
+	//ぶるんのパラメータ
+	//最小スケール
+	float minScale_ = 0.8f;
+	//最大スケール
+	float maxScale_ = 1.3f;
+	//どのくらいのスピードでやるか
+	float shakeRate_ = 0.2f;
+
 public:
 	void Initialize()override;
 	void Update()override;
@@ -69,7 +79,14 @@ public:
 //合体後
 class CombinedEnemiesStateAfterCombined : public ICombinedEnemiesState
 {
-private:
+protected:
+	//ぶるんのパラメータ
+	//最小スケール
+	float minScale_ = 0.5f;
+	//最大スケール
+	float maxScale_ = 1.2f;
+	//どのくらいのスピードでやるか
+	float shakeRate_ = 0.8f;
 
 public:
 	void Initialize()override;
@@ -79,7 +96,14 @@ public:
 //待機中
 class CombinedEnemiesStateMoveWait : public ICombinedEnemiesState
 {
-private:
+protected:
+	//ぶるんのパラメータ
+	//最小スケール
+	float minScale_ = 0.7f;
+	//最大スケール
+	float maxScale_ = 1.1f;
+	//どのくらいのスピードでやるか
+	float shakeRate_ = 0.7f;
 
 public:
 	void Initialize()override;
@@ -89,7 +113,6 @@ public:
 //縮み中
 class CombinedEnemiesStateShrink : public ICombinedEnemiesState
 {
-private:
 
 public:
 	void Initialize()override;
@@ -99,7 +122,6 @@ public:
 //縮んで待ってる
 class CombinedEnemiesStateWaitStretch : public ICombinedEnemiesState
 {
-private:
 
 public:
 	void Initialize()override;
@@ -109,7 +131,6 @@ public:
 //伸び中
 class CombinedEnemiesStateStretch : public ICombinedEnemiesState
 {
-private:
 
 public:
 	void Initialize()override;

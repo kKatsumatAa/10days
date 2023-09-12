@@ -113,7 +113,7 @@ void CombinedEnemiesStateMoveMowDown::Update()
 		enemies_->SetCentorPos({ lerp(centorPT.x, centorPT.x + direction_.x * Player::kMowDist_ * timerMax_,Math::Ease::EaseOutCirc(t,0,1.0f)),
 			lerp(centorPT.y, centorPT.y + direction_.y * Player::kMowDist_ * timerMax_, Math::Ease::EaseOutCirc(t,0,1.0f)) });
 
-		ShakeUpdate(0.6f, 1.1f, 0.9f, t);
+		ShakeUpdate(minScale_, maxScale_, shakeRate_, t);
 	};
 
 	std::function<void()>endF = [=]() {
@@ -138,7 +138,7 @@ void CombinedEnemiesStateSkewer::Update()
 {
 	timer_++;
 
-	enemies_->SetScaleSinRot(0.8f, 1.3f, 0.2f, (int32_t)timer_);
+	enemies_->SetScaleSinRot(minScale_, maxScale_, shakeRate_, (int32_t)timer_);
 	enemies_->SkewerUpdate();
 }
 
@@ -155,7 +155,7 @@ void CombinedEnemiesStateAfterCombined::Initialize()
 void CombinedEnemiesStateAfterCombined::Update()
 {
 	std::function<void(float)>f = [=](float t) {
-		ShakeUpdate(0.5f, 1.2f, 0.8f, t);
+		ShakeUpdate(minScale_, maxScale_, shakeRate_, t);
 	};
 	std::function<void()>endF = [=]() {
 		enemies_->EnemiesScaleReset();
@@ -178,7 +178,7 @@ void CombinedEnemiesStateMoveWait::Update()
 	enemies_->DirectionUpdate();
 
 	std::function<void(float)>f = [=](float t) {
-		ShakeUpdate(0.7f, 1.1f, 0.7f, t);
+		ShakeUpdate(minScale_, maxScale_, shakeRate_, t);
 	};
 
 	TimerUpdate(f);

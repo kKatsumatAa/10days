@@ -52,6 +52,7 @@ public:
 	const Vec2& GetZoom() { return zoom_; }
 	const Vec4& GetVisiableArea() { return visiableArea_; }
 	float GetRot() { return rot_; }
+	float GetIsFollow() { return isFollow_; }
 	const DirectX::XMMATRIX& GetCameraMatrix() { return cameraMatrix_; }
 
 public:

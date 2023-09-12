@@ -21,10 +21,6 @@ void GameScene::Initialize(void)
 {
 	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isGrayScale = false;
 
-	//全体のカメラ
-	CameraManager::GetInstance().AddCamera2D("GameCamera");
-	CameraManager::GetInstance().SetUsingCamera2D("GameCamera");
-
 	//BGM再生
 	Sound::GetInstance().PlayWave("play_BGM.wav", 1.0f, true);
 
@@ -35,6 +31,7 @@ void GameScene::Initialize(void)
     player_->SetRot(0);
     player_->SetRad({ 10,0 });
     player_->SetVecMove({ 0,-1 });
+	player_->Initialize();
 
 	EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
 
@@ -48,28 +45,39 @@ void GameScene::Initialize(void)
 	Score::GetInstance()->Init();
     GameSceneUpdate();
 
-	float opeUIPlusY = 280.0f;	//操作UIのY座標ずらす用
+	float opeUIPlusY = 260.0f;	//操作UIのY座標ずらす用
 	UI::GetInstance()->SetPos(UIType::Makimono, { 0.f,0.f });
 	UI::GetInstance()->SetColor(UIType::Makimono, { 0.7f,0.7f,0.7f,1.f });
 
-	UI::GetInstance()->SetPos(UIType::Lstick, { 100.f,100.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Time, { 100.f,180.f });
+	UI::GetInstance()->SetSize(UIType::Time, 0.2f);
+	UI::GetInstance()->SetAncorPoint(UIType::Time, { 0.5f,0.5f });
+
+	UI::GetInstance()->SetPos(UIType::Menubutton, { 100.f,0.f + opeUIPlusY });
+	UI::GetInstance()->SetSize(UIType::Menubutton, 0.3f);
+	UI::GetInstance()->SetAncorPoint(UIType::Menubutton, { 0.5f,0.5f });
+	UI::GetInstance()->SetPos(UIType::Pause, { 100.f,50.f + opeUIPlusY });
+	UI::GetInstance()->SetSize(UIType::Pause, 0.21f);
+	UI::GetInstance()->SetAncorPoint(UIType::Pause, { 0.5f,0.5f });
+
+	UI::GetInstance()->SetPos(UIType::Lstick, { 100.f,120.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Lstick, 0.3f);
 	UI::GetInstance()->SetAncorPoint(UIType::Lstick, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Move, { 100.f,150.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Move, { 100.f,170.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Move, 0.2f);
 	UI::GetInstance()->SetAncorPoint(UIType::Move, { 0.5f,0.5f });
 
-	UI::GetInstance()->SetPos(UIType::Rbutton, { 100.f,220.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Rbutton, { 100.f,240.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Rbutton, 0.3f);
 	UI::GetInstance()->SetAncorPoint(UIType::Rbutton, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Attack, { 100.f,270.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Attack, { 100.f,290.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Attack, 0.2f);
 	UI::GetInstance()->SetAncorPoint(UIType::Attack, { 0.5f,0.5f });
 
-	UI::GetInstance()->SetPos(UIType::Abutton, { 100.f,340.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Abutton, { 100.f,360.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Abutton, 0.3f);
 	UI::GetInstance()->SetAncorPoint(UIType::Abutton, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Skewer, { 100.f,390.f + opeUIPlusY });
+	UI::GetInstance()->SetPos(UIType::Skewer, { 100.f,410.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Skewer, 0.2f);
 	UI::GetInstance()->SetAncorPoint(UIType::Skewer, { 0.5f,0.5f });
 
@@ -257,6 +265,10 @@ void GameScene::DrawSprite2()
 	Score::GetInstance()->Draw();
 
 	UI::GetInstance()->Draw(UIType::Makimono);
+	drawNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
+	UI::GetInstance()->Draw(UIType::Time);
+	UI::GetInstance()->Draw(UIType::Menubutton);
+	UI::GetInstance()->Draw(UIType::Pause);
 	UI::GetInstance()->Draw(UIType::Lstick);
 	UI::GetInstance()->Draw(UIType::Move);
 	UI::GetInstance()->Draw(UIType::Rbutton);
