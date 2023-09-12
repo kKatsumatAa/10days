@@ -26,7 +26,7 @@ void GameScene::Initialize(void)
 	Sound::GetInstance().PlayWave("play_BGM.wav", 1.0f, true);
 
 	// (0,0) ~ (1280,720) ‚æ‚è‚¿‚å‚¢“à‘¤
-	stage_->Initialize({ 10,10 }, { 1270,710 });
+	stage_->Initialize({ 0,0 }, { 1280,720 });
 
 	player_->SetPos({ 300,300 });
 	player_->SetRot(0);
