@@ -6,6 +6,7 @@
 #include "KeyboardInput.h"
 #include "Score.h"
 #include "CameraManager.h"
+#include "UI.h"
 
 
 void TitleScene::Finalize()
@@ -20,6 +21,9 @@ void TitleScene::Initialize(void)
 	Sound::GetInstance().PlayWave("title_BGM.wav", 1.0f, true);
 
 	Score::GetInstance()->LoadScore();
+	UI::GetInstance()->SetPos(UIType::Abutton, { 640.f,600.f });
+	UI::GetInstance()->SetSize(UIType::Abutton, 0.8f);
+	UI::GetInstance()->SetAncorPoint(UIType::Abutton, { 0.5f,0.5f });
 }
 
 void TitleScene::Update(void)
@@ -59,10 +63,7 @@ void TitleScene::DrawSprite()
 	//タイトル
 	titleObj_.DrawBoxSprite(CameraManager::GetInstance().GetCamera2D("UICamera"), titleImageHandle_);
 
-	//DrawFormatString(0, 380, UtilL::Color::RED, "Scene: TITLE");
-	//DrawFormatString(0, 0, UtilL::Color::RED, "press pad-A or key-SPACE");
-	//DrawFormatString(0, 20, UtilL::Color::RED, "key-Rでpad接続再確認");
-	//DrawFormatString(0, 40, UtilL::Color::WHITE, GetPadConnect() ? "pad connected" : "pad isnt connected");
+	UI::GetInstance()->Draw(UIType::Abutton);
 }
 
 void TitleScene::DrawImgui()

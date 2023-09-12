@@ -1,4 +1,5 @@
 #include "UI.h"
+#include "CameraManager.h"
 
 UI::UI()
 {
@@ -12,33 +13,37 @@ UI* UI::GetInstance()
 
 void UI::AllLoad()
 {
-	//読み込み～
-	ui_[(uint32_t)UIType::Abutton] = TextureManager::LoadGraph("Resources/texture/Abutton.png");
-	ui_[(uint32_t)UIType::Bbutton] = TextureManager::LoadGraph("Resources/texture/Bbutton.png");
-	ui_[(uint32_t)UIType::Rbutton] = TextureManager::LoadGraph("Resources/texture/Rbutton.png");
-	ui_[(uint32_t)UIType::Lstick] = TextureManager::LoadGraph("Resources/texture/Lstick.png");
-	ui_[(uint32_t)UIType::Move] = TextureManager::LoadGraph("Resources/texture/move.png");
-	ui_[(uint32_t)UIType::Attack] = TextureManager::LoadGraph("Resources/texture/attack.png");
-	ui_[(uint32_t)UIType::Skewer] = TextureManager::LoadGraph("Resources/texture/skewer.png");
-	ui_[(uint32_t)UIType::Pause] = TextureManager::LoadGraph("Resources/texture/pause.png");
-	ui_[(uint32_t)UIType::Retry] = TextureManager::LoadGraph("Resources/texture/retry.png");
-	ui_[(uint32_t)UIType::ToTitle] = TextureManager::LoadGraph("Resources/texture/toTitle.png");
-	ui_[(uint32_t)UIType::NowScore] = TextureManager::LoadGraph("Resources/texture/score.png");
-	ui_[(uint32_t)UIType::HighScore] = TextureManager::LoadGraph("Resources/texture/highScore.png");
-
-	ui_[(uint32_t)UIType::Tutorial1] = TextureManager::LoadGraph("Resources/texture/tutorial_UI_01.png");
-	ui_[(uint32_t)UIType::Tutorial2] = TextureManager::LoadGraph("Resources/texture/tutorial_UI_02.png");
-	ui_[(uint32_t)UIType::Tutorial3] = TextureManager::LoadGraph("Resources/texture/tutorial_UI_03.png");
-	ui_[(uint32_t)UIType::Tutorial4] = TextureManager::LoadGraph("Resources/texture/tutorial_UI_04.png");
-	ui_[(uint32_t)UIType::Tutorial5] = TextureManager::LoadGraph("Resources/texture/tutorial_UI_05.png");
-	ui_[(uint32_t)UIType::Tutorial6] = TextureManager::LoadGraph("Resources/texture/tutorial_UI_06.png");
-	ui_[(uint32_t)UIType::Tutorial7] = TextureManager::LoadGraph("Resources/texture/tutorial_UI_07.png");
-
-	//アンカーポイント初期化
+	//メモリ確保+初期化
 	for (uint32_t i = 0; i < (uint32_t)UIType::Max; i++)
 	{
+		ui_.emplace_back();
+		ancorPoint_.emplace_back();
 		ancorPoint_[i] = { 0.f,0.f };	//左上
+		color_.emplace_back();
+		color_[i] = { 1.f, 1.f, 1.f, 1.f };	//全部の色使う
 	}
+
+	//読み込み～
+	ui_[(uint32_t)UIType::Abutton] = TextureManager::LoadGraph("Abutton.png");
+	ui_[(uint32_t)UIType::Bbutton] = TextureManager::LoadGraph("Bbutton.png");
+	ui_[(uint32_t)UIType::Rbutton] = TextureManager::LoadGraph("Rbutton.png");
+	ui_[(uint32_t)UIType::Lstick] = TextureManager::LoadGraph("Lstick.png");
+	ui_[(uint32_t)UIType::Move] = TextureManager::LoadGraph("move.png");
+	ui_[(uint32_t)UIType::Attack] = TextureManager::LoadGraph("attack.png");
+	ui_[(uint32_t)UIType::Skewer] = TextureManager::LoadGraph("skewer.png");
+	ui_[(uint32_t)UIType::Pause] = TextureManager::LoadGraph("pause.png");
+	ui_[(uint32_t)UIType::Retry] = TextureManager::LoadGraph("retry.png");
+	ui_[(uint32_t)UIType::ToTitle] = TextureManager::LoadGraph("toTitle.png");
+	ui_[(uint32_t)UIType::NowScore] = TextureManager::LoadGraph("score.png");
+	ui_[(uint32_t)UIType::HighScore] = TextureManager::LoadGraph("highScore.png");
+
+	ui_[(uint32_t)UIType::Tutorial1] = TextureManager::LoadGraph("tutorial_UI_01.png");
+	ui_[(uint32_t)UIType::Tutorial2] = TextureManager::LoadGraph("tutorial_UI_02.png");
+	ui_[(uint32_t)UIType::Tutorial3] = TextureManager::LoadGraph("tutorial_UI_03.png");
+	ui_[(uint32_t)UIType::Tutorial4] = TextureManager::LoadGraph("tutorial_UI_04.png");
+	ui_[(uint32_t)UIType::Tutorial5] = TextureManager::LoadGraph("tutorial_UI_05.png");
+	ui_[(uint32_t)UIType::Tutorial6] = TextureManager::LoadGraph("tutorial_UI_06.png");
+	ui_[(uint32_t)UIType::Tutorial7] = TextureManager::LoadGraph("tutorial_UI_07.png");
 }
 
 void UI::Init()
@@ -53,7 +58,8 @@ void UI::Draw(UIType uiType)
 {
 	//指定されたUIを描画
 	objUI_[(uint32_t)uiType].DrawBoxSprite(
-		nullptr, ui_[(uint32_t)uiType],
+		CameraManager::GetInstance().GetCamera2D("UICamera"),
+		ui_[(uint32_t)uiType],
 		{ 1.0f,1.0f,1.0f,1.0f },
 		ancorPoint_[(uint32_t)uiType]);
 }
@@ -71,4 +77,9 @@ void UI::SetSize(UIType uiType, float size)
 void UI::SetAncorPoint(UIType uiType, const Vec2& ancorPoint)
 {
 	ancorPoint_[(uint32_t)uiType] = ancorPoint;
+}
+
+void UI::SetColor(UIType uiType, const Vec4& color)
+{
+	color_[(uint32_t)uiType] = color;
 }
