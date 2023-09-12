@@ -1,4 +1,5 @@
 #include "Score.h"
+#include "ImGuiManager.h"
 
 #include <fstream>
 #include <string>
@@ -14,8 +15,10 @@ void Score::Init()
 	//ハイスコアの読み込み//
 }
 
-void Score::Add(uint32_t score)
+void Score::Add(uint32_t enemyNum)
 {
+	uint32_t score;
+	score = (uint32_t)((float)(enemyNum * 500) * (0.9f + 0.1f * (float)enemyNum));
 	nowScore_ += score;
 }
 
@@ -23,6 +26,16 @@ void Score::Draw()
 {
 	//DrawFormatString(700, 0, 0xffffff, "SCORE:%d", nowScore_);
 	//DrawFormatString(700, 20, 0xffffff, "HIGHSCORE:%d", highScore_);
+}
+
+void Score::DrawImGui()
+{
+	ImGui::Begin("Score");
+
+	ImGui::Text("NowScore: %d", (int)nowScore_);
+	ImGui::Text("HighScore: %d", (int)highScore_);
+
+	ImGui::End();
 }
 
 void Score::HighScoreUpdate()

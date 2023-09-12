@@ -187,4 +187,6 @@ void GameScene::DrawImgui()
 	GameVelocityManager::GetInstance().UpdateImGui();
 	//ヒットストップ
 	HitStopManager::GetInstance().DrawImGui();
+    //スコア
+    Score::DrawImGui();
 }
