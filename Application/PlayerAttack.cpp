@@ -58,4 +58,9 @@ void PlayerMowAttack::Draw(void)
     //DrawFormatString((int32_t)position_.x - 5, (int32_t)position_.y - 90, UtilL::Color::YELLOW, "%f",rotation_);
 
     //DrawRotaGraph((int32_t)position_.x, (int32_t)position_.y, kPngScale_, rotation_, png_mowAttack_, true);
+
+    Object::SetScale({ kPngScale_, kPngScale_,0 });
+    Object::SetTrans({ position_.x, position_.y,0 });
+    Object::SetRot({ 0,0, rotation_ - Math::Function::ToRadian(90)});
+    DrawBoxSprite(png_mowAttack_, { 1.0f,1.0f,1.0f,0.4f }, { 0.5f,0.5f });
 }
