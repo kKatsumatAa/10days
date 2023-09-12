@@ -57,7 +57,7 @@ void SceneTransition::Update(void)
 		// 1番目処理の移動のレート
 		float rate_move1 = (std::min)((float)frameCount_rolled_ / kMaxFrameRolled_, 1.f);
 		// 巻いてるやつの座標
-		pos_rolledScroll_.x = Math::Ease::EaseInOutSine(rate_move1, 1350, -70); // 移動幅 1420
+		pos_rolledScroll_.x = Math::Ease::EaseInOutSine(rate_move1, 1390, -110); // 移動幅 1420
 		// 巻いてないやつ真ん中の座標
 		pos_unrollScroll_.x = Math::Ease::EaseInOutSine(rate_move1, 1920 + 35, 640); // 移動幅 1420
 		// 巻いてないやつ上下の座標
