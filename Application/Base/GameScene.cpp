@@ -45,7 +45,7 @@ void GameScene::Initialize(void)
 	drawNum_.Initialize(TextureManager::LoadGraph("number.png"));
 
 	Score::GetInstance()->Init();
-	Update();
+    GameSceneUpdate();
 }
 
 void GameScene::Update(void)
@@ -162,6 +162,16 @@ void GameScene::Update(void)
 	}
 
 
+}
+
+void GameScene::GameSceneUpdate(void)
+{
+    stage_->Update();
+
+    player_->Update();
+    EnemyManager::GetInstance().Update();
+
+    ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
 }
 
 void GameScene::Draw(void)
