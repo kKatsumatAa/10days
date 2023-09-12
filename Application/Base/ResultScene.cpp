@@ -22,22 +22,46 @@ void ResultScene::Initialize(void)
 
 void ResultScene::Update(void)
 {
-	if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
-	{
-		Sound::GetInstance().PlayWave("sceneChange_SE.wav");
-		//BGMストップ
-		Sound::GetInstance().StopWave("result_BGM.wav");
-		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
-	}
+    if (PadInput::GetInstance().GetLeftStickTilt().y >= 0.3f)
+    {
+        destination_++;
+        destination_ = (std::min)(destination_, 1);
+    }
+    else if (PadInput::GetInstance().GetLeftStickTilt().y <= -0.3f)
+    {
+        destination_--;
+        destination_ = (std::max)(destination_, 0);
+    }
+
+    if (destination_ == Destination::RETRY)
+    {
+        if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+        {
+            Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+            //BGMストップ
+            Sound::GetInstance().StopWave("result_BGM.wav");
+            SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
+        }
+    }
+    else if (destination_ == Destination::TITLE)
+    {
+        if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+        {
+            Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+            //BGMストップ
+            Sound::GetInstance().StopWave("result_BGM.wav");
+            SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
+        }
+    }
 
 #ifdef _DEBUG
-	if (KeyboardInput::GetInstance().KeyTrigger(DIK_R))
-	{
-		Sound::GetInstance().PlayWave("sceneChange_SE.wav");
-		//BGMストップ
-		Sound::GetInstance().StopWave("result_BGM.wav");
-		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
-	}
+    if (KeyboardInput::GetInstance().KeyTrigger(DIK_R))
+    {
+        Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+        //BGMストップ
+        Sound::GetInstance().StopWave("result_BGM.wav");
+        SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
+    }
 #endif // _DEBUG
 }
 

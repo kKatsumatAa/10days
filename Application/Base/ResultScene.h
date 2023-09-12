@@ -7,9 +7,17 @@ class ResultScene :
     public SceneState
 {
 public:
+    enum Destination
+    {
+        RETRY,
+        TITLE,
+    };
+
+    // 変数
     uint64_t png_result_ = 0;       //リザルト画像
     uint32_t result_BGM_ = 0;
     uint32_t sceneChange_SE_ = 0;   //シーン遷移音
+    int32_t destination_;
 
     Object result_;
 
