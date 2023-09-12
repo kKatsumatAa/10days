@@ -10,7 +10,7 @@
 #include "SceneTransitionEffectState.h"
 #include "CircleCollider.h"
 #include "Sound.h"
-
+#include "UI.h"
 
 //---------------------------------------------------------------------------------------
 //デストラクタ
@@ -79,6 +79,9 @@ void SceneManager::Initialize()
 
 	//サウンド読み込み
 	LoadAllSound();
+
+	//UIに使う画像全部読み込み
+	UI::GetInstance()->AllLoad();
 }
 
 void SceneManager::LoadAllSound()

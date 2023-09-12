@@ -8,7 +8,7 @@ class PlayerSkewerAttack :
 public:
     // ’è”
     const Vec2 kRadius_{ 20.f,20.f }; // UŒ‚”ÍˆÍ
-    const float kMoveSpeed_{ 20.f }; // ‘¬“x
+    const float kMoveSpeed_{ 30.f }; // ‘¬“x
     const float kPngScale_{ 0.06f }; // ‰æ‘œ‚ÌŠg‘å—¦
 
     // ŠÖ”

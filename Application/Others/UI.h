@@ -34,9 +34,10 @@ enum class UIType
 class UI
 {
 private:
-	std::vector<Object> objUI_{ (uint32_t)UIType::Max };	//UI描画用オブジェクト群
-	std::vector<uint64_t> ui_{ (uint32_t)UIType::Max };		//UIテクスチャハンドル群
-	std::vector<Vec2> ancorPoint_{ (uint32_t)UIType::Max };	//UI描画基準点群
+	std::vector<Object> objUI_{((uint32_t)UIType::Max)};		//UI描画用オブジェクト群
+	std::vector<uint64_t> ui_{};		//UIテクスチャハンドル群
+	std::vector<Vec2> ancorPoint_{};	//UI描画基準点群
+	std::vector<Vec4> color_{};			//UI描画色群
 
 public:
 	UI();
@@ -55,4 +56,6 @@ public:
 	void SetSize(UIType uiType, float size);
 	//指定されたUIの描画基準点設定
 	void SetAncorPoint(UIType uiType, const Vec2& ancorPoint);
+	//指定されたUIの描画色設定
+	void SetColor(UIType uiType, const Vec4& color);
 };

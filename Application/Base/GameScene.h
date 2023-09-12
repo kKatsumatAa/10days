@@ -34,6 +34,7 @@ public:
 	void Finalize()override;
 	void Initialize()override;
 	void Update()override;
+    void GameSceneUpdate(void);
 	void Draw()override;
 	void DrawSprite()override;
 
