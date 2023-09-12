@@ -51,7 +51,7 @@ private:
 	const float BIG_SCALE_EXTEND_ = 1.0f / 32.0f;
 
 public:
-	//
+	//‰½‘Ì‚ÅƒfƒJ’cŽq‚É‚È‚é‚©
 	static const uint32_t TO_BIG_NUM_ = 8;
 
 

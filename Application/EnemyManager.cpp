@@ -409,10 +409,10 @@ void EnemyManager::Update()
 		if (!itr->get()->GetIsAlive())
 		{
 			//倒された敵の数用
-			defeatedEnemiesNum_ = itr->get()->GetEnemiesNum();
+			defeatedEnemiesNum_ += itr->get()->GetEnemiesNum();
 			if (itr->get()->GetIsBigDango())
 			{
-				defeatedEnemiesNum_ = CombinedEnemies::TO_BIG_NUM_ * 2 + 1;
+				defeatedEnemiesNum_ += CombinedEnemies::TO_BIG_NUM_ * 2 - 1;
 			}
 			isDefeatedEnemies_ = true;
 			//スコア加算
@@ -432,6 +432,7 @@ void EnemyManager::Update()
 			}
 		}
 	}
+	defeatedEnemiesNum_ = 0;
 
 	//薙ぎ払われてる最中の保存しておく更新
 	SaveMowDownEnemies();
