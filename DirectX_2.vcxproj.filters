@@ -426,6 +426,9 @@
     <ClCompile Include="Application\Effect\HitStop.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Application\Others\UI.cpp">
+      <Filter>ソース ファイル\Application\Others</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Util\Shake.h">
@@ -721,6 +724,9 @@
     </ClInclude>
     <ClInclude Include="Application\Effect\HitStop.h">
       <Filter>ヘッダー ファイル\Application\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Others\UI.h">
+      <Filter>ヘッダー ファイル\Application\Others</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -120,6 +120,7 @@
     <ClCompile Include="Application\Math\Easing.cpp" />
     <ClCompile Include="Application\Math\MathUtil.cpp" />
     <ClCompile Include="Application\Others\Score.cpp" />
+    <ClCompile Include="Application\Others\UI.cpp" />
     <ClCompile Include="Application\Others\UtilL.cpp" />
     <ClCompile Include="Application\Player.cpp" />
     <ClCompile Include="Application\PlayerAttack.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="Application\Math\MathUtil.h" />
     <ClInclude Include="Application\Others\FileSystem.h" />
     <ClInclude Include="Application\Others\Score.h" />
+    <ClInclude Include="Application\Others\UI.h" />
     <ClInclude Include="Application\Others\UtilL.h" />
     <ClInclude Include="Application\Player.h" />
     <ClInclude Include="Application\PlayerAttack.h" />
