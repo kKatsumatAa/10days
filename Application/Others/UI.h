@@ -19,6 +19,7 @@ enum class UIType
 	ToTitle,	//タイトルへ
 	NowScore,	//今回の記録
 	HighScore,	//最高記録
+	Makimono,	//巻物
 
     Tutorial1,
     Tutorial2,
