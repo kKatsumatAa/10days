@@ -100,6 +100,7 @@ private:
 
 public:
     // getter
+    bool GetSkewerEndShrink(void) { return isSkewerEndShrink_; }
     const Vec2& GetDirectionVec() { return pos4Line_; }
     const Vec2& GetMoveVec() { return vec_move_; }
     bool GetIsSkewer(void) { return skewer_.GetIsSkewer(); }
