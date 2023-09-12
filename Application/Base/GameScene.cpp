@@ -102,7 +102,7 @@ void GameScene::Update(void)
 
 	//設定した (制限時間) - (経過時間)
     int32_t nTimer = uint32_t(1000.f - nTimer_.GetTimer() / 60);
-	drawNum_.SetNum(nTimer, { 300,150 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 1.0f);	//残り秒数表示
+	drawNum_.SetNum(nTimer, { 200,10 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.85f);	//残り秒数表示
 
 	if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_START))
 	{
