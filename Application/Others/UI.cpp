@@ -19,6 +19,8 @@ void UI::AllLoad()
 		ui_.emplace_back();
 		ancorPoint_.emplace_back();
 		ancorPoint_[i] = { 0.f,0.f };	//ç∂è„
+		color_.emplace_back();
+		color_[i] = { 1.f, 1.f, 1.f, 1.f };	//ëSïîÇÃêFégÇ§
 	}
 
 	//ì«Ç›çûÇ›Å`
@@ -75,4 +77,9 @@ void UI::SetSize(UIType uiType, float size)
 void UI::SetAncorPoint(UIType uiType, const Vec2& ancorPoint)
 {
 	ancorPoint_[(uint32_t)uiType] = ancorPoint;
+}
+
+void UI::SetColor(UIType uiType, const Vec4& color)
+{
+	color_[(uint32_t)uiType] = color;
 }
