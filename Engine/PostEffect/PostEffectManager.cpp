@@ -37,7 +37,8 @@ void PostEffectManager::ImGuiUpdate()
 	ImGui::End();
 }
 
-void PostEffectManager::BeforeDraw(std::function<void()> drawSceneF, const std::function<void()>& drawSpriteF)
+void PostEffectManager::BeforeDraw(std::function<void()> drawSceneF, const std::function<void()>& drawSpriteF,
+	const std::function<void()>& drawSpriteF2)
 {
 	//1枚目に描画
 	postPera_[0]->DrawToPostpera(drawSceneF, true);
@@ -71,7 +72,7 @@ void PostEffectManager::BeforeDraw(std::function<void()> drawSceneF, const std::
 	//二枚目に描画結果、三枚目も描画する
 	std::function<void()>f3 = [=]() { postPera_[1]->Draw2();  };
 
-	postPera_[2]->DrawToPostpera(f3);
+	postPera_[2]->DrawToPostpera(f3, false, drawSpriteF2);
 	//ブラー用に書き込み
 	postPera_[2]->DrawToBlurAll();
 

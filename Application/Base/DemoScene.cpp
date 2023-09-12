@@ -39,6 +39,10 @@ void DemoScene::DrawSprite()
 //DrawFormatString(0, 380, UtilL::Color::RED, "Scene: DEMO");
 }
 
+void DemoScene::DrawSprite2()
+{
+}
+
 void DemoScene::DrawImgui()
 {
 }

@@ -28,7 +28,8 @@ public:
 	void Update();
 	void ImGuiUpdate();
 	//シーンのものをポストペラに描画する
-	void BeforeDraw(std::function<void()>drawSceneF, const std::function<void()>& drawSpriteF = nullptr);
+	void BeforeDraw(std::function<void()>drawSceneF, const std::function<void()>& drawSpriteF = nullptr,
+		const std::function<void()>& drawSpriteF2 = nullptr);
 	//実際に画面に描画
 	void DrawDisplay();
 

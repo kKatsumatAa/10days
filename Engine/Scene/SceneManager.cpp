@@ -180,6 +180,15 @@ void SceneManager::DrawSprite()
 	//DrawFormatString(0, 120, UtilL::Color::WHITE, "slow: %d", frameCount_slowMotion_);
 	//DrawFormatString(0, 160, UtilL::Color::GREEN, "frameCount: %d", frameCount_debug_);
 	}
+}
+
+void SceneManager::DrawSprite2()
+{
+	//ロードしてなければ
+	if (!SceneTransitionManager::GetInstance().GetIsLoadingOnly() && state_)
+	{
+		state_->DrawSprite2();
+	}
 
 	//シーン遷移マネージャ
 	SceneTransitionManager::GetInstance().Draw();

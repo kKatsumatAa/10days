@@ -19,6 +19,8 @@ void GameScene::Finalize()
 
 void GameScene::Initialize(void)
 {
+	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isGrayScale = false;
+
 	//全体のカメラ
 	CameraManager::GetInstance().AddCamera2D("GameCamera");
 	CameraManager::GetInstance().SetUsingCamera2D("GameCamera");
@@ -196,11 +198,6 @@ void GameScene::Update(void)
                 //BGMストップ
                 Sound::GetInstance().StopWave("play_BGM.wav");
                 SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
-                // いいだくん
-                if (GameVelocityManager::GetInstance().GetIsSlowMotion())
-                {
-                    GameVelocityManager::GetInstance().EndSlowMotion(30, 1.0f);
-                }
 			}
 		}
 		else if (destination_ == Destination::TITLE)
@@ -213,11 +210,6 @@ void GameScene::Update(void)
                 //BGMストップ
                 Sound::GetInstance().StopWave("play_BGM.wav");
                 SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
-                // いいだくん
-                if (GameVelocityManager::GetInstance().GetIsSlowMotion())
-                {
-                    GameVelocityManager::GetInstance().EndSlowMotion(30, 1.0f);
-                }
 			}
 		}
 	}
@@ -259,12 +251,15 @@ void GameScene::DrawSprite()
 	UI::GetInstance()->Draw(UIType::Attack);
 	UI::GetInstance()->Draw(UIType::Abutton);
 	UI::GetInstance()->Draw(UIType::Skewer);
+}
 
-    if (isMenu_)
-    {
-        UI::GetInstance()->Draw(UIType::Retry);
-        UI::GetInstance()->Draw(UIType::ToTitle);
-    }
+void GameScene::DrawSprite2()
+{
+	if (isMenu_)
+	{
+		UI::GetInstance()->Draw(UIType::Retry);
+		UI::GetInstance()->Draw(UIType::ToTitle);
+	}
 }
 
 void GameScene::DrawImgui()

@@ -14,7 +14,7 @@ public:
     void Update()override;
     void Draw()override;
     void DrawSprite()override;
-
+    void DrawSprite2()override;
     void DrawImgui()override;
 
 private:
