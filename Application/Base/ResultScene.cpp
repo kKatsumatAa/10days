@@ -20,6 +20,14 @@ void ResultScene::Initialize(void)
 
 	Score::GetInstance()->SaveScore();
 
+    Score::GetInstance()->SetNowPos({1000.f,300.f});
+	Score::GetInstance()->SetNowSize(0.5f);
+    Score::GetInstance()->SetNowNum();
+
+    Score::GetInstance()->SetHighPos({ 1000.f,200.f });
+    Score::GetInstance()->SetHighSize(0.5f);
+    Score::GetInstance()->SetHighNum();
+
 	UI::GetInstance()->SetPos(UIType::Abutton, { 640.f,600.f });
 	UI::GetInstance()->SetSize(UIType::Abutton, 0.8f);
 	UI::GetInstance()->SetAncorPoint(UIType::Abutton, {0.5f,0.5f});
@@ -84,9 +92,6 @@ void ResultScene::DrawSprite2()
 {
     //ƒŠƒUƒ‹ƒg‰æ‘œ
     result_.DrawBoxSprite(CameraManager::GetInstance().GetCamera2D("UICamera"), png_result_);
-
-    //DrawFormatString(0, 380, UtilL::Color::RED, "Scene: RESULT");
-    //DrawFormatString(0, 0, UtilL::Color::WHITE, "pad-A or key-R[DEBUG]‚Åtitle");
 
     Score::GetInstance()->Draw();
     Score::GetInstance()->DrawHighScore();

@@ -37,6 +37,9 @@ void TutorialScene::Initialize(void)
     ParticleManagerL::GetInstance()->Init();
 
     Score::GetInstance()->Init();
+    Score::GetInstance()->SetNowPos({ 1250.f,20.f });
+    Score::GetInstance()->SetNowSize(0.6f);
+    Score::GetInstance()->SetNowNum();
     TutorialSceneUpdate();
 
     float opeUIPlusY = 260.0f;	//‘€ìUI‚ÌYÀ•W‚¸‚ç‚·—p

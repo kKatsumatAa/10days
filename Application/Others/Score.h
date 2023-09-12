@@ -26,8 +26,11 @@ public:
 
 	void SetNowPos(const Vec2& pos) { nScorePos_ = pos; }
 	void SetHighPos(const Vec2& pos) { hScorePos_ = pos; }
-	void SetNowSize(const float size) { nScoreSize_ = size; }
-	void SetHighSize(const float size) { hScoreSize_ = size; }
+	void SetNowSize(float size) { nScoreSize_ = size; }
+	void SetHighSize(float size) { hScoreSize_ = size; }
+
+	void SetNowNum();	//座標とかサイズセットしたらこれ呼んで反映させる
+	void SetHighNum();	//座標とかサイズセットしたらこれ呼んで反映させる
 
 private:
 	uint32_t nowScore_;		//現在のスコア

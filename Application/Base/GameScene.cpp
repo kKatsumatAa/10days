@@ -46,6 +46,9 @@ void GameScene::Initialize(void)
 	drawNum_.Initialize(TextureManager::LoadGraph("number.png"));
 
 	Score::GetInstance()->Init();
+	Score::GetInstance()->SetNowPos({ 1250.f,20.f });
+	Score::GetInstance()->SetNowSize(0.6f);
+	Score::GetInstance()->SetNowNum();
     GameSceneUpdate();
 
 	float opeUIPlusY = 260.0f;	//‘€ìUI‚ÌYÀ•W‚¸‚ç‚·—p
@@ -262,7 +265,6 @@ void GameScene::DrawSprite()
 
 void GameScene::DrawSprite2()
 {
-
 	Score::GetInstance()->Draw();
 
 	UI::GetInstance()->Draw(UIType::Makimono);
