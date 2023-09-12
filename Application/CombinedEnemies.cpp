@@ -14,10 +14,10 @@ void CombinedEnemies::Initialize(Player* player, Stage* stage, const Vec2& direc
 	player_ = player;
 	stage_ = stage;
 	//
-	distance_ = (player_->GetPos() - player_->GetPos() + direction.GetNormalize() * length * ((float)enemiesNum_ / 2.0f)).GetLength();
+	distance_ = (player_->GetPos() - player_->GetPos() + direction.GetNormalize() * length_ * ((float)enemiesNum_ / 2.0f)).GetLength();
 
 	//中央位置計算
-	CalcCentorPos(player_->GetPos(), direction.GetNormalize());
+	//CalcCentorPos(player_->GetPos(), direction.GetNormalize());
 
 	//ステート
 	ChangeState("AFTER_COMBINED");
@@ -119,6 +119,10 @@ void CombinedEnemies::CalcCentorPos(const Vec2& targetPos, const Vec2& direction
 {
 	//仮
 	centorPos_ = targetPos + direction * length;
+	if (enemies_.size() == 1)
+	{
+		enemies_[0]->SetPos(centorPos_);
+	}
 }
 
 bool CombinedEnemies::SetInStagePos(const Vec2& pos, Vec2& pushBackVec)
@@ -252,8 +256,8 @@ void CombinedEnemies::SkewerUpdate()
 {
 	DirectionUpdate();
 	//串の下の部分が端の敵になるように
-	float enemyRadius = length / (float)enemiesNum_ / 2.0f;
-	centorPos_ = player_->GetPos4SwordBottom() + (player_->GetMoveVec() * (length / 2.0f + enemyRadius));
+	float enemyRadius = length_ / (float)enemiesNum_ / 2.0f;
+	centorPos_ = player_->GetPos4SwordBottom() + (player_->GetMoveVec() * (length_ / 2.0f + enemyRadius));
 
 	if (!player_->GetIsSkewer() && isSkewer_)
 	{
@@ -272,6 +276,11 @@ void CombinedEnemies::EnemiesMowDownTriggerUpdate()
 
 void CombinedEnemies::BigDangoUpdate()
 {
+	if (GetIsSkewer())
+	{
+		return;
+	}
+
 	if (enemiesNum_ > 1)
 	{
 		for (auto itr = enemies_.begin(); itr != enemies_.end(); itr++)
@@ -288,8 +297,9 @@ void CombinedEnemies::BigDangoUpdate()
 		enemiesNum_ = 1;
 
 		enemies_[0]->SetIsBigDango(true);
-		enemies_[0]->SetRad({ length * 2.0f,0 });
-		scaleExtend_ = length / 8.0f;
+		enemies_[0]->SetRad({ BIG_DANGO_EXTEND_ / 2.0f,0 });
+		enemies_[0]->SetScaleExtend(BIG_DANGO_EXTEND_ * BIG_SCALE_EXTEND_);
+		length_ = BIG_DANGO_EXTEND_;
 	}
 }
 
@@ -323,7 +333,7 @@ void CombinedEnemies::EnemiesPosUpdate()
 	//対応した位置に配置
 	for (auto& enemy : enemies_)
 	{
-		enemy->SetPos(centorPos_ + direction_ * (centorIndex - (float)count) * (length / (float)enemiesNum_));
+		enemy->SetPos(centorPos_ + direction_ * (centorIndex - (float)count) * (length_ / (float)enemiesNum_));
 
 		count++;
 	}
@@ -333,7 +343,7 @@ void CombinedEnemies::EnemiesScaleReset()
 {
 	for (auto& enemy : enemies_)
 	{
-		enemy->SetScale({ scaleExtend_,scaleExtend_ });
+		enemy->SetScale({ 1.0f,1.0f });
 	}
 }
 
@@ -371,7 +381,7 @@ void CombinedEnemies::SetScaleSinRot(float minS, float maxS, float rate, int32_t
 		scale.x = min(max(scale.x, minS), maxS);
 		scale.y = min(max(scale.y, minS), maxS);
 
-		enemy->SetScale(scale * scaleExtend_);
+		enemy->SetScale(scale);
 		count++;
 	}
 }
@@ -385,15 +395,13 @@ void CombinedEnemies::SetScale(const Vec2& scale)
 		scaleL += {GetRand(-scale.x * 0.1f, scale.x * 0.1f),
 			GetRand(-scale.y * 0.1f, scale.y * 0.1f)};
 
-		enemy->SetScale(scaleL * scaleExtend_);
+		enemy->SetScale(scaleL);
 	}
 }
 
 //------------------------------------------------------------------------------
 void CombinedEnemies::Update()
 {
-	BigDangoUpdate();
-
 	//薙ぎ払いの更新
 	//AnyEnemyMowDownUpdate();
 	//突進の更新
@@ -408,6 +416,8 @@ void CombinedEnemies::Update()
 
 	//薙ぎ払いフラグ更新
 	EnemiesMowDownTriggerUpdate();
+
+	BigDangoUpdate();
 
 	//敵が一体の場合は押し戻しなどをするため
 	if (enemiesNum_ == 1)
@@ -431,8 +441,8 @@ void CombinedEnemies::AddEnemy(std::unique_ptr<Enemy> enemy)
 	enemy->SetIsMowDownTrigger(false);
 	//敵の長さを加算していく
 	float addRadius = Enemy::KRadius_ * 2.0f;
-	length = radiusTmp_ + addRadius;
-	radiusTmp_ = length;
+	length_ = radiusTmp_ + addRadius;
+	radiusTmp_ = length_;
 	//登録
 	enemies_.push_back(std::move(enemy));
 	//敵の数を加算

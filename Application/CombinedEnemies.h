@@ -21,7 +21,7 @@ private:
 	//動くスピードの基
 	const float MOVE_SPEED_TMP_ = Enemy::kMoveSpeed_;
 	//全体の長さ
-	float length = 0.0f;
+	float length_ = 0.0f;
 	//プレイヤーまでの距離
 	float distance_ = 0;
 	const int32_t MOVE_TIMES_ = Enemy::kMoveTimes_; // 何回に分けて移動するか(瞬間移動に見えるのを避けるため）
@@ -47,7 +47,8 @@ private:
 	//生きているか
 	bool isAlive_ = true;
 	//
-	float scaleExtend_ = 1.0f;
+	const float BIG_DANGO_EXTEND_ = Enemy::KRadius_ * 2.0f * 7.0f;
+	const float BIG_SCALE_EXTEND_ = 1.0f / 32.0f;
 
 
 public:
@@ -104,13 +105,13 @@ public:
 	void SetCentorPos(const Vec2& centorPos) { centorPos_ = centorPos; }
 	const Vec2& GetDirection() { return direction_; }
 	void SetDirection(const Vec2& direction) { direction_ = direction.GetNormalize(); }
-	float GetLength() { return length; }
+	float GetLength() { return length_; }
 	void SetLength(float radius) {
-		length = radius;
+		length_ = radius;
 	}
 
 	void SetLengthTmp() {
-		radiusTmp_ = length;
+		radiusTmp_ = length_;
 	}
 	void SetCentorPosTmp() { centorPosTmp_ = centorPos_; }
 	void SetDirectionTmp() { directionTmp_ = direction_; }

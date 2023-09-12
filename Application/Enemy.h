@@ -56,6 +56,9 @@ private:
 
 	Vec2 scale_ = { 1.0f,1.0f };
 
+	//
+	float scaleExtend_ = 1.0f;
+
 	// resource
 	uint64_t png_enemy_;
 
@@ -67,6 +70,7 @@ public:
 	void SetIsSkewer(bool isSkewer) { isSkewer_ = isSkewer; }
 	void SetIsBigDango(bool isBigDango) { isBigDango_ = isBigDango; }
 	void SetScale(const Vec2& scale) { scale_ = scale; }
+	void SetScaleExtend(float scaleExtend) { scaleExtend_ = scaleExtend; }
 
 	// getter
 	bool GetIsMowDown() { return isMowDown_; }
@@ -76,6 +80,7 @@ public:
 	const Vec2& GetMowDownVec() { return vec_mow_; }
 	bool GetIsSkewer(void) { return isSkewer_; }
 	bool GetIsBigDango(void) { return isBigDango_; }
+	float GetScaleExtend_(void) { return scaleExtend_; }
 	const Vec2& GetScale() { return scale_; }
 
 public:

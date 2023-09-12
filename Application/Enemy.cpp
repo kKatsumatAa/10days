@@ -132,7 +132,7 @@ void Enemy::Update(void)
 
 void Enemy::Draw(void)
 {
-	Object::SetScale({ scale_.x * kPngScale_, scale_.y * kPngScale_,0 });
+	Object::SetScale(Vec3(scale_.x * kPngScale_, scale_.y * kPngScale_, 0) * scaleExtend_);
 	Object::SetTrans({ position_.x,position_.y,0 });
 	Object::SetRot({ 0,0,rotation_ });
 
