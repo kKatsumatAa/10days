@@ -137,11 +137,11 @@ void Player::Draw(void)
         //DrawLine((int32_t)pos_predictionLine_LB.x, (int32_t)pos_predictionLine_LB.y, (int32_t)pos_predictionLine_RB.x, (int32_t)pos_predictionLine_RB.y, Color::RED, 2); // 下横
         //DrawLine((int32_t)pos_predictionLine_LT.x, (int32_t)pos_predictionLine_LT.y, (int32_t)pos_predictionLine_RT.x, (int32_t)pos_predictionLine_RT.y, Color::RED, 2); // 上横
 
-        //矢印描画
-        arrow_.Object::SetScale({ kPngScale_ * 3.0f, kPngScale_ * 3.0f,0 });
-        arrow_.Object::SetTrans({ position_.x,position_.y,0 });
-        arrow_.Object::SetRot({ 0,0,rotation_ });
-        arrow_.DrawBoxSprite(png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
+		//矢印描画
+		arrow_.Object::SetScale({ kPngScale_ * 3.0f, kPngScale_ * 3.0f,0 });
+		arrow_.Object::SetTrans({ position_.x,position_.y,0 });
+		arrow_.Object::SetRot({ 0,0,rotation_ });
+		arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
 
         //DrawFormatString(1000, 60, UtilL::Color::GREEN, "溜め状態");
         //DrawFormatString(1000, 80, UtilL::Color::GREEN, "frame: %d/%d", frameCount_4Skewer_, kChargeFrame4Skewer_);
@@ -158,32 +158,32 @@ void Player::Draw(void)
         arrow_.Object::SetTrans({ pos_arrow.x, pos_arrow.y,0 });
         arrow_.Object::SetRot({ 0,0,rotation_ });
 
-        // プレイヤーの移動ベクトルが0だったら(スタート時対策）
-        if (vec_move_.GetLength() == 0)
-        {
-            // 矢印の座標を決め打ちで決める。（今は初期状態だと右向いてるので、右方向にきめうち）
-            pos_arrow = position_ + Vec2(1, 0) * kMowArrowDist2Self_;
-            arrow_.Object::SetTrans({ pos_arrow.x, pos_arrow.y,0 });
-            arrow_.DrawBoxSprite(png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
-        }
-        else // 移動ベクトルが0じゃなかったら。
-        {
-            arrow_.DrawBoxSprite(png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
-        }
-    }
+		// プレイヤーの移動ベクトルが0だったら(スタート時対策）
+		if (vec_move_.GetLength() == 0)
+		{
+			// 矢印の座標を決め打ちで決める。（今は初期状態だと右向いてるので、右方向にきめうち）
+			pos_arrow = position_ + Vec2(1, 0) * kMowArrowDist2Self_;
+			arrow_.Object::SetTrans({ pos_arrow.x, pos_arrow.y,0 });
+			arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
+		}
+		else // 移動ベクトルが0じゃなかったら。
+		{
+			arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
+		}
+	}
 
-    // skewerの為にボタン長押ししてない && 串刺し攻撃中でない && 薙ぎ払い攻撃中なら
-    // 薙ぎ払い状態 && 薙ぎ払いフレームカウントが0以外
-    if (state_ == State::ATTACK_MOW && mow_.GetFrameCountAttack() > 1)
-    {
-        // 串を描画
-        sword_.Object::SetScale({ kPngScale_, kPngScale_,0 });
-        sword_.Object::SetTrans({ pos4Sword_.x, pos4Sword_.y,0 });
-        sword_.Object::SetRot({ 0,0,rot4Sword2_ });
-        sword_.DrawBoxSprite(png_sword_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
-        //DrawCircle((int32_t)pos4Sword_.x, (int32_t)pos4Sword_.y, 1, UtilL::Color::BLUE, true, 1);
-    }
-    //DrawFormatString(1000, 120, UtilL::Color::GREEN, "rot4s: %f", rot4RotationSword_);
+	// skewerの為にボタン長押ししてない && 串刺し攻撃中でない && 薙ぎ払い攻撃中なら
+	// 薙ぎ払い状態 && 薙ぎ払いフレームカウントが0以外
+	if (state_ == State::ATTACK_MOW && mow_.GetFrameCountAttack() > 1)
+	{
+		// 串を描画
+		sword_.Object::SetScale({ kPngScale_, kPngScale_,0 });
+		sword_.Object::SetTrans({ pos4Sword_.x, pos4Sword_.y,0 });
+		sword_.Object::SetRot({ 0,0,rot4Sword2_ });
+		sword_.DrawBoxSprite(nullptr, png_sword_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+		//DrawCircle((int32_t)pos4Sword_.x, (int32_t)pos4Sword_.y, 1, UtilL::Color::BLUE, true, 1);
+	}
+	//DrawFormatString(1000, 120, UtilL::Color::GREEN, "rot4s: %f", rot4RotationSword_);
 
     if (state_ == State::ATTACK_SKEWER) // 串刺し攻撃中、串刺しの描画関数を呼び出す
     {
@@ -196,51 +196,51 @@ void Player::Draw(void)
             //突進パーティクル
             ParticleManagerL::GetInstance()->SkewerEffect(pos4SwordUp_, -vec_move_);
 
-            dist_p4su2p4sb_ = EnemyManager::GetInstance().GetSkewerEnemiesLength() - 18;
-        }
+			dist_p4su2p4sb_ = EnemyManager::GetInstance().GetSkewerEnemiesLength() - 18;
+		}
 
-        // 串
-        sword_.Object::SetScale({ kPngScale_, kPngScale_,0 });
-        sword_.Object::SetTrans({ pos4Sword_.x, pos4Sword_.y,0 });
-        sword_.Object::SetRot({ 0,0,rotation_ });
-        sword_.DrawBoxSprite(png_sword_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+		// 串
+		sword_.Object::SetScale({ kPngScale_, kPngScale_,0 });
+		sword_.Object::SetTrans({ pos4Sword_.x, pos4Sword_.y,0 });
+		sword_.Object::SetRot({ 0,0,rotation_ });
+		sword_.DrawBoxSprite(nullptr, png_sword_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
 
-        swordUp_.Object::SetScale({ kPngScale_, kPngScale_,0 });
-        swordUp_.Object::SetTrans({ pos4SwordUp_.x, pos4SwordUp_.y,0 });
-        swordUp_.Object::SetRot({ 0,0,rotation_ });
-        swordUp_.DrawBoxSprite(png_swordUp_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+		swordUp_.Object::SetScale({ kPngScale_, kPngScale_,0 });
+		swordUp_.Object::SetTrans({ pos4SwordUp_.x, pos4SwordUp_.y,0 });
+		swordUp_.Object::SetRot({ 0,0,rotation_ });
+		swordUp_.DrawBoxSprite(nullptr, png_swordUp_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
-        swordBottom_.Object::SetScale({ kPngScale_, kPngScale_,0 });
-        swordBottom_.Object::SetTrans({ pos4SwordBottom_.x, pos4SwordBottom_.y,0 });
-        swordBottom_.Object::SetRot({ 0,0,rotation_ });
-        swordBottom_.DrawBoxSprite(png_swordBottom_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
-        skewer_.Draw();
-    }
+		swordBottom_.Object::SetScale({ kPngScale_, kPngScale_,0 });
+		swordBottom_.Object::SetTrans({ pos4SwordBottom_.x, pos4SwordBottom_.y,0 });
+		swordBottom_.Object::SetRot({ 0,0,rotation_ });
+		swordBottom_.DrawBoxSprite(nullptr, png_swordBottom_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+		skewer_.Draw();
+	}
 
     // 無敵時間中なら
     if (frameCount_invincible_ != 0)
     {
         //DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, Color::YELLOW, true, 1);
 
-        Object::SetScale({ kPngScale_, kPngScale_,0 });
-        Object::SetTrans({ position_.x, position_.y,0 });
-        Object::SetRot({ 0,0,rotation_ });
-        DrawBoxSprite(png_player_, { 1.0f,1.0f,0,1.0f }, { 0.5f,0.5f });
-        //DrawFormatString(1000, 20, UtilL::Color::YELLOW, "無敵状態");
-        //DrawFormatString(1000, 40, UtilL::Color::YELLOW, "frame: %d", kMaxInvincibleFrame_ - frameCount_invincible_);
-    }
-    else // 無敵時間じゃないなら
-    {
-        //DrawFormatString(1000, 20, UtilL::Color::WHITE, "通常状態");
-        //DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, Color::WHITE, true, 1);
+		Object::SetScale({ kPngScale_, kPngScale_,0 });
+		Object::SetTrans({ position_.x, position_.y,0 });
+		Object::SetRot({ 0,0,rotation_ });
+		DrawBoxSprite(nullptr, png_player_, { 1.0f,1.0f,0,1.0f }, { 0.5f,0.5f });
+		//DrawFormatString(1000, 20, UtilL::Color::YELLOW, "無敵状態");
+		//DrawFormatString(1000, 40, UtilL::Color::YELLOW, "frame: %d", kMaxInvincibleFrame_ - frameCount_invincible_);
+	}
+	else // 無敵時間じゃないなら
+	{
+		//DrawFormatString(1000, 20, UtilL::Color::WHITE, "通常状態");
+		//DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, Color::WHITE, true, 1);
 
-        // playerの描画
-        Object::SetScale({ kPngScale_, kPngScale_,0 });
-        Object::SetTrans({ position_.x, position_.y,0 });
-        Object::SetRot({ 0,0,rotation_ });
-        DrawBoxSprite(png_player_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
-    }
+		// playerの描画
+		Object::SetScale({ kPngScale_, kPngScale_,0 });
+		Object::SetTrans({ position_.x, position_.y,0 });
+		Object::SetRot({ 0,0,rotation_ });
+		DrawBoxSprite(nullptr, png_player_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+	}
 
     // 串刺し攻撃時の判定座標
     //DrawFormatString(1000, 100, UtilL::Color::GREEN, "pos(%f,%f)", skewer_.GetPos().x, skewer_.GetPos().y);
@@ -249,35 +249,35 @@ void Player::Draw(void)
 
 void Player::ResetSkewerInfo4Pause(void)
 {
-    // 離した瞬間に初期化
-    frameCount_4Skewer_ = 0;
-    isSkewerScreenBlack4SceneM_ = false;
+	// 離した瞬間に初期化
+	frameCount_4Skewer_ = 0;
+	isSkewerScreenBlack4SceneM_ = false;
 
-    // スローモーション解除
-    // スローモーション切る奴
-    //SceneManager::GetInstance()->EndSlowMotion();
+	// スローモーション解除
+	// スローモーション切る奴
+	//SceneManager::GetInstance()->EndSlowMotion();
 }
 
 void Player::MoveUpdate(void)
 {
 
-    // 串刺し終了後の縮みフラグオンなら
-    if (isSkewerEndShrink_)
-    {
-        // フレームカウンタが規定値以上なら終了
-        if (frameCount_SkewerEndShrink_ > kMaxFrameSkewerEndShrink_)
-        {
-            isSkewerEndShrink_ = false;
-            frameCount_SkewerEndShrink_ = 0;
-        }
-        else // 規定値未満なら加算
-        {
-            float rate = (std::min)((float)frameCount_SkewerEndShrink_ / kMaxFrameSkewerEndShrink_, 1.f);
-            position_ = position_ + vec_move_ * Math::Ease::EaseInSine(rate) * dist_p4su2p4sb_;
+	// 串刺し終了後の縮みフラグオンなら
+	if (isSkewerEndShrink_)
+	{
+		// フレームカウンタが規定値以上なら終了
+		if (frameCount_SkewerEndShrink_ > kMaxFrameSkewerEndShrink_)
+		{
+			isSkewerEndShrink_ = false;
+			frameCount_SkewerEndShrink_ = 0;
+		}
+		else // 規定値未満なら加算
+		{
+			float rate = (std::min)((float)frameCount_SkewerEndShrink_ / kMaxFrameSkewerEndShrink_, 1.f);
+			position_ = position_ + vec_move_ * Math::Ease::EaseInSine(rate) * dist_p4su2p4sb_;
 
-            // フレーム加算
-            frameCount_SkewerEndShrink_++;
-        }
+			// フレーム加算
+			frameCount_SkewerEndShrink_++;
+		}
 
     }
     else // 縮み処理してる間は動けない
@@ -438,24 +438,26 @@ void Player::MowAttackUpdate(void)
 
 void Player::SkewerAttackUpdate(void)
 {
-    // isSkewerがfalseならMOVE状態へ遷移
-    if (skewer_.GetIsSkewer() == false)
-    {
-        state_ = State::MOVE;
-        // 判定がその場に残り続けちゃうから、絶対に引っかからない座標に転送するごり押し。 pos(-10万,-10万)
-        skewer_.SetPos({ -100000.f, -100000.f });
-        // 多分、ほぼ確実に通ると思うから規定フレーム後(ヒットストップ後）に通ると思うんで、スローモーション終了させてヒットストップも終了
-        if (frameCount_SkewerEndHitStop_)
-        {
-            //GameVelocityManager::GetInstance().BeginSlowMotion(30, 1.0f);
-            HitStopManager::GetInstance().BeginHitStop(60);
-            frameCount_SkewerEndHitStop_ = 0;
-            CameraManager::GetInstance().GetCamera2D()->EndFollow();
-            isSkewerEndShrink_ = true;
-        }
-        // 関数終了
-        return;
-    }
+	// isSkewerがfalseならMOVE状態へ遷移
+	if (skewer_.GetIsSkewer() == false)
+	{
+		state_ = State::MOVE;
+		// 判定がその場に残り続けちゃうから、絶対に引っかからない座標に転送するごり押し。 pos(-10万,-10万)
+		skewer_.SetPos({ -100000.f, -100000.f });
+		// 多分、ほぼ確実に通ると思うから規定フレーム後(ヒットストップ後）に通ると思うんで、スローモーション終了させてヒットストップも終了
+		if (frameCount_SkewerEndHitStop_)
+		{
+			//GameVelocityManager::GetInstance().BeginSlowMotion(30, 1.0f);
+			uint32_t deadEneNum;
+			EnemyManager::GetInstance().GetDefeatedEnemiesNum(deadEneNum);
+			HitStopManager::GetInstance().BeginHitStop(3 + deadEneNum * 2);
+			frameCount_SkewerEndHitStop_ = 0;
+			CameraManager::GetInstance().GetCamera2D()->EndFollow();
+			isSkewerEndShrink_ = true;
+		}
+		// 関数終了
+		return;
+	}
 
     // 串刺しの上半分の1フレーム後の座標 = 1フレーム前の上半分の座標 + (正規化されたプレイヤーの向き * 速度)
     Vec2 skewerd_swordUp_pos = pos4SwordUp_ /*+ vec_move_ * skewer_.GetKMoveSpeed()*/;

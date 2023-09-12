@@ -144,5 +144,5 @@ void Emitter::Particle::Draw()
 	obj_->SetTrans({ pos.x,pos.y,0 });
 	obj_->SetRot({ 0,0,rot });
 
-	obj_->DrawBoxSprite(0U,color);
+	obj_->DrawBoxSprite(nullptr, 0U,color);
 }

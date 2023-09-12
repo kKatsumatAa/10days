@@ -20,8 +20,10 @@ private:
     Vec2 RightBottom_{};
 
     uint64_t png_Stage_ = 0;        //ステージ画像
+    uint64_t png_Background_ = 0;   //背景画像
 
-    Object obj_;
+    Object objStage_;
+    Object objBack_;
 
 public:
     // getter

@@ -1,6 +1,7 @@
 #include "SceneTransition.h"
 #include <algorithm>
 #include "MathUtil.h"
+#include "CameraManager.h"
 
 
 uint64_t SceneTransition::png_rolledScroll_;
@@ -103,22 +104,22 @@ void SceneTransition::Draw(void)
 	wasiBack2_.SetScale({ 1.0f,1.0f,0 });
 	wasiBack2_.SetTrans({ pos_unrollScroll_.x,pos_unrollScroll_.y,0 });
 	wasiBack2_.SetRot({ 0,0,0 });
-	wasiBack2_.DrawBoxSprite(png_unrollScroll_, { 1.0f,1.0f,1.0f,(float)alpha_ / 255.0f }, { 0.5f,0.5f });
+	wasiBack2_.DrawBoxSprite(CameraManager::GetInstance().GetCamera2D("UICamera"), png_unrollScroll_, {1.0f,1.0f,1.0f,(float)alpha_ / 255.0f}, {0.5f,0.5f});
 
 	// îwåi-è„â∫ÇÃë—
 	wasiFrameUp2_.SetScale({ 1.0f,1.0f,0 });
 	wasiFrameUp2_.SetTrans({ pos_TBBeltBG_.x,pos_TBBeltBG_.y,0 });
 	wasiFrameUp2_.SetRot({ 0,0,0 });
-	wasiFrameUp2_.DrawBoxSprite(png_topBeltBG_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+	wasiFrameUp2_.DrawBoxSprite(CameraManager::GetInstance().GetCamera2D("UICamera"),png_topBeltBG_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
 	wasiFrameBottom2_.SetScale({ 1.0f,1.0f,0 });
 	wasiFrameBottom2_.SetTrans({ pos_TBBeltBG_.x,(720.f - pos_TBBeltBG_.y - 1),0 });
 	wasiFrameBottom2_.SetRot({ 0,0,0 });
-	wasiFrameBottom2_.DrawBoxSprite(png_bottomBeltBG_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+	wasiFrameBottom2_.DrawBoxSprite(CameraManager::GetInstance().GetCamera2D("UICamera"), png_bottomBeltBG_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
 	// ä™ï®
 	makimono_.SetScale({ 1.0f,1.0f,0 });
 	makimono_.SetTrans({ pos_rolledScroll_.x,(720.f - pos_rolledScroll_.y - 1),0 });
 	makimono_.SetRot({ 0,0,0 });
-	makimono_.DrawBoxSprite(png_rolledScroll_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+	makimono_.DrawBoxSprite(CameraManager::GetInstance().GetCamera2D("UICamera"), png_rolledScroll_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 }

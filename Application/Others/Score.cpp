@@ -1,5 +1,6 @@
 #include "Score.h"
 #include "ImGuiManager.h"
+#include "CameraManager.h"
 
 #include <fstream>
 #include <string>
@@ -30,7 +31,7 @@ void Score::Add(uint32_t enemyNum)
 
 void Score::Draw()
 {
-	drawNum_.Draw();
+	drawNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
 }
 
 void Score::DrawImGui()
