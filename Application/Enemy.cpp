@@ -145,7 +145,7 @@ void Enemy::Draw(void)
 		if (frameCount_move_ == 0)
 		{
 			// ìGÇÃêFÇÕê‘êFÇ…
-			DrawBoxSprite(png_enemy_, { 1.0f,0.1f,0.1f,1.0f }, { 0.5f,0.5f });
+			DrawBoxSprite(png_enemy_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
 			/*DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, UtilL::Color::WHITE, false, 1);*/
 		}
