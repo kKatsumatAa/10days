@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "DrawIntNumImage.h"
 
 class Score
 {
@@ -22,4 +23,6 @@ public:
 
 	static uint32_t nowScore_;		//現在のスコア
 	static uint32_t highScore_;		//今までのハイスコア
+
+	static DrawIntNumImage drawNum_;
 };
