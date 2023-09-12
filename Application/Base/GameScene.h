@@ -37,7 +37,7 @@ public:
     void GameSceneUpdate(void);
 	void Draw()override;
 	void DrawSprite()override;
-
+	void DrawSprite2()override;
 	void DrawImgui()override;
 
 private:

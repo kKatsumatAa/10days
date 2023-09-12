@@ -70,7 +70,7 @@ public:
 	void Update();
 	void Draw();
 	void DrawSprite();
-
+	void DrawSprite2();
 	void DrawImgui();
 
 	void LoadAllSound();

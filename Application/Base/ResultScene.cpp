@@ -26,12 +26,12 @@ void ResultScene::Initialize(void)
 
 void ResultScene::Update(void)
 {
-    if (PadInput::GetInstance().GetLeftStickTilt().y >= 0.3f)
+    if (PadInput::GetInstance().GetLeftStickTilt().x >= 0.3f)
     {
         destination_++;
         destination_ = (std::min)(destination_, 1);
     }
-    else if (PadInput::GetInstance().GetLeftStickTilt().y <= -0.3f)
+    else if (PadInput::GetInstance().GetLeftStickTilt().x <= -0.3f)
     {
         destination_--;
         destination_ = (std::max)(destination_, 0);
@@ -76,14 +76,19 @@ void ResultScene::Draw(void)
 
 void ResultScene::DrawSprite()
 {
-	//リザルト画像
-	result_.DrawBoxSprite(CameraManager::GetInstance().GetCamera2D("UICamera"), png_result_);
 
-	//DrawFormatString(0, 380, UtilL::Color::RED, "Scene: RESULT");
-	//DrawFormatString(0, 0, UtilL::Color::WHITE, "pad-A or key-R[DEBUG]でtitle");
+}
 
-	Score::GetInstance()->Draw();
-	UI::GetInstance()->Draw(UIType::Abutton);
+void ResultScene::DrawSprite2()
+{
+    //リザルト画像
+    result_.DrawBoxSprite(CameraManager::GetInstance().GetCamera2D("UICamera"), png_result_);
+
+    //DrawFormatString(0, 380, UtilL::Color::RED, "Scene: RESULT");
+    //DrawFormatString(0, 0, UtilL::Color::WHITE, "pad-A or key-R[DEBUG]でtitle");
+
+    Score::GetInstance()->Draw();
+    UI::GetInstance()->Draw(UIType::Abutton);
 }
 
 void ResultScene::DrawImgui()

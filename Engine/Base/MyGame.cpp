@@ -40,7 +40,8 @@ void MyGame::Draw()
 	{
 		std::function<void()>f = [=]() {sceneM_->Draw(); };
 		std::function<void()>spriteF = [=]() {sceneM_->DrawSprite(); };
-		PostEffectManager::GetInstance().BeforeDraw(f, spriteF);
+		std::function<void()>spriteF2 = [=]() {sceneM_->DrawSprite2(); };
+		PostEffectManager::GetInstance().BeforeDraw(f, spriteF, spriteF2);
 	}
 
 	//é¿ç€Ç…ï`âÊ

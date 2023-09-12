@@ -60,6 +60,11 @@ void TitleScene::Draw(void)
 
 void TitleScene::DrawSprite()
 {
+
+}
+
+void TitleScene::DrawSprite2()
+{
 	//ƒ^ƒCƒgƒ‹
 	titleObj_.DrawBoxSprite(CameraManager::GetInstance().GetCamera2D("UICamera"), titleImageHandle_);
 
