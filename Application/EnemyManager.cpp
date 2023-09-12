@@ -18,6 +18,8 @@ void EnemyManager::Initialize(Player* player, Stage* stage)
 
 	enemies_.clear();
 	combinedEnemiesArray_.clear();
+
+	enemyTexHandle_ = TextureManager::LoadGraph("enemy.png");
 }
 
 void EnemyManager::SaveMowDownEnemies()
@@ -183,7 +185,7 @@ void EnemyManager::GenerateUpdate()
 	{
 		float x = GetRand(100, 1100);
 		float y = GetRand(100.0f, 600.0f);
-		std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>(CollisionManger::GetInstance(), player_, stage_);
+		std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>(CollisionManger::GetInstance(), player_, stage_, enemyTexHandle_);
 		enemy->SetPos({ x,y });
 		enemy->SetRot(0);
 		enemy->SetRad({ Enemy::KRadius_,0 });
@@ -208,7 +210,7 @@ void EnemyManager::MowDownTriggerEnemiesUpdate()
 		combinedEnemiesArray_.push_back(std::move(mowDownedEnemies_));
 		mowDownedEnemies_ = nullptr;
 	}
-	
+
 }
 
 void EnemyManager::MowDownTriggerEnd()

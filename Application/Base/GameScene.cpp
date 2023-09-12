@@ -43,37 +43,114 @@ void GameScene::Initialize(void)
 
 void GameScene::Update(void)
 {
-	if (!HitStopManager::GetInstance().GetIsStop())
-	{
-		stage_->Update();
+    if (PadInput::GetInstance().GetTriggerButton(VK_GAMEPAD_MENU))
+    {
+        if (isMenu_)
+        {
+            isMenu_ = false;
+        }
+        else
+        {
+            isMenu_ = true;
+            // 串刺し用にボタン押してたら解除する用関数
+            player_->ResetSkewerInfo4Pause();
+        }
+    }
 
-		player_->Update();
-		EnemyManager::GetInstance().Update();
+    if (isMenu_ == false)
+    {
+        switch (progress_)
+        {
+        case GameScene::Progress::PRE:            // フレームカウントが規定値超えたら遷移
+            if (frameCount_preGame_ > kMaxFrame_preGame_)
+            {
+                // 進行値をGAMEに
+                progress_ = Progress::GAME;
+            }
+            break;
+        case GameScene::Progress::GAME:
+            break;
+        case GameScene::Progress::POST:
+            break;
+        default:
+            break;
+        }
 
-		if (KeyboardInput::GetInstance().KeyTrigger(DIK_0))
-		{
-			timer_.SetEndTime(10.f);
-		}
+        if (progress_ == Progress::PRE)
+        {
+            frameCount_preGame_++;
+        }
+        else if (progress_ == Progress::GAME)
+        {
+            if (!HitStopManager::GetInstance().GetIsStop())
+            {
+                stage_->Update();
 
-		if (timer_.GetIsEnd())
-		{
-			Score::HighScoreUpdate();
+                player_->Update();
+                EnemyManager::GetInstance().Update();
 
-			Sound::GetInstance().PlayWave("sceneChange_SE.wav");
-			//BGMストップ
-			Sound::GetInstance().StopWave("play_BGM.wav");
-			SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
-		}
+                if (KeyboardInput::GetInstance().KeyTrigger(DIK_0))
+                {
+                    timer_.SetEndTime(10.f);
+                }
 
-		ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
+                if (timer_.GetIsEnd())
+                {
+                    Score::HighScoreUpdate();
 
-		CollisionManger::GetInstance()->Update();
+                    Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+                    //BGMストップ
+                    Sound::GetInstance().StopWave("play_BGM.wav");
+                    SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
+                }
 
-		//ゲームスピード
-		GameVelocityManager::GetInstance().Update();
-	}
+                ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
 
-	HitStopManager::GetInstance().Update();
+                CollisionManger::GetInstance()->Update();
+
+                //ゲームスピード
+                GameVelocityManager::GetInstance().Update();
+            }
+
+            HitStopManager::GetInstance().Update();
+        }
+    }
+    else
+    {
+        if (PadInput::GetInstance().GetLeftStickTilt().y >= 0.3f)
+        {
+            destination_++;
+            destination_ = (std::min)(destination_, 1);
+        }
+        else if (PadInput::GetInstance().GetLeftStickTilt().y <= -0.3f)
+        {
+            destination_--;
+            destination_ = (std::max)(destination_, 0);
+        }
+
+        if (destination_ == Destination::RETRY)
+        {
+            if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+            {
+                //PlaySoundMem(sceneChange_SE_, DX_PLAYTYPE_NORMAL);
+                ////BGMストップ
+                //StopSoundMem(game_BGM_);
+                //SceneManager::GetInstance()->RequestChangeScene(SceneFactory::Usage::GAME);
+            }
+        }
+        else if (destination_ == Destination::TITLE)
+        {
+            if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+            {
+                //PlaySoundMem(sceneChange_SE_, DX_PLAYTYPE_NORMAL);
+                ////BGMストップ
+                //StopSoundMem(game_BGM_);
+                //SceneManager::GetInstance()->RequestChangeScene(SceneFactory::Usage::TITLE);
+            }
+        }
+    }
+
+	
 }
 
 void GameScene::Draw(void)

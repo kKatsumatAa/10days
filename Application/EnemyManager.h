@@ -22,6 +22,8 @@ private://•Ï”
 	//“G‚ÌãŒÀ
 	const uint32_t ENEMIES_MAX_ = 5;
 
+	uint64_t enemyTexHandle_ = 0;
+
 private://ŠÖ”
 	EnemyManager() { ; }
 	~EnemyManager() { ; }

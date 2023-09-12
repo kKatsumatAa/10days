@@ -17,7 +17,7 @@ public:
 	static const float KRadius_; // îºåa
 
 	// ä÷êî
-	Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr);
+	Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle);
 	~Enemy(void) override;
 
 	void Update(void) override;
@@ -56,7 +56,7 @@ private:
 	Vec2 scale_ = { 1.0f,1.0f };
 
 	// resource
-	uint64_t png_enemy_ = TextureManager::LoadGraph("enemy.png");
+	uint64_t png_enemy_;
 
 public:
 	// setter

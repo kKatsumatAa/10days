@@ -15,7 +15,8 @@ const float Enemy::kPushBackDist_ = 2.0f;
 const float Enemy::kPngScale_ = 0.07f;
 const float Enemy::KRadius_ = 16.f;
 
-Enemy::Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr) : IEntity(stagePtr), playerPtr_(playerPtr), colMPtr_(colMPtr)
+Enemy::Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle) 
+	: IEntity(stagePtr), playerPtr_(playerPtr), colMPtr_(colMPtr),png_enemy_(texHandle)
 {
 	// Õ“Ëƒ}ƒl[ƒWƒƒ‚Ö‚Ì“o˜^
 	colMPtr->Register(this);

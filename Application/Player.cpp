@@ -246,6 +246,17 @@ void Player::Draw(void)
 	//DrawFormatString(0, 500, UtilL::Color::WHITE, "pos(%f,%f)", position_.x, position_.y);
 }
 
+void Player::ResetSkewerInfo4Pause(void)
+{
+    // 離した瞬間に初期化
+    frameCount_4Skewer_ = 0;
+    isSkewerScreenBlack4SceneM_ = false;
+
+    // スローモーション解除
+    // スローモーション切る奴
+    //SceneManager::GetInstance()->EndSlowMotion();
+}
+
 void Player::MoveUpdate(void)
 {
 	// 入力
