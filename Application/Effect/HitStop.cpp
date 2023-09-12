@@ -16,6 +16,7 @@ void HitStopManager::Initialize()
 {
 	timer_ = 0;
 	timerMax_ = 0;
+	PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isBarrelCurve = true;
 }
 
 void HitStopManager::Update()

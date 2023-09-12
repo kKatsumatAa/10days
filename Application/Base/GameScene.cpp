@@ -50,21 +50,29 @@ void GameScene::Initialize(void)
 	Score::GetInstance()->Init();
 	Update();
 
-	UI::GetInstance()->SetPos(UIType::Lstick, { 30.f,30.f });
-	UI::GetInstance()->SetSize(UIType::Lstick, 0.2f);
-	UI::GetInstance()->SetPos(UIType::Move, { 100.f,30.f });
-	UI::GetInstance()->SetSize(UIType::Move, 0.2f);
+	UI::GetInstance()->SetPos(UIType::Makimono, { 0.f,0.f });
+	UI::GetInstance()->SetColor(UIType::Makimono, { 0.7f,0.7f,0.7f,1.f });
 
-	UI::GetInstance()->SetPos(UIType::Rbutton, { 30.f,80.f });
-	UI::GetInstance()->SetSize(UIType::Rbutton, 0.2f);
-	UI::GetInstance()->SetPos(UIType::Attack, { 100.f,80.f });
-	UI::GetInstance()->SetSize(UIType::Attack, 0.2f);
+	UI::GetInstance()->SetPos(UIType::Lstick, { 100.f,100.f });
+	UI::GetInstance()->SetSize(UIType::Lstick, 0.3f);
+	UI::GetInstance()->SetAncorPoint(UIType::Lstick, { 0.5f,0.5f });
+	UI::GetInstance()->SetPos(UIType::Move, { 100.f,160.f });
+	UI::GetInstance()->SetSize(UIType::Move, 0.25f);
+	UI::GetInstance()->SetAncorPoint(UIType::Move, { 0.5f,0.5f });
 
-	UI::GetInstance()->SetPos(UIType::Abutton, { 30.f,130.f });
-	UI::GetInstance()->SetSize(UIType::Abutton, 0.2f);
-	UI::GetInstance()->SetAncorPoint(UIType::Abutton, {0.f,0.f});
-	UI::GetInstance()->SetPos(UIType::Skewer, { 100.f,130.f });
-	UI::GetInstance()->SetSize(UIType::Skewer, 0.2f);
+	UI::GetInstance()->SetPos(UIType::Rbutton, { 100.f,240.f });
+	UI::GetInstance()->SetSize(UIType::Rbutton, 0.3f);
+	UI::GetInstance()->SetAncorPoint(UIType::Rbutton, { 0.5f,0.5f });
+	UI::GetInstance()->SetPos(UIType::Attack, { 100.f,300.f });
+	UI::GetInstance()->SetSize(UIType::Attack, 0.25f);
+	UI::GetInstance()->SetAncorPoint(UIType::Attack, { 0.5f,0.5f });
+
+	UI::GetInstance()->SetPos(UIType::Abutton, { 100.f,380.f });
+	UI::GetInstance()->SetSize(UIType::Abutton, 0.3f);
+	UI::GetInstance()->SetAncorPoint(UIType::Abutton, { 0.5f,0.5f });
+	UI::GetInstance()->SetPos(UIType::Skewer, { 100.f,440.f });
+	UI::GetInstance()->SetSize(UIType::Skewer, 0.25f);
+	UI::GetInstance()->SetAncorPoint(UIType::Skewer, { 0.5f,0.5f });
 
     UI::GetInstance()->SetPos(UIType::Retry, { 640,300 });
     UI::GetInstance()->SetSize(UIType::Retry, 0.6f);
@@ -240,21 +248,22 @@ void GameScene::DrawSprite()
 
 	player_->Draw();
 	EnemyManager::GetInstance().Draw();
+}
 
+void GameScene::DrawSprite2()
+{
 	drawNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
 
 	Score::GetInstance()->Draw();
 
+	UI::GetInstance()->Draw(UIType::Makimono);
 	UI::GetInstance()->Draw(UIType::Lstick);
 	UI::GetInstance()->Draw(UIType::Move);
 	UI::GetInstance()->Draw(UIType::Rbutton);
 	UI::GetInstance()->Draw(UIType::Attack);
 	UI::GetInstance()->Draw(UIType::Abutton);
 	UI::GetInstance()->Draw(UIType::Skewer);
-}
 
-void GameScene::DrawSprite2()
-{
 	if (isMenu_)
 	{
 		UI::GetInstance()->Draw(UIType::Retry);
