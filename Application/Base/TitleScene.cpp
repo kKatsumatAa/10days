@@ -19,7 +19,7 @@ void TitleScene::Initialize(void)
 	//BGMÄ¶
 	Sound::GetInstance().PlayWave("title_BGM.wav", 1.0f, true);
 
-	Score::LoadScore();
+	Score::GetInstance()->LoadScore();
 }
 
 void TitleScene::Update(void)

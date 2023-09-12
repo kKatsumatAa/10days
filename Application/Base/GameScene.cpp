@@ -35,7 +35,7 @@ void GameScene::Initialize(void)
 	EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
 
 	//timer_.Start(kMaxGameTimer_);
-	timer_.Start(1000000000);
+	timer_.Start(50000);	//制限時間50000秒に
 
 	ParticleManagerL::GetInstance()->Init();
 
@@ -44,13 +44,15 @@ void GameScene::Initialize(void)
 
 	drawNum_.Initialize(TextureManager::LoadGraph("number.png"));
 
-	Score::Init();
+	Score::GetInstance()->Init();
 	Update();
 }
 
 void GameScene::Update(void)
 {
-	drawNum_.SetNum(num_++, { 0,0 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 1.0f);
+	//設定した (制限時間) - (経過時間)
+	uint32_t timer = (uint32_t)timer_.GetEndTime() - (uint32_t)timer_.GetElapsedTime();
+	drawNum_.SetNum(timer, {0,100}, {1.0f / 10.0f,1.0f}, {100,160}, 1.0f);	//残り秒数表示
 
 	if (PadInput::GetInstance().GetTriggerButton(VK_GAMEPAD_MENU))
 	{
@@ -105,7 +107,7 @@ void GameScene::Update(void)
 
 				if (timer_.GetIsEnd())
 				{
-					Score::HighScoreUpdate();
+					Score::GetInstance()->HighScoreUpdate();
 
 					Sound::GetInstance().PlayWave("sceneChange_SE.wav");
 					//BGMストップ
@@ -183,7 +185,7 @@ void GameScene::DrawSprite()
 	////DrawFormatString(0, 20, UtilL::Color::WHITE, "time: %f", timer_.GetElapsedTime());
 	////DrawPad();
 
-	//Score::Draw();
+	Score::GetInstance()->Draw();
 }
 
 void GameScene::DrawImgui()
@@ -192,6 +194,4 @@ void GameScene::DrawImgui()
 	GameVelocityManager::GetInstance().UpdateImGui();
 	//ヒットストップ
 	HitStopManager::GetInstance().DrawImGui();
-    //スコア
-    Score::DrawImGui();
 }
