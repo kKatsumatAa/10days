@@ -26,12 +26,12 @@ void ResultScene::Initialize(void)
 
 void ResultScene::Update(void)
 {
-    if (PadInput::GetInstance().GetLeftStickTilt().y >= 0.3f)
+    if (PadInput::GetInstance().GetLeftStickTilt().x >= 0.3f)
     {
         destination_++;
         destination_ = (std::min)(destination_, 1);
     }
-    else if (PadInput::GetInstance().GetLeftStickTilt().y <= -0.3f)
+    else if (PadInput::GetInstance().GetLeftStickTilt().x <= -0.3f)
     {
         destination_--;
         destination_ = (std::max)(destination_, 0);
