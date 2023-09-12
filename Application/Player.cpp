@@ -177,7 +177,7 @@ void Player::Draw(void)
 	if (state_ == State::ATTACK_MOW && mow_.GetFrameCountAttack() > 1)
 	{
 		// ‹ø‚ð•`‰æ
-		sword_.Object::SetScale({ kPngScale_, kPngScale_,0 });
+		sword_.Object::SetScale({ 0.08f, 0.08f,0 });
 		sword_.Object::SetTrans({ pos4Sword_.x, pos4Sword_.y,0 });
 		sword_.Object::SetRot({ 0,0,rot4Sword2_ });
 		sword_.DrawBoxSprite(nullptr, png_sword_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
