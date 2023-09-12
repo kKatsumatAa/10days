@@ -13,6 +13,7 @@ public:
 	void Add(uint32_t enemyNum);
 	//スコア描画
 	void Draw();
+	void DrawHighScore();
 	void DrawImGui();
 
 	//ハイスコアの更新(したか確認)
@@ -26,5 +27,6 @@ public:
 	uint32_t nowScore_;		//現在のスコア
 	uint32_t highScore_;	//今までのハイスコア
 
-	DrawIntNumImage drawNum_;	//数字描画用
+	DrawIntNumImage drawNum_;		//数字描画用
+	DrawIntNumImage drawNumHigh_;	//数字描画用
 };

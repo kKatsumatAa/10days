@@ -19,6 +19,7 @@ void ResultScene::Initialize(void)
 	Sound::GetInstance().PlayWave("result_BGM.wav", 1.0f, true);
 
 	Score::GetInstance()->SaveScore();
+
 	UI::GetInstance()->SetPos(UIType::Abutton, { 640.f,600.f });
 	UI::GetInstance()->SetSize(UIType::Abutton, 0.8f);
 	UI::GetInstance()->SetAncorPoint(UIType::Abutton, {0.5f,0.5f});
