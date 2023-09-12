@@ -25,6 +25,7 @@ void TutorialScene::Initialize(void)
     player_->SetVecMove({ 0,-1 });
 
     EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
+    GameVelocityManager::GetInstance().Initialize();
 
     //timer_.Start(kMaxGameTimer_);
     timer_.Start(1000000000);
@@ -153,6 +154,10 @@ void TutorialScene::Update(void)
         }
 
         ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
+        CollisionManger::GetInstance()->Update();
+
+        //ゲームスピード
+        GameVelocityManager::GetInstance().Update();
 
         if (progressNum_ == 1)
         {

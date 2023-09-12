@@ -152,6 +152,10 @@ void Player::Draw(void)
 	else if (state_ != State::ATTACK_SKEWER) // 串刺し攻撃のために溜めてる間や、串刺し攻撃中は半円を表示しない ※それ以外の時に表示
 	{
 		// 攻撃範囲とdebugの表示
+#pragma region 薙ぎ払い攻撃の範囲を移動させてる
+        mow_.SetPos(position_);
+        mow_.SetRot(rotation_);
+#pragma endregion
 		mow_.Draw();
 
 		// 矢印の座標
@@ -314,8 +318,6 @@ void Player::MoveUpdate(void)
 #pragma region 薙ぎ払い攻撃の範囲を移動させてる
 		mow_.SetPos(position_);
 		mow_.SetRot(rotation_);
-		// サポートの矩形の中心点 = プレイヤーの座標 + 正面vec * kMowSupportCenterDist_
-		Vec2 center4MowSupport = position_ + vec_move_ * kMowSupportCenterDist_;
 #pragma endregion
 
 

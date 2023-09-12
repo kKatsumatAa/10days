@@ -31,9 +31,10 @@ void GameScene::Initialize(void)
 	// (0,0) ~ (1280,720) ‚æ‚è‚¿‚å‚¢“à‘¤
 	stage_->Initialize({ 0,0 }, { 1280,720 });
 
-	player_->SetPos({ 300,300 });
-	player_->SetRot(0);
-	player_->SetRad({ 10,0 });
+    player_->SetPos({ 640,360 });
+    player_->SetRot(0);
+    player_->SetRad({ 10,0 });
+    player_->SetVecMove({ 0,-1 });
 
 	EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
 
@@ -48,7 +49,7 @@ void GameScene::Initialize(void)
 	drawNum_.Initialize(TextureManager::LoadGraph("number.png"));
 
 	Score::GetInstance()->Init();
-	Update();
+    GameSceneUpdate();
 
 	UI::GetInstance()->SetPos(UIType::Makimono, { 0.f,0.f });
 	UI::GetInstance()->SetColor(UIType::Makimono, { 0.7f,0.7f,0.7f,1.f });
