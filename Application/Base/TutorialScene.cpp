@@ -151,10 +151,21 @@ void TutorialScene::Update(void)
 
     if (isMenu_ == false)
     {
-        stage_->Update();
+        if (!HitStopManager::GetInstance().GetIsStop())
+        {
+            stage_->Update();
 
-        player_->Update();
-        EnemyManager::GetInstance().Update();
+            player_->Update();
+            EnemyManager::GetInstance().Update();
+
+            ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
+            CollisionManger::GetInstance()->Update();
+
+            //ゲームスピード
+            GameVelocityManager::GetInstance().Update();
+        }
+
+        HitStopManager::GetInstance().Update();
 
 #ifdef _DEBUG
         if (KeyboardInput::GetInstance().KeyTrigger(DIK_0))
@@ -172,12 +183,6 @@ void TutorialScene::Update(void)
             Sound::GetInstance().StopWave("play_BGM.wav");
             SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
         }
-
-        ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
-        CollisionManger::GetInstance()->Update();
-
-        //ゲームスピード
-        GameVelocityManager::GetInstance().Update();
 
         if (progressNum_ == 1)
         {
