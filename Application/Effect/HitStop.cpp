@@ -22,13 +22,13 @@ void HitStopManager::Update()
 {
 	if (timer_ <= timerMax_)
 	{
-		PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.barrelCurvePow = min(1.0f - EaseIn(GetTimeRate()), MAX_EFFECT_POW_);
+		PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isEmboss = true;
 
 		timer_++;
 	}
 	else
 	{
-		PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isBarrelCurve = false;
+		PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isEmboss = false;
 	}
 }
 

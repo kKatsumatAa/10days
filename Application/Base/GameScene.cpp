@@ -240,7 +240,10 @@ void GameScene::DrawSprite()
 
 	player_->Draw();
 	EnemyManager::GetInstance().Draw();
+}
 
+void GameScene::DrawSprite2()
+{
 	drawNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
 
 	Score::GetInstance()->Draw();
@@ -251,10 +254,7 @@ void GameScene::DrawSprite()
 	UI::GetInstance()->Draw(UIType::Attack);
 	UI::GetInstance()->Draw(UIType::Abutton);
 	UI::GetInstance()->Draw(UIType::Skewer);
-}
 
-void GameScene::DrawSprite2()
-{
 	if (isMenu_)
 	{
 		UI::GetInstance()->Draw(UIType::Retry);

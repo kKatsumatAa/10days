@@ -28,22 +28,6 @@ PSOutput PS(Output input) : SV_TARGET
     float4 ret = float4(0, 0, 0, 0);
     bool isEffect = false;
 
-//エンボス
-    if (isEmboss == true)
-    {
-        ret += tex0.Sample(smp, input.uv + float2(-2 * dx, -2 * dy)) * 2; // 左上
-        ret += tex0.Sample(smp, input.uv + float2(0, -2 * dy)); // 上
-        ret += tex0.Sample(smp, input.uv + float2(2 * dx, -2 * dy)) * 0; // 右 上
-        ret += tex0.Sample(smp, input.uv + float2(-2 * dx, 0)); // 左
-        ret += tex0.Sample(smp, input.uv); // 自分
-        ret += tex0.Sample(smp, input.uv + float2(2 * dx, 0)) * -1; // 右
-        ret += tex0.Sample(smp, input.uv + float2(-2 * dx, 2 * dy)) * 0; // 左下
-        ret += tex0.Sample(smp, input.uv + float2(0, 2 * dy)) * -1; // 下 
-        ret += tex0.Sample(smp, input.uv + float2(2 * dx, 2 * dy)) * -2; // 右 下 
-
-        isEffect = true;
-    }
-
 //シャープネス
     if (isSharpness == true)
     {
@@ -168,11 +152,27 @@ PSOutput PS(Output input) : SV_TARGET
         tcolor.z = lerp(tcolor.b, y, grayScalePow);
 
 		// 出力するピクセル色
-        ret = tcolor;
+        ret = float4(tcolor.rgb, 1.0f);
 
         isEffect = true;
     }
 
+    //エンボス
+    if (isEmboss == true)
+    {
+        ret += tex0.Sample(smp, input.uv + float2(-2 * dx, -2 * dy)) * 2; // 左上
+        ret += tex0.Sample(smp, input.uv + float2(0, -2 * dy)); // 上
+        ret += tex0.Sample(smp, input.uv + float2(2 * dx, -2 * dy)) * 0; // 右 上
+        ret += tex0.Sample(smp, input.uv + float2(-2 * dx, 0)); // 左
+        ret += tex0.Sample(smp, input.uv); // 自分
+        ret += tex0.Sample(smp, input.uv + float2(2 * dx, 0)) * -1; // 右
+        ret += tex0.Sample(smp, input.uv + float2(-2 * dx, 2 * dy)) * 0; // 左下
+        ret += tex0.Sample(smp, input.uv + float2(0, 2 * dy)) * -1; // 下 
+        ret += tex0.Sample(smp, input.uv + float2(2 * dx, 2 * dy)) * -2; // 右 下 
+
+        isEffect = true;
+    }
+    
 //モザイク
     if (isMosaic)
     {
