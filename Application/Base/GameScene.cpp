@@ -50,43 +50,44 @@ void GameScene::Initialize(void)
 	Score::GetInstance()->Init();
 	Update();
 
+	float opeUIPlusY = 280.0f;	//操作UIのY座標ずらす用
 	UI::GetInstance()->SetPos(UIType::Makimono, { 0.f,0.f });
 	UI::GetInstance()->SetColor(UIType::Makimono, { 0.7f,0.7f,0.7f,1.f });
 
-	UI::GetInstance()->SetPos(UIType::Lstick, { 100.f,100.f });
+	UI::GetInstance()->SetPos(UIType::Lstick, { 100.f,100.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Lstick, 0.3f);
 	UI::GetInstance()->SetAncorPoint(UIType::Lstick, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Move, { 100.f,160.f });
-	UI::GetInstance()->SetSize(UIType::Move, 0.25f);
+	UI::GetInstance()->SetPos(UIType::Move, { 100.f,150.f + opeUIPlusY });
+	UI::GetInstance()->SetSize(UIType::Move, 0.2f);
 	UI::GetInstance()->SetAncorPoint(UIType::Move, { 0.5f,0.5f });
 
-	UI::GetInstance()->SetPos(UIType::Rbutton, { 100.f,240.f });
+	UI::GetInstance()->SetPos(UIType::Rbutton, { 100.f,220.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Rbutton, 0.3f);
 	UI::GetInstance()->SetAncorPoint(UIType::Rbutton, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Attack, { 100.f,300.f });
-	UI::GetInstance()->SetSize(UIType::Attack, 0.25f);
+	UI::GetInstance()->SetPos(UIType::Attack, { 100.f,270.f + opeUIPlusY });
+	UI::GetInstance()->SetSize(UIType::Attack, 0.2f);
 	UI::GetInstance()->SetAncorPoint(UIType::Attack, { 0.5f,0.5f });
 
-	UI::GetInstance()->SetPos(UIType::Abutton, { 100.f,380.f });
+	UI::GetInstance()->SetPos(UIType::Abutton, { 100.f,340.f + opeUIPlusY });
 	UI::GetInstance()->SetSize(UIType::Abutton, 0.3f);
 	UI::GetInstance()->SetAncorPoint(UIType::Abutton, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Skewer, { 100.f,440.f });
-	UI::GetInstance()->SetSize(UIType::Skewer, 0.25f);
+	UI::GetInstance()->SetPos(UIType::Skewer, { 100.f,390.f + opeUIPlusY });
+	UI::GetInstance()->SetSize(UIType::Skewer, 0.2f);
 	UI::GetInstance()->SetAncorPoint(UIType::Skewer, { 0.5f,0.5f });
 
-    UI::GetInstance()->SetPos(UIType::Retry, { 640,300 });
-    UI::GetInstance()->SetSize(UIType::Retry, 0.6f);
-    UI::GetInstance()->SetAncorPoint(UIType::Retry, { 0.5f,0.5f });
-    UI::GetInstance()->SetPos(UIType::ToTitle, { 640,500 });
-    UI::GetInstance()->SetSize(UIType::ToTitle, 0.6f);
-    UI::GetInstance()->SetAncorPoint(UIType::ToTitle, { 0.5f,0.5f });
+	UI::GetInstance()->SetPos(UIType::Retry, { 640,300 });
+	UI::GetInstance()->SetSize(UIType::Retry, 0.6f);
+	UI::GetInstance()->SetAncorPoint(UIType::Retry, { 0.5f,0.5f });
+	UI::GetInstance()->SetPos(UIType::ToTitle, { 640,500 });
+	UI::GetInstance()->SetSize(UIType::ToTitle, 0.6f);
+	UI::GetInstance()->SetAncorPoint(UIType::ToTitle, { 0.5f,0.5f });
 }
 
 void GameScene::Update(void)
 {
 	//設定した (制限時間) - (経過時間)
 	uint32_t timer = (uint32_t)timer_.GetEndTime() - (uint32_t)timer_.GetElapsedTime();
-	drawNum_.SetNum(timer, {0,150}, {1.0f / 10.0f,1.0f}, {100,160}, 1.0f);	//残り秒数表示
+	drawNum_.SetNum(timer, { 0,150 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 1.0f);	//残り秒数表示
 
 	if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_START))
 	{
@@ -101,20 +102,20 @@ void GameScene::Update(void)
 			player_->ResetSkewerInfo4Pause();
 		}
 
-        if (destination_ == Destination::RETRY)
-        {
-            UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,0.3f });
-            UI::GetInstance()->SetSize(UIType::ToTitle, 0.4f);
-            UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,1 });
-            UI::GetInstance()->SetSize(UIType::Retry, 1);
-        }
-        else if (destination_ == Destination::TITLE)
-        {
-            UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,0.3f });
-            UI::GetInstance()->SetSize(UIType::Retry, 0.4f);
-            UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,1 });
-            UI::GetInstance()->SetSize(UIType::ToTitle, 1);
-        }
+		if (destination_ == Destination::RETRY)
+		{
+			UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,0.3f });
+			UI::GetInstance()->SetSize(UIType::ToTitle, 0.4f);
+			UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,1 });
+			UI::GetInstance()->SetSize(UIType::Retry, 1);
+		}
+		else if (destination_ == Destination::TITLE)
+		{
+			UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,0.3f });
+			UI::GetInstance()->SetSize(UIType::Retry, 0.4f);
+			UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,1 });
+			UI::GetInstance()->SetSize(UIType::ToTitle, 1);
+		}
 	}
 
 	if (isMenu_ == false)
@@ -181,43 +182,43 @@ void GameScene::Update(void)
 		{
 			destination_++;
 			destination_ = (std::min)(destination_, 1);
-            UI::GetInstance()->SetColor(UIType::Retry, {1,1,1,0.3f});
-            UI::GetInstance()->SetSize(UIType::Retry, 0.4f);
-            UI::GetInstance()->SetColor(UIType::ToTitle, {1,1,1,1});
-            UI::GetInstance()->SetSize(UIType::ToTitle, 1);
-        }
+			UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,0.3f });
+			UI::GetInstance()->SetSize(UIType::Retry, 0.4f);
+			UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,1 });
+			UI::GetInstance()->SetSize(UIType::ToTitle, 1);
+		}
 		else if (PadInput::GetInstance().GetLeftStickTilt().y <= -0.3f)
 		{
 			destination_--;
 			destination_ = (std::max)(destination_, 0);
-            UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,0.3f });
-            UI::GetInstance()->SetSize(UIType::ToTitle, 0.4f);
-            UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,1 });
-            UI::GetInstance()->SetSize(UIType::Retry, 1);
-        }
+			UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,0.3f });
+			UI::GetInstance()->SetSize(UIType::ToTitle, 0.4f);
+			UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,1 });
+			UI::GetInstance()->SetSize(UIType::Retry, 1);
+		}
 
 		if (destination_ == Destination::RETRY)
 		{
 			if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
 			{
-                Score::GetInstance()->HighScoreUpdate();
+				Score::GetInstance()->HighScoreUpdate();
 
-                Sound::GetInstance().PlayWave("sceneChange_SE.wav");
-                //BGMストップ
-                Sound::GetInstance().StopWave("play_BGM.wav");
-                SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
+				Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+				//BGMストップ
+				Sound::GetInstance().StopWave("play_BGM.wav");
+				SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
 			}
 		}
 		else if (destination_ == Destination::TITLE)
 		{
 			if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
 			{
-                Score::GetInstance()->HighScoreUpdate();
+				Score::GetInstance()->HighScoreUpdate();
 
-                Sound::GetInstance().PlayWave("sceneChange_SE.wav");
-                //BGMストップ
-                Sound::GetInstance().StopWave("play_BGM.wav");
-                SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
+				Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+				//BGMストップ
+				Sound::GetInstance().StopWave("play_BGM.wav");
+				SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
 			}
 		}
 	}
@@ -227,12 +228,12 @@ void GameScene::Update(void)
 
 void GameScene::GameSceneUpdate(void)
 {
-    stage_->Update();
+	stage_->Update();
 
-    player_->Update();
-    EnemyManager::GetInstance().Update();
+	player_->Update();
+	EnemyManager::GetInstance().Update();
 
-    ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
+	ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
 }
 
 void GameScene::Draw(void)
