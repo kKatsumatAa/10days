@@ -14,8 +14,10 @@ void Score::Init()
 	//ハイスコアの読み込み//
 }
 
-void Score::Add(uint32_t score)
+void Score::Add(uint32_t enemyNum)
 {
+	uint32_t score;
+	score = (uint32_t)((float)(enemyNum * 500) * (0.9f + 0.1f * (float)enemyNum));
 	nowScore_ += score;
 }
 
