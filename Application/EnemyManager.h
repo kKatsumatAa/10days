@@ -23,6 +23,7 @@ private://•Ï”
 	const uint32_t ENEMIES_MAX_ = 5;
 
 	uint64_t enemyTexHandle_ = 0;
+	uint64_t BigEnemyTexHandle_ = 0;
 
 	//“|‚³‚ê‚½“G‚Ì”—p
 	bool isDefeatedEnemies_ = false;

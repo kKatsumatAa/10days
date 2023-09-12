@@ -56,6 +56,9 @@ void SceneManager::Initialize()
 
 	texhandle_[1] = TextureManager::LoadGraph("effect1.png");
 
+	//UIに使う画像全部読み込み
+	UI::GetInstance()->AllLoad();
+
 	//インスタンス生成
 	lightManager_ = std::move(LightManager::Create());
 	//ライト色を設定
@@ -68,9 +71,6 @@ void SceneManager::Initialize()
 	//シーン遷移マネージャ
 	SceneTransitionManager::GetInstance().Initialize();
 
-	//画像アップロード
-	DirectXWrapper::GetInstance().UpLoadTexture();
-
 	//全体のカメラ
 	CameraManager::GetInstance().AddCamera2D("UICamera");
 	CameraManager::GetInstance().SetUsingCamera2D("UICamera");
@@ -80,8 +80,8 @@ void SceneManager::Initialize()
 	//サウンド読み込み
 	LoadAllSound();
 
-	//UIに使う画像全部読み込み
-	UI::GetInstance()->AllLoad();
+	//画像アップロード
+	DirectXWrapper::GetInstance().UpLoadTexture();
 }
 
 void SceneManager::LoadAllSound()

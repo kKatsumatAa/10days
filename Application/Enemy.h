@@ -17,7 +17,7 @@ public:
 	static const float KRadius_; // ”¼Œa
 
 	// ŠÖ”
-	Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle);
+	Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle, uint64_t bigTexHandle);
 	~Enemy(void) override;
 
 	void Update(void) override;
@@ -61,6 +61,7 @@ private:
 
 	// resource
 	uint64_t png_enemy_;
+	uint64_t png_enemy_big_;
 
 public:
 	// setter
