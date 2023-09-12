@@ -124,7 +124,6 @@
     <ClCompile Include="Application\Others\UtilL.cpp" />
     <ClCompile Include="Application\Player.cpp" />
     <ClCompile Include="Application\PlayerAttack.cpp" />
-    <ClCompile Include="Application\PlayerMowAttackSupport.cpp" />
     <ClCompile Include="Application\PlayerSkewerAttack.cpp" />
     <ClCompile Include="Application\Stage.cpp" />
     <ClCompile Include="Engine\2D\Camera2D.cpp" />
@@ -224,7 +223,6 @@
     <ClInclude Include="Application\Others\UtilL.h" />
     <ClInclude Include="Application\Player.h" />
     <ClInclude Include="Application\PlayerAttack.h" />
-    <ClInclude Include="Application\PlayerMowAttackSupport.h" />
     <ClInclude Include="Application\PlayerSkewerAttack.h" />
     <ClInclude Include="Application\Stage.h" />
     <ClInclude Include="Engine\2D\Camera2D.h" />
