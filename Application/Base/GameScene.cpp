@@ -35,9 +35,6 @@ void GameScene::Initialize(void)
 
 	EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
 
-	//timer_.Start(kMaxGameTimer_);
-	timer_.Start(60);	//制限時間50000秒に
-
 	ParticleManagerL::GetInstance()->Init();
 
 	//ゲームスピード
@@ -94,9 +91,18 @@ void GameScene::Initialize(void)
 
 void GameScene::Update(void)
 {
+    if (HitStopManager::GetInstance().GetIsStop())
+    {
+        nTimer_.Update(false,0.f);
+    }
+    else
+    {
+        nTimer_.Update(false, GameVelocityManager::GetInstance().GetVelocity());
+    }
+
 	//設定した (制限時間) - (経過時間)
-	uint32_t timer = (uint32_t)timer_.GetEndTime() - (uint32_t)timer_.GetElapsedTime();
-	drawNum_.SetNum(timer, { 35,50 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.7f);	//残り秒数表示
+    int32_t nTimer = uint32_t(1000.f - nTimer_.GetTimer() / 60);
+	drawNum_.SetNum(nTimer, { 200,10 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.85f);	//残り秒数表示
 
 	if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_START))
 	{
@@ -159,12 +165,7 @@ void GameScene::Update(void)
 				player_->Update();
 				EnemyManager::GetInstance().Update();
 
-				if (KeyboardInput::GetInstance().KeyTrigger(DIK_0))
-				{
-					timer_.SetEndTime(10.f);
-				}
-
-				if (timer_.GetIsEnd())
+				if (nTimer_.GetisTimeOut())
 				{
 					Score::GetInstance()->HighScoreUpdate();
 
@@ -231,8 +232,6 @@ void GameScene::Update(void)
 			}
 		}
 	}
-
-
 }
 
 void GameScene::GameSceneUpdate(void)
@@ -277,6 +276,7 @@ void GameScene::DrawSprite2()
 	UI::GetInstance()->Draw(UIType::Abutton);
 	UI::GetInstance()->Draw(UIType::Skewer);
 
+	drawNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
 	if (isMenu_)
 	{
 		UI::GetInstance()->Draw(UIType::Retry);

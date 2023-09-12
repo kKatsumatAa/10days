@@ -3,6 +3,7 @@
 #include <chrono>
 #include "FileSystem.h"
 #include <typeinfo>
+#include <imgui.h>
 
 namespace UtilL {
     enum Color
@@ -71,15 +72,94 @@ namespace UtilL {
         // 関数
         void Start(float endTime = 1.0f);
 
-        void SetEndTime(float endTime) { endTime_ = endTime; }
+        // int32_tの最大値の関係で、596時間程しか一時停止できない。
+        void Pause(void); // 一時停止
+        void Resume(void); // 再開
 
-        const float GetEndTime(void) { return endTime_; }
-        const bool GetIsEnd(void) { return endTime_ < ((GetNowCount<milliseconds>() - startTime_) / 1000.0f); } // endTime < elapsedTime
-        const float GetElapsedTime(void) { return float{ (GetNowCount<milliseconds>() - startTime_) / 1000.0f }; }
+        void StartSlow(float spd = 1.f);
+        void EndSlow(void);
+        
+        void Draw4Imgui(void)
+        {
+            int32_t current = GetNowCount<milliseconds>();
+            int32_t elapsed_pause{};
+            int32_t elapsed_slow{};
 
-    private:
+            if (mil_pauseTime_) elapsed_pause = (current - mil_pauseTime_);
+            if (mil_slowTime_) elapsed_slow = uint32_t((current - mil_slowTime_) * (1 - spd_slow_));
+
+
+            ImGui::Begin("maru");
+            ImGui::Text("current:%d", current);
+            ImGui::Text("s      :%d", mil_startTime_);
+            ImGui::Text("p      :%d", mil_pauseTime_);
+            ImGui::Text("tp     :%f", mil_totalPuaseTime_);
+            ImGui::Text("e      :%f", sec_endTime_);
+            ImGui::Text("s_slow :%f", spd_slow_);
+            ImGui::Text("m_slowT:%d", mil_slowTime_);
+            ImGui::Text("e_pause:%d", elapsed_pause);
+            ImGui::Text("e_slow :%d", elapsed_slow);
+            ImGui::Text("return2:%f", float{ (current - mil_startTime_ - mil_totalPuaseTime_ - elapsed_pause - elapsed_slow) / 1000.0f });
+            ImGui::End();
+        }
+    public:
         // 変数
-        int32_t startTime_{ 0 }; // 計測開始時間
-        float endTime_{ 0.f }; // 到達目標時間
+        int32_t mil_startTime_; // 計測開始時のPC内部の時間
+        int32_t mil_pauseTime_; // 一時停止時のPC内部の時間
+        float mil_totalPuaseTime_; // 停止していた時間が合計何秒か
+        float sec_endTime_; // ゴールを何秒にするか
+
+        float spd_slow_{ 1.f }; // 計測時間にスローモーションを適用できる。
+        int32_t mil_slowTime_;
+
+    public:
+        // setter
+        void SetEndTime(float endTime) { sec_endTime_ = endTime; }
+
+        // getter
+        const float GetElapsedTime(void); // 経過時間取得
+        const float GetEndTime(void) { return sec_endTime_; } // 目標時間が何秒か
+        const bool GetIsEnd(void) { return sec_endTime_ < ((GetNowCount<milliseconds>() - mil_startTime_) / 1000.0f); } // endTime < elapsedTime
+    };
+
+    enum class TimeType
+    {
+        MilliSecond,
+        Second,
+        Minute
+    };
+
+    class NTimer final
+    {
+    private:
+        float timer_;		//タイマー
+        float maxTimer_;	//タイマーの最大値
+        bool isTimeOut_;	//タイマーが最大値に達したかフラグ
+
+    public:
+        NTimer() : timer_(0), maxTimer_(0), isTimeOut_(false) {}
+        NTimer(const float maxTimer) : timer_(0), maxTimer_(maxTimer), isTimeOut_(false) {}
+
+        //タイマーリセット
+        void Reset();
+        //更新(タイマー足されてく)
+        //elapseTimer:経過時間。タイマー加算量に影響する。スローモーション用
+        void Update(const bool isRoop, const float elapseTimer = 1.0f);
+        //指定した値分タイマーを減らしてく
+        void SubTimer(const float subTimer);
+
+        //セッター
+        void SetTimer(const float timer) { timer_ = timer; }
+        void SetMaxTimer(const float maxTime_r) { maxTimer_ = maxTime_r; }
+        void SetisTimeOut(bool isTimeOut) { isTimeOut_ = isTimeOut; }
+
+        //ゲッター
+        bool GetisTimeOut()const { return isTimeOut_; }
+        const float GetMaxTimer()const { return (float)maxTimer_; }
+        const float GetTimer()const { return (float)timer_; }
+        //タイマーの進み具合を取得
+        const float GetTimeRate()const { return (float)timer_ / (float)maxTimer_; }
+        //システムが開始されてからの時間を取得
+        float GetNowTime(const TimeType& timeType);
     };
 }

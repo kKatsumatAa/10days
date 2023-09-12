@@ -48,7 +48,7 @@ private:
 	std::unique_ptr<Stage> stage_{ std::make_unique<Stage>() };
 
 	std::unique_ptr<Player> player_{ std::make_unique<Player>(CollisionManger::GetInstance(), stage_.get()) };
-	UtilL::Timer timer_{};
+    UtilL::NTimer nTimer_{5000000};
 
 	Progress progress_;
 	int32_t frameCount_preGame_; // ゲーム前イベント用のフレームカウンタ。

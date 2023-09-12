@@ -18,11 +18,19 @@ void Score::Init()
 	nowScore_ = 0;
 	drawNum_.Initialize(TextureManager::LoadGraph("number.png"));
 	nScoreSize_ = 0.6f;
-	drawNum_.SetNum(nowScore_, { 1250.f - nScoreSize_* 100.f,20.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, nScoreSize_);
+	nScorePos_ = { 1250.f,20.f };
+	drawNum_.SetNum(
+		nowScore_,
+		{ nScorePos_.x - nScoreSize_ * 100.f,nScorePos_.y },
+		{ 1.0f / 10.0f,1.0f }, { 100,160 }, nScoreSize_);
 
 	drawNumHigh_.Initialize(TextureManager::LoadGraph("number.png"));
 	hScoreSize_ = 0.6f;
-	drawNumHigh_.SetNum(highScore_, { 400.f - hScoreSize_ * 100.f,200.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, hScoreSize_);
+	hScorePos_ = { 400.f ,200.f };
+	drawNumHigh_.SetNum(
+		highScore_,
+		{ hScorePos_.x - hScoreSize_ * 100.f,hScorePos_.y },
+		{ 1.0f / 10.0f,1.0f }, { 100,160 }, hScoreSize_);
 }
 
 void Score::Add(uint32_t enemyNum)
@@ -42,7 +50,10 @@ void Score::Add(uint32_t enemyNum)
 	}
 
 	//scale(第5引数) * 画像の大きさ = 桁ごとにずらす値(digitに掛けてる値)
-	drawNum_.SetNum(nowScore_, { 1250.f - digit * nScoreSize_ * 100.f,20.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, nScoreSize_);
+	drawNum_.SetNum(
+		nowScore_,
+		{ nScorePos_.x - digit * nScoreSize_ * 100.f,nScorePos_.y },
+		{ 1.0f / 10.0f,1.0f }, { 100,160 }, nScoreSize_);
 }
 
 void Score::Draw()
@@ -83,7 +94,10 @@ void Score::HighScoreUpdate()
 		}
 
 		//scale(第5引数) * 画像の大きさ = 桁ごとにずらす値(digitに掛けてる値)
-		drawNumHigh_.SetNum(highScore_, { 400.f - digit * hScoreSize_ * 100.f,200.f }, { 1.0f / 10.0f,1.0f }, { 100,160 }, hScoreSize_);
+		drawNumHigh_.SetNum(
+			highScore_,
+			{ hScorePos_.x - digit * hScoreSize_ * 100.f,hScorePos_.y },
+			{ 1.0f / 10.0f,1.0f }, { 100,160 }, hScoreSize_);
 	}
 }
 
