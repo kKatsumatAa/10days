@@ -60,6 +60,5 @@ private:
 
 	//テスト用
 	DrawIntNumImage drawNum_;
-	uint32_t num_ = 114514;
 };
 

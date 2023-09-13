@@ -46,6 +46,7 @@ void Player::Initialize()
 {
 	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isRadialBlur = false;
 	CameraManager::GetInstance().GetCamera2D()->EndFollow();
+	CameraManager::GetInstance().GetCamera2D()->SetZoom({1.0f,1.0f});
 }
 
 void Player::Update(void)
@@ -152,9 +153,9 @@ void Player::Draw(void)
 		arrow_.Object::SetRot({ 0,0,rotation_ });
 		arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,0.2f,0.3f,0.5f }, { 0.5f,0.5f });*/
 
-        skewerArea_.Object::SetTrans( { position_.x,position_.y,0 } );
-        skewerArea_.Object::SetRot({ 0,0,rotation_ });
-        skewerArea_.DrawBoxSprite(nullptr, png_skewerArea_, { 1.0f,0.2f,0.3f,0.5f }, { 0.5f,1.f });
+		skewerArea_.Object::SetTrans({ position_.x,position_.y,0 });
+		skewerArea_.Object::SetRot({ 0,0,rotation_ });
+		skewerArea_.DrawBoxSprite(nullptr, png_skewerArea_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,1.f });
 		//DrawFormatString(1000, 60, UtilL::Color::GREEN, "溜め状態");
 		//DrawFormatString(1000, 80, UtilL::Color::GREEN, "frame: %d/%d", frameCount_4Skewer_, kChargeFrame4Skewer_);
 	}
@@ -336,6 +337,7 @@ void Player::MoveUpdate(void)
 			// pad-A押してない時 && pad-R||RB でAttack_MOW状態に遷移
 			if (PadInput::GetInstance().GetPushButton(GAMEPAD_A) == false && PadInput::GetInstance().GetReleaseTrigger(GAMEPAD_RIGHT_SHOULDER))
 			{
+				CameraManager::GetInstance().GetCamera2D()->BeginZoom(1.2f, PlayerMowAttack::kMaxAttackFrame_);
 				Sound::GetInstance().PlayWave("attack_SE.wav", 0.2f);
 				mow_.Attack(vec_move_, position_);
 				state_ = State::ATTACK_MOW;
@@ -348,6 +350,7 @@ void Player::MoveUpdate(void)
 				{
 					// スローモーション開始
 					GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
+					CameraManager::GetInstance().GetCamera2D()->BeginZoom(1.0f, PlayerMowAttack::kMaxAttackFrame_);
 				}
 
 				// ATTACK_SKEWER状態に入るための溜め計測フレームを加算
@@ -419,6 +422,7 @@ void Player::MowAttackUpdate(void)
 	// 攻撃判定のフレームが0になったら
 	if (mow_.GetFrameCountAttack() == 0)
 	{
+		CameraManager::GetInstance().GetCamera2D()->BeginZoom(1.0f, PlayerMowAttack::kMaxAttackFrame_ * 10);
 		// 状態遷移
 		state_ = State::MOVE;
 		// 関数終了
@@ -500,7 +504,7 @@ void Player::SkewerAttackUpdate(void)
 		if (EnemyManager::GetInstance().GetSkewerEnemiesNum())
 		{
 			uint32_t hsTime = 20 + (uint32_t)(EnemyManager::GetInstance().GetSkewerEnemiesNum() * 0.2f);
-			hsTime = Math::Function::Clamp<uint32_t>(hsTime,20,60);	//無限に増えないよう制限
+			hsTime = Math::Function::Clamp<uint32_t>(hsTime, 20, 60);	//無限に増えないよう制限
 			HitStopManager::GetInstance().BeginHitStop(hsTime);
 		}
 
@@ -564,7 +568,7 @@ void Player::OnCollision(void)
 				GameVelocityManager::GetInstance().EndSlowMotion(30, 1.0f);
 			}
 
-			Sound::GetInstance().PlayWave("enemy_hit_SE.wav",0.5f);
+			Sound::GetInstance().PlayWave("enemy_hit_SE.wav", 0.5f);
 		}
 		else // 無敵時間中なら押し戻し
 		{
