@@ -27,6 +27,8 @@ void EnemyManager::Initialize(Player* player, Stage* stage)
 	BigEnemyTexHandle_ = TextureManager::LoadGraph("big_enemy.png");
 
 	enemyPopCommands_.clear();
+	enemyPopCommands_.str("");
+
 	isWaitingPop_ = false;
 }
 
@@ -566,8 +568,7 @@ void EnemyManager::LoadEnemiesDataCSVUpdate(float speed)
 		//LOOPƒRƒ}ƒ“ƒh
 		if (word.find("LOOP") == 0)
 		{
-			enemyPopCommands_.clear();
-			LoadEnemiesDataCSV(popFileName_);
+			enemyPopCommands_.seekg(0);
 		}
 	}
 }
