@@ -53,6 +53,10 @@ private:
     UtilL::NTimer ReadyGoTimer_{kReadyGoTimer_};
     UtilL::NTimer finTimer_{60}; // ケツのカウントダウン時の文字用
     UtilL::NTimer finTimer2_{60}; // ケツのカウントダウン時の文字用
+    UtilL::NTimer finTimer3_{60}; // ケツのカウントダウン時の文字用
+    UtilL::NTimer finTimer4_{60}; // ケツのカウントダウン時の文字用
+    UtilL::NTimer finTimer5_{60}; // ケツのカウントダウン時の文字用
+    UtilL::NTimer finTimerS_{40}; // ケツのカウントダウン時の文字用
 
     Progress progress_;
     int32_t frameCount_preGame_; // ゲーム前イベント用のフレームカウンタ。

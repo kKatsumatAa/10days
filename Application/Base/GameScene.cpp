@@ -390,7 +390,7 @@ void GameScene::DrawSprite2()
     {
         if (nTimer_.GetTimer() >= 54 * 60 && nTimer_.GetTimer() < 55 * 60)
         {
-            finTimer_.Update(false, 1.f);
+            finTimer_.Update(false, GameVelocityManager::GetInstance().GetVelocity());
             float rate = (std::min)(finTimer_.GetTimer() / finTimer_.GetMaxTimer(), 1.f);
             UI::GetInstance()->SetSize(UIType::Number5, Math::Ease::EaseOutQuint(rate,0.2f,3.3f));
             UI::GetInstance()->SetColor(UIType::Number5, { 1.f,1.f,1.f,0.2f });
@@ -399,8 +399,8 @@ void GameScene::DrawSprite2()
         }
         else if (nTimer_.GetTimer() >= 55 * 60 && nTimer_.GetTimer() < 56 * 60)
         {
-            finTimer_.Update(true, 1.f);
-            float rate = (std::min)(finTimer_.GetTimer() / finTimer_.GetMaxTimer(), 1.f);
+            finTimer2_.Update(true, GameVelocityManager::GetInstance().GetVelocity());
+            float rate = (std::min)(finTimer2_.GetTimer() / finTimer2_.GetMaxTimer(), 1.f);
             UI::GetInstance()->SetSize(UIType::Number4, Math::Ease::EaseOutQuint(rate, 0.2f, 3.3f));
             UI::GetInstance()->SetColor(UIType::Number4, { 1.f,1.f,1.f,0.2f });
             UI::GetInstance()->SetPos(UIType::Number4, { 640.f,360.f });
@@ -408,8 +408,8 @@ void GameScene::DrawSprite2()
         }
         else if (nTimer_.GetTimer() >= 56 * 60 && nTimer_.GetTimer() < 57 * 60)
         {
-            finTimer_.Update(true, 1.f);
-            float rate = (std::min)(finTimer_.GetTimer() / finTimer_.GetMaxTimer(), 1.f);
+            finTimer3_.Update(true, GameVelocityManager::GetInstance().GetVelocity());
+            float rate = (std::min)(finTimer3_.GetTimer() / finTimer3_.GetMaxTimer(), 1.f);
             UI::GetInstance()->SetSize(UIType::Number3, Math::Ease::EaseOutQuint(rate, 0.2f, 3.3f));
             UI::GetInstance()->SetColor(UIType::Number3, { 1.f,1.f,1.f,0.2f });
             UI::GetInstance()->SetPos(UIType::Number3, { 640.f,360.f });
@@ -417,8 +417,8 @@ void GameScene::DrawSprite2()
         }
         else if (nTimer_.GetTimer() >= 57 * 60 && nTimer_.GetTimer() < 58 * 60)
         {
-            finTimer_.Update(true, 1.f);
-            float rate = (std::min)(finTimer_.GetTimer() / finTimer_.GetMaxTimer(), 1.f);
+            finTimer4_.Update(true, GameVelocityManager::GetInstance().GetVelocity());
+            float rate = (std::min)(finTimer4_.GetTimer() / finTimer4_.GetMaxTimer(), 1.f);
             UI::GetInstance()->SetSize(UIType::Number2, Math::Ease::EaseOutQuint(rate, 0.2f, 3.3f));
             UI::GetInstance()->SetColor(UIType::Number2, { 1.f,1.f,1.f,0.2f });
             UI::GetInstance()->SetPos(UIType::Number2, { 640.f,360.f });
@@ -426,8 +426,8 @@ void GameScene::DrawSprite2()
         }
         else if (nTimer_.GetTimer() >= 58 * 60 && nTimer_.GetTimer() < 59 * 60)
         {
-            finTimer_.Update(true, 1.f);
-            float rate = (std::min)(finTimer_.GetTimer() / finTimer_.GetMaxTimer(), 1.f);
+            finTimer5_.Update(true, GameVelocityManager::GetInstance().GetVelocity());
+            float rate = (std::min)(finTimer5_.GetTimer() / finTimer5_.GetMaxTimer(), 1.f);
             UI::GetInstance()->SetSize(UIType::Number1, Math::Ease::EaseOutQuint(rate, 0.2f, 3.3f));
             UI::GetInstance()->SetColor(UIType::Number1, { 1.f,1.f,1.f,0.2f });
             UI::GetInstance()->SetPos(UIType::Number1, { 640.f,360.f });
@@ -435,8 +435,8 @@ void GameScene::DrawSprite2()
         }
         else if (nTimer_.GetTimer() >= 59 * 60 && nTimer_.GetTimer() < 60 * 60)
         {
-            finTimer2_.Update(false, 1.f);
-            float rate = (std::min)(finTimer2_.GetTimer() / finTimer2_.GetMaxTimer(), 1.f);
+            finTimerS_.Update(false, GameVelocityManager::GetInstance().GetVelocity());
+            float rate = (std::min)(finTimerS_.GetTimer() / finTimerS_.GetMaxTimer(), 1.f);
             UI::GetInstance()->SetSize(UIType::Finish, Math::Ease::EaseOutQuint(rate, 0.2f, 2.f));
             UI::GetInstance()->SetColor(UIType::Finish, { 1.f,1.f,1.f,Math::Ease::EaseOutQuint(rate, 0.f, 0.9f) });
             UI::GetInstance()->SetPos(UIType::Finish, { 640.f,360.f });
