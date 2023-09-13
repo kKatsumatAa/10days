@@ -251,7 +251,7 @@ void ResultScene::DrawSprite2()
     UI::GetInstance()->SetSize(UIType::NowScore, Math::Ease::EaseInOutSine(rate, 5.f, 0.5f));
     UI::GetInstance()->Draw(UIType::NowScore);
     Score::GetInstance()->SetNowColor({ 1.f,1.f,1.f,Math::Ease::EaseInOutSine(rate,0.f,1.f) });
-    Score::GetInstance()->SetNowPos({ 1000,210 });
+    Score::GetInstance()->SetNowPos({ Math::Ease::EaseOutSine(rate,1500,1000),210 });
     Score::GetInstance()->SetNowNum();
     Score::GetInstance()->Draw();
     float rate2 = (std::min)(timer_highScore_.GetTimer() / timer_highScore_.GetMaxTimer(), 1.f);
@@ -259,7 +259,7 @@ void ResultScene::DrawSprite2()
     UI::GetInstance()->SetSize(UIType::HighScore, Math::Ease::EaseInOutSine(rate2, 5.f, 0.5f));
     UI::GetInstance()->Draw(UIType::HighScore);
     Score::GetInstance()->SetHighColor({ 1.f,1.f,1.f,Math::Ease::EaseInOutSine(rate2,0.f,1.f) });
-    Score::GetInstance()->SetHighPos({ 1000,310 });
+    Score::GetInstance()->SetHighPos({ Math::Ease::EaseOutSine(rate2,1500,1000),310 });
     Score::GetInstance()->SetHighNum();
     Score::GetInstance()->Draw();
     float rate3 = (std::min)(timer_newRecord_.GetTimer() / timer_newRecord_.GetMaxTimer(), 1.f);
@@ -267,10 +267,9 @@ void ResultScene::DrawSprite2()
     UI::GetInstance()->SetSize(UIType::NewRecord, Math::Ease::EaseInOutSine(rate3, 5.f, 0.5f));
     UI::GetInstance()->Draw(UIType::NewRecord);
 
-    if (timer_DisplayRank_.GetisTimeOut())
-    {
-        Score::GetInstance()->DrawRank(0.1f);
-    }
+    float rate4 = (std::min)(timer_DisplayRank_.GetTimer() / timer_DisplayRank_.GetMaxTimer(), 1.f);
+    Score::GetInstance()->SetRankPos({ 640.f,Math::Ease::EaseOutSine(rate4,-200,300) });
+    Score::GetInstance()->DrawRank(0.1f);
 
     if (isEndAllDisplay_)
     {
