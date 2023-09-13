@@ -124,6 +124,10 @@ public:
 	bool GetDefeatedEnemiesNum(uint32_t& enemiesNum);
 	//“Ëi‚³‚ê‚Ä‚é“G‚Ì”
 	uint32_t GetSkewerEnemiesNum();
+	//‚­‚Á‚Â‚¢‚½uŠÔ‚Ì“G‚ª‚¢‚é‚©
+	bool GetIsDockingTriggerAnyEnemy();
+	//‚Å‚©‚Â‚æ‚ª‚¢‚é‚©
+	bool GetIsBigDangoAnyEnemy();
 
 public:
 	//“Ëi‚³‚ê‚Ä‚é“G‚Ì‰ò‚Ì”¼Œa

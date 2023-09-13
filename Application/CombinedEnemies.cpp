@@ -282,7 +282,7 @@ void CombinedEnemies::EnemiesMowDownTriggerUpdate()
 {
 	for (auto& enemy : enemies_)
 	{
-		enemy->MowDownFlagUpdate();
+		enemy->TriggerFlagUpdate();
 	}
 }
 
