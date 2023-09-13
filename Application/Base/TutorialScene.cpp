@@ -85,27 +85,27 @@ void TutorialScene::Initialize(void)
 	UI::GetInstance()->SetSize(UIType::ToTitle, 0.6f);
 	UI::GetInstance()->SetAncorPoint(UIType::ToTitle, { 0.5f,0.5f });
 
-	UI::GetInstance()->SetPos(UIType::Tutorial1, { 1000,500 });
-	UI::GetInstance()->SetSize(UIType::Tutorial1, 0.6f);
-	UI::GetInstance()->SetAncorPoint(UIType::Tutorial1, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Tutorial2, { 1000,300 });
-	UI::GetInstance()->SetSize(UIType::Tutorial2, 0.6f);
-	UI::GetInstance()->SetAncorPoint(UIType::Tutorial2, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Tutorial3, { 1000,500 });
-	UI::GetInstance()->SetSize(UIType::Tutorial3, 0.6f);
-	UI::GetInstance()->SetAncorPoint(UIType::Tutorial3, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Tutorial4, { 1000,500 });
-	UI::GetInstance()->SetSize(UIType::Tutorial4, 0.6f);
-	UI::GetInstance()->SetAncorPoint(UIType::Tutorial4, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Tutorial5, { 1000,500 });
-	UI::GetInstance()->SetSize(UIType::Tutorial5, 0.6f);
-	UI::GetInstance()->SetAncorPoint(UIType::Tutorial5, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Tutorial6, { 1000,500 });
-	UI::GetInstance()->SetSize(UIType::Tutorial6, 0.6f);
-	UI::GetInstance()->SetAncorPoint(UIType::Tutorial6, { 0.5f,0.5f });
-	UI::GetInstance()->SetPos(UIType::Tutorial7, { 1000,500 });
-	UI::GetInstance()->SetSize(UIType::Tutorial7, 0.6f);
-	UI::GetInstance()->SetAncorPoint(UIType::Tutorial7, { 0.5f,0.5f });
+    UI::GetInstance()->SetPos(UIType::Tutorial1, { 0,0 });
+    UI::GetInstance()->SetSize(UIType::Tutorial1, 0.6f);
+    UI::GetInstance()->SetAncorPoint(UIType::Tutorial1, { 0.f,0.f });
+    UI::GetInstance()->SetPos(UIType::Tutorial2, { 0,0 });
+    UI::GetInstance()->SetSize(UIType::Tutorial2, 0.6f);
+    UI::GetInstance()->SetAncorPoint(UIType::Tutorial2, { 0.f,0.f });
+    UI::GetInstance()->SetPos(UIType::Tutorial3, { 0,0 });
+    UI::GetInstance()->SetSize(UIType::Tutorial3, 0.6f);
+    UI::GetInstance()->SetAncorPoint(UIType::Tutorial3, { 0.f,0.f });
+    UI::GetInstance()->SetPos(UIType::Tutorial4, { 0,200 });
+    UI::GetInstance()->SetSize(UIType::Tutorial4, 0.6f);
+    UI::GetInstance()->SetAncorPoint(UIType::Tutorial4, { 0.f,0.f });
+    UI::GetInstance()->SetPos(UIType::Tutorial5, { 1000,500 });
+    UI::GetInstance()->SetSize(UIType::Tutorial5, 0.6f);
+    UI::GetInstance()->SetAncorPoint(UIType::Tutorial5, { 0.f,0.f });
+    UI::GetInstance()->SetPos(UIType::Tutorial6, { 1000,500 });
+    UI::GetInstance()->SetSize(UIType::Tutorial6, 0.6f);
+    UI::GetInstance()->SetAncorPoint(UIType::Tutorial6, { 0.f,0.f });
+    UI::GetInstance()->SetPos(UIType::Tutorial7, { 1000,500 });
+    UI::GetInstance()->SetSize(UIType::Tutorial7, 0.6f);
+    UI::GetInstance()->SetAncorPoint(UIType::Tutorial7, { 0.f,0.f });
 }
 
 void TutorialScene::Update(void)
@@ -494,41 +494,33 @@ void TutorialScene::DrawSprite2(void)
 {
 	Score::GetInstance()->Draw();
 
-	UI::GetInstance()->Draw(UIType::Makimono);
-	UI::GetInstance()->Draw(UIType::Menubutton);
-	UI::GetInstance()->Draw(UIType::Pause);
-	UI::GetInstance()->Draw(UIType::Lstick);
-	UI::GetInstance()->Draw(UIType::Move);
-	UI::GetInstance()->Draw(UIType::Rbutton);
-	UI::GetInstance()->Draw(UIType::Attack);
-	UI::GetInstance()->Draw(UIType::Abutton);
-	UI::GetInstance()->Draw(UIType::Skewer);
+    UI::GetInstance()->Draw(UIType::Makimono);
 
-	if (progressNum_ == 1)
-	{
-		UI::GetInstance()->Draw(UIType::Tutorial1);
-	}
-	else if (progressNum_ == 2)
-	{
-		UI::GetInstance()->Draw(UIType::Tutorial2);
-		UI::GetInstance()->Draw(UIType::Tutorial3);
-	}
-	else if (progressNum_ == 3)
-	{
-		UI::GetInstance()->Draw(UIType::Tutorial4);
-	}
-	else if (progressNum_ == 4)
-	{
-		UI::GetInstance()->Draw(UIType::Tutorial5);
-	}
-	else if (progressNum_ == 5)
-	{
-		UI::GetInstance()->Draw(UIType::Tutorial6);
-	}
-	else if (progressNum_ == 6)
-	{
-		UI::GetInstance()->Draw(UIType::Tutorial7);
-	}
+    if (progressNum_ == 1)
+    {
+        UI::GetInstance()->Draw(UIType::Tutorial1);
+    }
+    else if (progressNum_ == 2)
+    {
+        UI::GetInstance()->Draw(UIType::Tutorial3);
+        UI::GetInstance()->Draw(UIType::Tutorial4);
+    }
+    else if (progressNum_ == 3)
+    {
+        UI::GetInstance()->Draw(UIType::Tutorial2);
+    }
+    else if (progressNum_ == 4)
+    {
+        UI::GetInstance()->Draw(UIType::Tutorial5);
+    }
+    else if (progressNum_ == 5)
+    {
+        UI::GetInstance()->Draw(UIType::Tutorial6);
+    }
+    else if (progressNum_ == 6)
+    {
+        UI::GetInstance()->Draw(UIType::Tutorial7);
+    }
 
 	if (isMenu_)
 	{
