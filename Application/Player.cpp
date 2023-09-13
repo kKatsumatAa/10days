@@ -455,6 +455,11 @@ void Player::SkewerAttackUpdate(void)
 	// isSkewerがfalseならMOVE状態へ遷移
 	if (skewer_.GetIsSkewer() == false)
 	{
+		if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
+		{
+			// スローモーション開始
+			GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
+		}
 		PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isRadialBlur = false;
 		CameraManager::GetInstance().GetCamera2D()->EndFollow();
 		state_ = State::MOVE;
@@ -535,7 +540,7 @@ void Player::OnCollision(void)
 		// 無敵時間中でないなら
 		if (frameCount_invincible_ == 0)
 		{
-			CameraManager::GetInstance().GetCamera2D()->BeginShake(50, 5.0f);
+			CameraManager::GetInstance().GetCamera2D()->BeginShake(50, 8.0f);
 
 			// ノクバしま～す
 			isKnockback_ = true;
@@ -547,7 +552,7 @@ void Player::OnCollision(void)
 			if (frameCount_4Skewer_)
 			{
 				frameCount_4Skewer_ = 0;
-				GameVelocityManager::GetInstance().BeginSlowMotion(30, 1.0f);
+				GameVelocityManager::GetInstance().EndSlowMotion(30, 1.0f);
 			}
 		}
 		else // 無敵時間中なら押し戻し
