@@ -103,6 +103,7 @@ void SceneManager::LoadAllSound()
 	Sound::GetInstance().LoadWave("enemy_hit_SE.wav", false);
 	Sound::GetInstance().LoadWave("fusion_SE.wav", false);
 	Sound::GetInstance().LoadWave("wall_hit_SE.wav", false);
+	Sound::GetInstance().LoadWave("select_SE.wav", false);
 }
 
 void SceneManager::StopWaveAllScene()
@@ -124,6 +125,7 @@ void SceneManager::StopWaveAllScene()
 	Sound::GetInstance().StopWave("enemy_hit_SE.wav");
 	Sound::GetInstance().StopWave("fusion_SE.wav");
 	Sound::GetInstance().StopWave("wall_hit_SE.wav");
+	Sound::GetInstance().StopWave("select_SE.wav");
 }
 
 

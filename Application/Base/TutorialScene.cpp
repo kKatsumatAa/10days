@@ -137,6 +137,8 @@ void TutorialScene::Update(void)
             UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,1 });
             UI::GetInstance()->SetSize(UIType::ToTitle, 1);
         }
+
+        Sound::GetInstance().PlayWave("decision_SE.wav", 0.5f);
     }
 
     if (PadInput::GetInstance().GetPushButton(GAMEPAD_B)) // pad-B長押しでチュートリアルスキップ用のカウンタ加算
@@ -415,6 +417,10 @@ void TutorialScene::Update(void)
     {
         if (PadInput::GetInstance().GetLeftStickTilt().y >= 0.3f)
         {
+            if (destination_ == 0)
+            {
+                Sound::GetInstance().PlayWave("select_SE.wav", 0.5f);
+            }
             destination_++;
             destination_ = (std::min)(destination_, 1);
             UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,0.3f });
@@ -424,6 +430,10 @@ void TutorialScene::Update(void)
         }
         else if (PadInput::GetInstance().GetLeftStickTilt().y <= -0.3f)
         {
+            if (destination_ == 1)
+            {
+                Sound::GetInstance().PlayWave("select_SE.wav", 0.5f);
+            }
             destination_--;
             destination_ = (std::max)(destination_, 0);
             UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,0.3f });

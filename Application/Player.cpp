@@ -147,14 +147,14 @@ void Player::Draw(void)
 		//DrawLine((int32_t)pos_predictionLine_LT.x, (int32_t)pos_predictionLine_LT.y, (int32_t)pos_predictionLine_RT.x, (int32_t)pos_predictionLine_RT.y, Color::RED, 2); // 上横
 
 		//矢印描画
-		arrow_.Object::SetScale({ kPngScale_ * 3.0f, kPngScale_ * 3.0f,0 });
+		/*arrow_.Object::SetScale({ kPngScale_ * 3.0f, kPngScale_ * 5.0f,0 });
 		arrow_.Object::SetTrans({ position_.x,position_.y,0 });
 		arrow_.Object::SetRot({ 0,0,rotation_ });
-		arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
+		arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,0.2f,0.3f,0.5f }, { 0.5f,0.5f });*/
 
         skewerArea_.Object::SetTrans( { position_.x,position_.y,0 } );
         skewerArea_.Object::SetRot({ 0,0,rotation_ });
-        skewerArea_.DrawBoxSprite(nullptr, png_skewerArea_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,1.f });
+        skewerArea_.DrawBoxSprite(nullptr, png_skewerArea_, { 1.0f,0.2f,0.3f,0.5f }, { 0.5f,1.f });
 		//DrawFormatString(1000, 60, UtilL::Color::GREEN, "溜め状態");
 		//DrawFormatString(1000, 80, UtilL::Color::GREEN, "frame: %d/%d", frameCount_4Skewer_, kChargeFrame4Skewer_);
 	}
@@ -180,11 +180,11 @@ void Player::Draw(void)
 			// 矢印の座標を決め打ちで決める。（今は初期状態だと右向いてるので、右方向にきめうち）
 			pos_arrow = position_ + Vec2(1, 0) * kMowArrowDist2Self_;
 			arrow_.Object::SetTrans({ pos_arrow.x, pos_arrow.y,0 });
-			arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
+			arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,0.2f,0.3f,0.5f }, { 0.5f,0.5f });
 		}
 		else // 移動ベクトルが0じゃなかったら。
 		{
-			arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
+			arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,0.2f,0.3f,0.5f }, { 0.5f,0.5f });
 		}
 	}
 
@@ -193,7 +193,7 @@ void Player::Draw(void)
 	if (state_ == State::ATTACK_MOW && mow_.GetFrameCountAttack() > 1)
 	{
 		// 串を描画
-		sword_.Object::SetScale({ 0.08f, 0.08f,0 });
+		sword_.Object::SetScale({ 0.18f, 0.18f,0 });
 		sword_.Object::SetTrans({ pos4Sword_.x, pos4Sword_.y,0 });
 		sword_.Object::SetRot({ 0,0,rot4Sword2_ });
 		sword_.DrawBoxSprite(nullptr, png_sword_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
@@ -216,18 +216,18 @@ void Player::Draw(void)
 		}
 
 		// 串
-		sword_.Object::SetScale({ kPngScale_, kPngScale_,0 });
+		sword_.Object::SetScale({ 0.18f, 0.18f,0 });
 		sword_.Object::SetTrans({ pos4Sword_.x, pos4Sword_.y,0 });
 		sword_.Object::SetRot({ 0,0,rotation_ });
 		sword_.DrawBoxSprite(nullptr, png_sword_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
 
-		swordUp_.Object::SetScale({ kPngScale_, kPngScale_,0 });
+		swordUp_.Object::SetScale({ 0.18f, 0.18f,0 });
 		swordUp_.Object::SetTrans({ pos4SwordUp_.x, pos4SwordUp_.y,0 });
 		swordUp_.Object::SetRot({ 0,0,rotation_ });
 		swordUp_.DrawBoxSprite(nullptr, png_swordUp_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
-		swordBottom_.Object::SetScale({ kPngScale_, kPngScale_,0 });
+		swordBottom_.Object::SetScale({ 0.18f, 0.18f,0 });
 		swordBottom_.Object::SetTrans({ pos4SwordBottom_.x, pos4SwordBottom_.y,0 });
 		swordBottom_.Object::SetRot({ 0,0,rotation_ });
 		swordBottom_.DrawBoxSprite(nullptr, png_swordBottom_, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
@@ -344,7 +344,7 @@ void Player::MoveUpdate(void)
 			// pad-A長押しでATTACK_SKEWER状態に遷移
 			if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
 			{
-				if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+				if (!GameVelocityManager::GetInstance().GetIsSlowMotion())
 				{
 					// スローモーション開始
 					GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
@@ -458,7 +458,8 @@ void Player::SkewerAttackUpdate(void)
 	// isSkewerがfalseならMOVE状態へ遷移
 	if (skewer_.GetIsSkewer() == false)
 	{
-		if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
+		if (PadInput::GetInstance().GetPushButton(GAMEPAD_A)
+			&& !GameVelocityManager::GetInstance().GetIsSlowMotion())
 		{
 			// スローモーション開始
 			GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
@@ -498,7 +499,9 @@ void Player::SkewerAttackUpdate(void)
 		CameraManager::GetInstance().GetCamera2D()->EndFollow();
 		if (EnemyManager::GetInstance().GetSkewerEnemiesNum())
 		{
-			HitStopManager::GetInstance().BeginHitStop(20 + (uint32_t)(EnemyManager::GetInstance().GetSkewerEnemiesNum() * 0.2f));
+			uint32_t hsTime = 20 + (uint32_t)(EnemyManager::GetInstance().GetSkewerEnemiesNum() * 0.2f);
+			hsTime = Math::Function::Clamp<uint32_t>(hsTime,20,60);	//無限に増えないよう制限
+			HitStopManager::GetInstance().BeginHitStop(hsTime);
 		}
 
 		if (EnemyManager::GetInstance().GetSkewerEnemiesLength())
