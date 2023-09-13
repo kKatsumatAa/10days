@@ -46,10 +46,6 @@ public:
 	void SetHighPos(const Vec2& pos) { hScorePos_ = pos; }
 	void SetNowSize(float size) { nScoreSize_ = size; }
 	void SetHighSize(float size) { hScoreSize_ = size; }
-    void SetNowPos(const Vec2& pos) { nScorePos_ = pos; }
-    void SetHighPos(const Vec2& pos) { hScorePos_ = pos; }
-    void SetNowSize(float size) { nScoreSize_ = size; }
-    void SetHighSize(float size) { hScoreSize_ = size; }
     void SetNowColor(const Vec4& color) { nScoreColor_ = color; }
     void SetHighColor(const Vec4& color) { hScoreColor_ = color; }
 
