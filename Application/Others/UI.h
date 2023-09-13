@@ -23,6 +23,7 @@ enum class UIType
 	Makimono,	//巻物
     ReadyGo,    // 始め！
     Finish,     // そこまで!
+    NewRecord,  //新記録!
 
     Tutorial1,
     Tutorial2,
