@@ -37,7 +37,7 @@ void SceneTransitionManager::BeginSceneTransition(const std::function<void()>& l
 {
 	if (isDoingEffect_ == false)
 	{
-		Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+		Sound::GetInstance().PlayWave("sceneChange_SE.wav", 0.2f);
 	}
 	isDoingEffect_ = true;
 

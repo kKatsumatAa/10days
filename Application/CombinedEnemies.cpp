@@ -490,6 +490,9 @@ void CombinedEnemies::AddCombinedEnemies(std::unique_ptr<CombinedEnemies> combin
 		MowDownEnd();
 	}
 
+	//“G‚­‚Á‚Â‚¢‚½‰¹
+	Sound::GetInstance().PlayWave("fusion_SE.wav",0.5f);
+
 	ChangeState("AFTER_COMBINED");
 }
 

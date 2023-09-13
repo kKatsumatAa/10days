@@ -18,7 +18,7 @@ void TitleScene::Initialize(void)
 	//画像読み込み
 	titleImageHandle_ = TextureManager::LoadGraph("title.png");
 	//BGM再生
-	Sound::GetInstance().PlayWave("title_BGM.wav", 1.0f, true);
+	Sound::GetInstance().PlayWave("title_BGM.wav", 0.2f, true);
 
 	Score::GetInstance()->LoadScore();
 	UI::GetInstance()->SetPos(UIType::Abutton, { 640.f,600.f });
@@ -31,7 +31,7 @@ void TitleScene::Update(void)
 	// pad-Aで画面切替
 	if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
 	{
-		Sound::GetInstance().PlayWave("decision_SE.wav");
+		Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
 		//BGMストップ
 		Sound::GetInstance().StopWave("title_BGM.wav");
 		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);
@@ -41,14 +41,14 @@ void TitleScene::Update(void)
 #ifdef _DEBUG
 	if (KeyboardInput::GetInstance().KeyTrigger(DIK_SPACE))
 	{
-		Sound::GetInstance().PlayWave("decision_SE.wav");
+		Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
 		//BGMストップ
 		Sound::GetInstance().StopWave("title_BGM.wav");
 		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);
 	}
 	if (KeyboardInput::GetInstance().KeyTrigger(DIK_R))
 	{
-		Sound::GetInstance().PlayWave("decision_SE.wav");
+		Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
 	}
 #endif // _DEBUG
 }

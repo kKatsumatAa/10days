@@ -421,7 +421,7 @@ void EnemyManager::Update()
 			//ƒXƒRƒA‰ÁŽZ
 			Score::GetInstance()->Add(defeatedEnemiesNum_);
 			//Œ‚”j‰¹
-			Sound::GetInstance().PlayWave("brake_SE.wav");
+			Sound::GetInstance().PlayWave("brake_SE.wav", 0.2f);
 
 			combinedEnemiesArray_.erase(itr);
 
