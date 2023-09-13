@@ -19,7 +19,7 @@ void ResultScene::Initialize(void)
     Score::GetInstance()->LoadTex();
 
     //BGMÄ¶
-    Sound::GetInstance().PlayWave("result_BGM.wav", 0.2f, true);
+    //Sound::GetInstance().PlayWave("result_BGM.wav", 0.2f, true);
 
     Score::GetInstance()->SaveScore();
 
@@ -239,7 +239,7 @@ void ResultScene::DrawSprite2()
     Score::GetInstance()->SetHighNum();
     Score::GetInstance()->Draw();
     float rate3 = (std::min)(timer_newRecord_.GetTimer() / timer_newRecord_.GetMaxTimer(), 1.f);
-    UI::GetInstance()->SetColor(UIType::New, { 1.f,1.f,1.f,Math::Ease::EaseInOutSine(rate3,0.f,1.f) });
+    UI::GetInstance()->SetColor(UIType::NewRecord, { 1.f,1.f,1.f,Math::Ease::EaseInOutSine(rate3,0.f,1.f) });
     UI::GetInstance()->SetSize(UIType::HighScore, Math::Ease::EaseInOutSine(rate3, 5.f, 0.5f));
     UI::GetInstance()->Draw(UIType::HighScore);
 

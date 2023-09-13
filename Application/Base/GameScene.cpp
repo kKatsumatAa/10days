@@ -22,7 +22,7 @@ void GameScene::Initialize(void)
 	PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isGrayScale = false;
 
     //BGMÄ¶
-    Sound::GetInstance().PlayWave("play_BGM.wav", 0.2f, true);
+    //Sound::GetInstance().PlayWave("play_BGM.wav", 0.2f, true);
 
 	// (0,0) ~ (1280,720) ‚æ‚è‚¿‚å‚¢“à‘¤
 	stage_->Initialize({ 0,0 }, { 1280,720 });
