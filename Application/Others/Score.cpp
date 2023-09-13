@@ -15,6 +15,10 @@ Score* Score::GetInstance()
 
 void Score::LoadTex()
 {
+	for (uint32_t i = 0; i < (uint32_t)Rank::Max; i++)
+	{
+		rankTex_.emplace_back();
+	}
 	//“Ç‚Ýž‚Ý`
 	rankTex_[(uint32_t)Rank::Kakedasi] = TextureManager::LoadGraph("kakedasi.png");
 	rankTex_[(uint32_t)Rank::Hanninmae] = TextureManager::LoadGraph("hanninmae.png");

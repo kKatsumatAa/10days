@@ -9,7 +9,9 @@ enum class Rank
 	Itininmae,
 	Itiryu,
 	Jukuren,
-	Densetu
+	Densetu,
+
+	Max
 };
 
 class Score
