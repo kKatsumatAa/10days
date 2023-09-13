@@ -47,7 +47,7 @@ void PlayerMowAttack::Update(void)
     // “ã‚¬•¥‚¢‚ª“G‚É“–‚½‚Á‚½”»’èitrigger)
     if (isHitMow_ && isHitMowOld_ == false)
     {
-        // ƒRƒR
+		Sound::GetInstance().PlayWave("attack_hit_SE.wav");
     }
 
 	// UŒ‚’†‚È‚ç
