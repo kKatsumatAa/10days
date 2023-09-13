@@ -97,13 +97,13 @@ void TutorialScene::Initialize(void)
     UI::GetInstance()->SetPos(UIType::Tutorial4, { 0,200 });
     UI::GetInstance()->SetSize(UIType::Tutorial4, 0.6f);
     UI::GetInstance()->SetAncorPoint(UIType::Tutorial4, { 0.f,0.f });
-    UI::GetInstance()->SetPos(UIType::Tutorial5, { 1000,500 });
+    UI::GetInstance()->SetPos(UIType::Tutorial5, { 0,0 });
     UI::GetInstance()->SetSize(UIType::Tutorial5, 0.6f);
     UI::GetInstance()->SetAncorPoint(UIType::Tutorial5, { 0.f,0.f });
-    UI::GetInstance()->SetPos(UIType::Tutorial6, { 1000,500 });
+    UI::GetInstance()->SetPos(UIType::Tutorial6, { 0,0 });
     UI::GetInstance()->SetSize(UIType::Tutorial6, 0.6f);
     UI::GetInstance()->SetAncorPoint(UIType::Tutorial6, { 0.f,0.f });
-    UI::GetInstance()->SetPos(UIType::Tutorial7, { 1000,500 });
+    UI::GetInstance()->SetPos(UIType::Tutorial7, { 0,0 });
     UI::GetInstance()->SetSize(UIType::Tutorial7, 0.6f);
     UI::GetInstance()->SetAncorPoint(UIType::Tutorial7, { 0.f,0.f });
 }

@@ -15,19 +15,24 @@ void ResultScene::Initialize(void)
 {
     //画像読み込み
     png_result_ = TextureManager::LoadGraph("result.png");
+    Score::GetInstance()->LoadTex();
+
     //BGM再生
     Sound::GetInstance().PlayWave("result_BGM.wav", 0.2f, true);
 
     Score::GetInstance()->SaveScore();
 
-    UI::GetInstance()->SetPos(UIType::NowScore, { 250.f,350.f });
+    UI::GetInstance()->SetPos(UIType::NowScore, { 250.f,400.f });
     UI::GetInstance()->SetSize(UIType::NowScore, 0.5f);
     Score::GetInstance()->SetNowPos({ 1000.f,350.f });
     Score::GetInstance()->SetNowSize(0.5f);
     Score::GetInstance()->SetNowNum();
-    Score::GetInstance()->SetRank();
 
-    UI::GetInstance()->SetPos(UIType::HighScore, { 250.f,250.f });
+    Score::GetInstance()->SetRank();
+    Score::GetInstance()->SetRankPos({640.f, 200.f});
+    Score::GetInstance()->SetRankSize(0.8f);
+
+    UI::GetInstance()->SetPos(UIType::HighScore, { 250.f,300.f });
     UI::GetInstance()->SetSize(UIType::HighScore, 0.5f);
     Score::GetInstance()->SetHighPos({ 1000.f,250.f });
     Score::GetInstance()->SetHighSize(0.5f);
@@ -119,8 +124,6 @@ void ResultScene::Update(void)
         SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
     }
 #endif // _DEBUG
-
-
     //if (progressNum_ == 1)
     //{
     //    // 透明化しはじめるまでのフレームを待つため、kMaxFrame4StartTrans_の値を超えるまでは、rateの計算が出来ないようにする
@@ -347,6 +350,8 @@ void ResultScene::DrawSprite2()
     {
         UI::GetInstance()->Draw(UIType::Tutorial6);
     }*/
+
+    Score::GetInstance()->DrawRank(0.1f);
 }
 
 void ResultScene::DrawImgui()

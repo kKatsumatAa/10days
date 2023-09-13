@@ -11,6 +11,7 @@
 #include "CircleCollider.h"
 #include "Sound.h"
 #include "UI.h"
+#include "Score.h"
 
 //---------------------------------------------------------------------------------------
 //デストラクタ
