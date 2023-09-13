@@ -28,7 +28,6 @@ void TitleScene::Initialize(void)
 
 void TitleScene::Update(void)
 {
-#ifdef _RELEASE
     // pad-AÇ≈âÊñ êÿë÷
     if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
     {
@@ -37,7 +36,6 @@ void TitleScene::Update(void)
         Sound::GetInstance().StopWave("title_BGM.wav");
         SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);
     }
-#endif // _RELEASE
 
 #ifdef _DEBUG
 	// pad-AÇ≈âÊñ êÿë÷
