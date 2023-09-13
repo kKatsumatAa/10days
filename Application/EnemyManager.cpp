@@ -3,6 +3,9 @@
 #include <memory>
 #include "Util.h"
 #include "Score.h"
+#include <fstream>
+#include "GameVelocityManager.h"
+#include "GameVelocityState.h"
 
 
 EnemyManager& EnemyManager::GetInstance()
@@ -22,6 +25,9 @@ void EnemyManager::Initialize(Player* player, Stage* stage)
 
 	enemyTexHandle_ = TextureManager::LoadGraph("enemy.png");
 	BigEnemyTexHandle_ = TextureManager::LoadGraph("big_enemy.png");
+
+	enemyPopCommands_.clear();
+	isWaitingPop_ = false;
 }
 
 void EnemyManager::SaveMowDownEnemies()
@@ -380,6 +386,9 @@ void EnemyManager::AddCombinedEnemies(std::unique_ptr<CombinedEnemies> combEnemi
 //----------------------------------------------------------------------------------
 void EnemyManager::Update()
 {
+	//敵の生成処理
+	LoadEnemiesDataCSVUpdate(GameVelocityManager::GetInstance().GetVelocity());
+
 	for (auto itr = enemies_.begin(); itr != enemies_.end(); itr++)
 	{
 		itr->get()->Update();
@@ -443,8 +452,6 @@ void EnemyManager::Update()
 	CombinedUpdate();
 	//突進されてる敵とくっついたか
 	SkewerCombinedUpdate();
-	//生成処理
-	GenerateUpdate();
 	//薙ぎ払われてる最中の更新2
 	MowDownTriggerEnemiesUpdate();
 
@@ -467,6 +474,101 @@ void EnemyManager::Draw()
 	if (mowDownedEnemies_)
 	{
 		mowDownedEnemies_->Draw();
+	}
+}
+
+
+//-------------------------------------------------------------
+void EnemyManager::LoadEnemiesDataCSV(const std::string& name)
+{
+	std::string fullPath = ENEMIES_DATA_PATH_ + name;
+	popFileName_ = name;
+	///ファイルを開く
+	std::ifstream file;
+	file.open(fullPath);
+	assert(file.is_open());
+
+	//ファイルの内容を文字列ストリームにコピー
+	enemyPopCommands_ << file.rdbuf();
+
+	file.close();
+}
+
+void EnemyManager::LoadEnemiesDataCSVUpdate(float speed)
+{
+	//待機処理
+	if (isWaitingPop_)
+	{
+		popWaitTimer_ -= speed;
+
+		if (popWaitTimer_ <= 0)
+		{
+			isWaitingPop_ = false;
+		}
+		return;
+	}
+
+	//一行分の文字列を入れる変数
+	std::string line;
+
+	//コマンド実行ループ
+	while (std::getline(enemyPopCommands_, line))
+	{
+		//１行分の文字列をストリームに変換
+		std::istringstream lineStream(line);
+
+		std::string word;
+
+		//,区切りで行の先頭文字列を取得
+		std::getline(lineStream, word, ' ');
+
+		// "//"から始まる行はコメント
+		if (word.find("//") == 0)
+		{
+			continue;
+		}
+
+		//POPコマンド
+		if (word.find("POP") == 0)
+		{
+			//x座標
+			std::getline(lineStream, word, ' ');
+			float x = (float)std::atof(word.c_str());
+
+			//y座標
+			std::getline(lineStream, word, ' ');
+			float y = (float)std::atof(word.c_str());
+
+			//敵の数
+			std::getline(lineStream, word, ' ');
+			uint32_t num = std::atoi(word.c_str());
+
+			//敵追加
+			AddEnemy({ x,y }, num);
+		}
+
+		//WAITコマンド
+		if (word.find("WAIT") == 0)
+		{
+			std::getline(lineStream, word, ' ');
+
+			//待ち時間
+			int32_t waitTime = std::atoi(word.c_str());
+
+			//待機開始
+			popWaitTimer_ = (float)waitTime;
+			isWaitingPop_ = true;
+
+			//ループ抜ける
+			break;
+		}
+
+		//LOOPコマンド
+		if (word.find("LOOP") == 0)
+		{
+			enemyPopCommands_.clear();
+			LoadEnemiesDataCSV(popFileName_);
+		}
 	}
 }
 

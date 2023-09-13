@@ -34,6 +34,8 @@ void GameScene::Initialize(void)
 	player_->Initialize();
 
 	EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
+	//“G‚Ìƒf[ƒ^“Ç‚Ýž‚Ý
+	EnemyManager::GetInstance().LoadEnemiesDataCSV("gameEnemies.csv");
 
 	ParticleManagerL::GetInstance()->Init();
 

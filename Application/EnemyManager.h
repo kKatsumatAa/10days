@@ -2,6 +2,7 @@
 #include "CombinedEnemies.h"
 #include "CombinedEnemiesState.h"
 #include "Stage.h"
+#include <sstream>
 
 
 //敵管理クラス
@@ -29,6 +30,14 @@ private://変数
 	bool isDefeatedEnemies_ = false;
 	uint32_t defeatedEnemiesNum_ = 0;
 
+	//敵発生コマンド
+	std::stringstream enemyPopCommands_;
+	bool isWaitingPop_ = false;
+	float popWaitTimer_ = 0;
+	std::string popFileName_;
+
+	const std::string ENEMIES_DATA_PATH_ = "Resources/enemyData/";
+
 private://関数
 	EnemyManager() { ; }
 	~EnemyManager() { ; }
@@ -43,6 +52,14 @@ public:
 	void Initialize(Player* player, Stage* stage);
 	void Update();
 	void Draw();
+
+public:
+	//csv読み込み
+	void LoadEnemiesDataCSV(const std::string& name);
+
+private:
+	//csv読み込み更新処理
+	void LoadEnemiesDataCSVUpdate(float speed);
 
 private:
 	//薙ぎ払われた敵をまとめて保存しておく
