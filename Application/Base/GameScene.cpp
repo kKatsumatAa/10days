@@ -22,7 +22,7 @@ void GameScene::Initialize(void)
 	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isGrayScale = false;
 
 	//BGM再生
-	Sound::GetInstance().PlayWave("play_BGM.wav", 1.0f, true);
+	Sound::GetInstance().PlayWave("play_BGM.wav", 0.2f, true);
 
 	// (0,0) ~ (1280,720) よりちょい内側
 	stage_->Initialize({ 0,0 }, { 1280,720 });
@@ -172,7 +172,7 @@ void GameScene::Update(void)
 				{
 					Score::GetInstance()->HighScoreUpdate();
 
-					Sound::GetInstance().PlayWave("decision_SE.wav");
+					Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
 					//BGMストップ
 					Sound::GetInstance().StopWave("play_BGM.wav");
 					SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
@@ -216,7 +216,7 @@ void GameScene::Update(void)
 			{
 				Score::GetInstance()->HighScoreUpdate();
 
-				Sound::GetInstance().PlayWave("decision_SE.wav");
+				Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
 				//BGMストップ
 				Sound::GetInstance().StopWave("play_BGM.wav");
 				SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
@@ -228,7 +228,7 @@ void GameScene::Update(void)
 			{
 				Score::GetInstance()->HighScoreUpdate();
 
-				Sound::GetInstance().PlayWave("decision_SE.wav");
+				Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
 				//BGMストップ
 				Sound::GetInstance().StopWave("play_BGM.wav");
 				SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);

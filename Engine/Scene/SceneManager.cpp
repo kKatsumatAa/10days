@@ -99,6 +99,9 @@ void SceneManager::LoadAllSound()
 	Sound::GetInstance().LoadWave("result_SE.wav", false);
 	Sound::GetInstance().LoadWave("skewer_SE.wav", false);
 	Sound::GetInstance().LoadWave("skewer_hit_SE.wav", false);
+	Sound::GetInstance().LoadWave("attack_hit_SE.wav", false);
+	Sound::GetInstance().LoadWave("enemy_hit_SE.wav", false);
+	Sound::GetInstance().LoadWave("fusion_SE.wav", false);
 }
 
 void SceneManager::StopWaveAllScene()
@@ -116,6 +119,9 @@ void SceneManager::StopWaveAllScene()
 	Sound::GetInstance().StopWave("result_SE.wav");
 	Sound::GetInstance().StopWave("skewer_SE.wav");
 	Sound::GetInstance().StopWave("skewer_hit_SE.wav");
+	Sound::GetInstance().StopWave("attack_hit_SE.wav");
+	Sound::GetInstance().StopWave("enemy_hit_SE.wav");
+	Sound::GetInstance().StopWave("fusion_SE.wav");
 }
 
 

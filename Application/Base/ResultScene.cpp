@@ -16,7 +16,7 @@ void ResultScene::Initialize(void)
 	//画像読み込み
 	png_result_ = TextureManager::LoadGraph("result.png");
 	//BGM再生
-	Sound::GetInstance().PlayWave("result_BGM.wav", 1.0f, true);
+	Sound::GetInstance().PlayWave("result_BGM.wav", 0.2f, true);
 
 	Score::GetInstance()->SaveScore();
 
@@ -54,7 +54,7 @@ void ResultScene::Update(void)
     {
         if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
         {
-            Sound::GetInstance().PlayWave("decision_SE.wav");
+            Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
             //BGMストップ
             Sound::GetInstance().StopWave("result_BGM.wav");
             SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
@@ -64,7 +64,7 @@ void ResultScene::Update(void)
     {
         if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
         {
-            Sound::GetInstance().PlayWave("decision_SE.wav");
+            Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
             //BGMストップ
             Sound::GetInstance().StopWave("result_BGM.wav");
             SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
@@ -74,7 +74,7 @@ void ResultScene::Update(void)
 #ifdef _DEBUG
     if (KeyboardInput::GetInstance().KeyTrigger(DIK_R))
     {
-        Sound::GetInstance().PlayWave("decision_SE.wav");
+        Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
         //BGMストップ
         Sound::GetInstance().StopWave("result_BGM.wav");
         SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
