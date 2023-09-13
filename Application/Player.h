@@ -23,7 +23,7 @@ public:
     const float kMowSwordCenterDist_{ 30.f }; // 薙ぎ払い攻撃の絵の中心がプレイヤーの中心からどのくらい離れてるか
     const float kMaxRangeSwordDegree_{ 200.f }; // 剣をどのくらいの角度まで振るか
     const float kMowArrowXRate_{ 0.1f }; // 常時表示する薙ぎ払い用の矢印の拡大率X
-    const float kMowArrowYRate_{ 0.24f }; // 常時表示する薙ぎ払い用の矢印の拡大率Y
+    const float kMowArrowYRate_{ 0.34f }; // 常時表示する薙ぎ払い用の矢印の拡大率Y
     const float kMowArrowDist2Self_{ 80.f }; // 常時表示する薙ぎ払い用の矢印とプレイヤーの距離
 
     // 串刺し

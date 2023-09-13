@@ -74,7 +74,7 @@ void PlayerMowAttack::Draw(void)
 	Object::SetScale({ kPngScale_, kPngScale_,0 });
 	Object::SetTrans({ position_.x, position_.y,0 });
 	Object::SetRot({ 0,0, rotation_ - Math::Function::ToRadian(90) });
-	DrawBoxSprite(nullptr, png_mowAttack_, { 1.0f,1.0f,1.0f,0.4f }, { 0.5f,0.5f });
+	DrawBoxSprite(nullptr, png_mowAttack_, { 1.0f,0.2f,0.3f,0.5f }, { 0.5f,0.5f });
 }
 
 void PlayerMowAttack::OnCollision(void)

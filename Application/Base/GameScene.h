@@ -48,7 +48,7 @@ private:
 	std::unique_ptr<Stage> stage_{ std::make_unique<Stage>() };
 
 	std::unique_ptr<Player> player_{ std::make_unique<Player>(CollisionManger::GetInstance(), stage_.get()) };
-    UtilL::NTimer nTimer_{5000000};
+    UtilL::NTimer nTimer_{3600};	//60f*秒数　3600で60秒
     UtilL::NTimer countdownTimer_{180};
     UtilL::NTimer ReadyGoTimer_{kReadyGoTimer_};
 
@@ -60,6 +60,5 @@ private:
 
 	//テスト用
 	DrawIntNumImage drawNum_;
-	uint32_t num_ = 114514;
 };
 

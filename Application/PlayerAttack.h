@@ -10,8 +10,8 @@ public:
 	// ’è”
 	static const int32_t kMaxAttackFrame_{ 10 }; // UŒ‚”ÍˆÍ‚Ì—LŒøŠÔ(ƒtƒŒ[ƒ€)
 	const float kBlewDist_{ 80.f }; // ‚«”ò‚Î‚·‹——£
-	const Vec2 kRadius_{ 60,0 }; // UŒ‚”ÍˆÍ ¦Œ»İ”»’è‚ª‰~‚È‚Ì‚Åyg‚¢‚Ü‚¹‚ñ
-	const float kPngScale_{ 0.077f }; // ‰æ‘œ‚ÌŠg‘å—¦
+	const Vec2 kRadius_{ 65,0 }; // UŒ‚”ÍˆÍ ¦Œ»İ”»’è‚ª‰~‚È‚Ì‚Åyg‚¢‚Ü‚¹‚ñ
+	const float kPngScale_{ 0.08f }; // ‰æ‘œ‚ÌŠg‘å—¦
 
 	// ŠÖ”
 	PlayerMowAttack(CollisionManger* colMPtr);
