@@ -199,11 +199,6 @@ void Enemy::OnCollision(void)
 			// 合体OKフラグオン
 			isDocking_ = true;
 			enemyPtr->isDocking_ = true;
-			//合体音
-			/*if (Sound::GetInstance().CheckPlayingWave("fusion_SE.wav"))
-			{
-				Sound::GetInstance().PlayWave("fusion_SE.wav");
-			}*/
 			// 関数終了
 			return;
 		}
@@ -282,7 +277,6 @@ void Enemy::OnCollision(void)
 				vec_mow_ = paPtr->GetVecMove();
 
 				ParticleManagerL::GetInstance()->EnemyHitEffect(position_, vec_mow_);
-				//Sound::GetInstance().PlayWave("attack_hit_SE.wav");
 			}
 		}
 	}

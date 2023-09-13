@@ -503,6 +503,9 @@ void Player::SkewerAttackUpdate(void)
 			//GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
 			frameCount_SkewerEndHitStop_++;
 		}
+
+		//Œ‚”j‰¹
+		Sound::GetInstance().PlayWave("wall_hit_SE.wav", 1.0f);
 	}
 
 	const float eRange = EnemyManager::GetInstance().GetSkewerEnemiesLength();
