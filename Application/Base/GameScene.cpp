@@ -172,7 +172,7 @@ void GameScene::Update(void)
 				{
 					Score::GetInstance()->HighScoreUpdate();
 
-					Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+					Sound::GetInstance().PlayWave("decision_SE.wav");
 					//BGMストップ
 					Sound::GetInstance().StopWave("play_BGM.wav");
 					SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
@@ -216,7 +216,7 @@ void GameScene::Update(void)
 			{
 				Score::GetInstance()->HighScoreUpdate();
 
-				Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+				Sound::GetInstance().PlayWave("decision_SE.wav");
 				//BGMストップ
 				Sound::GetInstance().StopWave("play_BGM.wav");
 				SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
@@ -228,7 +228,7 @@ void GameScene::Update(void)
 			{
 				Score::GetInstance()->HighScoreUpdate();
 
-				Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+				Sound::GetInstance().PlayWave("decision_SE.wav");
 				//BGMストップ
 				Sound::GetInstance().StopWave("play_BGM.wav");
 				SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);

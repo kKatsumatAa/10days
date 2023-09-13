@@ -31,7 +31,7 @@ void TitleScene::Update(void)
 	// pad-Aで画面切替
 	if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
 	{
-		Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+		Sound::GetInstance().PlayWave("decision_SE.wav");
 		//BGMストップ
 		Sound::GetInstance().StopWave("title_BGM.wav");
 		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);
@@ -41,7 +41,7 @@ void TitleScene::Update(void)
 #ifdef _DEBUG
 	if (KeyboardInput::GetInstance().KeyTrigger(DIK_SPACE))
 	{
-		Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+		Sound::GetInstance().PlayWave("decision_SE.wav");
 		//BGMストップ
 		Sound::GetInstance().StopWave("title_BGM.wav");
 		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);

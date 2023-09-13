@@ -54,7 +54,7 @@ void ResultScene::Update(void)
     {
         if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
         {
-            Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+            Sound::GetInstance().PlayWave("decision_SE.wav");
             //BGMストップ
             Sound::GetInstance().StopWave("result_BGM.wav");
             SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
@@ -64,7 +64,7 @@ void ResultScene::Update(void)
     {
         if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
         {
-            Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+            Sound::GetInstance().PlayWave("decision_SE.wav");
             //BGMストップ
             Sound::GetInstance().StopWave("result_BGM.wav");
             SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
@@ -74,7 +74,7 @@ void ResultScene::Update(void)
 #ifdef _DEBUG
     if (KeyboardInput::GetInstance().KeyTrigger(DIK_R))
     {
-        Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+        Sound::GetInstance().PlayWave("decision_SE.wav");
         //BGMストップ
         Sound::GetInstance().StopWave("result_BGM.wav");
         SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
