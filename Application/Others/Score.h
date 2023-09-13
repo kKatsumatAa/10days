@@ -58,6 +58,8 @@ public:
 	void SetRankPos(const Vec2& pos);
 	//指定されたUIの描画サイズ設定
 	void SetRankSize(float size);
+    void SetRankColor(const Vec4& color);
+
 
     DrawIntNumImage& GetDrawNum(void) { return drawNum_; }
     DrawIntNumImage& GetDrawHighNum(void) { return drawNumHigh_; }

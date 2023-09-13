@@ -30,7 +30,7 @@ void ResultScene::Initialize(void)
     Score::GetInstance()->SetNowNum();
 
     Score::GetInstance()->SetRank();
-    Score::GetInstance()->SetRankPos({ 640.f, 200.f });
+    Score::GetInstance()->SetRankPos({ 640.f, 300.f });
     Score::GetInstance()->SetRankSize(0.8f);
 
     UI::GetInstance()->SetPos(UIType::HighScore, { 250.f,300.f });
@@ -120,6 +120,13 @@ void ResultScene::Update(void)
                         if (timer_DisplayRank_.GetisTimeOut())
                         {
                             isEndAllDisplay_ = true;
+                            // 加算6
+                            timer_other_.Update(false, 1.f);
+                            // pad-Aで演出1個スキップ6
+                            if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
+                            {
+                                timer_other_.SetTimer((float)kMaxFrame_currentScore_);
+                            }
                         }
                     }
                 }
@@ -136,6 +143,14 @@ void ResultScene::Update(void)
                     if (timer_DisplayRank_.GetisTimeOut())
                     {
                         isEndAllDisplay_ = true;
+                        // 加算6
+                        timer_other_.Update(false, 1.f);
+                        // pad-Aで演出1個スキップ6
+                        if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
+                        {
+                            timer_other_.SetTimer((float)kMaxFrame_currentScore_);
+                        }
+
                     }
                 }
             }
@@ -239,16 +254,25 @@ void ResultScene::DrawSprite2()
     Score::GetInstance()->SetHighNum();
     Score::GetInstance()->Draw();
     float rate3 = (std::min)(timer_newRecord_.GetTimer() / timer_newRecord_.GetMaxTimer(), 1.f);
-    UI::GetInstance()->SetColor(UIType::New, { 1.f,1.f,1.f,Math::Ease::EaseInOutSine(rate3,0.f,1.f) });
-    UI::GetInstance()->SetSize(UIType::HighScore, Math::Ease::EaseInOutSine(rate3, 5.f, 0.5f));
-    UI::GetInstance()->Draw(UIType::HighScore);
+    UI::GetInstance()->SetColor(UIType::NewRecord, { 1.f,0.f,0.f,Math::Ease::EaseInOutSine(rate3,0.f,1.f) });
+    UI::GetInstance()->SetSize(UIType::NewRecord, Math::Ease::EaseInOutSine(rate3, 5.f, 0.5f));
+    UI::GetInstance()->Draw(UIType::NewRecord);
 
+    if (timer_DisplayRank_.GetisTimeOut())
+    {
+        Score::GetInstance()->DrawRank(0.1f);
+    }
 
-    UI::GetInstance()->Draw(UIType::Retry);
-    UI::GetInstance()->Draw(UIType::ToTitle);
-    UI::GetInstance()->Draw(UIType::Abutton);
-
-    Score::GetInstance()->DrawRank(0.1f);
+    if (isEndAllDisplay_)
+    {
+        float rate5 = (std::min)(timer_other_.GetTimer() / timer_other_.GetMaxTimer(), 1.f);
+        UI::GetInstance()->SetColor(UIType::Retry, { 1.f,1.f,1.f,Math::Ease::EaseInOutSine(rate5,0.f,1.f) });
+        UI::GetInstance()->SetColor(UIType::ToTitle, { 1.f,1.f,1.f,Math::Ease::EaseInOutSine(rate5,0.f,1.f) });
+        UI::GetInstance()->SetColor(UIType::Abutton, { 1.f,1.f,1.f,Math::Ease::EaseInOutSine(rate5,0.f,1.f) });
+        UI::GetInstance()->Draw(UIType::Retry);
+        UI::GetInstance()->Draw(UIType::ToTitle);
+        UI::GetInstance()->Draw(UIType::Abutton);
+    }
 }
 
 void ResultScene::DrawImgui()

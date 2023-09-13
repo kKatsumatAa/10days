@@ -37,6 +37,7 @@ public:
     bool isNewRecord_{};
     UtilL::NTimer timer_newRecord_{(float)kMaxFrame_newRecord_};
     UtilL::NTimer timer_DisplayRank_{(float)kMaxFrame_DisplayRank_};
+    UtilL::NTimer timer_other_{(float)kMaxFrame_DisplayRank_};
 
     Object result_;
 
