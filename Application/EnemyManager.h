@@ -25,6 +25,7 @@ private://•Ï”
 
 	uint64_t enemyTexHandle_ = 0;
 	uint64_t BigEnemyTexHandle_ = 0;
+	uint64_t warningTexHandle_ = 0;
 
 	//“|‚³‚ê‚½“G‚Ì”—p
 	bool isDefeatedEnemies_ = false;
@@ -37,6 +38,9 @@ private://•Ï”
 	std::string popFileName_;
 
 	const std::string ENEMIES_DATA_PATH_ = "Resources/enemyData/";
+
+	//“G‚ª‰æ–ÊŠO‚É‚¢‚é‚Æ‚«‚ÌUI
+	std::vector<std::unique_ptr<Object>> enemyWarningUIs_;
 
 private://ŠÖ”
 	EnemyManager() { ; }
@@ -56,7 +60,6 @@ public:
 public:
 	//csv“Ç‚İ‚İ
 	void LoadEnemiesDataCSV(const std::string& name);
-
 private:
 	//csv“Ç‚İ‚İXVˆ—
 	void LoadEnemiesDataCSVUpdate(float speed);
