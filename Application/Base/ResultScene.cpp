@@ -39,7 +39,7 @@ void ResultScene::Initialize(void)
     UI::GetInstance()->SetAncorPoint(UIType::Retry, { 0.5f,0.5f });
     UI::GetInstance()->SetPos(UIType::ToTitle, { 940,600 });
     UI::GetInstance()->SetAncorPoint(UIType::ToTitle, { 0.5f,0.5f });
-    UI::GetInstance()->SetPos(UIType::Abutton, { 420,680 });
+    UI::GetInstance()->SetPos(UIType::Abutton, { 610,550 });
     UI::GetInstance()->SetSize(UIType::Abutton, 0.3f);
     UI::GetInstance()->SetAncorPoint(UIType::Abutton, { 0.5f,0.5f });
     if (destination_ == Destination::RETRY)
@@ -72,7 +72,7 @@ void ResultScene::Update(void)
         UI::GetInstance()->SetSize(UIType::Retry, 0.4f);
         UI::GetInstance()->SetColor(UIType::ToTitle, { 1,1,1,1 });
         UI::GetInstance()->SetSize(UIType::ToTitle, 0.7f);
-        UI::GetInstance()->SetPos(UIType::Abutton, { 920,680 });
+        UI::GetInstance()->SetPos(UIType::Abutton, { 1100,550 });
     }
     else if (PadInput::GetInstance().GetLeftStickTilt().x <= -0.3f)
     {
@@ -86,7 +86,7 @@ void ResultScene::Update(void)
         UI::GetInstance()->SetSize(UIType::ToTitle, 0.4f);
         UI::GetInstance()->SetColor(UIType::Retry, { 1,1,1,1 });
         UI::GetInstance()->SetSize(UIType::Retry, 0.7f);
-        UI::GetInstance()->SetPos(UIType::Abutton, { 420,680 });
+        UI::GetInstance()->SetPos(UIType::Abutton, { 610,550 });
     }
 
     if (destination_ == Destination::RETRY)
@@ -321,10 +321,10 @@ void ResultScene::DrawSprite2()
     Score::GetInstance()->DrawHighScore();
     UI::GetInstance()->Draw(UIType::NowScore);
     UI::GetInstance()->Draw(UIType::HighScore);
-    UI::GetInstance()->Draw(UIType::Abutton);
 
     UI::GetInstance()->Draw(UIType::Retry);
     UI::GetInstance()->Draw(UIType::ToTitle);
+    UI::GetInstance()->Draw(UIType::Abutton);
 }
 
 void ResultScene::DrawImgui()
