@@ -133,7 +133,7 @@ class CombinedEnemiesStateStretch : public ICombinedEnemiesState
 {
 private:
 	//敵の数による移動の倍率
-	const float VELOCITY_EXTEND_ = 0.05f;
+	const float VELOCITY_EXTEND_ = 0.1f;
 	//でかつよのスピード倍率
 	const float BIG_VELOCITY_EXTEND_ = 0.45f;
 
