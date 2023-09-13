@@ -41,11 +41,19 @@ void ResultScene::Update(void)
 {
     if (PadInput::GetInstance().GetLeftStickTilt().x >= 0.3f)
     {
+        if (destination_ == 0)
+        {
+            Sound::GetInstance().PlayWave("select_SE.wav", 0.5f);
+        }
         destination_++;
         destination_ = (std::min)(destination_, 1);
     }
     else if (PadInput::GetInstance().GetLeftStickTilt().x <= -0.3f)
     {
+        if (destination_ == 1)
+        {
+            Sound::GetInstance().PlayWave("select_SE.wav", 0.5f);
+        }
         destination_--;
         destination_ = (std::max)(destination_, 0);
     }
