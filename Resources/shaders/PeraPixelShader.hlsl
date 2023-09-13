@@ -193,7 +193,7 @@ PSOutput PS(Output input) : SV_TARGET
 //RGB‚¸‚ç‚µ
     if (isRGBShift)
     {
-        float shift = 0.005f;
+        float shift = RGBShiftPow;
         float r = tex0.Sample(smp, input.uv + float2(-shift, 0)).r;
         float g = tex0.Sample(smp, input.uv + float2(0, 0)).g;
         float b = tex0.Sample(smp, input.uv + float2(shift, 0)).b;

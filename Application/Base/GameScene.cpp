@@ -19,7 +19,7 @@ void GameScene::Finalize()
 
 void GameScene::Initialize(void)
 {
-	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isGrayScale = false;
+	PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isGrayScale = false;
 
     //BGMÄ¶
     Sound::GetInstance().PlayWave("play_BGM.wav", 0.2f, true);

@@ -3,6 +3,8 @@
 
 cbuffer ConstBufferEffectFlags : register(b0)
 {
+    //色
+    float4 color;
 	//ぼかし
     unsigned int isMultiTex;
 	//ぼかし
@@ -39,6 +41,7 @@ cbuffer ConstBufferEffectFlags : register(b0)
     unsigned int isNega;
 	//ネガポジ反転
     unsigned int isRGBShift;
+    float RGBShiftPow;
 	//ブルーム
     unsigned int isBloom;
 	//クロスフィルタ
@@ -55,8 +58,6 @@ cbuffer ConstBufferEffectFlags : register(b0)
     float nFocusWidth;
 	//フォーカスのスムースステップの幅の上限
     float focusDiffPow;
-    //色
-    float4 color;
 	//時間
     uint time;
 }
