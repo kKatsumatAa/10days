@@ -501,9 +501,9 @@ void EnemyManager::LoadEnemiesDataCSVUpdate(float speed)
 	//待機処理
 	if (isWaitingPop_)
 	{
-		popWaitTimer_ -= speed;
+		popWaitTimer_--;
 
-		if (popWaitTimer_ <= 0)
+		if (GetEnemiesCount() <= 0 || popWaitTimer_ <= 0)
 		{
 			isWaitingPop_ = false;
 		}
@@ -559,6 +559,7 @@ void EnemyManager::LoadEnemiesDataCSVUpdate(float speed)
 
 			//待機開始
 			popWaitTimer_ = (float)waitTime;
+
 			isWaitingPop_ = true;
 
 			//ループ抜ける

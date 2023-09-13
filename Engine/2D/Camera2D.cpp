@@ -74,7 +74,7 @@ void Camera2D::ZoomUpdate()
 	{
 		float t = min((float)zoomTimer_ / (float)zoomTimerMax_, 1.0f);
 
-		float lerpZoom = LerpVec2({ startZoomP_,0 }, { endZoomP_,0 }, EaseInOut(t)).x;
+		float lerpZoom = LerpVec2({ startZoomP_,0 }, { endZoomP_,0 }, EaseIn(t)).x;
 
 		zoom_ = { lerpZoom ,lerpZoom };
 
