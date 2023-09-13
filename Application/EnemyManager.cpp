@@ -392,6 +392,8 @@ void EnemyManager::AddCombinedEnemies(std::unique_ptr<CombinedEnemies> combEnemi
 //----------------------------------------------------------------------------------
 void EnemyManager::Update()
 {
+	isDefeatedEnemies_ = false;
+
 	//“G‚Ì¶¬ˆ—
 	LoadEnemiesDataCSVUpdate(GameVelocityManager::GetInstance().GetVelocity());
 
@@ -618,12 +620,10 @@ bool EnemyManager::GetDefeatedEnemiesNum(uint32_t& enemiesNum)
 	if (isDefeatedEnemies_)
 	{
 		enemiesNum = defeatedEnemiesNum_;
-		isDefeatedEnemies_ = false;
 		defeatedEnemiesNum_ = 0;
 
 		return true;
 	}
-
 	return false;
 }
 

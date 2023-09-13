@@ -18,7 +18,7 @@ void TutorialScene::Initialize(void)
 	CameraManager::GetInstance().SetUsingCamera2D("GameCamera");
 
 	//BGMÄ¶
-	Sound::GetInstance().PlayWave("play_BGM.wav", 0.2f, true);
+	//Sound::GetInstance().PlayWave("play_BGM.wav", 0.2f, true);
 
 	// (0,0) ~ (1280,720) ‚æ‚è‚¿‚å‚¢“à‘¤
 	stage_->Initialize({ 10,10 }, { 1270,710 });
@@ -494,6 +494,8 @@ void TutorialScene::DrawSprite(void)
 void TutorialScene::DrawSprite2(void)
 {
 	Score::GetInstance()->Draw();
+	Score::GetInstance()->SetOneSkewerNum();
+	Score::GetInstance()->DrawOneSkewerScore();
 
     UI::GetInstance()->Draw(UIType::Makimono);
 

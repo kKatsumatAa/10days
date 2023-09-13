@@ -36,6 +36,11 @@ void Score::Init()
 	nScorePos_ = { 0.f,0.f };
 	SetNowNum();
 
+	drawOneSkewerNum_.Initialize(TextureManager::LoadGraph("number.png"));
+	nScoreSize_ = 1.0f;
+	oSScorePos_ = { 0.f,0.f };
+	SetOneSkewerNum();
+
 	drawNumHigh_.Initialize(TextureManager::LoadGraph("number.png"));
 	hScoreSize_ = 1.f;
 	hScorePos_ = { 0.f ,0.f };
@@ -57,6 +62,11 @@ void Score::Draw()
 	drawNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
 }
 
+void Score::DrawOneSkewerScore()
+{
+	drawOneSkewerNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
+}
+
 void Score::DrawHighScore()
 {
 	drawNumHigh_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
@@ -68,8 +78,8 @@ void Score::DrawRank(float rot)
 	obj_.DrawBoxSprite(
 		CameraManager::GetInstance().GetCamera2D("UICamera"),
 		rankTex_[(uint32_t)rank_],
-		{1.f,1.f,1.f,1.f},
-		{0.5f,0.5f});
+		{ 1.f,1.f,1.f,1.f },
+		{ 0.5f,0.5f });
 }
 
 void Score::DrawImGui()
@@ -167,6 +177,53 @@ void Score::SetNowNum()
 		{ 1.0f / 10.0f,1.0f }, { 100,160 }, nScoreSize_);
 }
 
+//----------------------------------------------------
+void Score::SetOneSkewerNum()
+{
+	//桁数求める
+	float digit = 0.f;	//桁数
+	uint32_t result = plusScore_;	//値が変更されないように格納
+
+	if (plusScore_ <= 0)
+	{
+		digit = 1.f;
+	}
+	else
+	{
+		while (result > 0)
+		{
+			result /= 10;
+			digit++;
+		}
+	}
+
+	float t = min((float)oSTimer_ / (float)oSTimerTmp_, 1.0f);
+
+	//演出用処理
+	if (t < 1.0f)
+	{
+		oSScoreSize_ = LerpVec2({ oSScoreSizeTmp_,0 }, { 0,0 }, EaseIn(t)).x;
+		oSScoreAlpha_ = LerpVec2({ 1.0f,0 }, { 0,0 }, EaseIn(t)).x;
+
+		oSTimer_++;
+	}
+
+	drawOneSkewerNum_.SetNum(
+		plusScore_,
+		{ oSScorePos_.x - digit * oSScoreSize_ * 100.f,oSScorePos_.y },
+		{ 1.0f / 10.0f,1.0f }, { 100,160 }, oSScoreSize_, { 0.9f,0.7f,0.3f,oSScoreAlpha_ });
+}
+
+void Score::BeginOneSkewerEffect(float scale, const Vec2& pos, uint32_t time)
+{
+	oSScorePos_ = pos;
+	oSScoreSizeTmp_ = scale;
+	oSTimerTmp_ = time;
+	oSScoreAlpha_ = 1.0f;
+	oSTimer_ = 0;
+}
+
+//-------------------------------------------
 void Score::SetHighNum()
 {
 	//桁数求める

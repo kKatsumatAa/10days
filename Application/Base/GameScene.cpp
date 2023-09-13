@@ -22,7 +22,7 @@ void GameScene::Initialize(void)
 	PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isGrayScale = false;
 
     //BGMÄ¶
-    Sound::GetInstance().PlayWave("play_BGM.wav", 0.2f, true);
+    //Sound::GetInstance().PlayWave("play_BGM.wav", 0.2f, true);
 
 	// (0,0) ~ (1280,720) ‚æ‚è‚¿‚å‚¢“à‘¤
 	stage_->Initialize({ 0,0 }, { 1280,720 });
@@ -337,6 +337,8 @@ void GameScene::DrawSprite()
 void GameScene::DrawSprite2()
 {
 	Score::GetInstance()->Draw();
+	Score::GetInstance()->SetOneSkewerNum();
+	Score::GetInstance()->DrawOneSkewerScore();
 
 	UI::GetInstance()->Draw(UIType::Makimono);
 	UI::GetInstance()->Draw(UIType::Time);

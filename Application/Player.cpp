@@ -13,6 +13,7 @@
 #include "HitStop.h"
 #include "CameraManager.h"
 #include "ParticleManager.h"
+#include "Score.h"
 
 
 const float Player::kMowDist_{ 15.f };// 薙ぎ払いで吹き飛ばす距離 こっち変更するならenemy.hの割合も弄らないと瞬間移動になっちまう
@@ -103,15 +104,22 @@ void Player::Update(void)
 	// デバッグライン用記録
 	pos4Line_ = position_ + vec_move_ * 30;
 
-	// 向きから回転角を取得
-	rotation_ = std::acos(Vec2(0, -1).Dot(vec_move_));
-	//反転しないように
-	if (vec_move_.x < 0)
-	{
-		rotation_ = -rotation_;
-	}
-	// 右向き方向を取得
-	isRight_ = Vec2(0, -1).Cross(vec_move_.GetNormalize()) > 0.f;
+    // 向きから回転角を取得
+    rotation_ = std::acos(Vec2(0, -1).Dot(vec_move_));
+    //反転しないように
+    if (vec_move_.x < 0)
+    {
+        rotation_ = -rotation_;
+    }
+    // 右向き方向を取得
+    isRight_ = Vec2(0, -1).Cross(vec_move_.GetNormalize()) > 0.f;
+
+    uint32_t num = 0;
+    if (EnemyManager::GetInstance().GetDefeatedEnemiesNum(num))
+    {
+        //突進で稼いだスコアの演出
+        Score::GetInstance()->BeginOneSkewerEffect(0.4f, { 1250.f, 120.f }, 150);
+    }
 }
 
 void Player::Draw(void)

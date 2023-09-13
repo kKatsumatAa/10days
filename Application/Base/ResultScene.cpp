@@ -19,7 +19,7 @@ void ResultScene::Initialize(void)
     Score::GetInstance()->LoadTex();
 
     //BGMÄ¶
-    Sound::GetInstance().PlayWave("result_BGM.wav", 0.2f, true);
+    //Sound::GetInstance().PlayWave("result_BGM.wav", 0.2f, true);
 
     Score::GetInstance()->SaveScore();
 

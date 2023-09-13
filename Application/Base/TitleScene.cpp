@@ -18,7 +18,7 @@ void TitleScene::Initialize(void)
 	//‰æ‘œ“Ç‚Ýž‚Ý
 	titleImageHandle_ = TextureManager::LoadGraph("title.png");
 	//BGMÄ¶
-	Sound::GetInstance().PlayWave("title_BGM.wav", 0.2f, true);
+	//Sound::GetInstance().PlayWave("title_BGM.wav", 0.2f, true);
 
 	Score::GetInstance()->LoadScore();
 	UI::GetInstance()->SetPos(UIType::Abutton, { 640.f,600.f });
