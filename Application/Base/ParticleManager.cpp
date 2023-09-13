@@ -38,7 +38,7 @@ ParticleManagerL* ParticleManagerL::GetInstance()
 
 void ParticleManagerL::Init()
 {
-	texKey_ = TextureManager::LoadGraph("effect1.png");
+	texKey_ = TextureManager::LoadGraph("circle.png");
 
 	enemyDeadParticle_.Init();
 	skewerParticle_.Init();

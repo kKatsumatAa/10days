@@ -22,6 +22,7 @@ enum class UIType
 	HighScore,	//Å‚‹L˜^
 	Makimono,	//Šª•¨
     ReadyGo,    // n‚ßI
+    Finish,     // ‚»‚±‚Ü‚Å!
 
     Tutorial1,
     Tutorial2,
