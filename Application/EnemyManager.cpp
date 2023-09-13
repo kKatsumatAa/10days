@@ -6,6 +6,7 @@
 #include <fstream>
 #include "GameVelocityManager.h"
 #include "GameVelocityState.h"
+#include "CameraManager.h"
 
 
 EnemyManager& EnemyManager::GetInstance()
@@ -25,6 +26,7 @@ void EnemyManager::Initialize(Player* player, Stage* stage)
 
 	enemyTexHandle_ = TextureManager::LoadGraph("enemy.png");
 	BigEnemyTexHandle_ = TextureManager::LoadGraph("big_enemy.png");
+	warningTexHandle_ = TextureManager::LoadGraph("warning.png");
 
 	enemyPopCommands_.clear();
 	enemyPopCommands_.str("");
@@ -591,7 +593,7 @@ void EnemyManager::AddEnemy(const Vec2& pos, uint32_t combinedNum)
 	for (uint32_t i = 0; i < combinedNum; i++)
 	{
 		std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>(CollisionManger::GetInstance(), player_,
-			stage_, enemyTexHandle_, BigEnemyTexHandle_);
+			stage_, enemyTexHandle_, BigEnemyTexHandle_, warningTexHandle_);
 		enemy->SetPos(pos);
 		Vec2 dir = player_->GetPos() - pos;
 		enemy->SetRot(atan2f(dir.y, dir.x));

@@ -451,7 +451,7 @@ void TutorialScene::Update(void)
                 Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
                 //BGMストップ
                 Sound::GetInstance().StopWave("play_BGM.wav");
-                SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
+                SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);
             }
         }
         else if (destination_ == Destination::TITLE)
