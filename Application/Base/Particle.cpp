@@ -1,7 +1,7 @@
 #include "Particle.h"
 #include "MathUtil.h"
 #include "Easing.h"
-
+const float Emitter::TEX_EXTEND_ = 1.0f / 1024.0f;
 
 Emitter::Emitter()
 {
@@ -105,6 +105,7 @@ void Emitter::Add(uint32_t addNum, float life, float minScale, float maxScale, V
 		p.startScale = randomScale;
 		p.endScale = { 0,0 };
 		p.color = color;
+		p.key = key_;
 		//イージング用のタイマーを設定、開始
 		p.timerMax = life * 60.0f;
 		//
@@ -141,7 +142,7 @@ void Emitter::StartScalingTimer(bool isRun)
 //---------------------------------------------------------------------------------
 void Emitter::Particle::Draw()
 {
-	obj_->SetScale({ scale.x,scale.y,0 });
+	obj_->SetScale({ scale.x * TEX_EXTEND_,scale.y * TEX_EXTEND_,0 });
 	obj_->SetTrans({ pos.x,pos.y,0 });
 	obj_->SetRot({ 0,0,rot });
 
