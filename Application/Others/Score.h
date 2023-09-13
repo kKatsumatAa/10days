@@ -2,6 +2,16 @@
 #include <memory>
 #include "DrawIntNumImage.h"
 
+enum class Rank
+{
+	Kakedasi,
+	Hanninmae,
+	Itininmae,
+	Itiryu,
+	Jukuren,
+	Densetu
+};
+
 class Score
 {
 public:
@@ -32,6 +42,8 @@ public:
 	void SetNowNum();	//座標とかサイズセットしたらこれ呼んで反映させる
 	void SetHighNum();	//座標とかサイズセットしたらこれ呼んで反映させる
 
+	void SetRank();
+
 private:
 	uint32_t nowScore_;		//現在のスコア
 	uint32_t highScore_;	//今までのハイスコア
@@ -44,4 +56,6 @@ private:
 
 	float nScoreSize_;		//現在のスコアの描画サイズ
 	float hScoreSize_;		//今までのハイスコアの描画サイズ
+
+	Rank rank_;
 };
