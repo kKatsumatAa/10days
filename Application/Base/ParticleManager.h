@@ -13,6 +13,8 @@ private:
 	Emitter skewerParticle_;		//“Ëi
 	Emitter enemyHitParticle_;		//“G‚ª‚È‚¬•¥‚¢‚É“–‚½‚Á‚½
 
+	uint64_t texKey_;
+
 public:
 	//“G€‚ñ‚¾
 	void EnemyDeadEffect(const Vec2& pos);
