@@ -575,6 +575,7 @@ void Player::OnCollision(void)
 			}
 
 			Sound::GetInstance().PlayWave("enemy_hit_SE.wav", 0.5f);
+			ParticleManagerL::GetInstance()->PlayerKnokEffect(position_, vec_contactE2P_);
 		}
 		else // –³“GŽžŠÔ’†‚È‚ç‰Ÿ‚µ–ß‚µ
 		{

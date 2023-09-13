@@ -30,6 +30,17 @@ void ParticleManagerL::EnemyHitEffect(const Vec2& pos, const Vec2& velo)
 		v, 0, 0, { 0.75f,0.3f,0.5f,0.5f });
 }
 
+void ParticleManagerL::PlayerKnokEffect(const Vec2& pos, const Vec2& velo)
+{
+	Vec2 v = velo.GetNormalize();
+	enemyHitParticle_.SetPos(pos.x, pos.y);
+	Vec2 s = { 1.f, 1.f };
+	enemyHitParticle_.SetScale(s);
+	enemyHitParticle_.Add(30, 0.3f, 30.0f, 40.0f,
+		{ v.x - 5.0f,v.y - 5.0f }, { v.x + 5.0f,v.y + 5.0f },
+		v*1.2f, 0, 0, { 1.f,0.2f,0.3f,0.5f });
+}
+
 ParticleManagerL* ParticleManagerL::GetInstance()
 {
 	static ParticleManagerL instance;
