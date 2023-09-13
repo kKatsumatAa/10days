@@ -166,6 +166,7 @@ void TutorialScene::Update(void)
 
 			player_->Update();
 			EnemyManager::GetInstance().Update();
+			EnemyManager::GetInstance().SetIsAddEnemy();	//“G‚Ì”§ŒÀ
 
 			ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
 			CollisionManger::GetInstance()->Update();

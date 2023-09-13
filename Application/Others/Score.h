@@ -39,6 +39,13 @@ public:
     //ハイスコア読み込み
     void LoadScore();
 
+	//加算されるスコアを取得
+	const uint32_t GetPlusScore() { return plusScore_; }
+
+	void SetNowPos(const Vec2& pos) { nScorePos_ = pos; }
+	void SetHighPos(const Vec2& pos) { hScorePos_ = pos; }
+	void SetNowSize(float size) { nScoreSize_ = size; }
+	void SetHighSize(float size) { hScoreSize_ = size; }
     void SetNowPos(const Vec2& pos) { nScorePos_ = pos; }
     void SetHighPos(const Vec2& pos) { hScorePos_ = pos; }
     void SetNowSize(float size) { nScoreSize_ = size; }
@@ -62,6 +69,7 @@ public:
     bool GetIsNewRecord(void) { return nowScore_ > highScore_; }
 
 private:
+	uint32_t plusScore_;	//加算されるスコア
 	uint32_t nowScore_;		//現在のスコア
 	uint32_t highScore_;	//今までのハイスコア
 
