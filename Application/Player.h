@@ -67,6 +67,7 @@ private:
     int32_t frameCount_SkewerEndHitStop_; // 串刺し終了後のヒットストップの為のフレームカウンタ
     Vec2 vec_move_; // プレイヤーの向き
     State state_; // 現在の状態fsm
+    bool isHitMow_;
 
     Vec2 pos4Line_{}; // debug用プレイヤーの向き描画の溜めの座標
 

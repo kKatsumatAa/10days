@@ -13,6 +13,9 @@ PlayerMowAttack::PlayerMowAttack(CollisionManger* colMPtr) : IEntity(nullptr), c
 	// –¼ÌÝ’è
 	id_ = "player_mowAttack";
 
+    // Õ“Ëcallback”½‰f
+    onCollision_ = std::bind(&PlayerMowAttack::OnCollision, this);
+
 	radius_ = kRadius_;
 }
 
@@ -41,12 +44,21 @@ void PlayerMowAttack::Attack(const Vec2& vec_move, const Vec2& attackRangeCenter
 
 void PlayerMowAttack::Update(void)
 {
+    // “ã‚¬•¥‚¢‚ª“G‚É“–‚½‚Á‚½”»’èitrigger)
+    if (isHitMow_ && isHitMowOld_ == false)
+    {
+
+    }
+
 	// UŒ‚’†‚È‚ç
 	if (frameCount_attack_)
 	{
 		// UŒ‚ŽžŠÔƒJƒEƒ“ƒgƒtƒŒ[ƒ€‚ð‰ÁŽZ
 		Math::Function::LoopIncrement(frameCount_attack_, 0, kMaxAttackFrame_);
 	}
+
+    isHitMowOld_ = isHitMow_;
+    isHitMow_ = false;
 }
 
 void PlayerMowAttack::Draw(void)
@@ -63,4 +75,13 @@ void PlayerMowAttack::Draw(void)
 	Object::SetTrans({ position_.x, position_.y,0 });
 	Object::SetRot({ 0,0, rotation_ - Math::Function::ToRadian(90) });
 	DrawBoxSprite(nullptr, png_mowAttack_, { 1.0f,1.0f,1.0f,0.4f }, { 0.5f,0.5f });
+}
+
+void PlayerMowAttack::OnCollision(void)
+{
+    // ÚG‘ÎÛ‚Ì–¼Ì‚ª enemy
+    if (other_->GetId() == "enemy")
+    {
+        isHitMow_ = true;
+    }
 }
