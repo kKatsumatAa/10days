@@ -33,6 +33,13 @@ private:
 	//前の座標
 	Vec2 oldPos_;
 
+	//ズーム
+	bool isZoom_ = false;
+	float startZoomP_ = 0;
+	float endZoomP_ = 0;
+	int32_t zoomTimerMax_ = 0;
+	int32_t zoomTimer_ = 0;
+
 public:
 	void Initialize();
 	void Update();
@@ -41,6 +48,7 @@ private:
 	void VisiableUpdate();
 	void MatrixUpdate();
 	void FollowUpdate();
+	void ZoomUpdate();
 
 public:
 	void SetPos(const Vec2& pos) { pos_ = pos; }
@@ -59,4 +67,5 @@ public:
 	void BeginShake(uint32_t time, float maxLength);
 	void BeginFollow(float maxLength);
 	void EndFollow();
+	void BeginZoom(float endZoomPow, int32_t time);
 };

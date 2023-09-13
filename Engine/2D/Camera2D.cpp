@@ -1,4 +1,5 @@
 #include "Camera2D.h"
+#include "Util.h"
 
 using namespace DirectX;
 
@@ -9,6 +10,8 @@ void Camera2D::Initialize()
 void Camera2D::Update()
 {
 	FollowUpdate();
+
+	ZoomUpdate();
 
 	//シェイク更新
 	shake_.Update();
@@ -65,6 +68,25 @@ void Camera2D::FollowUpdate()
 	}
 }
 
+void Camera2D::ZoomUpdate()
+{
+	if (isZoom_)
+	{
+		float t = min((float)zoomTimer_ / (float)zoomTimerMax_, 1.0f);
+
+		float lerpZoom = LerpVec2({ startZoomP_,0 }, { endZoomP_,0 }, EaseInOut(t)).x;
+
+		zoom_ = { lerpZoom ,lerpZoom };
+
+		if (t >= 1.0f)
+		{
+			isZoom_ = false;
+		}
+
+		zoomTimer_++;
+	}
+}
+
 //----------------------------------------------------------
 void Camera2D::BeginShake(uint32_t time, float maxLength)
 {
@@ -87,3 +109,15 @@ void Camera2D::EndFollow()
 {
 	isFollow_ = false;
 }
+
+
+//-----------------------------------------------------------
+void Camera2D::BeginZoom(float endZoomPow, int32_t time)
+{
+	startZoomP_ = (zoom_.x + zoom_.y) / 2.0f;
+	endZoomP_ = endZoomPow;
+	zoomTimerMax_ = time;
+	zoomTimer_ = 0;
+	isZoom_ = true;
+}
+
