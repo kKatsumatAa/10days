@@ -128,7 +128,6 @@ void GameScene::Update(void)
 
 	int32_t nTimer = uint32_t(nTimer_.GetMaxTimer() / 60 - nTimer_.GetTimer() / 60);
 	drawNum_.SetNum(nTimer, { 200,10 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.85f);	//Žc‚è•b”•\Ž¦
-    int32_t nTimer = uint32_t(60.f - nTimer_.GetTimer() / 60);
     if (nTimer > 15)
     {
         drawNum_.SetNum(nTimer, { 15,15 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.85f);	//Žc‚è•b”•\Ž¦
@@ -385,6 +384,42 @@ void GameScene::DrawSprite2()
 
     if (nTimer_.GetisTimeOut() == false)
     {
+        if (nTimer_.GetTimer() >= 54 * 60 && nTimer_.GetTimer() < 56 * 60)
+        {
+            float rate = (std::min)(countdownTimer_.GetTimer() / 60, 1.f);
+            UI::GetInstance()->SetSize(UIType::Number5, Math::Ease::EaseOutQuint(rate, 1.8f, 2.2f));
+            UI::GetInstance()->SetPos(UIType::Number5, { 640.f,360.f });
+            UI::GetInstance()->Draw2(UIType::Number5, -0.1f);
+        }
+        else if (nTimer_.GetTimer() >= 55 * 60 && nTimer_.GetTimer() < 57 * 60)
+        {
+            float rate = (std::min)((countdownTimer_.GetTimer() - 60.f) / 60, 1.f);
+            UI::GetInstance()->SetSize(UIType::Number4, Math::Ease::EaseOutQuint(rate, 1.8f, 2.2f));
+            UI::GetInstance()->SetPos(UIType::Number4, { 640.f,360.f });
+            UI::GetInstance()->Draw2(UIType::Number4, 0.1f);
+        }
+        else if (nTimer_.GetTimer() >= 56 * 60 && nTimer_.GetTimer() < 58 * 60)
+        {
+            float rate = (std::min)((countdownTimer_.GetTimer() - 120.f) / 60, 1.f);
+            UI::GetInstance()->SetSize(UIType::Number3, Math::Ease::EaseOutQuint(rate, 1.8f, 2.2f));
+            UI::GetInstance()->SetPos(UIType::Number3, { 640.f,360.f });
+            UI::GetInstance()->Draw2(UIType::Number3, -0.1f);
+        }
+        else if (nTimer_.GetTimer() >= 57 * 60 && nTimer_.GetTimer() < 59 * 60)
+        {
+            float rate = (std::min)((countdownTimer_.GetTimer() - 120.f) / 60, 1.f);
+            UI::GetInstance()->SetSize(UIType::Number2, Math::Ease::EaseOutQuint(rate, 1.8f, 2.2f));
+            UI::GetInstance()->SetPos(UIType::Number2, { 640.f,360.f });
+            UI::GetInstance()->Draw2(UIType::Number2, 0.1f);
+        }
+        else if (nTimer_.GetTimer() >= 58 * 60 && nTimer_.GetTimer() < 60 * 60)
+        {
+            float rate = (std::min)((countdownTimer_.GetTimer() - 120.f) / 60, 1.f);
+            UI::GetInstance()->SetSize(UIType::Number1, Math::Ease::EaseOutQuint(rate, 1.8f, 2.2f));
+            UI::GetInstance()->SetPos(UIType::Number1, { 640.f,360.f });
+            UI::GetInstance()->Draw2(UIType::Number1, -0.1f);
+        }
+
     }
 
 	if (isMenu_)
