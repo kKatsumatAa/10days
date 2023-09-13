@@ -337,6 +337,8 @@ void GameScene::DrawSprite()
 void GameScene::DrawSprite2()
 {
 	Score::GetInstance()->Draw();
+	Score::GetInstance()->SetOneSkewerNum();
+	Score::GetInstance()->DrawOneSkewerScore();
 
 	UI::GetInstance()->Draw(UIType::Makimono);
 	UI::GetInstance()->Draw(UIType::Time);

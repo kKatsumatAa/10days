@@ -13,6 +13,7 @@
 #include "HitStop.h"
 #include "CameraManager.h"
 #include "ParticleManager.h"
+#include "Score.h"
 
 
 const float Player::kMowDist_{ 15.f };// 薙ぎ払いで吹き飛ばす距離 こっち変更するならenemy.hの割合も弄らないと瞬間移動になっちまう
@@ -110,6 +111,13 @@ void Player::Update(void)
     }
     // 右向き方向を取得
     isRight_ = Vec2(0, -1).Cross(vec_move_.GetNormalize()) > 0.f;
+
+    uint32_t num = 0;
+    if (EnemyManager::GetInstance().GetDefeatedEnemiesNum(num))
+    {
+        //突進で稼いだスコアの演出
+        Score::GetInstance()->BeginOneSkewerEffect(0.4f, { 1250.f, 120.f }, 150);
+    }
 }
 
 void Player::Draw(void)
@@ -475,6 +483,7 @@ void Player::SkewerAttackUpdate(void)
     // isSkewerがfalseならMOVE状態へ遷移
     if (skewer_.GetIsSkewer() == false)
     {
+        //
         if (PadInput::GetInstance().GetPushButton(GAMEPAD_A)
             && !GameVelocityManager::GetInstance().GetIsSlowMotion())
         {

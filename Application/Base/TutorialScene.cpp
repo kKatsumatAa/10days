@@ -493,6 +493,8 @@ void TutorialScene::DrawSprite(void)
 void TutorialScene::DrawSprite2(void)
 {
 	Score::GetInstance()->Draw();
+	Score::GetInstance()->SetOneSkewerNum();
+	Score::GetInstance()->DrawOneSkewerScore();
 
     UI::GetInstance()->Draw(UIType::Makimono);
 
