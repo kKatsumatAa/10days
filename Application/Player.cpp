@@ -44,9 +44,9 @@ Player::~Player(void)
 
 void Player::Initialize()
 {
-	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isRadialBlur = false;
+	PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isRadialBlur = false;
 	CameraManager::GetInstance().GetCamera2D()->EndFollow();
-	CameraManager::GetInstance().GetCamera2D()->SetZoom({1.0f,1.0f});
+	CameraManager::GetInstance().GetCamera2D()->SetZoom({ 1.0f,1.0f });
 }
 
 void Player::Update(void)
@@ -334,6 +334,8 @@ void Player::MoveUpdate(void)
 		// 無敵中じゃなければ攻撃できる
 		if (frameCount_invincible_ == 0)
 		{
+			PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isRGBShift = false;
+
 			// pad-A押してない時 && pad-R||RB でAttack_MOW状態に遷移
 			if (PadInput::GetInstance().GetPushButton(GAMEPAD_A) == false && PadInput::GetInstance().GetReleaseTrigger(GAMEPAD_RIGHT_SHOULDER))
 			{
@@ -382,6 +384,11 @@ void Player::MoveUpdate(void)
 				isSkewerScreenBlack4SceneM_ = false;
 
 			}
+		}
+		else
+		{
+			PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.RGBShiftPow = GetRand(0.005f, 0.015f)
+				* (1.0f - (float)frameCount_invincible_ / (float)kMaxInvincibleFrame_);
 		}
 	}
 	//// 串刺し終了後のヒットストップ
@@ -454,7 +461,7 @@ void Player::MowAttackUpdate(void)
 void Player::SkewerAttackUpdate(void)
 {
 	CameraManager::GetInstance().GetCamera2D()->BeginFollow(50.0f);
-	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isRadialBlur = true;
+	PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isRadialBlur = true;
 
 	// isSkewerがfalseならMOVE状態へ遷移
 	if (skewer_.GetIsSkewer() == false)
@@ -465,7 +472,7 @@ void Player::SkewerAttackUpdate(void)
 			// スローモーション開始
 			GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
 		}
-		PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isRadialBlur = false;
+		PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isRadialBlur = false;
 		CameraManager::GetInstance().GetCamera2D()->EndFollow();
 		state_ = State::MOVE;
 		// 判定がその場に残り続けちゃうから、絶対に引っかからない座標に転送するごり押し。 pos(-10万,-10万)
@@ -550,6 +557,8 @@ void Player::OnCollision(void)
 		// 無敵時間中でないなら
 		if (frameCount_invincible_ == 0)
 		{
+			PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isRGBShift = true;
+
 			CameraManager::GetInstance().GetCamera2D()->BeginShake(50, 8.0f);
 
 			// ノクバしま～す
@@ -566,6 +575,7 @@ void Player::OnCollision(void)
 			}
 
 			Sound::GetInstance().PlayWave("enemy_hit_SE.wav", 0.5f);
+			ParticleManagerL::GetInstance()->PlayerKnokEffect(position_, vec_contactE2P_);
 		}
 		else // 無敵時間中なら押し戻し
 		{

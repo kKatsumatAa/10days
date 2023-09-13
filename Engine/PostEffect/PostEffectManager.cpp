@@ -41,7 +41,7 @@ void PostEffectManager::BeforeDraw(std::function<void()> drawSceneF, const std::
 	const std::function<void()>& drawSpriteF2)
 {
 	//1枚目に描画
-	postPera_[0]->DrawToPostpera(drawSceneF, true);
+	postPera_[0]->DrawToPostpera(drawSceneF, true, drawSpriteF);
 
 	//深度バッファ
 	DirectXWrapper::GetInstance().ResourceBarrier(
@@ -59,7 +59,7 @@ void PostEffectManager::BeforeDraw(std::function<void()> drawSceneF, const std::
 	//一枚目に描画結果、二枚目も描画する
 	std::function<void()>f2 = [=]() { postPera_[0]->Draw2();  };
 
-	postPera_[1]->DrawToPostpera(f2, false, drawSpriteF);
+	postPera_[1]->DrawToPostpera(f2, false, drawSpriteF2);
 	//ブラー用に書き込み
 	postPera_[1]->DrawToBlurAll();
 
@@ -72,7 +72,7 @@ void PostEffectManager::BeforeDraw(std::function<void()> drawSceneF, const std::
 	//二枚目に描画結果、三枚目も描画する
 	std::function<void()>f3 = [=]() { postPera_[1]->Draw2();  };
 
-	postPera_[2]->DrawToPostpera(f3, false, drawSpriteF2);
+	postPera_[2]->DrawToPostpera(f3);
 	//ブラー用に書き込み
 	postPera_[2]->DrawToBlurAll();
 

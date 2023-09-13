@@ -38,7 +38,7 @@ class Emitter final
 		float startRadius = 0;	//開始時の距離
 
 		//画像
-		uint32_t key;
+		uint64_t key = 0;
 
 	public:
 		Particle() { ; }
@@ -69,6 +69,8 @@ private:
 	//何フレームに一回パーティクル追加するか
 	uint32_t addInterval_;
 
+	static const float TEX_EXTEND_;
+
 	//画像
 	uint64_t key_;
 
@@ -90,7 +92,7 @@ public:
 	//パーティクル追加
 	//lifeは秒数指定
 	void Add(uint32_t addNum, float life, float minScale, float maxScale, Vec2 minVelo, Vec2 maxVelo,
-		Vec2 accel = { 0,0 }, float minRot = 0.0f, float maxRot = 0.0f, Vec4 color = {1.f,1.f,1.f,1.f});
+		Vec2 accel = { 0,0 }, float minRot = 0.0f, float maxRot = 0.0f, Vec4 color = { 1.f,1.f,1.f,1.f });
 	//パーティクル全消し
 	void ClearParticles() { particles_.clear(); }
 
@@ -118,7 +120,7 @@ public:
 	//有効フラグ設定
 	void SetIsActive(bool isActive) { isActive_ = isActive; }
 	//テクスチャの設定
-	void SetTextureKey(uint32_t& key) { key_ = key; }
+	void SetTextureKey(uint64_t& key) { key_ = key; }
 
 	//拡縮用タイマーが切り替わる時間設定(秒)
 	void SetScalingTimer(float timer);
