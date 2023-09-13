@@ -28,17 +28,28 @@ void TitleScene::Initialize(void)
 
 void TitleScene::Update(void)
 {
+#ifdef _RELEASE
+    // pad-Aで画面切替
+    if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+    {
+        Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
+        //BGMストップ
+        Sound::GetInstance().StopWave("title_BGM.wav");
+        SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);
+    }
+#endif // _RELEASE
+
+#ifdef _DEBUG
 	// pad-Aで画面切替
 	if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
 	{
 		Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
 		//BGMストップ
 		Sound::GetInstance().StopWave("title_BGM.wav");
-		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);
+		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
 	}
 
 	// debag用key-Rで切替
-#ifdef _DEBUG
 	if (KeyboardInput::GetInstance().KeyTrigger(DIK_SPACE))
 	{
 		Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);

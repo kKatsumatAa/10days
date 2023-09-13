@@ -449,17 +449,17 @@ void TutorialScene::Update(void)
 			{
 				Score::GetInstance()->HighScoreUpdate();
 
-				Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
-				//BGMストップ
-				Sound::GetInstance().StopWave("play_BGM.wav");
-				SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
-			}
-		}
-		else if (destination_ == Destination::TITLE)
-		{
-			if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
-			{
-				Score::GetInstance()->HighScoreUpdate();
+                Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
+                //BGMストップ
+                Sound::GetInstance().StopWave("play_BGM.wav");
+                SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);
+            }
+        }
+        else if (destination_ == Destination::TITLE)
+        {
+            if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+            {
+                Score::GetInstance()->HighScoreUpdate();
 
 				Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
 				//BGMストップ
