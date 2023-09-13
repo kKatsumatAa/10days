@@ -32,6 +32,8 @@ void EnemyManager::Initialize(Player* player, Stage* stage)
 	enemyPopCommands_.str("");
 
 	isWaitingPop_ = false;
+
+	isAddEnemy_ = true;
 }
 
 void EnemyManager::SaveMowDownEnemies()
@@ -579,30 +581,36 @@ void EnemyManager::LoadEnemiesDataCSVUpdate(float speed)
 //-------------------------------------------------------------
 void EnemyManager::AddEnemy(std::unique_ptr<Enemy> enemy)
 {
-	std::unique_ptr<CombinedEnemies>cEs = std::make_unique<CombinedEnemies>();
-	cEs->AddEnemy(std::move(enemy));
-	cEs->Initialize(player_, stage_, player_->GetDirectionVec());
+	if (isAddEnemy_)
+	{
+		std::unique_ptr<CombinedEnemies>cEs = std::make_unique<CombinedEnemies>();
+		cEs->AddEnemy(std::move(enemy));
+		cEs->Initialize(player_, stage_, player_->GetDirectionVec());
 
-	combinedEnemiesArray_.push_back(std::move(cEs));
+		combinedEnemiesArray_.push_back(std::move(cEs));
+	}
 }
 
 void EnemyManager::AddEnemy(const Vec2& pos, uint32_t combinedNum)
 {
-	std::unique_ptr<CombinedEnemies>cEs = std::make_unique<CombinedEnemies>();
-
-	for (uint32_t i = 0; i < combinedNum; i++)
+	if (isAddEnemy_)
 	{
-		std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>(CollisionManger::GetInstance(), player_,
-			stage_, enemyTexHandle_, BigEnemyTexHandle_, warningTexHandle_);
-		enemy->SetPos(pos);
-		Vec2 dir = player_->GetPos() - pos;
-		enemy->SetRot(atan2f(dir.y, dir.x));
-		enemy->SetRad({ Enemy::KRadius_,0 });
-		cEs->AddEnemy(std::move(enemy));
-	}
+		std::unique_ptr<CombinedEnemies>cEs = std::make_unique<CombinedEnemies>();
 
-	cEs->Initialize(player_, stage_, player_->GetDirectionVec());
-	combinedEnemiesArray_.push_back(std::move(cEs));
+		for (uint32_t i = 0; i < combinedNum; i++)
+		{
+			std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>(CollisionManger::GetInstance(), player_,
+				stage_, enemyTexHandle_, BigEnemyTexHandle_, warningTexHandle_);
+			enemy->SetPos(pos);
+			Vec2 dir = player_->GetPos() - pos;
+			enemy->SetRot(atan2f(dir.y, dir.x));
+			enemy->SetRad({ Enemy::KRadius_,0 });
+			cEs->AddEnemy(std::move(enemy));
+		}
+
+		cEs->Initialize(player_, stage_, player_->GetDirectionVec());
+		combinedEnemiesArray_.push_back(std::move(cEs));
+	}
 }
 
 bool EnemyManager::GetDefeatedEnemiesNum(uint32_t& enemiesNum)
@@ -645,6 +653,18 @@ float EnemyManager::GetSkewerEnemiesLength()
 	}
 
 	return 0.0f;
+}
+
+void EnemyManager::SetIsAddEnemy()
+{
+	if (GetEnemiesCount() < (int32_t)TUTORIAL_ENEMIES_MAX_)
+	{
+		isAddEnemy_ = true;
+	}
+	else
+	{
+		isAddEnemy_ = false;
+	}
 }
 
 bool EnemyManager::GetIsDockingTriggerAnyEnemy()

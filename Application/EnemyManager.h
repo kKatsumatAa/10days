@@ -22,6 +22,8 @@ private://•Ï”
 
 	//“G‚ÌãŒÀ
 	const uint32_t ENEMIES_MAX_ = 5;
+	const uint32_t TUTORIAL_ENEMIES_MAX_ = 20;
+	bool isAddEnemy_ = true;
 
 	uint64_t enemyTexHandle_ = 0;
 	uint64_t BigEnemyTexHandle_ = 0;
@@ -132,6 +134,8 @@ public:
 public:
 	//“Ëi‚³‚ê‚Ä‚é“G‚Ì‰ò‚Ì”¼Œa
 	float GetSkewerEnemiesLength();
+
+	void SetIsAddEnemy();
 };
 
 
