@@ -53,7 +53,7 @@ void TitleScene::Update(void)
 		Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
 		//BGMストップ
 		Sound::GetInstance().StopWave("title_BGM.wav");
-		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TUTORIAL);
+		SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
 	}
 	if (KeyboardInput::GetInstance().KeyTrigger(DIK_R))
 	{

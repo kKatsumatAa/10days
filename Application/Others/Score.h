@@ -17,9 +17,9 @@ enum class Rank
 class Score
 {
 public:
-	static Score* GetInstance();
+    static Score* GetInstance();
 
-	void LoadTex();
+    void LoadTex();
 
 	//初期化
 	void Init();
@@ -32,13 +32,13 @@ public:
 	void DrawRank(float rot);
 	void DrawImGui();
 
-	//ハイスコアの更新(したか確認)
-	void HighScoreUpdate();
+    //ハイスコアの更新(したか確認)
+    void HighScoreUpdate();
 
-	//ハイスコア保存
-	void SaveScore();
-	//ハイスコア読み込み
-	void LoadScore();
+    //ハイスコア保存
+    void SaveScore();
+    //ハイスコア読み込み
+    void LoadScore();
 
 	//加算されるスコアを取得
 	const uint32_t GetPlusScore() { return plusScore_; }
@@ -49,6 +49,8 @@ public:
 	void SetNowSize(float size) { nScoreSize_ = size; }
 	void SetOneSkewerSize(float size) { oSScoreSize_ = size; }
 	void SetHighSize(float size) { hScoreSize_ = size; }
+    void SetNowColor(const Vec4& color) { nScoreColor_ = color; }
+    void SetHighColor(const Vec4& color) { hScoreColor_ = color; }
 
 	void SetNowNum();	//座標とかサイズセットしたらこれ呼んで反映させる
 	void SetOneSkewerNum();	//座標とかサイズセットしたらこれ呼んで反映させる
@@ -64,8 +66,13 @@ public:
 
 	bool GetIsOneSkewerEffect() { return oSTimer_ < oSTimerTmp_; }
 
+    DrawIntNumImage& GetDrawNum(void) { return drawNum_; }
+    DrawIntNumImage& GetDrawHighNum(void) { return drawNumHigh_; }
+
+    bool GetIsNewRecord(void) { return nowScore_ > highScore_; }
+
 private:
-	uint32_t plusScore_;		//加算されるスコア
+	uint32_t plusScore_;	//加算されるスコア
 	uint32_t nowScore_;		//現在のスコア
 	uint32_t highScore_;	//今までのハイスコア
 
@@ -80,6 +87,9 @@ private:
 	float nScoreSize_;		//現在のスコアの描画サイズ
 	float oSScoreSize_;		//一回の突進で稼いだスコアの描画サイズ
 	float hScoreSize_;		//今までのハイスコアの描画サイズ
+
+    Vec4 nScoreColor_;
+    Vec4 hScoreColor_;
 
 	float oSScoreAlpha_ = 0.0f;
 	uint32_t oSTimer_ = 1;

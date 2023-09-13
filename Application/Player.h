@@ -84,6 +84,8 @@ private:
     PlayerMowAttack mow_; // 薙ぎ払い用クラス
     PlayerSkewerAttack skewer_; // 串刺し用クラス
 
+    Vec4 areaColor_;    //攻撃範囲とかの色
+
 
     // resources
     bool isRight_{};
