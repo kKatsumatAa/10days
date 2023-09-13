@@ -344,7 +344,7 @@ void Player::MoveUpdate(void)
 			// pad-A長押しでATTACK_SKEWER状態に遷移
 			if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
 			{
-				if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+				if (!GameVelocityManager::GetInstance().GetIsSlowMotion())
 				{
 					// スローモーション開始
 					GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
@@ -458,7 +458,8 @@ void Player::SkewerAttackUpdate(void)
 	// isSkewerがfalseならMOVE状態へ遷移
 	if (skewer_.GetIsSkewer() == false)
 	{
-		if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
+		if (PadInput::GetInstance().GetPushButton(GAMEPAD_A)
+			&& !GameVelocityManager::GetInstance().GetIsSlowMotion())
 		{
 			// スローモーション開始
 			GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
