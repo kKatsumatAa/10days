@@ -9,14 +9,18 @@
 #include "ParticleManager.h"
 #include "Score.h"
 #include <cmath>
+#include "CameraManager.h"
 
 const float Enemy::kMoveSpeed_ = 30.0f;
 const float Enemy::kPushBackDist_ = 2.0f;
 const float Enemy::kPngScale_ = 0.07f;
+const float Enemy::kWarningPngScale_ = 0.5f;
 const float Enemy::KRadius_ = 16.f;
 
-Enemy::Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle, uint64_t bigTexHandle)
+Enemy::Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle, uint64_t bigTexHandle,
+	uint64_t warningTexHandle)
 	: IEntity(stagePtr), playerPtr_(playerPtr), colMPtr_(colMPtr), png_enemy_(texHandle), png_enemy_big_(bigTexHandle)
+	, warningTexHandle_(warningTexHandle)
 {
 	// 衝突マネージャへの登録
 	colMPtr->Register(this);
@@ -132,36 +136,90 @@ void Enemy::Update(void)
 
 void Enemy::Draw(void)
 {
-	Object::SetScale(Vec3(scale_.x * kPngScale_, scale_.y * kPngScale_, 0) * scaleExtend_);
-	Object::SetTrans({ position_.x,position_.y,0 });
-	Object::SetRot({ 0,0,rotation_ });
-
 	// 生きてるなら
 	if (isAlive_)
 	{
-		uint64_t texHandle = png_enemy_;
-		if (isBigDango_)
+		if (!WarnigUIDraw())
 		{
-			texHandle = png_enemy_big_;
-		}
+			Object::SetScale(Vec3(scale_.x * kPngScale_, scale_.y * kPngScale_, 0) * scaleExtend_);
+			Object::SetTrans({ position_.x,position_.y,0 });
+			Object::SetRot({ 0,0,rotation_ });
 
-		// 縮み状態なら
-		if (frameCount_move_ == 0)
-		{
-			// 敵の色は通常色に
-			DrawBoxSprite(nullptr, texHandle, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
+			uint64_t texHandle = png_enemy_;
+			if (isBigDango_)
+			{
+				texHandle = png_enemy_big_;
+			}
 
-			/*DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, UtilL::Color::WHITE, false, 1);*/
-		}
+			// 縮み状態なら
+			if (frameCount_move_ == 0)
+			{
+				// 敵の色は通常色に
+				DrawBoxSprite(nullptr, texHandle, { 1.0f,1.0f,1.0f,1.0f }, { 0.5f,0.5f });
 
-		// 伸び状態なら
-		if (frameCount_wait_ >= kMoveInterval_)
-		{
-			// 敵の色は緑色に
-			DrawBoxSprite(nullptr, texHandle, { 0.1f,1.0f,0.1f,1.0f }, { 0.5f,0.5f });
-			/*DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, UtilL::Color::GREEN, false, 1);*/
+				/*DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, UtilL::Color::WHITE, false, 1);*/
+			}
+
+			// 伸び状態なら
+			if (frameCount_wait_ >= kMoveInterval_)
+			{
+				// 敵の色は緑色に
+				DrawBoxSprite(nullptr, texHandle, { 0.1f,1.0f,0.1f,1.0f }, { 0.5f,0.5f });
+				/*DrawCircle((int32_t)position_.x, (int32_t)position_.y, (int32_t)radius_.x, UtilL::Color::GREEN, false, 1);*/
+			}
 		}
 	}
+}
+
+bool Enemy::WarnigUIDraw()
+{
+	Camera2D* camera = CameraManager::GetInstance().GetCamera2D();
+
+	Vec2 dirVec = GetPos() - camera->GetPos();
+	Vec2 ansVec = dirVec;
+
+	float fabsX = fabsf(dirVec.x);
+	float fabsY = fabsf(dirVec.y);
+
+	float lengthMax = WindowsApp::WINDOW_WIDTH_ / 2.0f;
+
+	//左側は少し端が近いので
+	if (dirVec.x < 0.0f)
+	{
+		lengthMax -= 200;
+	}
+
+	//x座標がカメラから出ていたら
+	if (fabsX > lengthMax)
+	{//長さの最大を決め、マイナスであればマイナスにする   
+		ansVec.x = dirVec.x / fabsX * min(fabsX, lengthMax) - radius_.x * dirVec.GetNormalize().x;
+	}
+	//x座標がカメラから出ていたら
+	if (fabsY > WindowsApp::WINDOW_HEIGHT_ / 2.0f)
+	{//長さの最大を決め、マイナスであればマイナスにする     
+		ansVec.y = dirVec.y / fabsY * min(fabsY, WindowsApp::WINDOW_HEIGHT_ / 2.0f) - radius_.x * dirVec.GetNormalize().y;
+	}
+	//画面から出ていたら
+	if (ansVec.GetLength() != dirVec.GetLength())
+	{
+		float scaleExtendL = min(max(1.0f - ansVec.GetLength() / WindowsApp::WINDOW_HEIGHT_, 0.1f), 1.0f);
+
+		SetTrans({ camera->GetPos().x + ansVec.x ,camera->GetPos().y + ansVec.y,0 });
+		Object::SetScale(Vec3(kWarningPngScale_, kWarningPngScale_, 0) * scaleExtend_ * scaleExtendL);
+		Object::SetRot({ 0,0,0 });
+
+		Vec4 col = { 1.0f,1.0f,1.0f,0.9f };
+		if (isBigDango_)
+		{
+			col = { 1.0f,0.2f,0.2f,0.8f };
+		}
+
+		DrawBoxSprite(camera, warningTexHandle_, col * scaleExtendL, { 0.5f,0.5f });
+
+		return true;
+	}
+
+	return false;
 }
 
 void Enemy::MowDownFlagUpdate()

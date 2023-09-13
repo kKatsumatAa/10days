@@ -13,11 +13,13 @@ public:
 	//static const float kMowRatio_; // ‚Á”ò‚Î‚³‚ê‚½‚Æ‚«‹——£‚É‘Î‚µ‚ÄA‚Ç‚Ì‚­‚ç‚¢‚ÌŠ„‡‚ÅˆÚ“®‚µ‚Ä‚¢‚­‚©
 	static const float kPushBackDist_; // ‰Ÿ‚µ–ß‚·‹——£
 	static const float kPngScale_; // ‰æ‘œ‚ÌŠg‘å—¦
+	static const float kWarningPngScale_; // ‰æ‘œ‚ÌŠg‘å—¦
 	static const uint32_t kMowFrame_ = 20; // ‰½ƒtƒŒ[ƒ€‚©‚¯‚Ä‚«”ò‚Î‚³‚ê‚é‚©
 	static const float KRadius_; // ”¼Œa
 
 	// ŠÖ”
-	Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle, uint64_t bigTexHandle);
+	Enemy(CollisionManger* colMPtr, Player* playerPtr, Stage* stagePtr, uint64_t texHandle, uint64_t bigTexHandle,
+		uint64_t warningTexHandle);
 	~Enemy(void) override;
 
 	void Update(void) override;
@@ -25,6 +27,8 @@ public:
 	void MowDownFlagUpdate();
 
 	void Draw(void) override;
+
+	bool WarnigUIDraw();
 
 private:
     // ‚È‚ñ‚©•ª‚©‚ñ‚È‚¢‚¯‚ÇA‰Ÿ‚µ–ß‚µˆ—’Ê‚Á‚Ä‚é‚¯‚ÇA“G“¯m‚ª‰Ÿ‚µ–ß‚µ‚³‚ê‚Ü‚¹‚ñB
@@ -62,6 +66,9 @@ private:
 	// resource
 	uint64_t png_enemy_;
 	uint64_t png_enemy_big_;
+	uint64_t warningTexHandle_ = 0;
+
+	Vec2 UIPos_ = { 0,0 };
 
 public:
 	// setter
