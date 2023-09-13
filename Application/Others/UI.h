@@ -21,6 +21,7 @@ enum class UIType
 	NowScore,	//今回の記録
 	HighScore,	//最高記録
 	Makimono,	//巻物
+    ReadyGo,    // 始め！
 
     Tutorial1,
     Tutorial2,
@@ -29,6 +30,17 @@ enum class UIType
     Tutorial5,
     Tutorial6,
     Tutorial7,
+
+    Number0,
+    Number1,
+    Number2,
+    Number3,
+    Number4,
+    Number5,
+    Number6,
+    Number7,
+    Number8,
+    Number9,
 
 	Max			//最大数(for文とか回す用)
 };
@@ -51,6 +63,7 @@ public:
 
 	//指定されたUIを描画
 	void Draw(UIType uiType);
+	void Draw2(UIType uiType, float rot);
 
 	//指定されたUIの描画座標設定
 	void SetPos(UIType uiType,const Vec2& pos);

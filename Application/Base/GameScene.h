@@ -14,7 +14,7 @@ class GameScene :
 public:
 	// 定数
 	float kMaxGameTimer_{ 60.f };
-	const int32_t kMaxFrame_preGame_{ 180 }; // ゲーム前イベントが何フレームか
+    const float kReadyGoTimer_{ 500 };
 
 	// 定義
 	enum class Progress
@@ -49,6 +49,8 @@ private:
 
 	std::unique_ptr<Player> player_{ std::make_unique<Player>(CollisionManger::GetInstance(), stage_.get()) };
     UtilL::NTimer nTimer_{5000000};
+    UtilL::NTimer countdownTimer_{180};
+    UtilL::NTimer ReadyGoTimer_{kReadyGoTimer_};
 
 	Progress progress_;
 	int32_t frameCount_preGame_; // ゲーム前イベント用のフレームカウンタ。
