@@ -20,11 +20,15 @@ void ResultScene::Initialize(void)
 
 	Score::GetInstance()->SaveScore();
 
-    Score::GetInstance()->SetNowPos({1000.f,300.f});
+    UI::GetInstance()->SetPos(UIType::NowScore, { 250.f,350.f });
+    UI::GetInstance()->SetSize(UIType::NowScore, 0.5f);
+    Score::GetInstance()->SetNowPos({1000.f,350.f});
 	Score::GetInstance()->SetNowSize(0.5f);
     Score::GetInstance()->SetNowNum();
 
-    Score::GetInstance()->SetHighPos({ 1000.f,200.f });
+    UI::GetInstance()->SetPos(UIType::HighScore, { 250.f,250.f });
+    UI::GetInstance()->SetSize(UIType::HighScore, 0.5f);
+    Score::GetInstance()->SetHighPos({ 1000.f,250.f });
     Score::GetInstance()->SetHighSize(0.5f);
     Score::GetInstance()->SetHighNum();
 
@@ -95,6 +99,8 @@ void ResultScene::DrawSprite2()
 
     Score::GetInstance()->Draw();
     Score::GetInstance()->DrawHighScore();
+    UI::GetInstance()->Draw(UIType::NowScore);
+    UI::GetInstance()->Draw(UIType::HighScore);
     UI::GetInstance()->Draw(UIType::Abutton);
 }
 
