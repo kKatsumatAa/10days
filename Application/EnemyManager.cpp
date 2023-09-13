@@ -406,10 +406,16 @@ void EnemyManager::Update()
 		if (!itr->get()->GetIsAlive())
 		{
 			//ì|Ç≥ÇÍÇΩìGÇÃêîóp
-			defeatedEnemiesNum_ += itr->get()->GetEnemiesNum();
-			if (itr->get()->GetIsBigDango())
+			for (uint32_t i = 0; i < itr->get()->GetEnemies().size(); i++)
 			{
-				defeatedEnemiesNum_ += CombinedEnemies::TO_BIG_NUM_ * 2 - 1;
+				if (itr->get()->GetEnemies()[i]->GetIsBigDango())
+				{
+					defeatedEnemiesNum_ += CombinedEnemies::TO_BIG_NUM_ * 2 - 1;
+				}
+				else
+				{
+					defeatedEnemiesNum_++;
+				}
 			}
 			isDefeatedEnemies_ = true;
 			//ÉXÉRÉAâ¡éZ
@@ -480,7 +486,7 @@ void EnemyManager::AddEnemy(const Vec2& pos, uint32_t combinedNum)
 
 	for (uint32_t i = 0; i < combinedNum; i++)
 	{
-		std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>(CollisionManger::GetInstance(), player_, 
+		std::unique_ptr<Enemy>enemy = std::make_unique<Enemy>(CollisionManger::GetInstance(), player_,
 			stage_, enemyTexHandle_, BigEnemyTexHandle_);
 		enemy->SetPos(pos);
 		Vec2 dir = player_->GetPos() - pos;
