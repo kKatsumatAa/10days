@@ -38,7 +38,7 @@ class Emitter final
 		float startRadius = 0;	//開始時の距離
 
 		//画像
-		uint32_t key;
+		uint64_t key;
 
 	public:
 		Particle() { ; }
@@ -118,7 +118,7 @@ public:
 	//有効フラグ設定
 	void SetIsActive(bool isActive) { isActive_ = isActive; }
 	//テクスチャの設定
-	void SetTextureKey(uint32_t& key) { key_ = key; }
+	void SetTextureKey(uint64_t& key) { key_ = key; }
 
 	//拡縮用タイマーが切り替わる時間設定(秒)
 	void SetScalingTimer(float timer);

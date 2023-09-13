@@ -38,9 +38,15 @@ ParticleManagerL* ParticleManagerL::GetInstance()
 
 void ParticleManagerL::Init()
 {
+	texKey_ = TextureManager::LoadGraph("effect1.png");
+
 	enemyDeadParticle_.Init();
 	skewerParticle_.Init();
 	enemyHitParticle_.Init();
+
+	enemyDeadParticle_.SetTextureKey(texKey_);
+	skewerParticle_.SetTextureKey(texKey_);
+	enemyHitParticle_.SetTextureKey(texKey_);
 }
 
 void ParticleManagerL::Update(float velocity)
