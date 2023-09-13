@@ -40,6 +40,7 @@ void UI::AllLoad()
 	ui_[(uint32_t)UIType::HighScore] = TextureManager::LoadGraph("highScore.png");
 	ui_[(uint32_t)UIType::Makimono] = TextureManager::LoadGraph("makimono.png");
 	ui_[(uint32_t)UIType::ReadyGo] = TextureManager::LoadGraph("start.png");
+	ui_[(uint32_t)UIType::Finish] = TextureManager::LoadGraph("finish.png");
 
 
 	ui_[(uint32_t)UIType::Tutorial1] = TextureManager::LoadGraph("tutorial_UI_01.png");
