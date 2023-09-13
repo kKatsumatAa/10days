@@ -58,7 +58,7 @@ public:
 	void SetRankSize(float size);
 
 private:
-	uint32_t plusScore_;		//加算されるスコア
+	uint32_t plusScore_;	//加算されるスコア
 	uint32_t nowScore_;		//現在のスコア
 	uint32_t highScore_;	//今までのハイスコア
 

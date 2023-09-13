@@ -20,6 +20,7 @@ public:
 	void Attack(const Vec2& vec_move, const Vec2& attackRangeCenter);
 	void Update(void) override;
 	void Draw(void) override;
+	void DrawArea(Vec4& color);
 
 private:
     void OnCollision(void);
