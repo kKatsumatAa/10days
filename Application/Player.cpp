@@ -498,7 +498,9 @@ void Player::SkewerAttackUpdate(void)
 		CameraManager::GetInstance().GetCamera2D()->EndFollow();
 		if (EnemyManager::GetInstance().GetSkewerEnemiesNum())
 		{
-			HitStopManager::GetInstance().BeginHitStop(20 + (uint32_t)(EnemyManager::GetInstance().GetSkewerEnemiesNum() * 0.2f));
+			uint32_t hsTime = 20 + (uint32_t)(EnemyManager::GetInstance().GetSkewerEnemiesNum() * 0.2f);
+			hsTime = Math::Function::Clamp<uint32_t>(hsTime,20,60);	//ñ≥å¿Ç…ëùÇ¶Ç»Ç¢ÇÊÇ§êßå¿
+			HitStopManager::GetInstance().BeginHitStop(hsTime);
 		}
 
 		if (EnemyManager::GetInstance().GetSkewerEnemiesLength())
