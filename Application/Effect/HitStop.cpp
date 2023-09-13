@@ -23,13 +23,13 @@ void HitStopManager::Update()
 {
 	if (timer_ <= timerMax_)
 	{
-		PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.barrelCurvePow = min(1.0f - EaseIn(GetTimeRate()), MAX_EFFECT_POW_);
+		PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.barrelCurvePow = min(1.0f - EaseIn(GetTimeRate()), MAX_EFFECT_POW_);
 
 		timer_++;
 	}
 	else
 	{
-		PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isBarrelCurve = false;
+		PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isBarrelCurve = false;
 	}
 }
 
@@ -49,5 +49,5 @@ void HitStopManager::BeginHitStop(uint32_t time)
 {
 	timer_ = 0;
 	timerMax_ = time;
-	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isBarrelCurve = true;
+	PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isBarrelCurve = true;
 }

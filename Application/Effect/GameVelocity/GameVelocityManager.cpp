@@ -73,8 +73,8 @@ float GameVelocityManager::GetVelocity()
 void GameVelocityManager::Update()
 {
 	//ŽO‚Â–Ú‚ÌF‚à
-	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isGrayScale = true;
-	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.grayScalePow = 1.0f - gameVelocity_;
+	PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isGrayScale = true;
+	PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.grayScalePow = 1.0f - gameVelocity_;
 
 	//
 	slowState_->Update();

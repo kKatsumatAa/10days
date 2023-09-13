@@ -19,7 +19,7 @@ void GameScene::Finalize()
 
 void GameScene::Initialize(void)
 {
-	PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isGrayScale = false;
+	PostEffectManager::GetInstance().GetPostEffect1()->effectFlags_.isGrayScale = false;
 
     //BGM再生
     Sound::GetInstance().PlayWave("play_BGM.wav", 0.2f, true);
@@ -134,10 +134,10 @@ void GameScene::Update(void)
     }
     else
     {
-        drawNum_.SetNum(nTimer, { 15,15 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.85f, { 170.f / 255.f, 50.f / 255.f, 40.f / 255.f, 1.f });	//残り秒数表示
+        drawNum_.SetNum(nTimer, { 15,15 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.85f, { 200.f / 255.f, 10.f / 255.f, 10.f / 255.f, 1.f });	//残り秒数表示
         if (nTimer < 10)
         {
-            drawNum_.SetNum(nTimer, { 25,15 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.85f, { 170.f / 255.f, 50.f / 255.f, 40.f / 255.f, 1.f });	//残り秒数表示
+            drawNum_.SetNum(nTimer, { 60,15 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.85f, { 200.f / 255.f, 10.f / 255.f, 10.f / 255.f, 1.f });	//残り秒数表示
         }
     }
 
@@ -390,43 +390,55 @@ void GameScene::DrawSprite2()
     {
         if (nTimer_.GetTimer() >= 54 * 60 && nTimer_.GetTimer() < 55 * 60)
         {
-            UI::GetInstance()->SetSize(UIType::Number5, 2.8f);
-            UI::GetInstance()->SetColor(UIType::Number5, { 1.f,1.f,1.f,0.12f });
+            finTimer_.Update(false, GameVelocityManager::GetInstance().GetVelocity());
+            float rate = (std::min)(finTimer_.GetTimer() / finTimer_.GetMaxTimer(), 1.f);
+            UI::GetInstance()->SetSize(UIType::Number5, Math::Ease::EaseOutQuint(rate,0.2f,3.3f));
+            UI::GetInstance()->SetColor(UIType::Number5, { 1.f,1.f,1.f,0.2f });
             UI::GetInstance()->SetPos(UIType::Number5, { 640.f,360.f });
             UI::GetInstance()->Draw2(UIType::Number5, -0.1f);
         }
         else if (nTimer_.GetTimer() >= 55 * 60 && nTimer_.GetTimer() < 56 * 60)
         {
-            UI::GetInstance()->SetSize(UIType::Number4, 2.8f);
-            UI::GetInstance()->SetColor(UIType::Number4, { 1.f,1.f,1.f,0.12f });
+            finTimer2_.Update(true, GameVelocityManager::GetInstance().GetVelocity());
+            float rate = (std::min)(finTimer2_.GetTimer() / finTimer2_.GetMaxTimer(), 1.f);
+            UI::GetInstance()->SetSize(UIType::Number4, Math::Ease::EaseOutQuint(rate, 0.2f, 3.3f));
+            UI::GetInstance()->SetColor(UIType::Number4, { 1.f,1.f,1.f,0.2f });
             UI::GetInstance()->SetPos(UIType::Number4, { 640.f,360.f });
             UI::GetInstance()->Draw2(UIType::Number4, 0.1f);
         }
         else if (nTimer_.GetTimer() >= 56 * 60 && nTimer_.GetTimer() < 57 * 60)
         {
-            UI::GetInstance()->SetSize(UIType::Number3, 2.8f);
-            UI::GetInstance()->SetColor(UIType::Number3, { 1.f,1.f,1.f,0.12f });
+            finTimer3_.Update(true, GameVelocityManager::GetInstance().GetVelocity());
+            float rate = (std::min)(finTimer3_.GetTimer() / finTimer3_.GetMaxTimer(), 1.f);
+            UI::GetInstance()->SetSize(UIType::Number3, Math::Ease::EaseOutQuint(rate, 0.2f, 3.3f));
+            UI::GetInstance()->SetColor(UIType::Number3, { 1.f,1.f,1.f,0.2f });
             UI::GetInstance()->SetPos(UIType::Number3, { 640.f,360.f });
             UI::GetInstance()->Draw2(UIType::Number3, -0.1f);
         }
         else if (nTimer_.GetTimer() >= 57 * 60 && nTimer_.GetTimer() < 58 * 60)
         {
-            UI::GetInstance()->SetSize(UIType::Number2, 2.8f);
-            UI::GetInstance()->SetColor(UIType::Number2, { 1.f,1.f,1.f,0.12f });
+            finTimer4_.Update(true, GameVelocityManager::GetInstance().GetVelocity());
+            float rate = (std::min)(finTimer4_.GetTimer() / finTimer4_.GetMaxTimer(), 1.f);
+            UI::GetInstance()->SetSize(UIType::Number2, Math::Ease::EaseOutQuint(rate, 0.2f, 3.3f));
+            UI::GetInstance()->SetColor(UIType::Number2, { 1.f,1.f,1.f,0.2f });
             UI::GetInstance()->SetPos(UIType::Number2, { 640.f,360.f });
             UI::GetInstance()->Draw2(UIType::Number2, 0.1f);
         }
         else if (nTimer_.GetTimer() >= 58 * 60 && nTimer_.GetTimer() < 59 * 60)
         {
-            UI::GetInstance()->SetSize(UIType::Number1, 2.8f);
-            UI::GetInstance()->SetColor(UIType::Number1, { 1.f,1.f,1.f,0.12f });
+            finTimer5_.Update(true, GameVelocityManager::GetInstance().GetVelocity());
+            float rate = (std::min)(finTimer5_.GetTimer() / finTimer5_.GetMaxTimer(), 1.f);
+            UI::GetInstance()->SetSize(UIType::Number1, Math::Ease::EaseOutQuint(rate, 0.2f, 3.3f));
+            UI::GetInstance()->SetColor(UIType::Number1, { 1.f,1.f,1.f,0.2f });
             UI::GetInstance()->SetPos(UIType::Number1, { 640.f,360.f });
             UI::GetInstance()->Draw2(UIType::Number1, -0.1f);
         }
-        else if (nTimer_.GetTimer() >= 59 * 60)
+        else if (nTimer_.GetTimer() >= 59 * 60 && nTimer_.GetTimer() < 60 * 60)
         {
-            UI::GetInstance()->SetSize(UIType::Finish, 2.f);
-            UI::GetInstance()->SetColor(UIType::Finish, { 1.f,1.f,1.f,0.9f });
+            finTimerS_.Update(false, GameVelocityManager::GetInstance().GetVelocity());
+            float rate = (std::min)(finTimerS_.GetTimer() / finTimerS_.GetMaxTimer(), 1.f);
+            UI::GetInstance()->SetSize(UIType::Finish, Math::Ease::EaseOutQuint(rate, 0.2f, 2.f));
+            UI::GetInstance()->SetColor(UIType::Finish, { 1.f,1.f,1.f,Math::Ease::EaseOutQuint(rate, 0.f, 0.9f) });
             UI::GetInstance()->SetPos(UIType::Finish, { 640.f,360.f });
             UI::GetInstance()->SetAncorPoint(UIType::Finish, { 0.5f,0.5f });
             UI::GetInstance()->Draw2(UIType::Finish, -0.1f);
