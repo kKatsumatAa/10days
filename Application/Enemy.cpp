@@ -131,7 +131,7 @@ void Enemy::Update(void)
 		}
 	}
 
-	MowDownFlagUpdate();
+	TriggerFlagUpdate();
 }
 
 void Enemy::Draw(void)
@@ -222,13 +222,15 @@ bool Enemy::WarnigUIDraw()
 	return false;
 }
 
-void Enemy::MowDownFlagUpdate()
+void Enemy::TriggerFlagUpdate()
 {
 	//敵の攻撃が終わったら合体しないように
 	if (!playerPtr_->GetFrameCountAttack())
 	{
 		isMowDownTrigger_ = false;
 	}
+
+	isDockingTrigger_ = false;
 }
 
 void Enemy::OnCollision(void)
@@ -256,6 +258,7 @@ void Enemy::OnCollision(void)
 		{
 			// 合体OKフラグオン
 			isDocking_ = true;
+			isDockingTrigger_ = true;
 			enemyPtr->isDocking_ = true;
 			// 関数終了
 			return;

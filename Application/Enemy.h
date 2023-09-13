@@ -24,7 +24,7 @@ public:
 
 	void Update(void) override;
 	//薙ぎ払い関係のアップデート
-	void MowDownFlagUpdate();
+	void TriggerFlagUpdate();
 
 	void Draw(void) override;
 
@@ -55,6 +55,7 @@ private:
 	int32_t frameCount_mow_;
 	// 薙ぎ払われた最中に合体OKフラグ
 	bool isDocking_{};
+	bool isDockingTrigger_{};
 	// 自分、今串刺しされてますフラグ
 	bool isSkewer_;
 

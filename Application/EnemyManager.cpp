@@ -646,3 +646,29 @@ float EnemyManager::GetSkewerEnemiesLength()
 
 	return 0.0f;
 }
+
+bool EnemyManager::GetIsDockingTriggerAnyEnemy()
+{
+	for (auto& enemies : combinedEnemiesArray_)
+	{
+		if (enemies->GetIsDockingAnyEnemy())
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool EnemyManager::GetIsBigDangoAnyEnemy()
+{
+	for (auto& enemies : combinedEnemiesArray_)
+	{
+		if (enemies->GetIsBigDango())
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
