@@ -21,8 +21,8 @@ void GameScene::Initialize(void)
 {
     PostEffectManager::GetInstance().GetPostEffect2()->effectFlags_.isGrayScale = false;
 
-	//BGM再生
-	Sound::GetInstance().PlayWave("play_BGM.wav", 0.2f, true);
+    //BGM再生
+    Sound::GetInstance().PlayWave("play_BGM.wav", 0.2f, true);
 
     // (0,0) ~ (1280,720) よりちょい内側
     stage_->Initialize({ 0,0 }, { 1280,720 });
@@ -33,9 +33,9 @@ void GameScene::Initialize(void)
     player_->SetVecMove({ 0,-1 });
     player_->Initialize();
 
-	EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
-	//敵のデータ読み込み
-	EnemyManager::GetInstance().LoadEnemiesDataCSV("gameEnemies.csv");
+    EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
+    //敵のデータ読み込み
+    EnemyManager::GetInstance().LoadEnemiesDataCSV("gameEnemies.csv");
 
     ParticleManagerL::GetInstance()->Init();
 
@@ -111,6 +111,14 @@ void GameScene::Initialize(void)
     UI::GetInstance()->SetSize(UIType::Number3, 0.6f);
     UI::GetInstance()->SetColor(UIType::Number3, { 1.f,1.f,1.f,0.7f });
     UI::GetInstance()->SetAncorPoint(UIType::Number3, { 0.5f,0.5f });
+    UI::GetInstance()->SetPos(UIType::Number4, { 680,500 });
+    UI::GetInstance()->SetSize(UIType::Number4, 0.6f);
+    UI::GetInstance()->SetColor(UIType::Number4, { 1.f,1.f,1.f,0.7f });
+    UI::GetInstance()->SetAncorPoint(UIType::Number4, { 0.5f,0.5f });
+    UI::GetInstance()->SetPos(UIType::Number5, { 680,500 });
+    UI::GetInstance()->SetSize(UIType::Number5, 0.6f);
+    UI::GetInstance()->SetColor(UIType::Number5, { 1.f,1.f,1.f,0.7f });
+    UI::GetInstance()->SetAncorPoint(UIType::Number5, { 0.5f,0.5f });
 }
 
 void GameScene::Update(void)
@@ -118,8 +126,15 @@ void GameScene::Update(void)
     //設定した (制限時間) - (経過時間)
     int32_t timer = int32_t(3.f - countdownTimer_.GetTimer() / 60);
 
-    int32_t nTimer = uint32_t(1000.f - nTimer_.GetTimer() / 60);
-    drawNum_.SetNum(nTimer, { 200,10 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.85f);	//残り秒数表示
+    int32_t nTimer = uint32_t(60.f - nTimer_.GetTimer() / 60);
+    if (nTimer > 15)
+    {
+        drawNum_.SetNum(nTimer, { 15,15 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.85f);	//残り秒数表示
+    }
+    else
+    {
+        drawNum_.SetNum(nTimer, { 15,15 }, { 1.0f / 10.0f,1.0f }, { 100,160 }, 0.85f, { 170.f / 255.f, 50.f / 255.f, 40.f / 255.f, 1.f });	//残り秒数表示
+    }
 
     if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_START))
     {
@@ -209,11 +224,11 @@ void GameScene::Update(void)
                 {
                     Score::GetInstance()->HighScoreUpdate();
 
-					Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
-					//BGMストップ
-					Sound::GetInstance().StopWave("play_BGM.wav");
-					SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
-				}
+                    Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
+                    //BGMストップ
+                    Sound::GetInstance().StopWave("play_BGM.wav");
+                    SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
+                }
 
                 ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
 
@@ -258,25 +273,25 @@ void GameScene::Update(void)
             {
                 Score::GetInstance()->HighScoreUpdate();
 
-				Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
-				//BGMストップ
-				Sound::GetInstance().StopWave("play_BGM.wav");
-				SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
-			}
-		}
-		else if (destination_ == Destination::TITLE)
-		{
-			if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
-			{
-				Score::GetInstance()->HighScoreUpdate();
+                Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
+                //BGMストップ
+                Sound::GetInstance().StopWave("play_BGM.wav");
+                SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
+            }
+        }
+        else if (destination_ == Destination::TITLE)
+        {
+            if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+            {
+                Score::GetInstance()->HighScoreUpdate();
 
-				Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
-				//BGMストップ
-				Sound::GetInstance().StopWave("play_BGM.wav");
-				SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
-			}
-		}
-	}
+                Sound::GetInstance().PlayWave("decision_SE.wav", 0.2f);
+                //BGMストップ
+                Sound::GetInstance().StopWave("play_BGM.wav");
+                SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
+            }
+        }
+    }
 }
 
 void GameScene::GameSceneUpdate(void)
@@ -320,6 +335,7 @@ void GameScene::DrawSprite2()
     UI::GetInstance()->Draw(UIType::Skewer);
 
     drawNum_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
+
     if (countdownTimer_.GetisTimeOut() == false)
     {
         if (countdownTimer_.GetTimer() < 60)
@@ -352,7 +368,11 @@ void GameScene::DrawSprite2()
         UI::GetInstance()->SetSize(UIType::ReadyGo, Math::Ease::EaseOutQuint(rate, 0.2f, 2.f));
         float alpha = (std::max)(0.8f - ReadyGoTimer_.GetTimer() / kReadyGoTimer_ * 4, 0.f);
         UI::GetInstance()->SetColor(UIType::ReadyGo, { 1,1,1,alpha });
-        UI::GetInstance()->Draw2(UIType::ReadyGo,rate2 * -Math::Function::ToRadian(740));
+        UI::GetInstance()->Draw2(UIType::ReadyGo, rate2 * -Math::Function::ToRadian(740));
+    }
+
+    if (nTimer_.GetisTimeOut() == false)
+    {
     }
 
     if (isMenu_)
