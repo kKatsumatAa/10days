@@ -19,8 +19,8 @@ public:
     const int32_t kMaxFrame_wait4Start_{ 20 };
     const int32_t kMaxFrame_currentScore_{ 80 };
     const int32_t kMaxFrame_highScore_{ 80 };
-    const int32_t kMaxFrame_newRecord_{ 300 };
-    const int32_t kMaxFrame_DisplayRank_{ 300 };
+    const int32_t kMaxFrame_newRecord_{ 100 };
+    const int32_t kMaxFrame_DisplayRank_{ 100 };
 
 
     // ïœêî
