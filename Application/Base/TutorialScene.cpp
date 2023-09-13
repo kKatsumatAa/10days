@@ -27,8 +27,12 @@ void TutorialScene::Initialize(void)
     player_->SetRot(0);
     player_->SetRad({ 10,0 });
     player_->SetVecMove({ 0,-1 });
+    player_->Initialize();
 
     EnemyManager::GetInstance().Initialize(player_.get(), stage_.get());
+    //“G‚Ìƒf[ƒ^“Ç‚İ‚İ
+    EnemyManager::GetInstance().LoadEnemiesDataCSV("tutorialEnemies.csv");
+
     GameVelocityManager::GetInstance().Initialize();
 
     //timer_.Start(kMaxGameTimer_);
