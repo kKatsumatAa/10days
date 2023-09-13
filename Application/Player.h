@@ -85,6 +85,7 @@ private:
     bool isRight_{};
     uint64_t png_player_ = TextureManager::LoadGraph("player.png");
     uint64_t png_arrow_ = TextureManager::LoadGraph("arrow.png");  //–îˆó‰æ‘œ
+    uint64_t png_skewerArea_ = TextureManager::LoadGraph("skewer_area.png"); // ‹øŽh‚µ”ÍˆÍ
     uint64_t png_sword_ = TextureManager::LoadGraph("sword.png");
     uint64_t png_swordUp_ = TextureManager::LoadGraph("sword_up.png");
     uint64_t png_swordBottom_ = TextureManager::LoadGraph("sword_bottom.png");
@@ -95,6 +96,7 @@ private:
     float rot4RotationSword_; // ‹ø‚ð‰ñ“]ˆÚ“®‚³‚¹‚éˆ×‚ÌŠp“x
 
     Object arrow_;
+    Object skewerArea_;
     Object sword_;
     Object swordUp_;
     Object swordBottom_;

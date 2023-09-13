@@ -152,6 +152,9 @@ void Player::Draw(void)
 		arrow_.Object::SetRot({ 0,0,rotation_ });
 		arrow_.DrawBoxSprite(nullptr, png_arrow_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,0.5f });
 
+        skewerArea_.Object::SetTrans( { position_.x,position_.y,0 } );
+        skewerArea_.Object::SetRot({ 0,0,rotation_ });
+        skewerArea_.DrawBoxSprite(nullptr, png_skewerArea_, { 1.0f,1.0f,1.0f,0.5f }, { 0.5f,1.f });
 		//DrawFormatString(1000, 60, UtilL::Color::GREEN, "ó≠ÇﬂèÛë‘");
 		//DrawFormatString(1000, 80, UtilL::Color::GREEN, "frame: %d/%d", frameCount_4Skewer_, kChargeFrame4Skewer_);
 	}
