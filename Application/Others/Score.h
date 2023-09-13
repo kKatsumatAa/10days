@@ -17,6 +17,8 @@ class Score
 public:
 	static Score* GetInstance();
 
+	void LoadTex();
+
 	//初期化
 	void Init();
 	//スコア追加
@@ -24,6 +26,7 @@ public:
 	//スコア描画
 	void Draw();
 	void DrawHighScore();
+	void DrawRank(float rot);
 	void DrawImGui();
 
 	//ハイスコアの更新(したか確認)
@@ -44,6 +47,11 @@ public:
 
 	void SetRank();
 
+	//指定されたUIの描画座標設定
+	void SetRankPos(const Vec2& pos);
+	//指定されたUIの描画サイズ設定
+	void SetRankSize(float size);
+
 private:
 	uint32_t nowScore_;		//現在のスコア
 	uint32_t highScore_;	//今までのハイスコア
@@ -58,4 +66,6 @@ private:
 	float hScoreSize_;		//今までのハイスコアの描画サイズ
 
 	Rank rank_;
+	Object obj_;
+	std::vector<uint64_t> rankTex_;
 };

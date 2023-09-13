@@ -13,6 +13,17 @@ Score* Score::GetInstance()
 	return &instance;
 }
 
+void Score::LoadTex()
+{
+	//ì«Ç›çûÇ›Å`
+	rankTex_[(uint32_t)Rank::Kakedasi] = TextureManager::LoadGraph("kakedasi.png");
+	rankTex_[(uint32_t)Rank::Hanninmae] = TextureManager::LoadGraph("hanninmae.png");
+	rankTex_[(uint32_t)Rank::Itininmae] = TextureManager::LoadGraph("itininmae.png");
+	rankTex_[(uint32_t)Rank::Itiryu] = TextureManager::LoadGraph("itiryu.png");
+	rankTex_[(uint32_t)Rank::Jukuren] = TextureManager::LoadGraph("jukuren.png");
+	rankTex_[(uint32_t)Rank::Densetu] = TextureManager::LoadGraph("densetu.png");
+}
+
 void Score::Init()
 {
 	nowScore_ = 0;
@@ -46,6 +57,16 @@ void Score::Draw()
 void Score::DrawHighScore()
 {
 	drawNumHigh_.Draw(CameraManager::GetInstance().GetCamera2D("UICamera"));
+}
+
+void Score::DrawRank(float rot)
+{
+	obj_.SetRot({ 0,0,rot });
+	obj_.DrawBoxSprite(
+		CameraManager::GetInstance().GetCamera2D("UICamera"),
+		rankTex_[(uint32_t)rank_],
+		{1.f,1.f,1.f,1.f},
+		{0.5f,0.5f});
 }
 
 void Score::DrawImGui()
@@ -194,4 +215,14 @@ void Score::SetRank()
 	{
 		rank_ = Rank::Densetu;
 	}
+}
+
+void Score::SetRankPos(const Vec2& pos)
+{
+	obj_.SetTrans({ pos.x,pos.y,0.f });
+}
+
+void Score::SetRankSize(float size)
+{
+	obj_.SetScale({ size,size,1.0f });
 }

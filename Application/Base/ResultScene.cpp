@@ -13,19 +13,24 @@ void ResultScene::Finalize()
 
 void ResultScene::Initialize(void)
 {
-	//‰æ‘œ“Ç‚Ýž‚Ý
-	png_result_ = TextureManager::LoadGraph("result.png");
-	//BGMÄ¶
-	Sound::GetInstance().PlayWave("result_BGM.wav", 0.2f, true);
+    //‰æ‘œ“Ç‚Ýž‚Ý
+    png_result_ = TextureManager::LoadGraph("result.png");
+    Score::GetInstance()->LoadTex();
 
-	Score::GetInstance()->SaveScore();
+    //BGMÄ¶
+    Sound::GetInstance().PlayWave("result_BGM.wav", 0.2f, true);
+
+    Score::GetInstance()->SaveScore();
 
     UI::GetInstance()->SetPos(UIType::NowScore, { 250.f,350.f });
     UI::GetInstance()->SetSize(UIType::NowScore, 0.5f);
-    Score::GetInstance()->SetNowPos({1000.f,350.f});
-	Score::GetInstance()->SetNowSize(0.5f);
+    Score::GetInstance()->SetNowPos({ 1000.f,350.f });
+    Score::GetInstance()->SetNowSize(0.5f);
     Score::GetInstance()->SetNowNum();
+
     Score::GetInstance()->SetRank();
+    Score::GetInstance()->SetRankPos({150.f, 640.f});
+    Score::GetInstance()->SetRankSize(0.5f);
 
     UI::GetInstance()->SetPos(UIType::HighScore, { 250.f,250.f });
     UI::GetInstance()->SetSize(UIType::HighScore, 0.5f);
@@ -111,6 +116,8 @@ void ResultScene::DrawSprite2()
     UI::GetInstance()->Draw(UIType::NowScore);
     UI::GetInstance()->Draw(UIType::HighScore);
     UI::GetInstance()->Draw(UIType::Abutton);
+
+    Score::GetInstance()->DrawRank(0.f);
 }
 
 void ResultScene::DrawImgui()
