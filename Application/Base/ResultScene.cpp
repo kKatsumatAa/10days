@@ -325,6 +325,28 @@ void ResultScene::DrawSprite2()
     UI::GetInstance()->Draw(UIType::Retry);
     UI::GetInstance()->Draw(UIType::ToTitle);
     UI::GetInstance()->Draw(UIType::Abutton);
+
+    /*if (progressNum_ == 1)
+    {
+        UI::GetInstance()->Draw(UIType::Tutorial1);
+    }
+    else if (progressNum_ == 2)
+    {
+        UI::GetInstance()->Draw(UIType::Tutorial2);
+        UI::GetInstance()->Draw(UIType::Tutorial3);
+    }
+    else if (progressNum_ == 3)
+    {
+        UI::GetInstance()->Draw(UIType::Tutorial4);
+    }
+    else if (progressNum_ == 4)
+    {
+        UI::GetInstance()->Draw(UIType::Tutorial5);
+    }
+    else if (progressNum_ == 5)
+    {
+        UI::GetInstance()->Draw(UIType::Tutorial6);
+    }*/
 }
 
 void ResultScene::DrawImgui()
