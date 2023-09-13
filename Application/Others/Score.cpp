@@ -25,6 +25,8 @@ void Score::Init()
 	hScoreSize_ = 1.f;
 	hScorePos_ = { 0.f ,0.f };
 	SetHighNum();
+
+	rank_ = Rank::Kakedasi;	//‚©‚¯‚¾‚µ
 }
 
 void Score::Add(uint32_t enemyNum)
@@ -32,8 +34,6 @@ void Score::Add(uint32_t enemyNum)
 	uint32_t score;
 	score = (uint32_t)((float)(enemyNum * 500) * (0.9f + 0.1f * (float)enemyNum));
 	nowScore_ += score;
-
-
 
 	SetNowNum();
 }
@@ -166,4 +166,32 @@ void Score::SetHighNum()
 		highScore_,
 		{ hScorePos_.x - digit * hScoreSize_ * 100.f,hScorePos_.y },
 		{ 1.0f / 10.0f,1.0f }, { 100,160 }, hScoreSize_);
+}
+
+void Score::SetRank()
+{
+	if (nowScore_ < 100000)
+	{
+		rank_ = Rank::Kakedasi;
+	}
+	else if (nowScore_ < 150000 && nowScore_ >= 100000)
+	{
+		rank_ = Rank::Hanninmae;
+	}
+	else if (nowScore_ < 200000 && nowScore_ >= 150000)
+	{
+		rank_ = Rank::Itininmae;
+	}
+	else if (nowScore_ < 250000 && nowScore_ >= 200000)
+	{
+		rank_ = Rank::Itiryu;
+	}
+	else if (nowScore_ < 300000 && nowScore_ >= 250000)
+	{
+		rank_ = Rank::Jukuren;
+	}
+	else if (nowScore_ >= 300000)
+	{
+		rank_ = Rank::Densetu;
+	}
 }

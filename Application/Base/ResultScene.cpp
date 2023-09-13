@@ -25,6 +25,7 @@ void ResultScene::Initialize(void)
     Score::GetInstance()->SetNowPos({1000.f,350.f});
 	Score::GetInstance()->SetNowSize(0.5f);
     Score::GetInstance()->SetNowNum();
+    Score::GetInstance()->SetRank();
 
     UI::GetInstance()->SetPos(UIType::HighScore, { 250.f,250.f });
     UI::GetInstance()->SetSize(UIType::HighScore, 0.5f);

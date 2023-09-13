@@ -34,6 +34,8 @@ public:
     const int32_t kMaxFrameSkewerEndHitStop_{ 20 }; // 串刺し終了後のヒットストップが何フレームかかり続けるか
     static bool isSkewerScreenBlack4SceneM_;
     const int32_t kMaxFrameSkewerEndShrink_{ 5 }; // 串刺し終了後、縮む時に何フレームかかるか
+    const int32_t kMaxFrame_postSkewerInvincible_{ 30 }; // 串刺し終了後攻撃を食らわないための無敵フレーム
+
 
     // 定義
     enum class State
@@ -73,13 +75,15 @@ private:
     bool isKnockback_{}; // ノクバされま～す
     int32_t frameCount_knockback_;
     Vec2 vec_contactE2P_; // 触れられた敵からプレイヤーへの向き
-
+    
+    int32_t frameCount_postSkewerInvincible_;
     bool isSkewerEndShrink_;
     int32_t frameCount_SkewerEndShrink_; // 串刺し終了後の縮むフレームカウンタ
     float dist_p4su2p4sb_; // 串刺し終了時のpos4SwordUpからpos4SwordBottomまでの距離
 
     PlayerMowAttack mow_; // 薙ぎ払い用クラス
     PlayerSkewerAttack skewer_; // 串刺し用クラス
+
 
     // resources
     bool isRight_{};
