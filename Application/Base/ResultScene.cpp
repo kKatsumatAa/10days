@@ -78,31 +78,16 @@ void ResultScene::Update(void)
 {
     // 加算1
     timer_wait4Start_.Update(false, 1.f);
-    // pad-Aで演出1個スキップ1
-    if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
-    {
-        timer_wait4Start_.SetTimer((float)kMaxFrame_wait4Start_);
-    }
     // 分岐1
     if (timer_wait4Start_.GetisTimeOut())
     {
         // 加算2
         timer_currentScore_.Update(false, 1.f);
-        // pad-Aで演出1個スキップ2
-        if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
-        {
-            timer_currentScore_.SetTimer((float)kMaxFrame_currentScore_);
-        }
         // 分岐2
         if (timer_currentScore_.GetisTimeOut())
         {
             // 加算3
             timer_highScore_.Update(false, 1.f);
-            // pad-Aで演出1個スキップ3
-            if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
-            {
-                timer_highScore_.SetTimer((float)kMaxFrame_currentScore_);
-            }
             // 分岐3
             if (timer_highScore_.GetisTimeOut())
             {
@@ -110,32 +95,17 @@ void ResultScene::Update(void)
                 {
                     // 加算4
                     timer_newRecord_.Update(false, 1.f);
-                    // pad-Aで演出1個スキップ4
-                    if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
-                    {
-                        timer_newRecord_.SetTimer((float)kMaxFrame_currentScore_);
-                    }
                     // 分岐4
                     if (timer_newRecord_.GetisTimeOut())
                     {
                         // 加算5
                         timer_DisplayRank_.Update(false, 1.f);
-                        // pad-Aで演出1個スキップ5
-                        if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
-                        {
-                            timer_DisplayRank_.SetTimer((float)kMaxFrame_currentScore_);
-                        }
                         // 分岐5
                         if (timer_DisplayRank_.GetisTimeOut())
                         {
                             isEndAllDisplay_ = true;
                             // 加算6
                             timer_other_.Update(false, 1.f);
-                            // pad-Aで演出1個スキップ6
-                            if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
-                            {
-                                timer_other_.SetTimer((float)kMaxFrame_currentScore_);
-                            }
                         }
                     }
                 }
@@ -143,22 +113,12 @@ void ResultScene::Update(void)
                 {
                     // 加算5
                     timer_DisplayRank_.Update(false, 1.f);
-                    // pad-Aで演出1個スキップ5
-                    if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
-                    {
-                        timer_DisplayRank_.SetTimer((float)kMaxFrame_currentScore_);
-                    }
                     // 分岐5
                     if (timer_DisplayRank_.GetisTimeOut())
                     {
                         isEndAllDisplay_ = true;
                         // 加算6
                         timer_other_.Update(false, 1.f);
-                        // pad-Aで演出1個スキップ6
-                        if (PadInput::GetInstance().GetPushButton(GAMEPAD_A))
-                        {
-                            timer_other_.SetTimer((float)kMaxFrame_currentScore_);
-                        }
 
                     }
                 }
