@@ -22,6 +22,7 @@ public:
 	void Draw(void) override;
 
 private:
+    void OnCollision(void);
 
 	// •Ï”
 	CollisionManger* colMPtr_;
@@ -32,6 +33,10 @@ private:
 	// resource
 	uint64_t png_mowAttack_ = TextureManager::LoadGraph("attack_area.png");
 	uint32_t attack_SE_ = 0;   //UŒ‚‰¹
+
+    // “ã‚¬•¥‚¢‚ª“G‚É“–‚½‚Á‚½‚©‚Ç‚¤‚©
+    bool isHitMow_;
+    bool isHitMowOld_;
 
 public:
 	// setter

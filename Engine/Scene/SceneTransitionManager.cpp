@@ -35,6 +35,10 @@ void SceneTransitionManager::ChangeEffectState(std::unique_ptr<SceneTransitionEf
 
 void SceneTransitionManager::BeginSceneTransition(const std::function<void()>& loadFunc)
 {
+	if (isDoingEffect_ == false)
+	{
+		Sound::GetInstance().PlayWave("sceneChange_SE.wav", 0.2f);
+	}
 	isDoingEffect_ = true;
 
 	//“Ç‚İ‚İ‚ÌŠÖ”ƒRƒs[

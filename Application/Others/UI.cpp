@@ -39,6 +39,8 @@ void UI::AllLoad()
 	ui_[(uint32_t)UIType::NowScore] = TextureManager::LoadGraph("score.png");
 	ui_[(uint32_t)UIType::HighScore] = TextureManager::LoadGraph("highScore.png");
 	ui_[(uint32_t)UIType::Makimono] = TextureManager::LoadGraph("makimono.png");
+	ui_[(uint32_t)UIType::ReadyGo] = TextureManager::LoadGraph("start.png");
+
 
 	ui_[(uint32_t)UIType::Tutorial1] = TextureManager::LoadGraph("tutorial_UI_01.png");
 	ui_[(uint32_t)UIType::Tutorial2] = TextureManager::LoadGraph("tutorial_UI_02.png");
@@ -47,6 +49,18 @@ void UI::AllLoad()
 	ui_[(uint32_t)UIType::Tutorial5] = TextureManager::LoadGraph("tutorial_UI_05.png");
 	ui_[(uint32_t)UIType::Tutorial6] = TextureManager::LoadGraph("tutorial_UI_06.png");
 	ui_[(uint32_t)UIType::Tutorial7] = TextureManager::LoadGraph("tutorial_UI_07.png");
+
+
+	ui_[(uint32_t)UIType::Number0] = TextureManager::LoadGraph("number0.png");
+	ui_[(uint32_t)UIType::Number1] = TextureManager::LoadGraph("number1.png");
+	ui_[(uint32_t)UIType::Number2] = TextureManager::LoadGraph("number2.png");
+	ui_[(uint32_t)UIType::Number3] = TextureManager::LoadGraph("number3.png");
+	ui_[(uint32_t)UIType::Number4] = TextureManager::LoadGraph("number4.png");
+	ui_[(uint32_t)UIType::Number5] = TextureManager::LoadGraph("number5.png");
+	ui_[(uint32_t)UIType::Number6] = TextureManager::LoadGraph("number6.png");
+	ui_[(uint32_t)UIType::Number7] = TextureManager::LoadGraph("number7.png");
+	ui_[(uint32_t)UIType::Number8] = TextureManager::LoadGraph("number8.png");
+	ui_[(uint32_t)UIType::Number9] = TextureManager::LoadGraph("number9.png");
 }
 
 void UI::Init()
@@ -65,6 +79,16 @@ void UI::Draw(UIType uiType)
 		ui_[(uint32_t)uiType],
 		color_[(uint32_t)uiType],
 		ancorPoint_[(uint32_t)uiType]);
+}
+
+void UI::Draw2(UIType uiType, float rot)
+{
+    objUI_[(uint32_t)uiType].SetRot({0,0,rot});
+    objUI_[(uint32_t)uiType].DrawBoxSprite(
+        CameraManager::GetInstance().GetCamera2D("UICamera"),
+        ui_[(uint32_t)uiType],
+        color_[(uint32_t)uiType],
+        ancorPoint_[(uint32_t)uiType]);
 }
 
 void UI::SetPos(UIType uiType, const Vec2& pos)
