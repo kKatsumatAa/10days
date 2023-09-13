@@ -337,7 +337,6 @@ void Player::MoveUpdate(void)
 			// pad-A押してない時 && pad-R||RB でAttack_MOW状態に遷移
 			if (PadInput::GetInstance().GetPushButton(GAMEPAD_A) == false && PadInput::GetInstance().GetReleaseTrigger(GAMEPAD_RIGHT_SHOULDER))
 			{
-				CameraManager::GetInstance().GetCamera2D()->BeginZoom(1.2f, PlayerMowAttack::kMaxAttackFrame_);
 				Sound::GetInstance().PlayWave("attack_SE.wav", 0.2f);
 				mow_.Attack(vec_move_, position_);
 				state_ = State::ATTACK_MOW;
@@ -350,7 +349,6 @@ void Player::MoveUpdate(void)
 				{
 					// スローモーション開始
 					GameVelocityManager::GetInstance().BeginSlowMotion(30, 0.1f);
-					CameraManager::GetInstance().GetCamera2D()->BeginZoom(1.0f, PlayerMowAttack::kMaxAttackFrame_);
 				}
 
 				// ATTACK_SKEWER状態に入るための溜め計測フレームを加算
@@ -422,7 +420,6 @@ void Player::MowAttackUpdate(void)
 	// 攻撃判定のフレームが0になったら
 	if (mow_.GetFrameCountAttack() == 0)
 	{
-		CameraManager::GetInstance().GetCamera2D()->BeginZoom(1.0f, PlayerMowAttack::kMaxAttackFrame_ * 10);
 		// 状態遷移
 		state_ = State::MOVE;
 		// 関数終了
