@@ -10,6 +10,14 @@
 
 void ResultScene::Finalize()
 {
+    UI::GetInstance()->SetColor(UIType::Abutton, { 1,1,1,1 });
+
+    timer_wait4Start_.Reset();
+    timer_currentScore_.Reset();
+    timer_highScore_.Reset();
+    timer_newRecord_.Reset();
+    timer_DisplayRank_.Reset();
+    timer_other_.Reset();
 }
 
 void ResultScene::Initialize(void)
@@ -63,6 +71,7 @@ void ResultScene::Initialize(void)
 
     UI::GetInstance()->SetPos(UIType::NowScore, { 250,200 });
     UI::GetInstance()->SetPos(UIType::HighScore, { 250,300 });
+
 }
 
 void ResultScene::Update(void)
