@@ -140,7 +140,7 @@ void TutorialScene::Update(void)
         frameCount_skipTutorial_++;
         if (frameCount_skipTutorial_ > kMaxFrameSkipTutorial_)
         {
-            Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+            Sound::GetInstance().PlayWave("decision_SE.wav");
             //BGMストップ
             Sound::GetInstance().StopWave("play_BGM.wav");
             SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
@@ -181,7 +181,7 @@ void TutorialScene::Update(void)
         {
             Score::GetInstance()->HighScoreUpdate();
 
-            Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+            Sound::GetInstance().PlayWave("decision_SE.wav");
             //BGMストップ
             Sound::GetInstance().StopWave("play_BGM.wav");
             SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
@@ -399,7 +399,7 @@ void TutorialScene::Update(void)
                     // 表示する看板を次のものへ
                     progressNum_++;
 
-                    Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+                    Sound::GetInstance().PlayWave("decision_SE.wav");
                     //BGMストップ
                     Sound::GetInstance().StopWave("play_BGM.wav");
                     SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
@@ -434,7 +434,7 @@ void TutorialScene::Update(void)
             {
                 Score::GetInstance()->HighScoreUpdate();
 
-                Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+                Sound::GetInstance().PlayWave("decision_SE.wav");
                 //BGMストップ
                 Sound::GetInstance().StopWave("play_BGM.wav");
                 SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
@@ -446,7 +446,7 @@ void TutorialScene::Update(void)
             {
                 Score::GetInstance()->HighScoreUpdate();
 
-                Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+                Sound::GetInstance().PlayWave("decision_SE.wav");
                 //BGMストップ
                 Sound::GetInstance().StopWave("play_BGM.wav");
                 SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);

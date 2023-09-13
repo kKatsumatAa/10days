@@ -131,6 +131,11 @@ public:
 //L‚Ñ’†
 class CombinedEnemiesStateStretch : public ICombinedEnemiesState
 {
+private:
+	//“G‚Ì”‚É‚æ‚éˆÚ“®‚Ì”{—¦
+	const float VELOCITY_EXTEND_ = 0.1f;
+	//‚Å‚©‚Â‚æ‚ÌƒXƒs[ƒh”{—¦
+	const float BIG_VELOCITY_EXTEND_ = 0.45f;
 
 public:
 	void Initialize()override;

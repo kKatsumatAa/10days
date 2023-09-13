@@ -33,6 +33,8 @@ void Score::Add(uint32_t enemyNum)
 	score = (uint32_t)((float)(enemyNum * 500) * (0.9f + 0.1f * (float)enemyNum));
 	nowScore_ += score;
 
+
+
 	SetNowNum();
 }
 
@@ -119,6 +121,19 @@ void Score::SetNowNum()
 		{
 			result /= 10;
 			digit++;
+		}
+
+		//1‚ÌˆÊ‚Ì’l‚ğ‹‚ß‚Ä
+		uint32_t num = nowScore_ % 10;	//1‚ÌˆÊ‚Ì’l
+
+		//Œë·‚ªo‚Ä‚½‚çC³
+		if (num == 9)
+		{
+			nowScore_ += 1;
+		}
+		else if (num == 1)
+		{
+			nowScore_ -= 1;
 		}
 	}
 

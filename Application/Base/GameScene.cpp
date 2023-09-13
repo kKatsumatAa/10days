@@ -207,11 +207,11 @@ void GameScene::Update(void)
                 {
                     Score::GetInstance()->HighScoreUpdate();
 
-                    Sound::GetInstance().PlayWave("sceneChange_SE.wav");
-                    //BGMストップ
-                    Sound::GetInstance().StopWave("play_BGM.wav");
-                    SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
-                }
+					Sound::GetInstance().PlayWave("decision_SE.wav");
+					//BGMストップ
+					Sound::GetInstance().StopWave("play_BGM.wav");
+					SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::RESULT);
+				}
 
                 ParticleManagerL::GetInstance()->Update(GameVelocityManager::GetInstance().GetVelocity());
 
@@ -256,25 +256,25 @@ void GameScene::Update(void)
             {
                 Score::GetInstance()->HighScoreUpdate();
 
-                Sound::GetInstance().PlayWave("sceneChange_SE.wav");
-                //BGMストップ
-                Sound::GetInstance().StopWave("play_BGM.wav");
-                SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
-            }
-        }
-        else if (destination_ == Destination::TITLE)
-        {
-            if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
-            {
-                Score::GetInstance()->HighScoreUpdate();
+				Sound::GetInstance().PlayWave("decision_SE.wav");
+				//BGMストップ
+				Sound::GetInstance().StopWave("play_BGM.wav");
+				SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
+			}
+		}
+		else if (destination_ == Destination::TITLE)
+		{
+			if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
+			{
+				Score::GetInstance()->HighScoreUpdate();
 
-                Sound::GetInstance().PlayWave("sceneChange_SE.wav");
-                //BGMストップ
-                Sound::GetInstance().StopWave("play_BGM.wav");
-                SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
-            }
-        }
-    }
+				Sound::GetInstance().PlayWave("decision_SE.wav");
+				//BGMストップ
+				Sound::GetInstance().StopWave("play_BGM.wav");
+				SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
+			}
+		}
+	}
 }
 
 void GameScene::GameSceneUpdate(void)

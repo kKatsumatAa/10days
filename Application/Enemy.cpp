@@ -275,6 +275,8 @@ void Enemy::OnCollision(void)
 				isMowDownTrigger_ = true;
 				// ‚«”ò‚Î‚³‚ê‚é•ûŒü‚ð‹L˜^
 				vec_mow_ = paPtr->GetVecMove();
+
+				ParticleManagerL::GetInstance()->EnemyHitEffect(position_, vec_mow_);
 			}
 		}
 	}

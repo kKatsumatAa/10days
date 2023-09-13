@@ -20,11 +20,15 @@ void ResultScene::Initialize(void)
 
 	Score::GetInstance()->SaveScore();
 
-    Score::GetInstance()->SetNowPos({1000.f,300.f});
+    UI::GetInstance()->SetPos(UIType::NowScore, { 250.f,350.f });
+    UI::GetInstance()->SetSize(UIType::NowScore, 0.5f);
+    Score::GetInstance()->SetNowPos({1000.f,350.f});
 	Score::GetInstance()->SetNowSize(0.5f);
     Score::GetInstance()->SetNowNum();
 
-    Score::GetInstance()->SetHighPos({ 1000.f,200.f });
+    UI::GetInstance()->SetPos(UIType::HighScore, { 250.f,250.f });
+    UI::GetInstance()->SetSize(UIType::HighScore, 0.5f);
+    Score::GetInstance()->SetHighPos({ 1000.f,250.f });
     Score::GetInstance()->SetHighSize(0.5f);
     Score::GetInstance()->SetHighNum();
 
@@ -50,7 +54,7 @@ void ResultScene::Update(void)
     {
         if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
         {
-            Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+            Sound::GetInstance().PlayWave("decision_SE.wav");
             //BGMストップ
             Sound::GetInstance().StopWave("result_BGM.wav");
             SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::GAME);
@@ -60,7 +64,7 @@ void ResultScene::Update(void)
     {
         if (PadInput::GetInstance().GetTriggerButton(GAMEPAD_A))
         {
-            Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+            Sound::GetInstance().PlayWave("decision_SE.wav");
             //BGMストップ
             Sound::GetInstance().StopWave("result_BGM.wav");
             SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
@@ -70,7 +74,7 @@ void ResultScene::Update(void)
 #ifdef _DEBUG
     if (KeyboardInput::GetInstance().KeyTrigger(DIK_R))
     {
-        Sound::GetInstance().PlayWave("sceneChange_SE.wav");
+        Sound::GetInstance().PlayWave("decision_SE.wav");
         //BGMストップ
         Sound::GetInstance().StopWave("result_BGM.wav");
         SceneManager::GetInstance().SetNextScene(SceneFactory::Usage::TITLE);
@@ -95,6 +99,8 @@ void ResultScene::DrawSprite2()
 
     Score::GetInstance()->Draw();
     Score::GetInstance()->DrawHighScore();
+    UI::GetInstance()->Draw(UIType::NowScore);
+    UI::GetInstance()->Draw(UIType::HighScore);
     UI::GetInstance()->Draw(UIType::Abutton);
 }
 

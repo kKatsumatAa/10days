@@ -247,8 +247,18 @@ void CombinedEnemiesStateStretch::Update()
 		//半径セット
 		enemies_->SetLength(lerp(enemies_->GetLengthTmp() / 2.0f, enemies_->GetLengthTmp(), Math::Ease::EaseInCubic(t, 0, 1.0f)));
 		//半径分向いてる方向に進む
-		Vec2 nextPos = { lerp(centorPT.x, centorPT.x + directionT.x * radiusT * 2.0f, t),
-			lerp(centorPT.y, centorPT.y + directionT.y * radiusT * 2.0f, t) };
+		Vec2 dirL = directionT * radiusT * 2.0f / (float)enemies_->GetEnemiesNum();
+		//でかつよなら
+		if (enemies_->GetIsBigDango())
+		{
+			dirL *= BIG_VELOCITY_EXTEND_;
+		}
+		else
+		{
+			dirL = dirL + dirL * VELOCITY_EXTEND_ * (float)(enemies_->GetEnemiesNum() - 1);
+		}
+		Vec2 nextPos = { lerp(centorPT.x, centorPT.x + dirL.x, t),
+			lerp(centorPT.y, centorPT.y + dirL.y, t) };
 
 		//スケール
 		enemies_->SetScale({ lerp(1.5f,1.0f, t),lerp(0.5f,1.0f,  t) });
